@@ -2,16 +2,16 @@ import random
 from typing import Optional
 
 from .directions import DIRECTIONS
-from .models import CellState, GameBoard, Ship, ShipType, get_fleet, get_ship_size
+from .models import Board, CellState, Ship, ShipType, get_fleet, get_ship_size
 
 ROW_LABELS = "ABCDEFGHIJ"  # index 0='A' ... 9='J'
 
 _MAX_PLACEMENT_RETRIES = 1000
 
 
-class BoardManager:
-    def __init__(self, board: GameBoard) -> None:
-        self.board = board
+class GameBoard:
+    def __init__(self) -> None:
+        self.board = Board()
 
     # ------------------------------------------------------------------
     # Coordinate parsing
@@ -73,11 +73,11 @@ class BoardManager:
             if not (0 <= r <= 9 and 0 <= c <= 9):
                 return False, (
                     f"Ship extends out of bounds at "
-                    f"{BoardManager.format_coordinate(max(0, min(r, 9)), max(0, min(c, 9)))}"
+                    f"{GameBoard.format_coordinate(max(0, min(r, 9)), max(0, min(c, 9)))}"
                 )
             if self.board.get_cell(r, c)[0] is not ShipType.NONE:
                 return False, (
-                    f"Cell {BoardManager.format_coordinate(r, c)} is already occupied"
+                    f"Cell {GameBoard.format_coordinate(r, c)} is already occupied"
                 )
         return True, ""
 

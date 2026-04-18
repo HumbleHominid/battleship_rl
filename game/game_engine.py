@@ -3,9 +3,9 @@ import logging
 from typing import Optional
 
 from .agents.agent import RLAgent
-from .board_manager import BoardManager
 from .directions import DIRECTIONS
-from .models import CellState, GameBoard, ShipType, get_fleet, get_ship_name
+from .game_board import GameBoard
+from .models import CellState, ShipType, get_fleet, get_ship_name
 from .websocket import GameWebSocketServer
 
 logger = logging.getLogger(__name__)
@@ -41,8 +41,8 @@ class GameEngine:
         self.mode = mode
         self.enable_ws = enable_ws
 
-        self.player_board = BoardManager(GameBoard())
-        self.agent_board = BoardManager(GameBoard())
+        self.player_board = GameBoard()
+        self.agent_board = GameBoard()
 
         self.ws_server = (
             GameWebSocketServer(host=ws_host, port=ws_port) if enable_ws else None
@@ -187,14 +187,14 @@ class GameEngine:
             raw: str = await loop.run_in_executor(None, input, "Your shot (e.g. B5): ")
             raw = raw.strip()
             try:
-                row, col = BoardManager.parse_coordinate(raw)
+                row, col = GameBoard.parse_coordinate(raw)
                 await self._fire_on_agent_board(row, col)
                 return
             except ValueError as e:
                 print(f"  Invalid: {e}")
 
     async def _fire_on_agent_board(self, row: int, col: int) -> None:
-        coord = BoardManager.format_coordinate(row, col)
+        coord = GameBoard.format_coordinate(row, col)
         try:
             state, ship = self.agent_board.receive_shot(row, col)
         except ValueError as e:
@@ -225,7 +225,7 @@ class GameEngine:
             coord = self.rl_agent.select_move(board_state)
 
         try:
-            row, col = BoardManager.parse_coordinate(coord)
+            row, col = GameBoard.parse_coordinate(coord)
         except ValueError as e:
             logger.warning("Agent sent invalid coordinate '%s': %s", coord, e)
             return

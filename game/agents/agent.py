@@ -1,7 +1,7 @@
 import random
 from typing import Optional
 
-from game.board_manager import BoardManager
+from game.game_board import GameBoard
 
 
 class RLAgent:
@@ -31,7 +31,7 @@ class RLAgent:
             raise RuntimeError("No untried cells remain — game should already be over")
         cell = self._rng.choice(self._untried_cells)
         self._untried_cells.remove(cell)
-        return BoardManager.format_coordinate(cell[0], cell[1])
+        return GameBoard.format_coordinate(cell[0], cell[1])
 
     def receive_result(
         self, coordinate: str, result: str, ship_sunk: Optional[str]
