@@ -3,7 +3,7 @@ from .ship import Ship
 from .ship_type import ShipType
 
 
-class GameBoard:
+class Board:
     def __init__(self) -> None:
         # board[row][col] = (ShipType, CellState)
         self.board: list[list[tuple[ShipType, CellState]]] = [
