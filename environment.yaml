@@ -1,0 +1,11 @@
+name:
+  - battleship-rl
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - ipykernel
+  - numpy
+  - polars
+  - websockets
