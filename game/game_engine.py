@@ -269,6 +269,10 @@ class GameEngine:
             "ship_sunk": sunk_name,
         }
 
+    @property
+    def turn(self) -> int:
+        return self._turn
+
     # ------------------------------------------------------------------
     # Win condition
     # ------------------------------------------------------------------
