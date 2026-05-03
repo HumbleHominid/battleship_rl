@@ -1,11 +1,11 @@
 import asyncio
 import logging
+import random
 from typing import Optional
 
-from .agents.agent import RLAgent
-from .directions import DIRECTIONS
+from .agents.base_agent import BaseAgent
 from .game_board import GameBoard
-from .models import CellState, ShipType, get_fleet, get_ship_name
+from .models import CellState, get_fleet, get_ship_size
 from .websocket import GameWebSocketServer
 
 logger = logging.getLogger(__name__)
@@ -15,30 +15,29 @@ class GameEngine:
     """
     Orchestrates a full game of Battleship.
 
-    Modes
-    -----
-    automated  : Both fleets placed randomly; agent uses stub random moves.
-                 Runs to completion without user input (useful for RL training).
-    interactive: Human places their own ships and fires manually;
-                 agent's fleet is placed randomly and moves come from WS or stub.
+    The game-side agent always runs in-process and is passed in at construction.
+    The player is either a random stub or a WebSocket-connected human, controlled
+    by the `player_type` argument.
 
     WebSocket
     ---------
     A GameWebSocketServer runs as a background asyncio task.
     After every move the full game_state is broadcast to all observers.
-    If an RL agent connects over WebSocket the game awaits its move commands;
-    otherwise the local RLAgent stub makes random moves.
-    Pass --no-ws at the CLI to skip starting the server.
+    Pass enable_ws=False to skip starting the server.
     """
 
     def __init__(
         self,
-        mode: str = "automated",
+        agent: BaseAgent,
+        player_type: str = "random",
+        player_placement: str = "random",
         ws_host: str = "localhost",
         ws_port: int = 8765,
         enable_ws: bool = True,
     ) -> None:
-        self.mode = mode
+        self.agent = agent
+        self.player_type = player_type
+        self.player_placement = player_placement
         self.enable_ws = enable_ws
 
         self.player_board = GameBoard()
@@ -47,7 +46,6 @@ class GameEngine:
         self.ws_server = (
             GameWebSocketServer(host=ws_host, port=ws_port) if enable_ws else None
         )
-        self.rl_agent = RLAgent()
 
         self._turn: int = 0
         self._current_player: str = "player"
@@ -63,7 +61,6 @@ class GameEngine:
         server_task: Optional[asyncio.Task] = None
         if self.ws_server:
             server_task = asyncio.create_task(self.ws_server.start())
-            # Brief yield so the server socket is bound before setup begins.
             await asyncio.sleep(0)
 
         try:
@@ -86,52 +83,54 @@ class GameEngine:
     # ------------------------------------------------------------------
 
     async def _setup(self) -> None:
-        if self.mode == "interactive":
-            await self._setup_interactive()
+        self.agent.place_fleet(self.agent_board)
+
+        if self.player_type == "websocket":
+            await self._setup_ws_player()
         else:
-            await self._setup_automated()
+            self.player_board.place_fleet()
+            logger.info("Setup complete: agent vs random player")
 
-    async def _setup_automated(self) -> None:
-        self.player_board.place_fleet()
-        self.agent_board.place_fleet()
-        logger.info("Automated mode: fleets placed via pluggable placement strategy")
+    async def _setup_ws_player(self) -> None:
+        assert self.ws_server is not None
+        logger.info("Waiting for WebSocket player to connect...")
+        while not self.ws_server.player_connected:
+            await asyncio.sleep(0.1)
+        logger.info("WebSocket player connected")
 
-    async def _setup_interactive(self) -> None:
-        print("\n=== BATTLESHIP ===")
-        print("Place your ships. Format: <coordinate> <direction>")
-        print("  Example: A1 right  |  B5 down  |  J10 up")
-        directions = ", ".join(DIRECTIONS.keys())
-        print(f"  Directions: {directions}\n")
-
-        for ship_type in get_fleet():
-            await self._prompt_ship_placement(ship_type)
-
-        print("\nYour fleet is placed. Agent is placing its fleet...")
-        self.agent_board.place_fleet()
-        print("Ready! Game starting.\n")
-
-    async def _prompt_ship_placement(self, ship_type: ShipType) -> None:
-        loop = asyncio.get_event_loop()
-        name = get_ship_name(ship_type)
-
-        while True:
-            self.player_board.display(fog_of_war=False, label="Your Board")
-            prompt = f"Place your {name} — enter coordinate and direction: "
-            raw: str = await loop.run_in_executor(None, input, prompt)
-            raw = raw.strip()
-            parts = raw.split()
-            if len(parts) != 2:
-                print(
-                    "  Invalid input. Use format: <coordinate> <direction>  (e.g. A1 right)\n"
+        if self.player_placement == "manual":
+            for ship_type in get_fleet():
+                await self.ws_server.send_to_player(
+                    {
+                        "type": "place_ship",
+                        "ship": ship_type.name,
+                        "size": get_ship_size(ship_type),
+                    }
                 )
-                continue
-            coord, direction = parts[0], parts[1].lower()
-            try:
-                _ = self.player_board.place_ship_from_str(ship_type, coord, direction)
-                print(f"  {name} placed.\n")
-                return
-            except ValueError as e:
-                print(f"  Error: {e}\n")
+                while True:
+                    msg = await self.ws_server.wait_for_player_placement()
+                    try:
+                        self.player_board.place_ship_from_str(
+                            ship_type, msg["coordinate"], msg["direction"]
+                        )
+                        await self.ws_server.send_to_player(
+                            {"type": "placement_ack", "valid": True}
+                        )
+                        break
+                    except (ValueError, KeyError) as e:
+                        await self.ws_server.send_to_player(
+                            {"type": "placement_ack", "valid": False, "error": str(e)}
+                        )
+        else:
+            self.player_board.place_fleet()
+
+        await self.ws_server.send_to_player(
+            {
+                "type": "game_start",
+                "your_board": self.player_board.board_as_matrix(),
+            }
+        )
+        logger.info("Setup complete: agent vs WebSocket player")
 
     # ------------------------------------------------------------------
     # Game loop
@@ -149,10 +148,7 @@ class GameEngine:
             self._display_boards()
 
             if self.ws_server:
-                state = self._build_state_dict()
-                await self.ws_server.broadcast_state(state)
-                if self.ws_server.agent_connected:
-                    await self.ws_server.send_to_agent(self._build_agent_view_dict())
+                await self.ws_server.broadcast_state(self._build_state_dict())
 
             if self._check_win_condition():
                 if self.ws_server:
@@ -160,38 +156,39 @@ class GameEngine:
                 break
 
             self._current_player = (
-                "rl_agent" if self._current_player == "player" else "player"
+                "agent" if self._current_player == "player" else "player"
             )
-            await asyncio.sleep(0)  # yield to event loop
+            await asyncio.sleep(0)
 
     # ------------------------------------------------------------------
     # Turns
     # ------------------------------------------------------------------
 
     async def _take_player_turn(self) -> None:
-        if self.mode == "automated":
-            await self._player_random_shot()
-        else:
-            await self._player_interactive_shot()
-
-    async def _player_random_shot(self) -> None:
-        import random
-
-        unhit = self.agent_board.get_unhit_cells()
-        row, col = random.choice(unhit)
-        await self._fire_on_agent_board(row, col)
-
-    async def _player_interactive_shot(self) -> None:
-        loop = asyncio.get_event_loop()
-        while True:
-            raw: str = await loop.run_in_executor(None, input, "Your shot (e.g. B5): ")
-            raw = raw.strip()
+        if self.player_type == "websocket":
+            assert self.ws_server is not None
+            await self.ws_server.send_to_player(self._build_player_view())
+            coord = await self.ws_server.wait_for_player_move()
             try:
-                row, col = GameBoard.parse_coordinate(raw)
-                await self._fire_on_agent_board(row, col)
-                return
+                row, col = GameBoard.parse_coordinate(coord)
             except ValueError as e:
-                print(f"  Invalid: {e}")
+                logger.warning("Player sent invalid coordinate '%s': %s", coord, e)
+                return
+            await self._fire_on_agent_board(row, col)
+            if self.ws_server and self._last_move:
+                await self.ws_server.send_to_player(
+                    {
+                        "type": "move_ack",
+                        "coordinate": self._last_move["coordinate"],
+                        "result": self._last_move["result"],
+                        "ship_sunk": self._last_move["ship_sunk"],
+                        "game_over": self._game_over,
+                    }
+                )
+        else:
+            unhit = self.agent_board.get_unhit_cells()
+            row, col = random.choice(unhit)
+            await self._fire_on_agent_board(row, col)
 
     async def _fire_on_agent_board(self, row: int, col: int) -> None:
         coord = GameBoard.format_coordinate(row, col)
@@ -208,6 +205,16 @@ class GameEngine:
             msg += f" — {sunk_name} sunk!"
         print(msg)
 
+        if ship and ship.is_sunk and self.ws_server:
+            await self.ws_server.broadcast_state(
+                {
+                    "type": "ship_sunk",
+                    "attacker": "player",
+                    "ship": sunk_name,
+                    "turn": self._turn,
+                }
+            )
+
         self._last_move = {
             "player": "player",
             "coordinate": coord,
@@ -216,13 +223,8 @@ class GameEngine:
         }
 
     async def _take_agent_turn(self) -> None:
-        if self.ws_server and self.ws_server.agent_connected:
-            # Real agent sends move over WebSocket; await it.
-            coord = await self.ws_server.wait_for_agent_move()
-        else:
-            # Use local stub for random play.
-            board_state = self._build_state_dict()
-            coord = self.rl_agent.select_move(board_state)
+        obs = self._build_agent_obs()
+        coord = self.agent.select_move(obs)
 
         try:
             row, col = GameBoard.parse_coordinate(coord)
@@ -243,21 +245,20 @@ class GameEngine:
             msg += f" — {sunk_name} sunk!"
         print(msg)
 
-        self.rl_agent.receive_result(coord, result_str, sunk_name)
+        self.agent.receive_result(coord, result_str, sunk_name)
 
-        if self.ws_server and self.ws_server.agent_connected:
-            await self.ws_server.send_to_agent(
+        if ship and ship.is_sunk and self.ws_server:
+            await self.ws_server.broadcast_state(
                 {
-                    "type": "move_ack",
-                    "coordinate": coord,
-                    "result": result_str,
-                    "ship_sunk": sunk_name,
-                    "game_over": False,
+                    "type": "ship_sunk",
+                    "attacker": "agent",
+                    "ship": sunk_name,
+                    "turn": self._turn,
                 }
             )
 
         self._last_move = {
-            "player": "rl_agent",
+            "player": "agent",
             "coordinate": coord,
             "result": result_str,
             "ship_sunk": sunk_name,
@@ -274,13 +275,36 @@ class GameEngine:
             return True
         if self.player_board.all_ships_sunk():
             self._game_over = True
-            self._winner = "rl_agent"
+            self._winner = "agent"
             return True
         return False
 
     # ------------------------------------------------------------------
     # State serialisation
     # ------------------------------------------------------------------
+
+    def _build_agent_obs(self) -> dict:
+        return {
+            "enemy_board": self.player_board.board_as_matrix(fog_of_war=True),
+            "your_board": self.agent_board.board_as_matrix(fog_of_war=False),
+            "ships_sunk": {
+                "by_you": self.player_board.ships_sunk_count(),
+                "against_you": self.agent_board.ships_sunk_count(),
+            },
+            "turn": self._turn,
+        }
+
+    def _build_player_view(self) -> dict:
+        return {
+            "type": "player_view",
+            "enemy_board": self.agent_board.board_as_matrix(fog_of_war=True),
+            "your_board": self.player_board.board_as_matrix(fog_of_war=False),
+            "ships_sunk": {
+                "by_you": self.agent_board.ships_sunk_count(),
+                "against_you": self.player_board.ships_sunk_count(),
+            },
+            "turn": self._turn,
+        }
 
     def _build_state_dict(self) -> dict:
         return {
@@ -298,7 +322,6 @@ class GameEngine:
                 "cells_hit": self.player_board.cells_hit_count(),
             },
             "agent_board": {
-                # Observers see agent board with fog (no ship positions unless hit)
                 "cells": self.agent_board.board_as_matrix(fog_of_war=True),
                 "ships_remaining": len(self.agent_board.board.ships)
                 - self.agent_board.ships_sunk_count(),
@@ -310,23 +333,12 @@ class GameEngine:
                     "ships_sunk": self.agent_board.ships_sunk_count(),
                     "cells_hit": self.agent_board.cells_hit_count(),
                 },
-                "rl_agent": {
+                "agent": {
                     "ships_sunk": self.player_board.ships_sunk_count(),
                     "cells_hit": self.player_board.cells_hit_count(),
                 },
             },
             "last_move": self._last_move,
-        }
-
-    def _build_agent_view_dict(self) -> dict:
-        """Fog-of-war observation sent exclusively to the connected RL agent."""
-        return {
-            "type": "agent_view",
-            "turn": self._turn,
-            # Enemy (player) board: agent only sees hits/misses, not ship positions
-            "enemy_board_fog": self.player_board.board_as_matrix(fog_of_war=True),
-            # Own board: agent sees where it was hit
-            "your_board_fog": self.agent_board.board_as_matrix(fog_of_war=False),
         }
 
     def _build_game_over_dict(self) -> dict:
@@ -339,7 +351,7 @@ class GameEngine:
                     "ships_sunk": self.agent_board.ships_sunk_count(),
                     "cells_hit": self.agent_board.cells_hit_count(),
                 },
-                "rl_agent": {
+                "agent": {
                     "ships_sunk": self.player_board.ships_sunk_count(),
                     "cells_hit": self.player_board.cells_hit_count(),
                 },
@@ -352,21 +364,23 @@ class GameEngine:
 
     def _display_boards(self) -> None:
         print(f"\n--- Turn {self._turn} ---")
-        self.player_board.display(fog_of_war=False, label="Your Board")
-        self.agent_board.display(fog_of_war=True, label="Agent's Board (your shots)")
+        self.player_board.display(fog_of_war=False, label="Player's Board")
+        self.agent_board.display(
+            fog_of_war=True, label="Agent's Board (player's shots)"
+        )
 
     def _display_game_over(self) -> None:
         print("\n" + "=" * 40)
         print("GAME OVER")
-        winner_label = "You" if self._winner == "player" else "The RL Agent"
+        winner_label = "Player" if self._winner == "player" else "The Agent"
         print(f"Winner: {winner_label}")
         print(f"Total turns: {self._turn}")
         print(
-            f"Your score    — ships sunk: {self.agent_board.ships_sunk_count()}, "
+            f"Player's score — ships sunk: {self.agent_board.ships_sunk_count()}, "
             f"cells hit: {self.agent_board.cells_hit_count()}"
         )
         print(
-            f"Agent's score — ships sunk: {self.player_board.ships_sunk_count()}, "
+            f"Agent's score  — ships sunk: {self.player_board.ships_sunk_count()}, "
             f"cells hit: {self.player_board.cells_hit_count()}"
         )
         print("=" * 40)

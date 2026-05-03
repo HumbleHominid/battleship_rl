@@ -1,5 +1,6 @@
-from .agent import RLAgent
+from game.agents.base_agent import BaseAgent
+from game.agents.random_agent import RandomAgent
 
-__all__ = [
-    "RLAgent",
-]
+AGENT_REGISTRY: dict[str, type[BaseAgent]] = {
+    "random": RandomAgent,
+}
