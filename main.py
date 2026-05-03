@@ -55,6 +55,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Run without any graphical output (for testing or server environments)",
     )
+    parser.add_argument(
+        "--max-games",
+        type=int,
+        default=100,
+        help="Number of games to play before exiting (default: 100)",
+    )
     return parser.parse_args()
 
 
@@ -83,7 +89,7 @@ async def main() -> None:
         headless=args.headless,
     )
     game_num = 1
-    max_games = 100
+    max_games = args.max_games
     win_dist = {"player": 0, "agent": 0}
     turns = []
 
