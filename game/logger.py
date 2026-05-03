@@ -19,15 +19,17 @@ class GameLogger:
     only filter, controlled by --log-level at startup.
     """
 
+    log_file: Path | None = None
+
     @classmethod
     def setup(cls, console_level: int = logging.WARNING) -> None:
         """Configure handlers. Called once from main.py at process start."""
         _LOG_DIR.mkdir(exist_ok=True)
-        log_file = _LOG_DIR / f"battleship_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+        cls.log_file = _LOG_DIR / f"battleship_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 
         _log.setLevel(logging.DEBUG)  # pass everything to handlers; handlers decide
 
-        fh = logging.FileHandler(log_file, encoding="utf-8")
+        fh = logging.FileHandler(cls.log_file, encoding="utf-8")
         fh.setLevel(logging.DEBUG)  # file captures all levels — level set at call time
         fh.setFormatter(logging.Formatter(_FILE_FORMAT))
         _log.addHandler(fh)
@@ -36,6 +38,15 @@ class GameLogger:
         ch.setLevel(console_level)  # console respects --log-level (default WARNING)
         ch.setFormatter(logging.Formatter(_CONSOLE_FORMAT))
         _log.addHandler(ch)
+
+    @classmethod
+    def close(cls) -> None:
+        """Flush and close all file handlers. Call before archiving the log file."""
+        for handler in list(_log.handlers):
+            if isinstance(handler, logging.FileHandler):
+                handler.flush()
+                handler.close()
+                _log.removeHandler(handler)
 
     @classmethod
     def debug(cls, msg: str, *args) -> None:

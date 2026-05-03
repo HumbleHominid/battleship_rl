@@ -2,6 +2,7 @@ import argparse
 import asyncio
 import logging
 import time
+import zipfile
 
 from game.agents import AGENT_REGISTRY
 from game.game_engine import GameEngine
@@ -125,6 +126,14 @@ async def main() -> None:
     print(agent_str)
     print(f"Total elapsed time: {hours:.0f}h {minutes:.0f}m {seconds:.2f}s")
     print(f"Average turns taken: {avg_turns:.2f} ± {std_turns:.2f}")
+
+    GameLogger.close()
+    if GameLogger.log_file and GameLogger.log_file.exists():
+        zip_path = GameLogger.log_file.with_suffix(".zip")
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+            zf.write(GameLogger.log_file, GameLogger.log_file.name)
+        GameLogger.log_file.unlink()
+        print(f"Log archived to {zip_path}")
 
 
 if __name__ == "__main__":
