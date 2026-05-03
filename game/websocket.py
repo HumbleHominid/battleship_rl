@@ -14,14 +14,14 @@ class GameWebSocketServer:
     """
     Embedded WebSocket server that:
       - Broadcasts game state to all connected observers after every move.
-      - Accepts a single RL agent connection; receives move commands from it
-        and puts them on an asyncio queue for the game loop to consume.
+      - Accepts a single player connection; receives move and placement commands
+        from it and puts them on asyncio queues for the game loop to consume.
 
     Connection protocol:
-      Client sends first: {"type": "hello", "role": "observer"}  or  "rl_agent"
+      Client sends first: {"type": "hello", "role": "observer"}  or  "player"
       Server replies:     {"type": "welcome", "game_id": "...", "role": "..."}
 
-    Only one rl_agent is accepted at a time; subsequent "rl_agent" connections
+    Only one player is accepted at a time; subsequent "player" connections
     are downgraded to observers.
     """
 
@@ -30,8 +30,9 @@ class GameWebSocketServer:
         self.port = port
         self.game_id: str = str(uuid.uuid4())
         self._observers: set[WebSocketServerProtocol] = set()
-        self._agent_ws: Optional[WebSocketServerProtocol] = None
-        self._move_queue: asyncio.Queue[str] = asyncio.Queue()
+        self._player_ws: Optional[WebSocketServerProtocol] = None
+        self._player_move_queue: asyncio.Queue[str] = asyncio.Queue()
+        self._player_placement_queue: asyncio.Queue[dict] = asyncio.Queue()
         self._server = None
 
     # ------------------------------------------------------------------
@@ -58,14 +59,14 @@ class GameWebSocketServer:
     async def stop(self) -> None:
         """Send close frames to all connected clients."""
         all_clients = set(self._observers)
-        if self._agent_ws:
-            all_clients.add(self._agent_ws)
+        if self._player_ws:
+            all_clients.add(self._player_ws)
         if all_clients:
             await asyncio.gather(
                 *(ws.close() for ws in all_clients), return_exceptions=True
             )
         self._observers.clear()
-        self._agent_ws = None
+        self._player_ws = None
 
     # ------------------------------------------------------------------
     # Connection handler
@@ -83,13 +84,14 @@ class GameWebSocketServer:
 
         role = msg.get("role", "observer")
 
-        if role == "rl_agent" and self._agent_ws is None:
-            actual_role = "rl_agent"
+        if role == "player" and self._player_ws is None:
+            actual_role = "player"
         else:
-            if role == "rl_agent":
+            if role in ("player", "rl_agent"):
                 logger.warning(
-                    "Second rl_agent connection from %s; treating as observer",
+                    "Downgrading %s connection from %s to observer",
                     websocket.remote_address,
+                    role,
                 )
             actual_role = "observer"
 
@@ -103,33 +105,35 @@ class GameWebSocketServer:
             )
         )
 
-        if actual_role == "rl_agent":
-            await self._handle_agent(websocket)
+        if actual_role == "player":
+            await self._handle_player(websocket)
         else:
             await self._handle_observer(websocket)
 
-    async def _handle_agent(self, websocket: WebSocketServerProtocol) -> None:
-        """Receive move commands from the RL agent and enqueue them."""
-        self._agent_ws = websocket
-        logger.info("RL agent connected from %s", websocket.remote_address)
+    async def _handle_player(self, websocket: WebSocketServerProtocol) -> None:
+        """Receive move and placement commands from the player and enqueue them."""
+        self._player_ws = websocket
+        logger.info("Player connected from %s", websocket.remote_address)
         try:
             async for raw in websocket:
                 try:
                     msg = json.loads(raw)
                 except json.JSONDecodeError:
-                    logger.warning("Agent sent non-JSON: %s", raw)
+                    logger.warning("Player sent non-JSON: %s", raw)
                     continue
                 if msg.get("type") == "move":
                     coord = msg.get("coordinate", "")
                     if coord:
-                        await self._move_queue.put(coord)
+                        await self._player_move_queue.put(coord)
                     else:
-                        logger.warning("Agent move missing 'coordinate' field")
+                        logger.warning("Player move missing 'coordinate' field")
+                elif msg.get("type") == "placement":
+                    await self._player_placement_queue.put(msg)
         except websockets.exceptions.ConnectionClosed:
             pass
         finally:
-            self._agent_ws = None
-            logger.info("RL agent disconnected")
+            self._player_ws = None
+            logger.info("Player disconnected")
 
     async def _handle_observer(self, websocket: WebSocketServerProtocol) -> None:
         """Register an observer and hold its connection open until disconnect."""
@@ -165,28 +169,27 @@ class GameWebSocketServer:
                 disconnected.add(ws)
         self._observers -= disconnected
 
-    async def send_to_agent(self, message_dict: dict) -> None:
-        """Send a JSON message to the connected RL agent. No-op if none connected."""
-        if self._agent_ws is None:
+    async def send_to_player(self, message_dict: dict) -> None:
+        """Send a JSON message to the connected player. No-op if none connected."""
+        if self._player_ws is None:
             return
         try:
-            await self._agent_ws.send(json.dumps(message_dict))
+            await self._player_ws.send(json.dumps(message_dict))
         except websockets.exceptions.ConnectionClosed:
-            self._agent_ws = None
+            self._player_ws = None
 
-    async def wait_for_agent_move(self) -> str:
-        """
-        Await the next move coordinate from the RL agent's move queue.
-        The game loop calls this during the agent's turn; it yields control to
-        the event loop until the agent sends a move over WebSocket.
-        Returns a coordinate string like 'B5'.
-        """
-        return await self._move_queue.get()
+    async def wait_for_player_move(self) -> str:
+        """Await the next move coordinate from the player's move queue."""
+        return await self._player_move_queue.get()
+
+    async def wait_for_player_placement(self) -> dict:
+        """Await the next ship placement message from the player's placement queue."""
+        return await self._player_placement_queue.get()
 
     # ------------------------------------------------------------------
     # Properties
     # ------------------------------------------------------------------
 
     @property
-    def agent_connected(self) -> bool:
-        return self._agent_ws is not None
+    def player_connected(self) -> bool:
+        return self._player_ws is not None

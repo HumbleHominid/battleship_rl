@@ -2,6 +2,7 @@ import argparse
 import asyncio
 import logging
 
+from game.agents import AGENT_REGISTRY
 from game.game_engine import GameEngine
 
 
@@ -10,11 +11,21 @@ def parse_args() -> argparse.Namespace:
         description="Battleship RL — play Battleship against an RL agent"
     )
     parser.add_argument(
-        "--mode",
-        choices=["automated", "interactive"],
-        default="automated",
-        help="Game mode: 'automated' runs without user input (default); "
-        "'interactive' lets the user place ships and make moves",
+        "--agent",
+        default="random",
+        help="Agent key from AGENT_REGISTRY (default: random)",
+    )
+    parser.add_argument(
+        "--player-type",
+        choices=["random", "websocket"],
+        default="random",
+        help="Player type: 'random' stub or 'websocket' human (default: random)",
+    )
+    parser.add_argument(
+        "--player-placement",
+        choices=["random", "manual"],
+        default="random",
+        help="Fleet placement for WS player: 'random' or 'manual' via WS protocol (default: random)",
     )
     parser.add_argument(
         "--ws-host",
@@ -49,8 +60,19 @@ async def main() -> None:
         format="%(levelname)s %(name)s: %(message)s",
     )
 
+    agent_cls = AGENT_REGISTRY.get(args.agent)
+    if agent_cls is None:
+        import sys
+        print(
+            f"error: Unknown agent '{args.agent}'. Available: {list(AGENT_REGISTRY)}",
+            file=sys.stderr,
+        )
+        sys.exit(2)
+
     engine = GameEngine(
-        mode=args.mode,
+        agent=agent_cls(),
+        player_type=args.player_type,
+        player_placement=args.player_placement,
         ws_host=args.ws_host,
         ws_port=args.ws_port,
         enable_ws=not args.no_ws,
