@@ -1,12 +1,11 @@
 import random
-from typing import Callable, Optional
+from typing import Optional
 
 from .directions import DIRECTIONS
-from .models import Board, CellState, Ship, ShipType, get_fleet, get_ship_size
+from .fleet_placement_methods import PLACEMENT_METHODS
+from .models import Board, CellState, Ship, ShipType, get_ship_size
 
 ROW_LABELS = "ABCDEFGHIJ"  # index 0='A' ... 9='J'
-
-_MAX_PLACEMENT_RETRIES = 1000
 
 
 class GameBoard:
@@ -106,11 +105,6 @@ class GameBoard:
         row, col = self.parse_coordinate(coord)
         return self.place_ship(ship_type, row, col, direction)
 
-    def place_fleet_randomly(self) -> None:
-        """Randomly place all ships. Retries on collision."""
-        from .fleet_placement_methods import place_fleet_random
-        place_fleet_random(self)
-
     def get_placed_cells(self) -> list[tuple[int, int]]:
         return [cell for ship in self.board.ships for cell in ship.cells]
 
@@ -120,11 +114,11 @@ class GameBoard:
         Algorithm and weights are configured via PLACEMENT_METHODS in
         game/fleet_placement_methods.py.
         """
-        from .fleet_placement_methods import PLACEMENT_METHODS
+
         weights = [w for w, _ in PLACEMENT_METHODS]
-        callables = [fn for _, fn in PLACEMENT_METHODS]
-        chosen_fn = random.choices(callables, weights=weights, k=1)[0]
-        chosen_fn(self)
+        callables = [f for _, f in PLACEMENT_METHODS]
+        f = random.choices(callables, weights=weights, k=1)[0]
+        f(self)
 
     # ------------------------------------------------------------------
     # Hit detection
