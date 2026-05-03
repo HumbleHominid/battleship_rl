@@ -1,6 +1,7 @@
 import argparse
 import asyncio
 import logging
+import time
 
 from game.agents import AGENT_REGISTRY
 from game.game_engine import GameEngine
@@ -93,6 +94,7 @@ async def main() -> None:
     win_dist = {"player": 0, "agent": 0}
     turns = []
 
+    begin = time.time()
     while game_num <= max_games:
         start_text = f"GAME START — {game_num}"
         print(start_text)
@@ -106,6 +108,10 @@ async def main() -> None:
         engine.reset()
         game_num += 1
 
+    elapsed = time.time() - begin
+    hours, rem = divmod(elapsed, 3600)
+    minutes, seconds = divmod(rem, 60)
+
     total_turns = sum(turns)
     avg_turns = total_turns / len(turns)
     std_turns = (sum((t - avg_turns) ** 2 for t in turns) / len(turns)) ** 0.5
@@ -113,6 +119,7 @@ async def main() -> None:
     print(f"Final win distribution after {max_games} games:")
     print(f"  Player: {win_dist['player']} wins")
     print(f"  Agent: {win_dist['agent']} wins")
+    print(f"Total elapsed time: {hours:.0f}h {minutes:.0f}m {seconds:.2f}s")
     print(f"Average turns taken: {avg_turns:.2f} ± {std_turns:.2f}")
 
 
