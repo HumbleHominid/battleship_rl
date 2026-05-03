@@ -61,6 +61,7 @@ async def main() -> None:
     agent_cls = AGENT_REGISTRY.get(args.agent)
     if agent_cls is None:
         import sys
+
         print(
             f"error: Unknown agent '{args.agent}'. Available: {list(AGENT_REGISTRY)}",
             file=sys.stderr,
@@ -75,7 +76,14 @@ async def main() -> None:
         ws_port=args.ws_port,
         enable_ws=not args.no_ws,
     )
-    await engine.run()
+    game_num = 1
+    max_games = 1
+
+    while game_num <= max_games:
+        game_num += 1
+        GameLogger.info("Starting game %d", game_num)
+        await engine.run()
+        engine.reset()
 
 
 if __name__ == "__main__":

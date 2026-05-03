@@ -1,5 +1,13 @@
-**/__pycache__/
+# Claude
+.claude/
 .obsidian/
 **/graphify-out/
-.claude/
+
+# Python
+**/__pycache__/
+
+# Logs
 game/logs/
+
+# Mac
+.DS_Store
