@@ -85,6 +85,7 @@ async def main() -> None:
     game_num = 1
     max_games = 100
     win_dist = {"player": 0, "agent": 0}
+    turns = []
 
     while game_num <= max_games:
         start_text = f"GAME START — {game_num}"
@@ -94,11 +95,19 @@ async def main() -> None:
 
         if engine.game_over and engine.winner:
             win_dist.update({engine.winner: win_dist[engine.winner] + 1})
+            turns.append(engine.turn)
 
         engine.reset()
         game_num += 1
 
-    print(f"Final win distribution after {max_games} games: {win_dist}")
+    total_turns = sum(turns)
+    avg_turns = total_turns / len(turns)
+    std_turns = (sum((t - avg_turns) ** 2 for t in turns) / len(turns)) ** 0.5
+
+    print(f"Final win distribution after {max_games} games:")
+    print(f"  Player: {win_dist['player']} wins")
+    print(f"  Agent: {win_dist['agent']} wins")
+    print(f"Average turns taken: {avg_turns:.2f} ± {std_turns:.2f}")
 
 
 if __name__ == "__main__":
