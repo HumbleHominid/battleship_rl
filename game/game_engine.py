@@ -1,14 +1,13 @@
 import asyncio
-import logging
 import random
 from typing import Optional
 
 from .agents.base_agent import BaseAgent
+from .coordinate_methods import format_coordinate, parse_coordinate
 from .game_board import GameBoard
+from .logger import GameLogger
 from .models import CellState, get_fleet, get_ship_size
 from .websocket import GameWebSocketServer
-
-logger = logging.getLogger(__name__)
 
 
 class GameEngine:
@@ -89,14 +88,14 @@ class GameEngine:
             await self._setup_ws_player()
         else:
             self.player_board.place_fleet()
-            logger.info("Setup complete: agent vs random player")
+            GameLogger.info("Setup complete: agent vs random player")
 
     async def _setup_ws_player(self) -> None:
         assert self.ws_server is not None
-        logger.info("Waiting for WebSocket player to connect...")
+        GameLogger.info("Waiting for WebSocket player to connect...")
         while not self.ws_server.player_connected:
             await asyncio.sleep(0.1)
-        logger.info("WebSocket player connected")
+        GameLogger.info("WebSocket player connected")
 
         if self.player_placement == "manual":
             for ship_type in get_fleet():
@@ -130,7 +129,7 @@ class GameEngine:
                 "your_board": self.player_board.board_as_matrix(),
             }
         )
-        logger.info("Setup complete: agent vs WebSocket player")
+        GameLogger.info("Setup complete: agent vs WebSocket player")
 
     # ------------------------------------------------------------------
     # Game loop
@@ -170,9 +169,9 @@ class GameEngine:
             await self.ws_server.send_to_player(self._build_player_view())
             coord = await self.ws_server.wait_for_player_move()
             try:
-                row, col = GameBoard.parse_coordinate(coord)
+                row, col = parse_coordinate(coord)
             except ValueError as e:
-                logger.warning("Player sent invalid coordinate '%s': %s", coord, e)
+                GameLogger.warn("Player sent invalid coordinate '%s': %s", coord, e)
                 return
             await self._fire_on_agent_board(row, col)
             if self.ws_server and self._last_move:
@@ -191,19 +190,19 @@ class GameEngine:
             await self._fire_on_agent_board(row, col)
 
     async def _fire_on_agent_board(self, row: int, col: int) -> None:
-        coord = GameBoard.format_coordinate(row, col)
+        coord = format_coordinate(row, col)
         try:
             state, ship = self.agent_board.receive_shot(row, col)
         except ValueError as e:
-            print(f"  {e}")
+            GameLogger.warn("Player fired invalid cell: %s", e)
             return
 
         sunk_name = ship.ship_type.name if (ship and ship.is_sunk) else None
         result_str = "HIT" if state is CellState.HIT else "MISS"
-        msg = f"  Player fires {coord}: {result_str}"
+        msg = f"Player fires {coord}: {result_str}"
         if sunk_name:
             msg += f" — {sunk_name} sunk!"
-        print(msg)
+        GameLogger.info(msg)
 
         if ship and ship.is_sunk and self.ws_server:
             await self.ws_server.broadcast_state(
@@ -227,23 +226,23 @@ class GameEngine:
         coord = self.agent.select_move(obs)
 
         try:
-            row, col = GameBoard.parse_coordinate(coord)
+            row, col = parse_coordinate(coord)
         except ValueError as e:
-            logger.warning("Agent sent invalid coordinate '%s': %s", coord, e)
+            GameLogger.warn("Agent sent invalid coordinate '%s': %s", coord, e)
             return
 
         try:
             state, ship = self.player_board.receive_shot(row, col)
         except ValueError as e:
-            logger.warning("Agent double-fired at %s: %s", coord, e)
+            GameLogger.warn("Agent double-fired at %s: %s", coord, e)
             return
 
         sunk_name = ship.ship_type.name if (ship and ship.is_sunk) else None
         result_str = "HIT" if state is CellState.HIT else "MISS"
-        msg = f"  Agent fires {coord}: {result_str}"
+        msg = f"Agent fires {coord}: {result_str}"
         if sunk_name:
             msg += f" — {sunk_name} sunk!"
-        print(msg)
+        GameLogger.info(msg)
 
         self.agent.receive_result(coord, result_str, sunk_name)
 
@@ -280,7 +279,7 @@ class GameEngine:
         return False
 
     # ------------------------------------------------------------------
-    # State serialisation
+    # State serialization
     # ------------------------------------------------------------------
 
     def _build_agent_obs(self) -> dict:
@@ -370,17 +369,19 @@ class GameEngine:
         )
 
     def _display_game_over(self) -> None:
-        print("\n" + "=" * 40)
-        print("GAME OVER")
         winner_label = "Player" if self._winner == "player" else "The Agent"
-        print(f"Winner: {winner_label}")
-        print(f"Total turns: {self._turn}")
-        print(
-            f"Player's score — ships sunk: {self.agent_board.ships_sunk_count()}, "
-            f"cells hit: {self.agent_board.cells_hit_count()}"
-        )
-        print(
-            f"Agent's score  — ships sunk: {self.player_board.ships_sunk_count()}, "
-            f"cells hit: {self.player_board.cells_hit_count()}"
-        )
-        print("=" * 40)
+
+        def _report_score(board: GameBoard, owner: str) -> str:
+            return f"{owner} — sunk: {board.ships_sunk_count()}, hit: {board.cells_hit_count()}"
+
+        gameover_msg = f"GAME OVER — Winner: {winner_label} | Turns: {self._turn}"
+        player_report = _report_score(self.player_board, "Player")
+        agent_report = _report_score(self.agent_board, "Agent")
+
+        print(gameover_msg)
+        print(player_report)
+        print(agent_report)
+
+        GameLogger.info(gameover_msg)
+        GameLogger.info(player_report)
+        GameLogger.info(agent_report)

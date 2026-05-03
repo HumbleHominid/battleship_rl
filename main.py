@@ -4,6 +4,7 @@ import logging
 
 from game.agents import AGENT_REGISTRY
 from game.game_engine import GameEngine
+from game.logger import GameLogger
 
 
 def parse_args() -> argparse.Namespace:
@@ -55,10 +56,7 @@ def parse_args() -> argparse.Namespace:
 async def main() -> None:
     args = parse_args()
 
-    logging.basicConfig(
-        level=getattr(logging, args.log_level),
-        format="%(levelname)s %(name)s: %(message)s",
-    )
+    GameLogger.setup(getattr(logging, args.log_level))
 
     agent_cls = AGENT_REGISTRY.get(args.agent)
     if agent_cls is None:
