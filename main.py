@@ -50,6 +50,11 @@ def parse_args() -> argparse.Namespace:
         default="WARNING",
         help="Logging verbosity (default: WARNING)",
     )
+    parser.add_argument(
+        "--headless",
+        action="store_true",
+        help="Run without any graphical output (for testing or server environments)",
+    )
     return parser.parse_args()
 
 
@@ -75,15 +80,25 @@ async def main() -> None:
         ws_host=args.ws_host,
         ws_port=args.ws_port,
         enable_ws=not args.no_ws,
+        headless=args.headless,
     )
     game_num = 1
-    max_games = 1
+    max_games = 100
+    win_dist = {"player": 0, "agent": 0}
 
     while game_num <= max_games:
-        game_num += 1
-        GameLogger.info("Starting game %d", game_num)
+        start_text = f"GAME START — {game_num}"
+        print(start_text)
+        GameLogger.info(start_text)
         await engine.run()
+
+        if engine.game_over and engine.winner:
+            win_dist.update({engine.winner: win_dist[engine.winner] + 1})
+
         engine.reset()
+        game_num += 1
+
+    print(f"Final win distribution after {max_games} games: {win_dist}")
 
 
 if __name__ == "__main__":

@@ -33,11 +33,13 @@ class GameEngine:
         ws_host: str = "localhost",
         ws_port: int = 8765,
         enable_ws: bool = True,
+        headless: bool = False,
     ) -> None:
         self.agent = agent
         self.player_type = player_type
         self.player_placement = player_placement
         self.enable_ws = enable_ws
+        self.headless = headless
 
         self.reset()
 
@@ -147,7 +149,8 @@ class GameEngine:
             else:
                 await self._take_agent_turn()
 
-            self._display_boards()
+            if not self.headless:
+                self._display_boards()
 
             if self.ws_server:
                 await self.ws_server.broadcast_state(self._build_state_dict())
@@ -280,6 +283,14 @@ class GameEngine:
             self._winner = "agent"
             return True
         return False
+
+    @property
+    def game_over(self) -> bool:
+        return self._game_over
+
+    @property
+    def winner(self) -> Optional[str]:
+        return self._winner
 
     # ------------------------------------------------------------------
     # State serialization
