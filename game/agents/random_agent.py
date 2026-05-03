@@ -19,7 +19,6 @@ class RandomAgent(BaseAgent):
         cell = self._rng.choice(self._untried_cells)
         self._untried_cells.remove(cell)
         formatted_cell = format_coordinate(cell[0], cell[1])
-        GameLogger.info("RandomAgent selects move: %s", formatted_cell)
         return formatted_cell
 
     def reset(self) -> None:

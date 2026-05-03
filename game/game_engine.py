@@ -39,18 +39,21 @@ class GameEngine:
         self.player_placement = player_placement
         self.enable_ws = enable_ws
 
-        self.player_board = GameBoard()
-        self.agent_board = GameBoard()
+        self.reset()
 
         self.ws_server = (
             GameWebSocketServer(host=ws_host, port=ws_port) if enable_ws else None
         )
 
-        self._turn: int = 0
-        self._current_player: str = "player"
-        self._game_over: bool = False
-        self._winner: Optional[str] = None
-        self._last_move: Optional[dict] = None
+    def reset(self) -> None:
+        self.player_board = GameBoard()
+        self.agent_board = GameBoard()
+        self._turn = 0
+        self._current_player = "player"
+        self._game_over = False
+        self._winner = None
+        self._last_move = None
+        self.agent.reset()
 
     # ------------------------------------------------------------------
     # Entry point
