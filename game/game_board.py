@@ -1,43 +1,15 @@
 import random
 from typing import Optional
 
+from .coordinate_methods import ROW_LABELS, format_coordinate, parse_coordinate
 from .directions import DIRECTIONS
 from .fleet_placement_methods import PLACEMENT_METHODS
 from .models import Board, CellState, Ship, ShipType, get_ship_size
-
-ROW_LABELS = "ABCDEFGHIJ"  # index 0='A' ... 9='J'
 
 
 class GameBoard:
     def __init__(self) -> None:
         self.board = Board()
-
-    # ------------------------------------------------------------------
-    # Coordinate parsing
-    # ------------------------------------------------------------------
-
-    @staticmethod
-    def parse_coordinate(coord: str) -> tuple[int, int]:
-        """Parse 'A1'-'J10' to zero-indexed (row, col). Raises ValueError on bad input."""
-        coord = coord.strip().upper()
-        if len(coord) < 2:
-            raise ValueError(f"Invalid coordinate: '{coord}'")
-        row_char = coord[0]
-        col_str = coord[1:]
-        if row_char not in ROW_LABELS:
-            raise ValueError(f"Row '{row_char}' out of range A-J")
-        try:
-            col = int(col_str)
-        except ValueError:
-            raise ValueError(f"Column '{col_str}' is not a number")
-        if col < 1 or col > 10:
-            raise ValueError(f"Column {col} out of range 1-10")
-        return ROW_LABELS.index(row_char), col - 1
-
-    @staticmethod
-    def format_coordinate(row: int, col: int) -> str:
-        """Format zero-indexed (row, col) to 'A1'-'J10'."""
-        return f"{ROW_LABELS[row]}{col + 1}"
 
     # ------------------------------------------------------------------
     # Placement
@@ -72,12 +44,10 @@ class GameBoard:
             if not (0 <= r <= 9 and 0 <= c <= 9):
                 return False, (
                     f"Ship extends out of bounds at "
-                    f"{GameBoard.format_coordinate(max(0, min(r, 9)), max(0, min(c, 9)))}"
+                    f"{format_coordinate(max(0, min(r, 9)), max(0, min(c, 9)))}"
                 )
             if self.board.get_cell(r, c)[0] is not ShipType.NONE:
-                return False, (
-                    f"Cell {GameBoard.format_coordinate(r, c)} is already occupied"
-                )
+                return False, (f"Cell {format_coordinate(r, c)} is already occupied")
         return True, ""
 
     def place_ship(
@@ -102,7 +72,7 @@ class GameBoard:
         self, ship_type: ShipType, coord: str, direction: str
     ) -> Ship:
         """Convenience wrapper: place_ship_from_str(ShipType.CARRIER, 'A1', 'right')."""
-        row, col = self.parse_coordinate(coord)
+        row, col = parse_coordinate(coord)
         return self.place_ship(ship_type, row, col, direction)
 
     def get_placed_cells(self) -> list[tuple[int, int]]:
@@ -140,7 +110,7 @@ class GameBoard:
         ship_type, current_state = self.board.get_cell(row, col)
         if current_state in (CellState.HIT, CellState.MISS):
             raise ValueError(
-                f"Cell {self.format_coordinate(row, col)} has already been shot"
+                f"Cell {format_coordinate(row, col)} has already been shot"
             )
 
         if ship_type is not ShipType.NONE:

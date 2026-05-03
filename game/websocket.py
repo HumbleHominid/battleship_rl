@@ -1,13 +1,12 @@
 import asyncio
 import json
-import logging
 import uuid
 from typing import Optional
 
 import websockets
 from websockets.server import WebSocketServerProtocol  # type: ignore
 
-logger = logging.getLogger(__name__)
+from .logger import GameLogger
 
 
 class GameWebSocketServer:
@@ -46,7 +45,7 @@ class GameWebSocketServer:
         """
         async with websockets.serve(self._handler, self.host, self.port) as server:
             self._server = server
-            logger.info(
+            GameLogger.info(
                 "WebSocket server listening on ws://%s:%d", self.host, self.port
             )
             try:
@@ -54,7 +53,7 @@ class GameWebSocketServer:
             except asyncio.CancelledError:
                 pass
         self._server = None
-        logger.info("WebSocket server stopped")
+        GameLogger.info("WebSocket server stopped")
 
     async def stop(self) -> None:
         """Send close frames to all connected clients."""
@@ -78,7 +77,7 @@ class GameWebSocketServer:
             raw = await asyncio.wait_for(websocket.recv(), timeout=10.0)
             msg = json.loads(raw)
         except (asyncio.TimeoutError, json.JSONDecodeError, Exception) as e:
-            logger.warning("Bad handshake from %s: %s", websocket.remote_address, e)
+            GameLogger.warn("Bad handshake from %s: %s", websocket.remote_address, e)
             await websocket.close()
             return
 
@@ -88,7 +87,7 @@ class GameWebSocketServer:
             actual_role = "player"
         else:
             if role in ("player", "rl_agent"):
-                logger.warning(
+                GameLogger.warn(
                     "Downgrading %s connection from %s to observer",
                     websocket.remote_address,
                     role,
@@ -113,32 +112,32 @@ class GameWebSocketServer:
     async def _handle_player(self, websocket: WebSocketServerProtocol) -> None:
         """Receive move and placement commands from the player and enqueue them."""
         self._player_ws = websocket
-        logger.info("Player connected from %s", websocket.remote_address)
+        GameLogger.info("Player connected from %s", websocket.remote_address)
         try:
             async for raw in websocket:
                 try:
                     msg = json.loads(raw)
                 except json.JSONDecodeError:
-                    logger.warning("Player sent non-JSON: %s", raw)
+                    GameLogger.warn("Player sent non-JSON: %s", raw)
                     continue
                 if msg.get("type") == "move":
                     coord = msg.get("coordinate", "")
                     if coord:
                         await self._player_move_queue.put(coord)
                     else:
-                        logger.warning("Player move missing 'coordinate' field")
+                        GameLogger.warn("Player move missing 'coordinate' field")
                 elif msg.get("type") == "placement":
                     await self._player_placement_queue.put(msg)
         except websockets.exceptions.ConnectionClosed:
             pass
         finally:
             self._player_ws = None
-            logger.info("Player disconnected")
+            GameLogger.info("Player disconnected")
 
     async def _handle_observer(self, websocket: WebSocketServerProtocol) -> None:
         """Register an observer and hold its connection open until disconnect."""
         self._observers.add(websocket)
-        logger.info(
+        GameLogger.info(
             "Observer connected from %s (total: %d)",
             websocket.remote_address,
             len(self._observers),
@@ -150,7 +149,9 @@ class GameWebSocketServer:
             pass
         finally:
             self._observers.discard(websocket)
-            logger.info("Observer disconnected (remaining: %d)", len(self._observers))
+            GameLogger.info(
+                "Observer disconnected (remaining: %d)", len(self._observers)
+            )
 
     # ------------------------------------------------------------------
     # Messaging

@@ -1,7 +1,8 @@
 import random
 
 from game.agents.base_agent import BaseAgent
-from game.game_board import GameBoard
+from game.coordinate_methods import format_coordinate
+from game.logger import GameLogger
 
 
 class RandomAgent(BaseAgent):
@@ -10,13 +11,17 @@ class RandomAgent(BaseAgent):
             (r, c) for r in range(10) for c in range(10)
         ]
         self._rng = random.Random()
+        GameLogger.info("Initialized RandomAgent")
 
     def select_move(self, obs: dict) -> str:
         if not self._untried_cells:
             raise RuntimeError("No untried cells remain")
         cell = self._rng.choice(self._untried_cells)
         self._untried_cells.remove(cell)
-        return GameBoard.format_coordinate(cell[0], cell[1])
+        formatted_cell = format_coordinate(cell[0], cell[1])
+        GameLogger.info("RandomAgent selects move: %s", formatted_cell)
+        return formatted_cell
 
     def reset(self) -> None:
         self._untried_cells = [(r, c) for r in range(10) for c in range(10)]
+        GameLogger.info("RandomAgent state reset")

@@ -2,7 +2,10 @@ import math
 import random
 from typing import Callable
 
+from game.coordinate_methods import format_coordinate
+
 from .directions import DIRECTIONS
+from .logger import GameLogger
 from .models import get_fleet
 from .placement_protocol import PlacementTarget
 
@@ -16,6 +19,10 @@ _GAUSSIAN_SIGMA = 2.5
 _DIRECTIONS = list(DIRECTIONS.keys())
 
 
+def _placement_error(method: str) -> str:
+    return f"Failed to place fleet using {method} after {_MAX_RETRIES} retries"
+
+
 def place_fleet_random(board: PlacementTarget) -> None:
     for ship_type in get_fleet():
         placed = False
@@ -26,12 +33,19 @@ def place_fleet_random(board: PlacementTarget) -> None:
             valid, _ = board.can_place_ship(ship_type, row, col, direction)
             if valid:
                 board.place_ship(ship_type, row, col, direction)
+                cell = format_coordinate(row, col)
+                GameLogger.info(
+                    "Placed %s at %s facing %s",
+                    ship_type.name,
+                    cell,
+                    direction,
+                )
                 placed = True
                 break
         if not placed:
-            raise RuntimeError(
-                f"Failed to place {ship_type.name} after {_MAX_RETRIES} retries"
-            )
+            err_str = _placement_error("random")
+            GameLogger.error(err_str)
+            raise RuntimeError(err_str)
 
 
 def place_fleet_gaussian(board: PlacementTarget) -> None:
@@ -49,12 +63,19 @@ def place_fleet_gaussian(board: PlacementTarget) -> None:
             valid, _ = board.can_place_ship(ship_type, row, col, direction)
             if valid:
                 board.place_ship(ship_type, row, col, direction)
+                cell = format_coordinate(row, col)
+                GameLogger.info(
+                    "Placed %s at %s facing %s",
+                    ship_type.name,
+                    cell,
+                    direction,
+                )
                 placed = True
                 break
         if not placed:
-            raise RuntimeError(
-                f"Failed to place {ship_type.name} after {_MAX_RETRIES} retries (gaussian)"
-            )
+            err_str = _placement_error("gaussian")
+            GameLogger.error(err_str)
+            raise RuntimeError(err_str)
 
 
 def place_fleet_spread(board: PlacementTarget) -> None:
@@ -73,14 +94,20 @@ def place_fleet_spread(board: PlacementTarget) -> None:
                 if not valid:
                     continue
                 score = min(
-                    math.sqrt((row - r) ** 2 + (col - c) ** 2)
-                    for r, c in occupied
+                    math.sqrt((row - r) ** 2 + (col - c) ** 2) for r, c in occupied
                 )
                 if score > best_score:
                     best_score = score
                     best = (row, col, direction)
             if best is not None:
                 board.place_ship(ship_type, *best)
+                cell = format_coordinate(*best[:2])
+                GameLogger.info(
+                    "Placed %s at %s facing %s",
+                    ship_type.name,
+                    cell,
+                    best[2],
+                )
                 placed = True
 
         if not placed:
@@ -91,13 +118,20 @@ def place_fleet_spread(board: PlacementTarget) -> None:
                 valid, _ = board.can_place_ship(ship_type, row, col, direction)
                 if valid:
                     board.place_ship(ship_type, row, col, direction)
+                    cell = format_coordinate(row, col)
+                    GameLogger.info(
+                        "Placed %s at %s facing %s",
+                        ship_type.name,
+                        cell,
+                        direction,
+                    )
                     placed = True
                     break
 
         if not placed:
-            raise RuntimeError(
-                f"Failed to place {ship_type.name} after {_MAX_RETRIES} retries (spread)"
-            )
+            err_str = _placement_error("spread")
+            GameLogger.error(err_str)
+            raise RuntimeError(err_str)
 
 
 # Relative weights control how often each algorithm is selected.
