@@ -92,9 +92,9 @@ class GameEngine:
             await self._setup_automated()
 
     async def _setup_automated(self) -> None:
-        self.player_board.place_fleet_randomly()
-        self.agent_board.place_fleet_randomly()
-        logger.info("Automated mode: fleets placed randomly")
+        self.player_board.place_fleet()
+        self.agent_board.place_fleet()
+        logger.info("Automated mode: fleets placed via pluggable placement strategy")
 
     async def _setup_interactive(self) -> None:
         print("\n=== BATTLESHIP ===")
@@ -107,7 +107,7 @@ class GameEngine:
             await self._prompt_ship_placement(ship_type)
 
         print("\nYour fleet is placed. Agent is placing its fleet...")
-        self.agent_board.place_fleet_randomly()
+        self.agent_board.place_fleet()
         print("Ready! Game starting.\n")
 
     async def _prompt_ship_placement(self, ship_type: ShipType) -> None:
