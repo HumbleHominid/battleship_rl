@@ -386,7 +386,7 @@ class GameEngine:
         winner_label = "Player" if self._winner == "player" else "The Agent"
 
         def _report_score(board: GameBoard, owner: str) -> str:
-            return f"{owner} — sunk: {board.ships_sunk_count()}, hit: {board.cells_hit_count()}"
+            return f"  {owner} — sunk: {board.ships_sunk_count()}, hit: {board.cells_hit_count()}"
 
         gameover_msg = f"GAME OVER — Winner: {winner_label} | Turns: {self._turn}"
         player_report = _report_score(self.player_board, "Player")
@@ -395,6 +395,7 @@ class GameEngine:
         print(gameover_msg)
         print(player_report)
         print(agent_report)
+        print("-" * len(gameover_msg))
 
         GameLogger.info(gameover_msg)
         GameLogger.info(player_report)
