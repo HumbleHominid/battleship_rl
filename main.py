@@ -115,10 +115,14 @@ async def main() -> None:
     total_turns = sum(turns)
     avg_turns = total_turns / len(turns)
     std_turns = (sum((t - avg_turns) ** 2 for t in turns) / len(turns)) ** 0.5
+    player_srt = f"Player ({args.player_type}):"
+    agent_str = f"Agent ({args.agent}):"
+    player_str = f"  {player_srt:20s} {win_dist['player']} wins"
+    agent_str = f"  {agent_str:20s} {win_dist['agent']} wins"
 
     print(f"Final win distribution after {max_games} games:")
-    print(f"  Player: {win_dist['player']} wins")
-    print(f"  Agent: {win_dist['agent']} wins")
+    print(player_str)
+    print(agent_str)
     print(f"Total elapsed time: {hours:.0f}h {minutes:.0f}m {seconds:.2f}s")
     print(f"Average turns taken: {avg_turns:.2f} ± {std_turns:.2f}")
 
