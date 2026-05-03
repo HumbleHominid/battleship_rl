@@ -393,8 +393,9 @@ class GameEngine:
             return f"  {owner} — sunk: {board.ships_sunk_count()}, hit: {board.cells_hit_count()}"
 
         gameover_msg = f"GAME OVER — Winner: {winner_label} | Turns: {self._turn}"
-        player_report = _report_score(self.player_board, "Player")
-        agent_report = _report_score(self.agent_board, "Agent")
+        # You report the board of your opponent since that's what you were trying to sink/hit
+        player_report = _report_score(self.agent_board, "Player")
+        agent_report = _report_score(self.player_board, "Agent")
 
         print(gameover_msg)
         print(player_report)
