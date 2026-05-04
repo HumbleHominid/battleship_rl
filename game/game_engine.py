@@ -34,12 +34,14 @@ class GameEngine:
         ws_port: int = 8765,
         enable_ws: bool = True,
         headless: bool = False,
+        log_boards: bool = False,
     ) -> None:
         self.agent = agent
         self.player_type = player_type
         self.player_placement = player_placement
         self.enable_ws = enable_ws
         self.headless = headless
+        self.log_boards = log_boards
 
         self.reset()
 
@@ -48,8 +50,8 @@ class GameEngine:
         )
 
     def reset(self) -> None:
-        self.player_board = GameBoard()
-        self.agent_board = GameBoard()
+        self.player_board = GameBoard(self.log_boards)
+        self.agent_board = GameBoard(self.log_boards)
         self._turn = 0
         self._current_player = "player"
         self._game_over = False
