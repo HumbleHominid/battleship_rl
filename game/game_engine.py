@@ -53,7 +53,7 @@ class GameEngine:
         self.player_board = GameBoard(self.log_boards)
         self.agent_board = GameBoard(self.log_boards)
         self._turn = 0
-        self._current_player = "player"
+        self._current_player = "player" if random.random() < 0.5 else "agent"
         self._game_over = False
         self._winner = None
         self._last_move = None
