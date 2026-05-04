@@ -63,6 +63,11 @@ def parse_args() -> argparse.Namespace:
         default=100,
         help="Number of games to play before exiting (default: 100)",
     )
+    parser.add_argument(
+        "--log-boards",
+        action="store_true",
+        help="Log the game boards to the log file (like terminal output in gui mode)",
+    )
     return parser.parse_args()
 
 
@@ -89,6 +94,7 @@ async def main() -> None:
         ws_port=args.ws_port,
         enable_ws=not args.no_ws,
         headless=args.headless,
+        log_boards=args.log_boards,
     )
     game_num = 1
     max_games = args.max_games

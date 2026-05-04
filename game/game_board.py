@@ -4,12 +4,14 @@ from typing import Optional
 from .coordinate_methods import ROW_LABELS, format_coordinate, parse_coordinate
 from .directions import DIRECTIONS
 from .fleet_placement_methods import PLACEMENT_METHODS
+from .logger import GameLogger
 from .models import Board, CellState, Ship, ShipType, get_ship_size
 
 
 class GameBoard:
-    def __init__(self) -> None:
+    def __init__(self, log_boards: bool = False) -> None:
         self.board = Board()
+        self.log_boards = log_boards
 
     # ------------------------------------------------------------------
     # Placement
@@ -189,12 +191,20 @@ class GameBoard:
         """Print the board to stdout with row/col headers."""
         header = f"  {'  '.join(str(c) for c in range(1, 11))}"
         if label:
-            print(f"\n{label}")
+            if self.log_boards:
+                print(f"\n{label}")
+            GameLogger.info(label)
+
         print(header)
+        if self.log_boards:
+            GameLogger.info(header)
         for r in range(10):
             cells = []
             for c in range(10):
                 ship_type, state = self.board.get_cell(r, c)
                 cells.append(self._cell_symbol(ship_type, state, fog_of_war))
-            print(f"{ROW_LABELS[r]} {' '.join(f'{sym:2}' for sym in cells)}")
+            msg = f"{ROW_LABELS[r]} {' '.join(f'{sym:2}' for sym in cells)}"
+            print(msg)
+            if self.log_boards:
+                GameLogger.info(msg)
         print()
