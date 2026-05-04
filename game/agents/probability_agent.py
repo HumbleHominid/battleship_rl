@@ -9,7 +9,7 @@ from game.models import ShipType, get_fleet, get_ship_size
 _BOARD_SIZE = 10
 
 
-class ProbabilityAgent(BaseAgent):
+class BayesianAgent(BaseAgent):
     """Bayesian probability density agent.
 
     Enumerates all valid ship placements once, then permanently eliminates
@@ -27,7 +27,7 @@ class ProbabilityAgent(BaseAgent):
         self._sunk_ship_types: set[ShipType] = set()
         self._initialized: bool = False
         self._rng = random.Random()
-        GameLogger.info("Initialized ProbabilityAgent")
+        GameLogger.info("Initialized BayesianAgent")
 
     def reset(self) -> None:
         self._valid_placements = {}
@@ -44,9 +44,7 @@ class ProbabilityAgent(BaseAgent):
             for dr, dc in [(0, 1), (1, 0)]:
                 for r in range(_BOARD_SIZE):
                     for c in range(_BOARD_SIZE):
-                        cells = frozenset(
-                            (r + dr * i, c + dc * i) for i in range(size)
-                        )
+                        cells = frozenset((r + dr * i, c + dc * i) for i in range(size))
                         if all(
                             0 <= cr < _BOARD_SIZE and 0 <= cc < _BOARD_SIZE
                             for cr, cc in cells
@@ -55,7 +53,11 @@ class ProbabilityAgent(BaseAgent):
             self._valid_placements[ship_type] = placements
         self._initialized = True
         total = sum(len(p) for p in self._valid_placements.values())
-        GameLogger.debug("Initialized %d total placements across %d ships", total, len(self._valid_placements))
+        GameLogger.debug(
+            "Initialized %d total placements across %d ships",
+            total,
+            len(self._valid_placements),
+        )
 
     def _recompute_grid(self) -> None:
         grid = [[0] * _BOARD_SIZE for _ in range(_BOARD_SIZE)]
@@ -68,7 +70,9 @@ class ProbabilityAgent(BaseAgent):
                     grid[r][c] += 1
         self._grid = grid
 
-    def receive_result(self, coordinate: str, result: str, ship_sunk: Optional[str]) -> None:
+    def receive_result(
+        self, coordinate: str, result: str, ship_sunk: Optional[str]
+    ) -> None:
         if not self._initialized:
             return
 
@@ -124,5 +128,9 @@ class ProbabilityAgent(BaseAgent):
 
         candidates = [(r, c) for r, c in unshot_cells if self._grid[r][c] == best_count]
         chosen = self._rng.choice(candidates)
-        GameLogger.debug("Selected %s with probability count %d", format_coordinate(*chosen), best_count)
+        GameLogger.debug(
+            "Selected %s with probability count %d",
+            format_coordinate(*chosen),
+            best_count,
+        )
         return format_coordinate(*chosen)
