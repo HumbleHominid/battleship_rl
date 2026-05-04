@@ -87,9 +87,12 @@ class GameBoard:
         game/fleet_placement_methods.py.
         """
 
-        weights = [w for w, _ in PLACEMENT_METHODS]
-        callables = [f for _, f in PLACEMENT_METHODS]
-        f = random.choices(callables, weights=weights, k=1)[0]
+        weights = [w for w, _ in PLACEMENT_METHODS.values()]
+        placement_names = list(PLACEMENT_METHODS.keys())
+        heuristic = random.choices(placement_names, weights=weights, k=1)[0]
+        self.placement_method = heuristic
+        f = PLACEMENT_METHODS[heuristic][1]
+        GameLogger.debug(f"Placing fleet using '{heuristic}' method")
         f(self)
 
     # ------------------------------------------------------------------

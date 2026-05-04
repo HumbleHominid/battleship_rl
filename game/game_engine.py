@@ -418,14 +418,19 @@ class GameEngine:
         gameover_msg = (
             f"GAME OVER — Winner: {winner_label} | Turns: {str(self._turn):3s}"
         )
+        placement_msg = (
+            f"  Placement — {self.player_board.placement_method.capitalize()}"
+        )
         player_report = _report_score("Player", self.player_score)
         agent_report = _report_score("Agent", self.agent_score)
 
         print(gameover_msg)
+        print(placement_msg)
         print(player_report)
         print(agent_report)
         print("-" * len(gameover_msg))
 
         GameLogger.info(gameover_msg)
+        GameLogger.debug(placement_msg)
         GameLogger.info(player_report)
         GameLogger.info(agent_report)
