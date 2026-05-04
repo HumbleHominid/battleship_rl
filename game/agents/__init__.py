@@ -1,6 +1,6 @@
 from game.agents.base_agent import BaseAgent
+from game.agents.bayesian_agent import BayesianAgent
 from game.agents.hunt_agent import HuntAgent
-from game.agents.probability_agent import BayesianAgent
 from game.agents.random_agent import RandomAgent
 
 AGENT_REGISTRY: dict[str, type[BaseAgent]] = {
