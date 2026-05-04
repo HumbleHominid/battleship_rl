@@ -104,7 +104,7 @@ async def main() -> None:
 
         if engine.game_over and engine.winner:
             win_dist.update({engine.winner: win_dist[engine.winner] + 1})
-            turns.append(engine.turn)
+            turns.append(engine.player_board.cells_targeted())
 
         engine.reset()
         game_num += 1
@@ -116,16 +116,19 @@ async def main() -> None:
     total_turns = sum(turns)
     avg_turns = total_turns / len(turns)
     std_turns = (sum((t - avg_turns) ** 2 for t in turns) / len(turns)) ** 0.5
-    player_srt = f"Player ({args.player_type}):"
-    agent_str = f"Agent ({args.agent}):"
-    player_str = f"  {player_srt:20s} {win_dist['player']} wins"
-    agent_str = f"  {agent_str:20s} {win_dist['agent']} wins"
+
+    def construct_str(label: str, arg_value: str) -> str:
+        prefix = f"  {label.capitalize()} ({arg_value}):"
+        return f"{prefix:25s} {str(win_dist[label]):3s} wins"
+
+    player_str = construct_str("player", args.player_type)
+    agent_str = construct_str("agent", args.agent)
 
     print(f"Final win distribution after {max_games} games:")
     print(player_str)
     print(agent_str)
-    print(f"Total elapsed time: {hours:.0f}h {minutes:.0f}m {seconds:.2f}s")
-    print(f"Average turns taken: {avg_turns:.2f} ± {std_turns:.2f}")
+    print(f"Total elapsed time:  {hours:.0f}h {minutes:.0f}m {seconds:.2f}s")
+    print(f"Average Agent turns: {avg_turns:.2f} ± {std_turns:.2f}")
 
     GameLogger.close()
     if GameLogger.log_file and GameLogger.log_file.exists():
@@ -133,7 +136,7 @@ async def main() -> None:
         with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
             zf.write(GameLogger.log_file, GameLogger.log_file.name)
         GameLogger.log_file.unlink()
-        print(f"Log archived to {zip_path}")
+        print(f"\nLog archived to {zip_path}")
 
 
 if __name__ == "__main__":

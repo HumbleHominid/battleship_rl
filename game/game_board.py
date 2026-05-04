@@ -138,6 +138,14 @@ class GameBoard:
             1 for row in self.board.board for _, state in row if state is CellState.HIT
         )
 
+    def cells_targeted(self) -> int:
+        return sum(
+            1
+            for row in self.board.board
+            for _, state in row
+            if state in (CellState.HIT, CellState.MISS)
+        )
+
     def get_unhit_cells(self) -> list[tuple[int, int]]:
         """Return all (row, col) pairs not yet shot (EMPTY or ship still there)."""
         return [

@@ -208,6 +208,8 @@ class GameEngine:
         msg = f"Player fires {coord}: {result_str}"
         if sunk_name:
             msg += f" — {sunk_name} sunk!"
+        if not self.headless:
+            print(msg)
         GameLogger.info(msg)
 
         if ship and ship.is_sunk and self.ws_server:
@@ -248,6 +250,8 @@ class GameEngine:
         msg = f"Agent fires {coord}: {result_str}"
         if sunk_name:
             msg += f" — {sunk_name} sunk!"
+        if not self.headless:
+            print(msg)
         GameLogger.info(msg)
 
         self.agent.receive_result(coord, result_str, sunk_name)
@@ -392,7 +396,9 @@ class GameEngine:
         def _report_score(board: GameBoard, owner: str) -> str:
             return f"  {owner:6s} — sunk: {board.ships_sunk_count()}, hit: {board.cells_hit_count()}"
 
-        gameover_msg = f"GAME OVER — Winner: {winner_label} | Turns: {self._turn}"
+        gameover_msg = (
+            f"GAME OVER — Winner: {winner_label} | Turns: {str(self._turn):3s}"
+        )
         # You report the board of your opponent since that's what you were trying to sink/hit
         player_report = _report_score(self.agent_board, "Player")
         agent_report = _report_score(self.player_board, "Agent")
