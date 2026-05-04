@@ -300,14 +300,14 @@ def place_fleet_diagonal(board: PlacementTarget) -> None:
 
 # Relative weights control how often each algorithm is selected.
 # Edit the first element of each tuple to tune the distribution.
-PLACEMENT_METHODS: list[tuple[int, PlacementMethod]] = [
-    (1, place_fleet_random),
-    (1, place_fleet_gaussian),
-    (1, place_fleet_spread),
-    (1, place_fleet_edges),
-    (1, place_fleet_corners),
-    (1, place_fleet_clustered),
-    (1, place_fleet_quadrant),
-    (1, place_fleet_dense_center),
-    (1, place_fleet_diagonal),
-]
+PLACEMENT_METHODS: dict[str, tuple[int, PlacementMethod]] = {
+    "random": (1, place_fleet_random),
+    "gaussian": (1, place_fleet_gaussian),
+    "spread": (1, place_fleet_spread),
+    "edges": (1, place_fleet_edges),
+    "corners": (1, place_fleet_corners),
+    "clustered": (1, place_fleet_clustered),
+    "quadrant": (1, place_fleet_quadrant),
+    "dense_center": (1, place_fleet_dense_center),
+    "diagonal": (1, place_fleet_diagonal),
+}
