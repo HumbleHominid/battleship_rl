@@ -382,6 +382,23 @@ class GameEngine:
         }
 
     # ------------------------------------------------------------------
+    # Scores
+    # ------------------------------------------------------------------
+    @property
+    def player_score(self) -> dict:
+        return {
+            "sunk": self.agent_board.ships_sunk_count(),
+            "hit": self.agent_board.cells_hit_count(),
+        }
+
+    @property
+    def agent_score(self) -> dict:
+        return {
+            "sunk": self.player_board.ships_sunk_count(),
+            "hit": self.player_board.cells_hit_count(),
+        }
+
+    # ------------------------------------------------------------------
     # Display
     # ------------------------------------------------------------------
 
@@ -395,15 +412,14 @@ class GameEngine:
     def _display_game_over(self) -> None:
         winner_label = "Player" if self._winner == "player" else "The Agent"
 
-        def _report_score(board: GameBoard, owner: str) -> str:
-            return f"  {owner:6s} — sunk: {board.ships_sunk_count()}, hit: {board.cells_hit_count()}"
+        def _report_score(owner: str, score: dict) -> str:
+            return f"  {owner:6s} — sunk: {score['sunk']}, hit: {score['hit']}"
 
         gameover_msg = (
             f"GAME OVER — Winner: {winner_label} | Turns: {str(self._turn):3s}"
         )
-        # You report the board of your opponent since that's what you were trying to sink/hit
-        player_report = _report_score(self.agent_board, "Player")
-        agent_report = _report_score(self.player_board, "Agent")
+        player_report = _report_score("Player", self.player_score)
+        agent_report = _report_score("Agent", self.agent_score)
 
         print(gameover_msg)
         print(player_report)
