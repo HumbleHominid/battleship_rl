@@ -193,11 +193,11 @@ class GameBoard:
         if label:
             if self.log_boards:
                 print(f"\n{label}")
-            GameLogger.info(label)
+            GameLogger.debug(label)
 
         print(header)
         if self.log_boards:
-            GameLogger.info(header)
+            GameLogger.debug(header)
         for r in range(10):
             cells = []
             for c in range(10):
@@ -206,5 +206,5 @@ class GameBoard:
             msg = f"{ROW_LABELS[r]} {' '.join(f'{sym:2}' for sym in cells)}"
             print(msg)
             if self.log_boards:
-                GameLogger.info(msg)
+                GameLogger.debug(msg)
         print()
