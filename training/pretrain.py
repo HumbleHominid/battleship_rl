@@ -22,6 +22,7 @@ from game.agents.feature_extractor import FeatureExtractor
 from game.agents.transformer_ppo_agent import TransformerPPONet
 from game.coordinate_methods import parse_coordinate
 from training.battleship_env import BattleshipEnv
+from training.training_logger import TrainingLogger
 
 
 def coord_to_index(coord: str) -> int:
@@ -45,6 +46,7 @@ def main() -> None:
     args = parse_args()
     device = torch.device(args.device)
 
+    TrainingLogger.setup(run_name="pretrain")
     os.makedirs(os.path.dirname(args.checkpoint) or ".", exist_ok=True)
 
     net = TransformerPPONet().to(device)
@@ -115,7 +117,7 @@ def main() -> None:
             avg_loss = total_loss / args.log_interval
             acc = total_correct / args.log_interval * 100
             elapsed = time.time() - t0
-            print(
+            LOG(
                 f"step {step:7d} | loss {avg_loss:.4f} | acc {acc:.1f}% "
                 f"| episodes {episode_count} | {elapsed:.1f}s"
             )
@@ -125,10 +127,16 @@ def main() -> None:
 
         if step % args.save_interval == 0:
             torch.save({"net_state": net.state_dict(), "step": step}, args.checkpoint)
-            print(f"  saved checkpoint to {args.checkpoint}")
+            LOG(f"  saved checkpoint to {args.checkpoint}")
 
     torch.save({"net_state": net.state_dict(), "step": step}, args.checkpoint)
-    print(f"Pretraining complete. Checkpoint: {args.checkpoint}")
+    LOG(f"Pretraining complete. Checkpoint: {args.checkpoint}")
+    TrainingLogger.close()
+
+
+def LOG(msg: str) -> None:
+    TrainingLogger.info(msg)
+    print(msg)
 
 
 if __name__ == "__main__":

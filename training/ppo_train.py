@@ -25,6 +25,7 @@ from game.agents.feature_extractor import FeatureExtractor
 from game.agents.transformer_ppo_agent import TransformerPPONet
 from game.coordinate_methods import parse_coordinate
 from training.battleship_env import BattleshipEnv
+from training.training_logger import TrainingLogger
 
 # ---------------------------------------------------------------------------
 # Hyperparameters
@@ -292,18 +293,20 @@ def main() -> None:
     device = torch.device(args.device)
     os.makedirs(os.path.dirname(args.save_path) or ".", exist_ok=True)
 
+    TrainingLogger.setup(run_name="ppo")
+
     net = TransformerPPONet().to(device)
     if not args.from_scratch and args.checkpoint:
         ckpt = torch.load(args.checkpoint, map_location=device)
         net.load_state_dict(ckpt["net_state"])
-        print(f"Loaded checkpoint from {args.checkpoint}")
+        TrainingLogger.info(f"Loaded checkpoint from {args.checkpoint}")
     net.train()
 
     optimizer = optim.Adam(net.parameters(), lr=args.lr)
 
-    print("Computing BayesianAgent baseline (100 games)...")
+    TrainingLogger.info("Computing BayesianAgent baseline (100 games)...")
     baseline = bayes_baseline(100)
-    print(f"Baseline (BayesianAgent): {baseline:.2f} turns avg")
+    TrainingLogger.info(f"Baseline (BayesianAgent): {baseline:.2f} turns avg")
 
     best_turns = float("inf")
     env = BattleshipEnv()
@@ -328,7 +331,7 @@ def main() -> None:
 
         elapsed = time.time() - t0
         mean_turns = float(np.mean(episode_turns))
-        print(
+        TrainingLogger.info(
             f"iter {iteration:4d} | turns {mean_turns:.1f} | "
             f"policy {losses['policy_loss']:.4f} | "
             f"value {losses['value_loss']:.4f} | "
@@ -338,7 +341,7 @@ def main() -> None:
         if iteration % args.eval_interval == 0:
             eval_turns = evaluate(net, args.eval_games, device)
             delta = baseline - eval_turns
-            print(
+            TrainingLogger.info(
                 f"  eval {args.eval_games} games: {eval_turns:.2f} turns "
                 f"(baseline Δ {delta:+.2f})"
             )
@@ -347,11 +350,14 @@ def main() -> None:
                 torch.save(
                     {"net_state": net.state_dict(), "iter": iteration}, args.save_path
                 )
-                print(f"  *** new best {best_turns:.2f} — saved to {args.save_path}")
+                TrainingLogger.info(
+                    f"  *** new best {best_turns:.2f} — saved to {args.save_path}"
+                )
 
-    print(
+    TrainingLogger.info(
         f"\nTraining complete. Best eval: {best_turns:.2f} turns. Baseline: {baseline:.2f} turns."
     )
+    TrainingLogger.close()
 
 
 if __name__ == "__main__":
