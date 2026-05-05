@@ -28,18 +28,6 @@ from game.models import Board
 from training.battleship_env import BattleshipEnv
 from training.training_logger import TrainingLogger
 
-# ---------------------------------------------------------------------------
-# Hyperparameters
-# ---------------------------------------------------------------------------
-GAMMA = 0.99
-LAM = 0.95  # GAE lambda
-CLIP_EPS = 0.2
-VALUE_COEF = 0.5
-ENTROPY_COEF = 0.01
-MAX_GRAD_NORM = 0.5
-N_EPOCHS = 4  # PPO update epochs per rollout
-MINIBATCH = 256  # transitions per minibatch
-N_EPISODES_PER_ITER = 8
 
 
 @dataclass
@@ -81,15 +69,16 @@ class RolloutBuffer:
 
         return returns, advantages
 
-    def to_tensors(self, device: torch.device) -> dict[str, torch.Tensor]:
-        n = len(self.transitions)
+    def to_tensors(
+        self, device: torch.device, gamma: float, lam: float
+    ) -> dict[str, torch.Tensor]:
         cell = np.stack([t.cell_feats for t in self.transitions])  # (N, 100, F)
         glob = np.stack([t.global_feats for t in self.transitions])  # (N, G)
         mask = np.stack([t.legal_mask for t in self.transitions])  # (N, 100)
         actions = np.array([t.action for t in self.transitions])  # (N,)
         old_lp = np.array([t.log_prob for t in self.transitions])  # (N,)
 
-        returns, advantages = self.compute_returns_advantages(GAMMA, LAM)
+        returns, advantages = self.compute_returns_advantages(gamma, lam)
         advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
 
         return {
@@ -162,6 +151,11 @@ def ppo_update(
     net: TransformerPPONet,
     optimizer: optim.Optimizer,
     batch: dict[str, torch.Tensor],
+    clip_eps: float,
+    value_coef: float,
+    entropy_coef: float,
+    max_grad_norm: float,
+    minibatch: int,
 ) -> dict[str, float]:
     n = batch["cell"].shape[0]
     indices = torch.randperm(n, device=batch["cell"].device)
@@ -169,8 +163,8 @@ def ppo_update(
     total_policy_loss = total_value_loss = total_entropy = 0.0
     n_updates = 0
 
-    for start in range(0, n, MINIBATCH):
-        idx = indices[start : start + MINIBATCH]
+    for start in range(0, n, minibatch):
+        idx = indices[start : start + minibatch]
         cell = batch["cell"][idx]
         glob = batch["glob"][idx]
         mask = batch["mask"][idx]
@@ -185,20 +179,20 @@ def ppo_update(
         # Clipped PPO objective
         ratio = (new_lp - old_lp).exp()
         surr1 = ratio * advs
-        surr2 = ratio.clamp(1 - CLIP_EPS, 1 + CLIP_EPS) * advs
+        surr2 = ratio.clamp(1 - clip_eps, 1 + clip_eps) * advs
         policy_loss = -torch.min(surr1, surr2).mean()
 
-        # Value loss (clipped)
+        # Value loss
         value_loss = nn.functional.mse_loss(value, returns)
 
         # Entropy bonus (over legal actions only; clamp avoids 0 * -inf = NaN)
         probs = log_probs.exp()
         entropy = -(probs * log_probs.clamp(min=-100)).sum(dim=-1).mean()
 
-        loss = policy_loss + VALUE_COEF * value_loss - ENTROPY_COEF * entropy
+        loss = policy_loss + value_coef * value_loss - entropy_coef * entropy
         optimizer.zero_grad()
         loss.backward()
-        nn.utils.clip_grad_norm_(net.parameters(), MAX_GRAD_NORM)
+        nn.utils.clip_grad_norm_(net.parameters(), max_grad_norm)
         optimizer.step()
 
         total_policy_loss += policy_loss.item()
@@ -271,8 +265,9 @@ def bayes_baseline(n_games: int = 100) -> float:
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
+    # Training control
     p.add_argument("--iters", type=int, default=500)
-    p.add_argument("--lr", type=float, default=3e-4)
+    p.add_argument("--lr", type=float, default=1e-4)
     p.add_argument(
         "--checkpoint",
         type=str,
@@ -286,6 +281,17 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--eval-interval", type=int, default=25)
     p.add_argument("--eval-games", type=int, default=100)
     p.add_argument("--device", type=str, default="cpu")
+    # Rollout
+    p.add_argument("--n-episodes-per-iter", type=int, default=32)
+    # PPO update
+    p.add_argument("--n-epochs", type=int, default=2)
+    p.add_argument("--minibatch", type=int, default=512)
+    p.add_argument("--gamma", type=float, default=0.99)
+    p.add_argument("--lam", type=float, default=0.95)
+    p.add_argument("--clip-eps", type=float, default=0.15)
+    p.add_argument("--value-coef", type=float, default=0.05)
+    p.add_argument("--entropy-coef", type=float, default=0.003)
+    p.add_argument("--max-grad-norm", type=float, default=0.5)
     return p.parse_args()
 
 
@@ -305,8 +311,11 @@ def main() -> None:
 
     optimizer = optim.Adam(net.parameters(), lr=args.lr)
 
-    TrainingLogger.info("Computing BayesianAgent baseline (100 games)...")
-    baseline = bayes_baseline(100)
+    n_baseline_games = 1000
+    TrainingLogger.info(
+        f"Computing BayesianAgent baseline ({n_baseline_games} games)..."
+    )
+    baseline = bayes_baseline(n_baseline_games)
     TrainingLogger.info(f"Baseline (BayesianAgent): {baseline:.2f} turns avg")
 
     best_turns = float("inf")
@@ -318,17 +327,26 @@ def main() -> None:
         buffer = RolloutBuffer()
         episode_turns = []
 
-        for _ in range(N_EPISODES_PER_ITER):
+        for _ in range(args.n_episodes_per_iter):
             transitions, turns = collect_episode(net, env, extractor, device)
             for t in transitions:
                 buffer.add(t)
             episode_turns.append(turns)
 
-        batch = buffer.to_tensors(device)
+        batch = buffer.to_tensors(device, gamma=args.gamma, lam=args.lam)
 
         losses: dict[str, float] = {}
-        for _ in range(N_EPOCHS):
-            losses = ppo_update(net, optimizer, batch)
+        for _ in range(args.n_epochs):
+            losses = ppo_update(
+                net,
+                optimizer,
+                batch,
+                clip_eps=args.clip_eps,
+                value_coef=args.value_coef,
+                entropy_coef=args.entropy_coef,
+                max_grad_norm=args.max_grad_norm,
+                minibatch=args.minibatch,
+            )
 
         elapsed = time.time() - t0
         mean_turns = float(np.mean(episode_turns))

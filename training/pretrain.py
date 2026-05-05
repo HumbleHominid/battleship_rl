@@ -16,6 +16,7 @@ import time
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torch.optim.lr_scheduler import CosineAnnealingLR, LinearLR, SequentialLR
 
 from game.agents.bayesian_agent import BayesianAgent
 from game.agents.feature_extractor import FeatureExtractor
@@ -40,6 +41,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--save-interval", type=int, default=10_000)
     p.add_argument("--checkpoint", type=str, default="checkpoints/pretrain.pt")
     p.add_argument("--device", type=str, default="cpu")
+    p.add_argument("--warmup-steps", type=int, default=2_000)
     p.add_argument("--board-size", type=int, default=10)
     p.add_argument(
         "--fleet-config",
@@ -69,21 +71,36 @@ def main() -> None:
             )
         selected_ships.append(ShipType[ship_name])
     Ship.valid_ships = selected_ships
-    TrainingLogger.info(
-        f"Selected ships for fleet: {[ship.name for ship in Ship.valid_ships]}"
-    )
 
     TrainingLogger.setup(run_name="pretrain")
+    TrainingLogger.debug(
+        f"Selected ships for fleet: {[ship.name for ship in Ship.valid_ships]}"
+    )
     os.makedirs(os.path.dirname(args.checkpoint) or ".", exist_ok=True)
 
     net = TransformerPPONet().to(device)
     net.train()
     optimizer = optim.Adam(net.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+    scheduler = SequentialLR(
+        optimizer,
+        schedulers=[
+            LinearLR(
+                optimizer,
+                start_factor=0.01,
+                end_factor=1.0,
+                total_iters=args.warmup_steps,
+            ),
+            CosineAnnealingLR(
+                optimizer, T_max=max(1, args.steps - args.warmup_steps), eta_min=1e-5
+            ),
+        ],
+        milestones=[args.warmup_steps],
+    )
     criterion = nn.NLLLoss()  # inputs are already log-probabilities from the network
 
     env = BattleshipEnv()
     extractor = FeatureExtractor()
-    label_agent = BayesianAgent()
+    label_agent = BayesianAgent(deterministic_selection=True)
 
     obs, _ = env.reset()
     extractor.reset()
@@ -91,6 +108,7 @@ def main() -> None:
 
     total_loss = 0.0
     total_correct = 0
+    log_steps = 0
     episode_count = 0
     step = 0
     t0 = time.time()
@@ -119,12 +137,15 @@ def main() -> None:
 
         optimizer.zero_grad()
         loss.backward()
+        nn.utils.clip_grad_norm_(net.parameters(), 1.0)
         optimizer.step()
+        scheduler.step()
 
         total_loss += loss.item()
         pred = log_probs[0].argmax().item()
         total_correct += int(pred == target_idx)
         step += 1
+        log_steps += 1
 
         # Advance environment following the expert policy
         action = coord_to_index(expert_coord)
@@ -141,8 +162,8 @@ def main() -> None:
             label_agent.reset()
 
         if step == 1 or step % args.log_interval == 0:
-            avg_loss = total_loss / args.log_interval
-            acc = total_correct / args.log_interval * 100
+            avg_loss = total_loss / log_steps
+            acc = total_correct / log_steps * 100
             elapsed = time.time() - t0
             TrainingLogger.info(
                 f"step {step:7d} | loss {avg_loss:.4f} | acc {acc:.1f}% "
@@ -150,6 +171,7 @@ def main() -> None:
             )
             total_loss = 0.0
             total_correct = 0
+            log_steps = 0
             t0 = time.time()
 
         if step % args.save_interval == 0:

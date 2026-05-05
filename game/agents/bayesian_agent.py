@@ -18,7 +18,7 @@ class BayesianAgent(BaseAgent):
     covering at least one hit cell are counted, focusing fire on the damaged ship.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, deterministic_selection: bool = False) -> None:
         self._valid_placements: dict[ShipType, list[frozenset[tuple[int, int]]]] = {}
         self._grid: list[list[int]] = [
             [0] * Board.board_size for _ in range(Board.board_size)
@@ -27,6 +27,7 @@ class BayesianAgent(BaseAgent):
         self._sunk_ship_types: set[ShipType] = set()
         self._initialized: bool = False
         self._rng = random.Random()
+        self._deterministic_selection = deterministic_selection
         GameLogger.info("Initialized BayesianAgent")
 
     def reset(self) -> None:
@@ -126,8 +127,14 @@ class BayesianAgent(BaseAgent):
             GameLogger.debug("All placements exhausted, falling back to random")
             return format_coordinate(*self._rng.choice(unshot_cells))
 
-        candidates = [(r, c) for r, c in unshot_cells if self._grid[r][c] == best_count]
-        chosen = self._rng.choice(candidates)
+        candidates = sorted(
+            (r, c) for r, c in unshot_cells if self._grid[r][c] == best_count
+        )
+        chosen = (
+            candidates[0]
+            if self._deterministic_selection
+            else self._rng.choice(candidates)
+        )
         GameLogger.debug(
             "Selected %s with probability count %d",
             format_coordinate(*chosen),
