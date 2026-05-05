@@ -77,7 +77,7 @@ def parse_args() -> argparse.Namespace:
         help="Size of the game board (default: 10)",
     )
     parser.add_argument(
-        "--ships",
+        "--fleet-config",
         nargs="+",
         default=[
             ShipType.CARRIER.name,
@@ -86,7 +86,7 @@ def parse_args() -> argparse.Namespace:
             ShipType.SUBMARINE.name,
             ShipType.DESTROYER.name,
         ],
-        help="List of ship types to include in the fleet (default: all standard ships) e.g. --ships CARRIER DESTROYER",
+        help="List of ship types to include in the fleet (default: all standard ships) e.g. --fleet-config CARRIER DESTROYER",
     )
     return parser.parse_args()
 
