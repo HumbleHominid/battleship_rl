@@ -1,13 +1,14 @@
 import argparse
 import asyncio
 import logging
+import sys
 import time
 import zipfile
 
 from game.agents import AGENT_REGISTRY
 from game.game_engine import GameEngine
 from game.logger import GameLogger
-from game.models import Board
+from game.models import Board, Ship, ShipType
 
 
 def parse_args() -> argparse.Namespace:
@@ -75,6 +76,18 @@ def parse_args() -> argparse.Namespace:
         default=10,
         help="Size of the game board (default: 10)",
     )
+    parser.add_argument(
+        "--ships",
+        nargs="+",
+        default=[
+            ShipType.CARRIER.name,
+            ShipType.BATTLESHIP.name,
+            ShipType.CRUISER.name,
+            ShipType.SUBMARINE.name,
+            ShipType.DESTROYER.name,
+        ],
+        help="List of ship types to include in the fleet (default: all standard ships) e.g. --ships CARRIER DESTROYER",
+    )
     return parser.parse_args()
 
 
@@ -85,15 +98,25 @@ async def main() -> None:
 
     agent_cls = AGENT_REGISTRY.get(args.agent)
     if agent_cls is None:
-        import sys
-
-        print(
-            f"error: Unknown agent '{args.agent}'. Available: {list(AGENT_REGISTRY)}",
-            file=sys.stderr,
+        GameLogger.error(
+            f"error: Unknown agent '{args.agent}'. Available: {list(AGENT_REGISTRY)}"
         )
         sys.exit(2)
 
     Board.board_size = args.board_size
+    valid_ships = set(ship.name for ship in ShipType if ship != ShipType.NONE)
+    selected_ships = []
+    for ship_name in args.ships:
+        if ship_name not in valid_ships:
+            GameLogger.error(
+                f"error: Invalid ship '{ship_name}'. Valid options: {valid_ships}"
+            )
+            sys.exit(2)
+        selected_ships.append(ShipType[ship_name])
+    Ship.valid_ships = selected_ships
+    GameLogger.debug(
+        f"Selected ships for fleet: {[ship.name for ship in Ship.valid_ships]}"
+    )
 
     engine = GameEngine(
         agent=agent_cls(),

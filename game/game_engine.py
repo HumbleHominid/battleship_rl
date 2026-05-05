@@ -6,7 +6,7 @@ from .agents.base_agent import BaseAgent
 from .coordinate_methods import format_coordinate, parse_coordinate
 from .game_board import GameBoard
 from .logger import GameLogger
-from .models import CellState, get_fleet, get_ship_size
+from .models import CellState, Ship, get_ship_size
 from .websocket import GameWebSocketServer
 
 
@@ -105,7 +105,7 @@ class GameEngine:
         GameLogger.info("WebSocket player connected")
 
         if self.player_placement == "manual":
-            for ship_type in get_fleet():
+            for ship_type in Ship.get_fleet():
                 await self.ws_server.send_to_player(
                     {
                         "type": "place_ship",

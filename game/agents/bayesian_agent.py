@@ -4,7 +4,7 @@ from typing import Optional
 from game.agents.base_agent import BaseAgent
 from game.coordinate_methods import format_coordinate, parse_coordinate
 from game.logger import GameLogger
-from game.models import Board, ShipType, get_fleet, get_ship_size
+from game.models import Board, Ship, ShipType, get_ship_size
 
 
 class BayesianAgent(BaseAgent):
@@ -38,7 +38,7 @@ class BayesianAgent(BaseAgent):
         GameLogger.info("ProbabilityAgent state reset")
 
     def _initialize_placements(self) -> None:
-        for ship_type in get_fleet():
+        for ship_type in Ship.get_fleet():
             size = get_ship_size(ship_type)
             placements: list[frozenset[tuple[int, int]]] = []
             for dr, dc in [(0, 1), (1, 0)]:
