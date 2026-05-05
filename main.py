@@ -7,6 +7,7 @@ import zipfile
 from game.agents import AGENT_REGISTRY
 from game.game_engine import GameEngine
 from game.logger import GameLogger
+from game.models import Board
 
 
 def parse_args() -> argparse.Namespace:
@@ -92,6 +93,8 @@ async def main() -> None:
         )
         sys.exit(2)
 
+    Board.board_size = args.board_size
+
     engine = GameEngine(
         agent=agent_cls(),
         player_type=args.player_type,
@@ -101,7 +104,6 @@ async def main() -> None:
         enable_ws=not args.no_ws,
         headless=args.headless,
         log_boards=args.log_boards,
-        board_size=args.board_size,
     )
     game_num = 1
     max_games = args.max_games

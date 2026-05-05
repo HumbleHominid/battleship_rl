@@ -9,8 +9,8 @@ from .models import Board, CellState, Ship, ShipType, get_ship_size
 
 
 class GameBoard:
-    def __init__(self, log_boards: bool = False, board_size: int = 10) -> None:
-        self.board = Board(board_size=board_size)
+    def __init__(self, log_boards: bool = False) -> None:
+        self.board = Board()
         self.log_boards = log_boards
 
     # ------------------------------------------------------------------
