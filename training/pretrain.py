@@ -21,7 +21,7 @@ from game.agents.bayesian_agent import BayesianAgent
 from game.agents.feature_extractor import FeatureExtractor
 from game.agents.transformer_ppo_agent import TransformerPPONet
 from game.coordinate_methods import parse_coordinate
-from game.models import Board
+from game.models import Board, Ship, ShipType
 from training.battleship_env import BattleshipEnv
 from training.training_logger import TrainingLogger
 
@@ -40,12 +40,38 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--save-interval", type=int, default=10_000)
     p.add_argument("--checkpoint", type=str, default="checkpoints/pretrain.pt")
     p.add_argument("--device", type=str, default="cpu")
+    p.add_argument("--board-size", type=int, default=10)
+    p.add_argument(
+        "--fleet-config",
+        nargs="+",
+        default=[
+            ShipType.CARRIER.name,
+            ShipType.BATTLESHIP.name,
+            ShipType.CRUISER.name,
+            ShipType.SUBMARINE.name,
+            ShipType.DESTROYER.name,
+        ],
+    )
     return p.parse_args()
 
 
 def main() -> None:
     args = parse_args()
     device = torch.device(args.device)
+
+    Board.board_size = args.board_size
+    valid_ships = set(ship.name for ship in ShipType if ship != ShipType.NONE)
+    selected_ships = []
+    for ship_name in args.fleet_config:
+        if ship_name not in valid_ships:
+            raise ValueError(
+                f"Invalid ship '{ship_name}' in fleet config. Valid options: {valid_ships}"
+            )
+        selected_ships.append(ShipType[ship_name])
+    Ship.valid_ships = selected_ships
+    TrainingLogger.info(
+        f"Selected ships for fleet: {[ship.name for ship in Ship.valid_ships]}"
+    )
 
     TrainingLogger.setup(run_name="pretrain")
     os.makedirs(os.path.dirname(args.checkpoint) or ".", exist_ok=True)
