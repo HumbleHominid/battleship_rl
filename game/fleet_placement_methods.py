@@ -3,6 +3,7 @@ import random
 from typing import Callable
 
 from game.coordinate_methods import format_coordinate
+from game.models import Board
 
 from .directions import DIRECTIONS
 from .logger import GameLogger
@@ -19,11 +20,16 @@ _GAUSSIAN_SIGMA = 2.5
 _CLUSTER_SIGMA = 1.5
 
 _DIRECTIONS = list(DIRECTIONS.keys())
-_CORNERS = [(0, 0), (0, 9), (9, 0), (9, 9)]
+_CORNERS = [
+    (0, 0),
+    (0, Board.board_size - 1),
+    (Board.board_size - 1, 0),
+    (Board.board_size - 1, Board.board_size - 1),
+]
 
 
 def _edge_dist(r: int, c: int) -> float:
-    return float(min(r, 9 - r, c, 9 - c))
+    return float(min(r, Board.board_size - 1 - r, c, Board.board_size - 1 - c))
 
 
 def _corner_dist(r: int, c: int) -> float:
@@ -47,8 +53,8 @@ def _best_scored_candidate(
     best: tuple[int, int, str] | None = None
     best_score = float("inf") if lower_is_better else float("-inf")
     for _ in range(_SCORED_CANDIDATES):
-        row = random.randint(0, 9)
-        col = random.randint(0, 9)
+        row = random.randint(0, Board.board_size - 1)
+        col = random.randint(0, Board.board_size - 1)
         direction = random.choice(_DIRECTIONS)
         valid, _ = board.can_place_ship(ship_type, row, col, direction)
         if not valid:
@@ -83,8 +89,8 @@ def _place_with_score(
 
         if not placed:
             for _ in range(_MAX_RETRIES):
-                row = random.randint(0, 9)
-                col = random.randint(0, 9)
+                row = random.randint(0, Board.board_size - 1)
+                col = random.randint(0, Board.board_size - 1)
                 direction = random.choice(_DIRECTIONS)
                 valid, _ = board.can_place_ship(ship_type, row, col, direction)
                 if valid:
@@ -112,8 +118,8 @@ def place_fleet_random(board: PlacementTarget) -> None:
     for ship_type in get_fleet():
         placed = False
         for _ in range(_MAX_RETRIES):
-            row = random.randint(0, 9)
-            col = random.randint(0, 9)
+            row = random.randint(0, Board.board_size - 1)
+            col = random.randint(0, Board.board_size - 1)
             direction = random.choice(_DIRECTIONS)
             valid, _ = board.can_place_ship(ship_type, row, col, direction)
             if valid:
@@ -135,15 +141,22 @@ def place_fleet_random(board: PlacementTarget) -> None:
 
 def place_fleet_gaussian(board: PlacementTarget) -> None:
     hotspots = [
-        (random.randint(1, 8), random.randint(1, 8))
+        (
+            random.randint(1, Board.board_size - 2),
+            random.randint(1, Board.board_size - 2),
+        )
         for _ in range(_GAUSSIAN_N_HOTSPOTS)
     ]
     for ship_type in get_fleet():
         placed = False
         for _ in range(_MAX_RETRIES):
             hr, hc = random.choice(hotspots)
-            row = max(0, min(9, round(random.gauss(hr, _GAUSSIAN_SIGMA))))
-            col = max(0, min(9, round(random.gauss(hc, _GAUSSIAN_SIGMA))))
+            row = max(
+                0, min(Board.board_size - 1, round(random.gauss(hr, _GAUSSIAN_SIGMA)))
+            )
+            col = max(
+                0, min(Board.board_size - 1, round(random.gauss(hc, _GAUSSIAN_SIGMA)))
+            )
             direction = random.choice(_DIRECTIONS)
             valid, _ = board.can_place_ship(ship_type, row, col, direction)
             if valid:
@@ -172,8 +185,8 @@ def place_fleet_spread(board: PlacementTarget) -> None:
             best: tuple[int, int, str] | None = None
             best_score = -1.0
             for _ in range(_SPREAD_CANDIDATES):
-                row = random.randint(0, 9)
-                col = random.randint(0, 9)
+                row = random.randint(0, Board.board_size - 1)
+                col = random.randint(0, Board.board_size - 1)
                 direction = random.choice(_DIRECTIONS)
                 valid, _ = board.can_place_ship(ship_type, row, col, direction)
                 if not valid:
@@ -197,8 +210,8 @@ def place_fleet_spread(board: PlacementTarget) -> None:
 
         if not placed:
             for _ in range(_MAX_RETRIES):
-                row = random.randint(0, 9)
-                col = random.randint(0, 9)
+                row = random.randint(0, Board.board_size - 1)
+                col = random.randint(0, Board.board_size - 1)
                 direction = random.choice(_DIRECTIONS)
                 valid, _ = board.can_place_ship(ship_type, row, col, direction)
                 if valid:
@@ -231,12 +244,18 @@ def place_fleet_corners(board: PlacementTarget) -> None:
 
 def place_fleet_clustered(board: PlacementTarget) -> None:
     """Pack all ships tightly around a single random hotspot (opposite of spread)."""
-    hr, hc = random.randint(1, 8), random.randint(1, 8)
+    hr, hc = random.randint(1, Board.board_size - 2), random.randint(
+        1, Board.board_size - 2
+    )
     for ship_type in get_fleet():
         placed = False
         for _ in range(_MAX_RETRIES):
-            row = max(0, min(9, round(random.gauss(hr, _CLUSTER_SIGMA))))
-            col = max(0, min(9, round(random.gauss(hc, _CLUSTER_SIGMA))))
+            row = max(
+                0, min(Board.board_size - 1, round(random.gauss(hr, _CLUSTER_SIGMA)))
+            )
+            col = max(
+                0, min(Board.board_size - 1, round(random.gauss(hc, _CLUSTER_SIGMA)))
+            )
             direction = random.choice(_DIRECTIONS)
             valid, _ = board.can_place_ship(ship_type, row, col, direction)
             if valid:
@@ -259,10 +278,19 @@ def place_fleet_quadrant(board: PlacementTarget) -> None:
     """Confine the entire fleet to one randomly chosen quadrant."""
     row_range, col_range = random.choice(
         [
-            ((0, 4), (0, 4)),
-            ((0, 4), (5, 9)),
-            ((5, 9), (0, 4)),
-            ((5, 9), (5, 9)),
+            ((0, Board.board_size // 2 - 1), (0, Board.board_size // 2 - 1)),
+            (
+                (0, Board.board_size // 2 - 1),
+                (Board.board_size // 2, Board.board_size - 1),
+            ),
+            (
+                (Board.board_size // 2, Board.board_size - 1),
+                (0, Board.board_size // 2 - 1),
+            ),
+            (
+                (Board.board_size // 2, Board.board_size - 1),
+                (Board.board_size // 2, Board.board_size - 1),
+            ),
         ]
     )
     for ship_type in get_fleet():

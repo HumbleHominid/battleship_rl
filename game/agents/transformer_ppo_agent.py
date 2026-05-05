@@ -13,6 +13,7 @@ from game.agents.feature_extractor import (
     FeatureExtractor,
 )
 from game.coordinate_methods import format_coordinate
+from game.models import Board
 
 _D_MODEL = 128
 _N_HEADS = 4
@@ -71,13 +72,15 @@ class TransformerPPONet(nn.Module):
             value:     (B,)
         """
         cell_tokens = self.cell_proj(cell_feats)  # (B, 100, D)
-        global_token = self.global_proj(global_feats).unsqueeze(1) + self.global_embed  # (B, 1, D)
+        global_token = (
+            self.global_proj(global_feats).unsqueeze(1) + self.global_embed
+        )  # (B, 1, D)
 
         seq = torch.cat([global_token, cell_tokens], dim=1)  # (B, 101, D)
         encoded = self.encoder(seq)  # (B, 101, D)
 
-        global_out = encoded[:, 0, :]    # (B, D)
-        cell_out = encoded[:, 1:, :]     # (B, 100, D)
+        global_out = encoded[:, 0, :]  # (B, D)
+        cell_out = encoded[:, 1:, :]  # (B, 100, D)
 
         logits = self.policy_head(cell_out).squeeze(-1)  # (B, 100)
         logits = logits.masked_fill(~legal_mask, float("-inf"))
@@ -121,15 +124,19 @@ class TransformerPPOAgent(BaseAgent):
         cell_np = self._extractor.compute_cell_features(obs)
         global_np = self._extractor.compute_global_features(ships_sunk, turn)
 
-        cell_t = torch.tensor(cell_np, dtype=torch.float32, device=self._device).unsqueeze(0)
-        global_t = torch.tensor(global_np, dtype=torch.float32, device=self._device).unsqueeze(0)
+        cell_t = torch.tensor(
+            cell_np, dtype=torch.float32, device=self._device
+        ).unsqueeze(0)
+        global_t = torch.tensor(
+            global_np, dtype=torch.float32, device=self._device
+        ).unsqueeze(0)
         legal_mask = cell_t[0, :, 12].bool().unsqueeze(0)  # (1, 100)
 
         with torch.no_grad():
             log_probs, _ = self.net(cell_t, global_t, legal_mask)
 
         action = log_probs[0].argmax().item()
-        row, col = divmod(action, 10)
+        row, col = divmod(action, Board.board_size)
         return format_coordinate(row, col)
 
     def receive_result(

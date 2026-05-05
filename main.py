@@ -68,6 +68,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Log the game boards to the log file (like terminal output in gui mode)",
     )
+    parser.add_argument(
+        "--board-size",
+        type=int,
+        default=10,
+        help="Size of the game board (default: 10)",
+    )
     return parser.parse_args()
 
 
@@ -95,6 +101,7 @@ async def main() -> None:
         enable_ws=not args.no_ws,
         headless=args.headless,
         log_boards=args.log_boards,
+        board_size=args.board_size,
     )
     game_num = 1
     max_games = args.max_games

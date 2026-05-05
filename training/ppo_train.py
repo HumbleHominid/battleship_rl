@@ -24,6 +24,7 @@ from game.agents.bayesian_agent import BayesianAgent
 from game.agents.feature_extractor import FeatureExtractor
 from game.agents.transformer_ppo_agent import TransformerPPONet
 from game.coordinate_methods import parse_coordinate
+from game.models import Board
 from training.battleship_env import BattleshipEnv
 from training.training_logger import TrainingLogger
 
@@ -104,7 +105,7 @@ class RolloutBuffer:
 
 def coord_to_index(coord: str) -> int:
     row, col = parse_coordinate(coord)
-    return row * 10 + col
+    return row * Board.board_size + col
 
 
 def collect_episode(
@@ -261,7 +262,7 @@ def bayes_baseline(n_games: int = 100) -> float:
         while not env.done:
             coord = agent.select_move(obs)
             row, col = parse_coordinate(coord)
-            action = row * 10 + col
+            action = row * Board.board_size + col
             obs, _, _, _, info = env.step(action)
             agent.receive_result(info["coordinate"], info["result"], info["ship_sunk"])
         turns_list.append(env.turn)

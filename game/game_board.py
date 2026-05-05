@@ -9,8 +9,8 @@ from .models import Board, CellState, Ship, ShipType, get_ship_size
 
 
 class GameBoard:
-    def __init__(self, log_boards: bool = False) -> None:
-        self.board = Board()
+    def __init__(self, log_boards: bool = False, board_size: int = 10) -> None:
+        self.board = Board(board_size=board_size)
         self.log_boards = log_boards
 
     # ------------------------------------------------------------------
@@ -43,10 +43,10 @@ class GameBoard:
             return False, str(e)
 
         for r, c in cells:
-            if not (0 <= r <= 9 and 0 <= c <= 9):
+            if not (0 <= r < Board.board_size and 0 <= c < Board.board_size):
                 return False, (
                     f"Ship extends out of bounds at "
-                    f"{format_coordinate(max(0, min(r, 9)), max(0, min(c, 9)))}"
+                    f"{format_coordinate(max(0, min(r, Board.board_size - 1)), max(0, min(c, Board.board_size - 1)))}"
                 )
             if self.board.get_cell(r, c)[0] is not ShipType.NONE:
                 return False, (f"Cell {format_coordinate(r, c)} is already occupied")
@@ -155,8 +155,8 @@ class GameBoard:
         """Return all (row, col) pairs not yet shot (EMPTY or ship still there)."""
         return [
             (r, c)
-            for r in range(10)
-            for c in range(10)
+            for r in range(Board.board_size)
+            for c in range(Board.board_size)
             if self.board.get_cell(r, c)[1] is CellState.EMPTY
         ]
 
@@ -166,9 +166,9 @@ class GameBoard:
         If fog_of_war=True, ship types are hidden as NONE unless the cell is HIT.
         """
         result = []
-        for r in range(10):
+        for r in range(Board.board_size):
             row_data = []
-            for c in range(10):
+            for c in range(Board.board_size):
                 ship_type, state = self.board.get_cell(r, c)
                 if fog_of_war and state is not CellState.HIT:
                     ship_type = ShipType.NONE
@@ -192,7 +192,7 @@ class GameBoard:
 
     def display(self, fog_of_war: bool = False, label: str = "") -> None:
         """Print the board to stdout with row/col headers."""
-        header = f"  {'  '.join(str(c) for c in range(1, 11))}"
+        header = f"  {'  '.join(str(c) for c in range(1, Board.board_size + 1))}"
         if label:
             if self.log_boards:
                 print(f"\n{label}")
@@ -201,9 +201,9 @@ class GameBoard:
         print(header)
         if self.log_boards:
             GameLogger.debug(header)
-        for r in range(10):
+        for r in range(Board.board_size):
             cells = []
-            for c in range(10):
+            for c in range(Board.board_size):
                 ship_type, state = self.board.get_cell(r, c)
                 cells.append(self._cell_symbol(ship_type, state, fog_of_war))
             msg = f"{ROW_LABELS[r]} {' '.join(f'{sym:2}' for sym in cells)}"
