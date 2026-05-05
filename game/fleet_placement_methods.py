@@ -7,7 +7,7 @@ from game.models import Board
 
 from .directions import DIRECTIONS
 from .logger import GameLogger
-from .models import get_fleet
+from .models import Ship
 from .placement_protocol import PlacementTarget
 
 PlacementMethod = Callable[[PlacementTarget], None]
@@ -74,7 +74,7 @@ def _place_with_score(
     score_fn: Callable[[int, int], float],
     lower_is_better: bool = True,
 ) -> None:
-    for ship_type in get_fleet():
+    for ship_type in Ship.get_fleet():
         placed = False
         best = _best_scored_candidate(board, ship_type, score_fn, lower_is_better)
         if best is not None:
@@ -115,7 +115,7 @@ def _placement_error(method: str) -> str:
 
 
 def place_fleet_random(board: PlacementTarget) -> None:
-    for ship_type in get_fleet():
+    for ship_type in Ship.get_fleet():
         placed = False
         for _ in range(_MAX_RETRIES):
             row = random.randint(0, Board.board_size - 1)
@@ -147,7 +147,7 @@ def place_fleet_gaussian(board: PlacementTarget) -> None:
         )
         for _ in range(_GAUSSIAN_N_HOTSPOTS)
     ]
-    for ship_type in get_fleet():
+    for ship_type in Ship.get_fleet():
         placed = False
         for _ in range(_MAX_RETRIES):
             hr, hc = random.choice(hotspots)
@@ -177,7 +177,7 @@ def place_fleet_gaussian(board: PlacementTarget) -> None:
 
 
 def place_fleet_spread(board: PlacementTarget) -> None:
-    for ship_type in get_fleet():
+    for ship_type in Ship.get_fleet():
         placed = False
         occupied = board.get_placed_cells()
 
@@ -247,7 +247,7 @@ def place_fleet_clustered(board: PlacementTarget) -> None:
     hr, hc = random.randint(1, Board.board_size - 2), random.randint(
         1, Board.board_size - 2
     )
-    for ship_type in get_fleet():
+    for ship_type in Ship.get_fleet():
         placed = False
         for _ in range(_MAX_RETRIES):
             row = max(
@@ -293,7 +293,7 @@ def place_fleet_quadrant(board: PlacementTarget) -> None:
             ),
         ]
     )
-    for ship_type in get_fleet():
+    for ship_type in Ship.get_fleet():
         placed = False
         for _ in range(_MAX_RETRIES):
             row = random.randint(*row_range)

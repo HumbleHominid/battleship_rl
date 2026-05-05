@@ -4,14 +4,13 @@ import numpy as np
 
 from game.agents.bayesian_agent import BayesianAgent
 from game.coordinate_methods import parse_coordinate
-from game.models import Board
-from game.models.ship import _SHIP_SIZES
+from game.models import Board, Ship, get_ship_size
 
 _MAX_L1_DIST = 2 * (Board.board_size - 1)
-_N_SHIP_TYPES = len(_SHIP_SIZES)
+_N_SHIP_TYPES = len(Ship.get_fleet())
 CELL_FEATURE_DIM = 16
 GLOBAL_FEATURE_DIM = 4
-_MAX_TOTAL_HITS = sum(_SHIP_SIZES.values())
+_MAX_TOTAL_HITS = sum(get_ship_size(ship_type) for ship_type in Ship.get_fleet())
 
 
 class FeatureExtractor:
@@ -62,7 +61,7 @@ class FeatureExtractor:
             (_N_SHIP_TYPES, Board.board_size, Board.board_size), dtype=np.float32
         )
         target_mode = len(self._bayes._unresolved_hits) > 0
-        for i, ship_type in enumerate(_SHIP_SIZES.keys()):
+        for i, ship_type in enumerate(Ship.get_fleet()):
             if ship_type not in self._bayes._valid_placements:
                 continue
             for placement in self._bayes._valid_placements[ship_type]:
