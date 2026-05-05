@@ -9,7 +9,7 @@ battleship_rl.egg-info/
 .envs/**
 
 # Logs
-game/logs/
+**/logs/
 
 # Training
 checkpoints/
