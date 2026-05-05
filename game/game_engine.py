@@ -35,6 +35,7 @@ class GameEngine:
         enable_ws: bool = True,
         headless: bool = False,
         log_boards: bool = False,
+        board_size: int = 10,
     ) -> None:
         self.agent = agent
         self.player_type = player_type
@@ -42,6 +43,7 @@ class GameEngine:
         self.enable_ws = enable_ws
         self.headless = headless
         self.log_boards = log_boards
+        self.board_size = board_size
 
         self.reset()
 
@@ -50,8 +52,8 @@ class GameEngine:
         )
 
     def reset(self) -> None:
-        self.player_board = GameBoard(self.log_boards)
-        self.agent_board = GameBoard(self.log_boards)
+        self.player_board = GameBoard(self.log_boards, board_size=self.board_size)
+        self.agent_board = GameBoard(self.log_boards, board_size=self.board_size)
         self._turn = 0
         self._current_player = "player" if random.random() < 0.5 else "agent"
         self._game_over = False

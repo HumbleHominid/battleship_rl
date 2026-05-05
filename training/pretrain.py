@@ -21,13 +21,14 @@ from game.agents.bayesian_agent import BayesianAgent
 from game.agents.feature_extractor import FeatureExtractor
 from game.agents.transformer_ppo_agent import TransformerPPONet
 from game.coordinate_methods import parse_coordinate
+from game.models import Board
 from training.battleship_env import BattleshipEnv
 from training.training_logger import TrainingLogger
 
 
 def coord_to_index(coord: str) -> int:
     row, col = parse_coordinate(coord)
-    return row * 10 + col
+    return row * Board.board_size + col
 
 
 def parse_args() -> argparse.Namespace:
@@ -113,11 +114,11 @@ def main() -> None:
             extractor.reset()
             label_agent.reset()
 
-        if step % args.log_interval == 0:
+        if step == 1 or step % args.log_interval == 0:
             avg_loss = total_loss / args.log_interval
             acc = total_correct / args.log_interval * 100
             elapsed = time.time() - t0
-            LOG(
+            TrainingLogger.info(
                 f"step {step:7d} | loss {avg_loss:.4f} | acc {acc:.1f}% "
                 f"| episodes {episode_count} | {elapsed:.1f}s"
             )
@@ -127,16 +128,11 @@ def main() -> None:
 
         if step % args.save_interval == 0:
             torch.save({"net_state": net.state_dict(), "step": step}, args.checkpoint)
-            LOG(f"  saved checkpoint to {args.checkpoint}")
+            TrainingLogger.info(f"  saved checkpoint to {args.checkpoint}")
 
     torch.save({"net_state": net.state_dict(), "step": step}, args.checkpoint)
-    LOG(f"Pretraining complete. Checkpoint: {args.checkpoint}")
+    TrainingLogger.info(f"Pretraining complete. Checkpoint: {args.checkpoint}")
     TrainingLogger.close()
-
-
-def LOG(msg: str) -> None:
-    TrainingLogger.info(msg)
-    print(msg)
 
 
 if __name__ == "__main__":

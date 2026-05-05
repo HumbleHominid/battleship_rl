@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from game.coordinate_methods import format_coordinate
 from game.game_board import GameBoard
-from game.models import CellState
+from game.models import Board, CellState
 
 
 class BattleshipEnv:
@@ -45,7 +45,7 @@ class BattleshipEnv:
         if self._done:
             raise RuntimeError("Episode is over; call reset() first.")
 
-        row, col = divmod(action, 10)
+        row, col = divmod(action, Board.board_size)
         coord = format_coordinate(row, col)
         cell_state, ship = self._board.receive_shot(row, col)
 
@@ -55,8 +55,11 @@ class BattleshipEnv:
         sunk_name: str | None = None
         if cell_state is CellState.MISS:
             reward -= 0.1
-        elif ship is not None and ship.is_sunk:
+        if cell_state is CellState.HIT:
+            reward += 1.0
+        if ship is not None and ship.is_sunk:
             sunk_name = ship.ship_type.name
+            reward += 5.0
 
         self._done = self._board.all_ships_sunk()
         if self._done:
@@ -71,7 +74,7 @@ class BattleshipEnv:
 
     def legal_actions(self) -> list[int]:
         """Return list of cell indices (0–99) that have not yet been shot."""
-        return [r * 10 + c for r, c in self._board.get_unhit_cells()]
+        return [r * Board.board_size + c for r, c in self._board.get_unhit_cells()]
 
     @property
     def done(self) -> bool:
@@ -86,7 +89,9 @@ class BattleshipEnv:
     def _get_obs(self) -> dict:
         return {
             "enemy_board": self._board.board_as_matrix(fog_of_war=True),
-            "your_board": [["NONE:EMPTY"] * 10 for _ in range(10)],
+            "your_board": [
+                ["NONE:EMPTY"] * Board.board_size for _ in range(Board.board_size)
+            ],
             "ships_sunk": {
                 "by_you": self._board.ships_sunk_count(),
                 "against_you": 0,

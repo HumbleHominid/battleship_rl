@@ -4,21 +4,14 @@ import numpy as np
 
 from game.agents.bayesian_agent import BayesianAgent
 from game.coordinate_methods import parse_coordinate
-from game.models import ShipType
+from game.models import Board
+from game.models.ship import _SHIP_SIZES
 
-_BOARD_SIZE = 10
-_MAX_L1_DIST = 18  # max L1 distance on 10x10 board
-_SHIP_TYPES_ORDERED = [
-    ShipType.CARRIER,
-    ShipType.BATTLESHIP,
-    ShipType.CRUISER,
-    ShipType.SUBMARINE,
-    ShipType.DESTROYER,
-]
-_N_SHIP_TYPES = len(_SHIP_TYPES_ORDERED)
+_MAX_L1_DIST = 2 * (Board.board_size - 1)
+_N_SHIP_TYPES = len(_SHIP_SIZES)
 CELL_FEATURE_DIM = 16
 GLOBAL_FEATURE_DIM = 4
-_MAX_TOTAL_HITS = 17  # 5+4+3+3+2
+_MAX_TOTAL_HITS = sum(_SHIP_SIZES.values())
 
 
 class FeatureExtractor:
@@ -37,7 +30,9 @@ class FeatureExtractor:
     def __init__(self) -> None:
         self._bayes = BayesianAgent()
         # 0 = unknown/EMPTY, 1 = HIT, 2 = MISS
-        self._board_state = np.zeros((_BOARD_SIZE, _BOARD_SIZE), dtype=np.int8)
+        self._board_state = np.zeros(
+            (Board.board_size, Board.board_size), dtype=np.int8
+        )
 
     def reset(self) -> None:
         self._bayes.reset()
@@ -63,9 +58,11 @@ class FeatureExtractor:
         total_norm = total_grid / total_max if total_max > 0 else total_grid
 
         # Per-ship-type occupancy grids (same target-mode logic as BayesianAgent)
-        per_type = np.zeros((_N_SHIP_TYPES, _BOARD_SIZE, _BOARD_SIZE), dtype=np.float32)
+        per_type = np.zeros(
+            (_N_SHIP_TYPES, Board.board_size, Board.board_size), dtype=np.float32
+        )
         target_mode = len(self._bayes._unresolved_hits) > 0
-        for i, ship_type in enumerate(_SHIP_TYPES_ORDERED):
+        for i, ship_type in enumerate(_SHIP_SIZES.keys()):
             if ship_type not in self._bayes._valid_placements:
                 continue
             for placement in self._bayes._valid_placements[ship_type]:
@@ -77,11 +74,17 @@ class FeatureExtractor:
             if type_max > 0:
                 per_type[i] /= type_max
 
-        hit_positions = list(zip(*np.where(self._board_state == 1))) if np.any(self._board_state == 1) else []
+        hit_positions = (
+            list(zip(*np.where(self._board_state == 1)))
+            if np.any(self._board_state == 1)
+            else []
+        )
 
-        features = np.zeros((_BOARD_SIZE, _BOARD_SIZE, CELL_FEATURE_DIM), dtype=np.float32)
-        for r in range(_BOARD_SIZE):
-            for c in range(_BOARD_SIZE):
+        features = np.zeros(
+            (Board.board_size, Board.board_size, CELL_FEATURE_DIM), dtype=np.float32
+        )
+        for r in range(Board.board_size):
+            for c in range(Board.board_size):
                 f = features[r, c]
                 state = int(self._board_state[r, c])
 
@@ -90,14 +93,17 @@ class FeatureExtractor:
                 f[6 + state] = 1.0  # one-hot known state (6=unknown, 7=hit, 8=miss)
 
                 if hit_positions:
-                    f[9] = min(abs(r - hr) + abs(c - hc) for hr, hc in hit_positions) / _MAX_L1_DIST
+                    f[9] = (
+                        min(abs(r - hr) + abs(c - hc) for hr, hc in hit_positions)
+                        / _MAX_L1_DIST
+                    )
                 else:
                     f[9] = 1.0
 
                 adj_hit = adj_unknown = 0
                 for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
                     nr, nc = r + dr, c + dc
-                    if 0 <= nr < _BOARD_SIZE and 0 <= nc < _BOARD_SIZE:
+                    if 0 <= nr < Board.board_size and 0 <= nc < Board.board_size:
                         ns = int(self._board_state[nr, nc])
                         if ns == 1:
                             adj_hit += 1
@@ -106,11 +112,11 @@ class FeatureExtractor:
                 f[10] = adj_hit / 4.0
                 f[11] = adj_unknown / 4.0
                 f[12] = 1.0 if state == 0 else 0.0
-                f[13] = r / (_BOARD_SIZE - 1)
-                f[14] = c / (_BOARD_SIZE - 1)
+                f[13] = r / (Board.board_size - 1)
+                f[14] = c / (Board.board_size - 1)
                 f[15] = float((r + c) % 2)
 
-        return features.reshape(100, CELL_FEATURE_DIM)
+        return features.reshape(Board.board_size**2, CELL_FEATURE_DIM)
 
     def compute_global_features(self, ships_sunk: int, turn: int) -> np.ndarray:
         """Return shape (4,) float32 global context vector."""
@@ -119,7 +125,7 @@ class FeatureExtractor:
             [
                 ships_sunk / 5.0,
                 (5 - ships_sunk) / 5.0,
-                min(turn / 100.0, 1.0),
+                min(turn / (Board.board_size**2), 1.0),
                 total_hits / _MAX_TOTAL_HITS,
             ],
             dtype=np.float32,
