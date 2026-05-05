@@ -1,6 +1,6 @@
 # Training the TransformerPPO Agent
 
-All commands should be run from the **project root**. The project uses a `pyproject.toml` so both `game` and `training` are installed as packages — run `pip install -e .` once after cloning (the conda setup does this automatically).
+All commands should be run from the **project root**. The project is installed as an editable package (`pip install -e .`) so no `PYTHONPATH` manipulation is needed.
 
 ## Two-phase pipeline
 
@@ -14,22 +14,24 @@ python training/pretrain.py \
   --checkpoint checkpoints/pretrain.pt
 ```
 
-Key options:
 | Flag | Default | Description |
 |------|---------|-------------|
 | `--steps` | 200000 | Total gradient steps |
-| `--lr` | 1e-3 | Adam learning rate |
+| `--lr` | 1e-3 | Peak Adam learning rate |
 | `--weight-decay` | 1e-4 | Adam weight decay |
+| `--warmup-steps` | 2000 | Linear LR warmup steps before cosine decay |
 | `--log-interval` | 1000 | Print loss/accuracy every N steps |
 | `--save-interval` | 10000 | Save checkpoint every N steps |
 | `--checkpoint` | `checkpoints/pretrain.pt` | Output checkpoint path |
-| `--device` | cpu | `cpu` or `mps` or `cuda` |
+| `--device` | `cpu` | `cpu`, `mps`, or `cuda` |
+| `--board-size` | 10 | Board dimension (N×N) |
+| `--fleet-config` | all 5 ships | Space-separated ship names to include |
 
-Expect accuracy to climb toward ~60–80% after 200k steps (BayesianAgent is a deterministic argmax policy, so it's learnable). Loss around 1.5–2.0 indicates good convergence.
+Expect accuracy to reach ~55–65% by step 5k and ~75–85% by 50k. Loss below 1.0 indicates good convergence.
 
 ### Phase 2 — PPO fine-tuning
 
-Loads the pretrained checkpoint and fine-tunes with on-policy PPO. Collects 8 serial episodes per iteration, then runs 4 update epochs.
+Loads the pretrained checkpoint and fine-tunes with on-policy PPO. Collects 32 serial episodes per iteration, then runs 2 update epochs.
 
 ```bash
 python training/ppo_train.py \
@@ -43,19 +45,34 @@ To train from random initialization (skips imitation pretraining):
 python training/ppo_train.py --iters 500 --from-scratch
 ```
 
-Key options:
+**Training control:**
+
 | Flag | Default | Description |
 |------|---------|-------------|
 | `--iters` | 500 | Number of PPO iterations |
-| `--lr` | 3e-4 | Adam learning rate |
+| `--lr` | 1e-4 | Adam learning rate |
 | `--checkpoint` | — | Pretrained checkpoint to load |
 | `--from-scratch` | false | Train from random init |
 | `--save-path` | `checkpoints/ppo_best.pt` | Where to save the best checkpoint |
 | `--eval-interval` | 25 | Evaluate every N iterations |
 | `--eval-games` | 100 | Games per evaluation run |
-| `--device` | cpu | `cpu` or `mps` or `cuda` |
+| `--device` | `cpu` | `cpu`, `mps`, or `cuda` |
 
-The BayesianAgent baseline (~47 turns avg) is computed once at startup. The best checkpoint is saved whenever eval turns improve.
+**Rollout & PPO hyperparameters:**
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--n-episodes-per-iter` | 32 | Episodes collected per iteration |
+| `--n-epochs` | 2 | PPO update epochs per rollout |
+| `--minibatch` | 512 | Transitions per minibatch |
+| `--gamma` | 0.99 | Discount factor |
+| `--lam` | 0.95 | GAE λ |
+| `--clip-eps` | 0.15 | PPO clipping range |
+| `--value-coef` | 0.05 | Value loss weight in total loss |
+| `--entropy-coef` | 0.003 | Entropy bonus weight |
+| `--max-grad-norm` | 0.5 | Gradient clipping norm |
+
+The BayesianAgent baseline is computed over 1000 games at startup. The best checkpoint is saved whenever eval turns improve.
 
 ## Reward structure
 
@@ -68,7 +85,7 @@ The BayesianAgent baseline (~47 turns avg) is computed once at startup. The best
 ## Running the trained agent
 
 ```bash
-# Play 100 automated games and report win rate + avg turns
+# Play 100 automated games and report avg turns
 python main.py --agent transformer_ppo --no-ws --headless --max-games 100
 
 # Load a specific checkpoint
@@ -77,19 +94,3 @@ from game.agents.transformer_ppo_agent import TransformerPPOAgent
 agent = TransformerPPOAgent.load('checkpoints/ppo_best.pt')
 "
 ```
-
-## Hyperparameter reference
-
-PPO constants (edit `training/ppo_train.py` to change):
-
-| Constant | Value |
-|----------|-------|
-| `GAMMA` | 0.99 |
-| `LAM` (GAE λ) | 0.95 |
-| `CLIP_EPS` | 0.2 |
-| `VALUE_COEF` | 0.5 |
-| `ENTROPY_COEF` | 0.01 |
-| `MAX_GRAD_NORM` | 0.5 |
-| `N_EPOCHS` | 4 |
-| `MINIBATCH` | 256 |
-| `N_EPISODES_PER_ITER` | 8 |
