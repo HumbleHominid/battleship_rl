@@ -7,6 +7,7 @@ A battleship RL agent.
 ```bash
 conda env create -n battleship-rl -f environment.yaml
 conda activate battleship-rl
+pip install -e .
 ```
 
 ## Usage

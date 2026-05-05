@@ -3,11 +3,16 @@
 .obsidian/
 **/graphify-out/
 
-# Python
+# Python/ Conda
 **/__pycache__/
+battleship_rl.egg-info/
+.envs/**
 
 # Logs
 game/logs/
+
+# Training
+checkpoints/
 
 # Mac
 .DS_Store
