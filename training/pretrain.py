@@ -80,7 +80,12 @@ def main() -> None:
 
     net = TransformerPPONet().to(device)
     net.train()
-    optimizer = optim.Adam(net.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+    policy_params = (
+        list(net.policy_cell_proj.parameters())
+        + list(net.policy_encoder.parameters())
+        + list(net.policy_head.parameters())
+    )
+    optimizer = optim.Adam(policy_params, lr=args.lr, weight_decay=args.weight_decay)
     scheduler = SequentialLR(
         optimizer,
         schedulers=[
@@ -137,7 +142,7 @@ def main() -> None:
 
         optimizer.zero_grad()
         loss.backward()
-        nn.utils.clip_grad_norm_(net.parameters(), 1.0)
+        nn.utils.clip_grad_norm_(policy_params, 1.0)
         optimizer.step()
         scheduler.step()
 

@@ -23,18 +23,19 @@ _DROPOUT = 0.1
 
 
 class TransformerPPONet(nn.Module):
-    """Transformer actor-critic network for Battleship.
+    """Transformer actor-critic network for Battleship with separate policy and value trunks.
 
-    Processes 101 tokens: 1 global token (for value) + 100 cell tokens (for policy).
+    Policy trunk: cell_proj → 4-layer encoder → policy_head (per-cell logit).
+    Value trunk:  value_cell_proj + global_proj → 4-layer encoder → value_head (global token).
+    Trunks share no parameters so value gradients cannot corrupt pretrained policy weights.
     """
 
     def __init__(self) -> None:
         super().__init__()
-        self.cell_proj = nn.Linear(CELL_FEATURE_DIM, _D_MODEL)
-        self.global_proj = nn.Linear(GLOBAL_FEATURE_DIM, _D_MODEL)
-        self.global_embed = nn.Parameter(torch.zeros(_D_MODEL))
 
-        encoder_layer = nn.TransformerEncoderLayer(
+        # Policy trunk
+        self.policy_cell_proj = nn.Linear(CELL_FEATURE_DIM, _D_MODEL)
+        policy_layer = nn.TransformerEncoderLayer(
             d_model=_D_MODEL,
             nhead=_N_HEADS,
             dim_feedforward=_DIM_FF,
@@ -42,13 +43,26 @@ class TransformerPPONet(nn.Module):
             activation="gelu",
             batch_first=True,
         )
-        self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=_N_LAYERS)
-
+        self.policy_encoder = nn.TransformerEncoder(policy_layer, num_layers=_N_LAYERS)
         self.policy_head = nn.Sequential(
             nn.Linear(_D_MODEL, 64),
             nn.GELU(),
             nn.Linear(64, 1),
         )
+
+        # Value trunk
+        self.value_cell_proj = nn.Linear(CELL_FEATURE_DIM, _D_MODEL)
+        self.global_proj = nn.Linear(GLOBAL_FEATURE_DIM, _D_MODEL)
+        self.global_embed = nn.Parameter(torch.zeros(_D_MODEL))
+        value_layer = nn.TransformerEncoderLayer(
+            d_model=_D_MODEL,
+            nhead=_N_HEADS,
+            dim_feedforward=_DIM_FF,
+            dropout=_DROPOUT,
+            activation="gelu",
+            batch_first=True,
+        )
+        self.value_encoder = nn.TransformerEncoder(value_layer, num_layers=_N_LAYERS)
         self.value_head = nn.Sequential(
             nn.Linear(_D_MODEL, 64),
             nn.GELU(),
@@ -71,22 +85,22 @@ class TransformerPPONet(nn.Module):
             log_probs: (B, 100) — log softmax over cells (illegal = -inf before softmax)
             value:     (B,)
         """
-        cell_tokens = self.cell_proj(cell_feats)  # (B, 100, D)
-        global_token = (
-            self.global_proj(global_feats).unsqueeze(1) + self.global_embed
-        )  # (B, 1, D)
-
-        seq = torch.cat([global_token, cell_tokens], dim=1)  # (B, 101, D)
-        encoded = self.encoder(seq)  # (B, 101, D)
-
-        global_out = encoded[:, 0, :]  # (B, D)
-        cell_out = encoded[:, 1:, :]  # (B, 100, D)
-
-        logits = self.policy_head(cell_out).squeeze(-1)  # (B, 100)
+        # Policy path: cell tokens only
+        policy_tokens = self.policy_cell_proj(cell_feats)  # (B, 100, D)
+        policy_out = self.policy_encoder(policy_tokens)  # (B, 100, D)
+        logits = self.policy_head(policy_out).squeeze(-1)  # (B, 100)
         logits = logits.masked_fill(~legal_mask, float("-inf"))
         log_probs = F.log_softmax(logits, dim=-1)
 
-        value = self.value_head(global_out).squeeze(-1)  # (B,)
+        # Value path: global token + all cell tokens
+        value_tokens = self.value_cell_proj(cell_feats)  # (B, 100, D)
+        global_token = (
+            self.global_proj(global_feats).unsqueeze(1) + self.global_embed
+        )  # (B, 1, D)
+        value_seq = torch.cat([global_token, value_tokens], dim=1)  # (B, 101, D)
+        value_out = self.value_encoder(value_seq)  # (B, 101, D)
+        value = self.value_head(value_out[:, 0, :]).squeeze(-1)  # (B,)
+
         return log_probs, value
 
 
