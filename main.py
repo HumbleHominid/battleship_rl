@@ -22,9 +22,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--player-type",
-        choices=["random", "websocket"],
         default="random",
-        help="Player type: 'random' stub or 'websocket' human (default: random)",
+        help="Agent key from AGENT_REGISTRY or 'websocket' (default: random)",
     )
     parser.add_argument(
         "--player-placement",
@@ -99,21 +98,28 @@ async def main() -> None:
     agent_cls = AGENT_REGISTRY.get(args.agent)
     if agent_cls is None:
         GameLogger.error(
-            f"error: Unknown agent '{args.agent}'. Available: {list(AGENT_REGISTRY)}"
+            f"Unknown agent '{args.agent}'. Available: {list(AGENT_REGISTRY)}"
         )
         sys.exit(2)
 
+    player_cls = None
+    if args.player_type in AGENT_REGISTRY:
+        player_cls = AGENT_REGISTRY[args.player_type]
+    elif args.player_type != "websocket":
+        GameLogger.error(
+            f"Invalid player type '{args.player_type}'. Defaulting to random"
+        )
+        player_cls = AGENT_REGISTRY["random"]
+
     Board.board_size = args.board_size
     valid_ships = set(ship.name for ship in ShipType if ship != ShipType.NONE)
-    selected_ships = []
-    for ship_name in args.ships:
-        if ship_name not in valid_ships:
-            GameLogger.error(
-                f"error: Invalid ship '{ship_name}'. Valid options: {valid_ships}"
-            )
+    fleet_config = []
+    for ship in args.fleet_config:
+        if ship not in valid_ships:
+            GameLogger.error(f"Invalid ship '{ship}'. Valid options: {valid_ships}")
             sys.exit(2)
-        selected_ships.append(ShipType[ship_name])
-    Ship.valid_ships = selected_ships
+        fleet_config.append(ShipType[ship])
+    Ship.valid_ships = fleet_config
     GameLogger.debug(
         f"Selected ships for fleet: {[ship.name for ship in Ship.valid_ships]}"
     )
@@ -127,6 +133,7 @@ async def main() -> None:
         enable_ws=not args.no_ws,
         headless=args.headless,
         log_boards=args.log_boards,
+        player_agent=player_cls() if player_cls else None,
     )
     game_num = 1
     max_games = args.max_games
