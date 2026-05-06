@@ -79,6 +79,7 @@ class RolloutBuffer:
         old_lp = np.array([t.log_prob for t in self.transitions])  # (N,)
 
         returns, advantages = self.compute_returns_advantages(gamma, lam)
+        returns = (returns - returns.mean()) / (returns.std() + 1e-8)
         advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
 
         return {
@@ -149,10 +150,12 @@ def collect_episode(
 
 def ppo_update(
     net: TransformerPPONet,
-    optimizer: optim.Optimizer,
+    policy_optimizer: optim.Optimizer,
+    value_optimizer: optim.Optimizer,
+    policy_params: list,
+    value_params: list,
     batch: dict[str, torch.Tensor],
     clip_eps: float,
-    value_coef: float,
     entropy_coef: float,
     max_grad_norm: float,
     minibatch: int,
@@ -182,18 +185,24 @@ def ppo_update(
         surr2 = ratio.clamp(1 - clip_eps, 1 + clip_eps) * advs
         policy_loss = -torch.min(surr1, surr2).mean()
 
-        # Value loss
-        value_loss = nn.functional.mse_loss(value, returns)
-
         # Entropy bonus (over legal actions only; clamp avoids 0 * -inf = NaN)
         probs = log_probs.exp()
         entropy = -(probs * log_probs.clamp(min=-100)).sum(dim=-1).mean()
 
-        loss = policy_loss + value_coef * value_loss - entropy_coef * entropy
-        optimizer.zero_grad()
-        loss.backward()
-        nn.utils.clip_grad_norm_(net.parameters(), max_grad_norm)
-        optimizer.step()
+        # Value loss
+        value_loss = nn.functional.mse_loss(value, returns)
+
+        # Policy trunk update (retain graph so value backward can follow)
+        policy_optimizer.zero_grad()
+        (policy_loss - entropy_coef * entropy).backward(retain_graph=True)
+        nn.utils.clip_grad_norm_(policy_params, max_grad_norm)
+        policy_optimizer.step()
+
+        # Value trunk update (independent backward — no policy gradient)
+        value_optimizer.zero_grad()
+        value_loss.backward()
+        nn.utils.clip_grad_norm_(value_params, max_grad_norm)
+        value_optimizer.step()
 
         total_policy_loss += policy_loss.item()
         total_value_loss += value_loss.item()
@@ -206,6 +215,34 @@ def ppo_update(
         "value_loss": total_value_loss / k,
         "entropy": total_entropy / k,
     }
+
+
+def value_warmup_update(
+    net: TransformerPPONet,
+    value_optimizer: optim.Optimizer,
+    value_params: list,
+    batch: dict[str, torch.Tensor],
+    max_grad_norm: float,
+    minibatch: int,
+) -> float:
+    """One epoch of value-trunk-only updates — policy trunk receives zero gradient."""
+    n = batch["cell"].shape[0]
+    indices = torch.randperm(n, device=batch["cell"].device)
+    total_value_loss = 0.0
+    n_updates = 0
+
+    for start in range(0, n, minibatch):
+        idx = indices[start : start + minibatch]
+        _, value = net(batch["cell"][idx], batch["glob"][idx], batch["mask"][idx])
+        value_loss = nn.functional.mse_loss(value, batch["returns"][idx])
+        value_optimizer.zero_grad()
+        value_loss.backward()
+        nn.utils.clip_grad_norm_(value_params, max_grad_norm)
+        value_optimizer.step()
+        total_value_loss += value_loss.item()
+        n_updates += 1
+
+    return total_value_loss / max(n_updates, 1)
 
 
 def evaluate(
@@ -267,7 +304,8 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
     # Training control
     p.add_argument("--iters", type=int, default=500)
-    p.add_argument("--lr", type=float, default=1e-4)
+    p.add_argument("--policy-lr", type=float, default=1e-4)
+    p.add_argument("--value-lr", type=float, default=1e-4)
     p.add_argument(
         "--checkpoint",
         type=str,
@@ -281,6 +319,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--eval-interval", type=int, default=25)
     p.add_argument("--eval-games", type=int, default=100)
     p.add_argument("--device", type=str, default="cpu")
+    # Value head warmup
+    p.add_argument("--value-warmup-iters", type=int, default=100)
     # Rollout
     p.add_argument("--n-episodes-per-iter", type=int, default=32)
     # PPO update
@@ -289,7 +329,6 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--gamma", type=float, default=0.99)
     p.add_argument("--lam", type=float, default=0.95)
     p.add_argument("--clip-eps", type=float, default=0.15)
-    p.add_argument("--value-coef", type=float, default=0.05)
     p.add_argument("--entropy-coef", type=float, default=0.003)
     p.add_argument("--max-grad-norm", type=float, default=0.5)
     return p.parse_args()
@@ -305,11 +344,31 @@ def main() -> None:
     net = TransformerPPONet().to(device)
     if not args.from_scratch and args.checkpoint:
         ckpt = torch.load(args.checkpoint, map_location=device)
-        net.load_state_dict(ckpt["net_state"])
-        TrainingLogger.info(f"Loaded checkpoint from {args.checkpoint}")
+        result = net.load_state_dict(ckpt["net_state"], strict=False)
+        if result.missing_keys:
+            TrainingLogger.warn(
+                f"Checkpoint has {len(result.missing_keys)} missing keys "
+                f"(architecture changed — re-run pretrain.py to get a compatible checkpoint). "
+                f"First missing: {result.missing_keys[0]}"
+            )
+        else:
+            TrainingLogger.info(f"Loaded checkpoint from {args.checkpoint}")
     net.train()
 
-    optimizer = optim.Adam(net.parameters(), lr=args.lr)
+    policy_params = (
+        list(net.policy_cell_proj.parameters())
+        + list(net.policy_encoder.parameters())
+        + list(net.policy_head.parameters())
+    )
+    value_params = (
+        list(net.value_cell_proj.parameters())
+        + list(net.global_proj.parameters())
+        + [net.global_embed]
+        + list(net.value_encoder.parameters())
+        + list(net.value_head.parameters())
+    )
+    policy_optimizer = optim.Adam(policy_params, lr=args.policy_lr)
+    value_optimizer = optim.Adam(value_params, lr=args.value_lr)
 
     n_baseline_games = 1000
     TrainingLogger.info(
@@ -321,6 +380,25 @@ def main() -> None:
     best_turns = float("inf")
     env = BattleshipEnv()
     extractor = FeatureExtractor()
+
+    if args.value_warmup_iters > 0:
+        TrainingLogger.info(f"Value head warmup ({args.value_warmup_iters} iters)...")
+        for wu in range(1, args.value_warmup_iters + 1):
+            buffer = RolloutBuffer()
+            for _ in range(args.n_episodes_per_iter):
+                transitions, _ = collect_episode(net, env, extractor, device)
+                for t in transitions:
+                    buffer.add(t)
+            batch = buffer.to_tensors(device, gamma=args.gamma, lam=args.lam)
+            for _ in range(args.n_epochs):
+                v_loss = value_warmup_update(
+                    net, value_optimizer, value_params, batch, args.max_grad_norm, args.minibatch
+                )
+            if wu % 10 == 0:
+                TrainingLogger.info(
+                    f"  warmup {wu:4d}/{args.value_warmup_iters} | value {v_loss:.4f}"
+                )
+        TrainingLogger.info("Value warmup complete.")
 
     for iteration in range(1, args.iters + 1):
         t0 = time.time()
@@ -339,10 +417,12 @@ def main() -> None:
         for _ in range(args.n_epochs):
             losses = ppo_update(
                 net,
-                optimizer,
+                policy_optimizer,
+                value_optimizer,
+                policy_params,
+                value_params,
                 batch,
                 clip_eps=args.clip_eps,
-                value_coef=args.value_coef,
                 entropy_coef=args.entropy_coef,
                 max_grad_norm=args.max_grad_norm,
                 minibatch=args.minibatch,
