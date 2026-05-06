@@ -11,6 +11,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import logging
 import os
 import time
 from dataclasses import dataclass, field
@@ -27,7 +28,6 @@ from game.coordinate_methods import parse_coordinate
 from game.models import Board
 from training.battleship_env import BattleshipEnv
 from training.training_logger import TrainingLogger
-
 
 
 @dataclass
@@ -232,6 +232,9 @@ def value_warmup_update(
     n_updates = 0
 
     for start in range(0, n, minibatch):
+        TrainingLogger.debug(
+            f"    Update {start // minibatch + 1} / {n // minibatch + (n % minibatch > 0)}"
+        )
         idx = indices[start : start + minibatch]
         _, value = net(batch["cell"][idx], batch["glob"][idx], batch["mask"][idx])
         value_loss = nn.functional.mse_loss(value, batch["returns"][idx])
@@ -331,6 +334,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--clip-eps", type=float, default=0.15)
     p.add_argument("--entropy-coef", type=float, default=0.003)
     p.add_argument("--max-grad-norm", type=float, default=0.5)
+    p.add_argument(
+        "--log-level",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        default="INFO",
+        help="Logging verbosity (default: INFO)",
+    )
     return p.parse_args()
 
 
@@ -339,7 +348,7 @@ def main() -> None:
     device = torch.device(args.device)
     os.makedirs(os.path.dirname(args.save_path) or ".", exist_ok=True)
 
-    TrainingLogger.setup(run_name="ppo")
+    TrainingLogger.setup(run_name="ppo", console_level=getattr(logging, args.log_level))
 
     net = TransformerPPONet().to(device)
     if not args.from_scratch and args.checkpoint:
@@ -384,20 +393,31 @@ def main() -> None:
     if args.value_warmup_iters > 0:
         TrainingLogger.info(f"Value head warmup ({args.value_warmup_iters} iters)...")
         for wu in range(1, args.value_warmup_iters + 1):
+            TrainingLogger.debug(f"Warmup iteration {wu} / {args.value_warmup_iters}")
             buffer = RolloutBuffer()
             for _ in range(args.n_episodes_per_iter):
                 transitions, _ = collect_episode(net, env, extractor, device)
                 for t in transitions:
                     buffer.add(t)
             batch = buffer.to_tensors(device, gamma=args.gamma, lam=args.lam)
-            for _ in range(args.n_epochs):
+            for i in range(args.n_epochs):
+                TrainingLogger.debug(f"  Epoch {i + 1} / {args.n_epochs}")
                 v_loss = value_warmup_update(
-                    net, value_optimizer, value_params, batch, args.max_grad_norm, args.minibatch
+                    net,
+                    value_optimizer,
+                    value_params,
+                    batch,
+                    args.max_grad_norm,
+                    args.minibatch,
                 )
+
+            msg = f"Value warmup iter {wu:4d}/{args.value_warmup_iters} | value loss {v_loss:.4f}"
             if wu % 10 == 0:
                 TrainingLogger.info(
                     f"  warmup {wu:4d}/{args.value_warmup_iters} | value {v_loss:.4f}"
                 )
+            else:
+                print(msg, end="\r")
         TrainingLogger.info("Value warmup complete.")
 
     for iteration in range(1, args.iters + 1):

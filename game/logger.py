@@ -4,7 +4,6 @@ from pathlib import Path
 
 _LOG_DIR = Path(__file__).parent / "logs"
 _FILE_FORMAT = "%(asctime)s %(levelname)-8s %(message)s"
-_CONSOLE_FORMAT = "%(levelname)s: %(message)s"
 
 _log = logging.getLogger("battleship")
 
@@ -22,10 +21,12 @@ class GameLogger:
     log_file: Path | None = None
 
     @classmethod
-    def setup(cls, console_level: int = logging.WARNING) -> None:
+    def setup(cls, console_level: int = logging.INFO) -> None:
         """Configure handlers. Called once from main.py at process start."""
         _LOG_DIR.mkdir(exist_ok=True)
-        cls.log_file = _LOG_DIR / f"battleship_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+        cls.log_file = (
+            _LOG_DIR / f"battleship_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+        )
 
         _log.setLevel(logging.DEBUG)  # pass everything to handlers; handlers decide
 
@@ -36,7 +37,7 @@ class GameLogger:
 
         ch = logging.StreamHandler()
         ch.setLevel(console_level)  # console respects --log-level (default WARNING)
-        ch.setFormatter(logging.Formatter(_CONSOLE_FORMAT))
+        ch.setFormatter(logging.Formatter("%(message)s"))
         _log.addHandler(ch)
 
     @classmethod
