@@ -57,27 +57,27 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
-def main() -> None:
-    args = parse_args()
-    device = torch.device(args.device)
-
+def setup_board_and_fleet(args: argparse.Namespace) -> None:
     Board.board_size = args.board_size
     valid_ships = set(ship.name for ship in ShipType if ship != ShipType.NONE)
     selected_ships = []
     for ship_name in args.fleet_config:
         if ship_name not in valid_ships:
-            raise ValueError(
-                f"Invalid ship '{ship_name}' in fleet config. Valid options: {valid_ships}"
-            )
+            msg = f"Invalid ship '{ship_name}' in fleet config. Valid options: {valid_ships}"
+            TrainingLogger.error(msg)
+            raise ValueError(msg)
         selected_ships.append(ShipType[ship_name])
     Ship.valid_ships = selected_ships
-
-    TrainingLogger.setup(run_name="pretrain")
     TrainingLogger.debug(
         f"Selected ships for fleet: {[ship.name for ship in Ship.valid_ships]}"
     )
-    os.makedirs(os.path.dirname(args.checkpoint) or ".", exist_ok=True)
 
+
+def init_transformer_ppo(
+    args: argparse.Namespace, device: torch.device
+) -> tuple[
+    TransformerPPONet, list[nn.Parameter], optim.Optimizer, SequentialLR, nn.NLLLoss
+]:
     net = TransformerPPONet().to(device)
     net.train()
     policy_params = (
@@ -102,7 +102,29 @@ def main() -> None:
         milestones=[args.warmup_steps],
     )
     criterion = nn.NLLLoss()  # inputs are already log-probabilities from the network
+    return net, policy_params, optimizer, scheduler, criterion
 
+
+def main() -> None:
+    args = parse_args()
+
+    # Init resources
+    TrainingLogger.setup(run_name="pretrain")
+    os.makedirs(os.path.dirname(args.checkpoint) or ".", exist_ok=True)
+    device = torch.device(args.device)
+
+    # Custom board size and fleet config
+    try:
+        setup_board_and_fleet(args)
+    except ValueError as e:
+        raise e
+
+    # Transformer setup
+    net, policy_params, optimizer, scheduler, criterion = init_transformer_ppo(
+        args, device
+    )
+
+    # Environment setup
     env = BattleshipEnv()
     extractor = FeatureExtractor()
     label_agent = BayesianAgent(deterministic_selection=True)
