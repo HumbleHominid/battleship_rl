@@ -207,6 +207,12 @@ class GameEngine:
                 )
                 return
             await self._fire_on_agent_board(row, col)
+            if self._last_move:
+                self.player_agent.receive_result(
+                    coord,
+                    self._last_move["result"],
+                    self._last_move["ship_sunk"],
+                )
         else:
             unhit = self.agent_board.get_unhit_cells()
             row, col = random.choice(unhit)
