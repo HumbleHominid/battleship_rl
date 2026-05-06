@@ -35,6 +35,7 @@ class GameEngine:
         enable_ws: bool = True,
         headless: bool = False,
         log_boards: bool = False,
+        player_agent: BaseAgent | None = None,
     ) -> None:
         self.agent = agent
         self.player_type = player_type
@@ -42,6 +43,7 @@ class GameEngine:
         self.enable_ws = enable_ws
         self.headless = headless
         self.log_boards = log_boards
+        self.player_agent = player_agent
 
         self.reset()
 
@@ -58,6 +60,8 @@ class GameEngine:
         self._winner = None
         self._last_move = None
         self.agent.reset()
+        if self.player_agent:
+            self.player_agent.reset()
 
     # ------------------------------------------------------------------
     # Entry point
@@ -192,6 +196,17 @@ class GameEngine:
                         "game_over": self._game_over,
                     }
                 )
+        elif self.player_agent:
+            obs = self._build_player_view()
+            coord = self.player_agent.select_move(obs)
+            try:
+                row, col = parse_coordinate(coord)
+            except ValueError as e:
+                GameLogger.warn(
+                    "Player agent sent invalid coordinate '%s': %s", coord, e
+                )
+                return
+            await self._fire_on_agent_board(row, col)
         else:
             unhit = self.agent_board.get_unhit_cells()
             row, col = random.choice(unhit)
