@@ -10,6 +10,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import logging
 import os
 import time
 
@@ -38,6 +39,9 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--lr", type=float, default=1e-3)
     p.add_argument("--weight-decay", type=float, default=1e-4)
     p.add_argument("--log-interval", type=int, default=1_000)
+    p.add_argument(
+        "--log-level", choices=["DEBUG", "INFO", "WARNING", "ERROR"], default="INFO"
+    )
     p.add_argument("--save-interval", type=int, default=10_000)
     p.add_argument("--checkpoint", type=str, default="checkpoints/pretrain.pt")
     p.add_argument("--device", type=str, default="cpu")
@@ -105,20 +109,10 @@ def init_transformer_ppo(
     return net, policy_params, optimizer, scheduler, criterion
 
 
-def main() -> None:
-    args = parse_args()
-
-    # Init resources
-    TrainingLogger.setup(run_name="pretrain")
-    os.makedirs(os.path.dirname(args.checkpoint) or ".", exist_ok=True)
-    device = torch.device(args.device)
-
-    # Custom board size and fleet config
-    try:
-        setup_board_and_fleet(args)
-    except ValueError as e:
-        raise e
-
+def run_training_loop(
+    args: argparse.Namespace,
+    device: torch.device,
+) -> None:
     # Transformer setup
     net, policy_params, optimizer, scheduler, criterion = init_transformer_ppo(
         args, device
@@ -129,16 +123,18 @@ def main() -> None:
     extractor = FeatureExtractor()
     label_agent = BayesianAgent(deterministic_selection=True)
 
-    obs, _ = env.reset()
-    extractor.reset()
-    label_agent.reset()
+    def env_reset() -> tuple[dict, dict]:
+        extractor.reset()
+        label_agent.reset()
+        return env.reset()
 
-    total_loss = 0.0
-    total_correct = 0
-    log_steps = 0
+    def interval_reset() -> tuple[float, int, int, float]:
+        return 0.0, 0, 0, time.time()
+
     episode_count = 0
     step = 0
-    t0 = time.time()
+    obs, _ = env_reset()
+    total_loss, total_correct, log_steps, t0 = interval_reset()
 
     while step < args.steps:
         # Expert label
@@ -162,6 +158,7 @@ def main() -> None:
         log_probs, _ = net(cell_t, global_t, legal_mask)
         loss = criterion(log_probs, target_t)
 
+        # gradient step
         optimizer.zero_grad()
         loss.backward()
         nn.utils.clip_grad_norm_(policy_params, 1.0)
@@ -184,9 +181,7 @@ def main() -> None:
 
         if done:
             episode_count += 1
-            obs, _ = env.reset()
-            extractor.reset()
-            label_agent.reset()
+            obs, _ = env_reset()
 
         if step == 1 or step % args.log_interval == 0:
             avg_loss = total_loss / log_steps
@@ -196,16 +191,33 @@ def main() -> None:
                 f"step {step:7d} | loss {avg_loss:.4f} | acc {acc:.1f}% "
                 f"| episodes {episode_count} | {elapsed:.1f}s"
             )
-            total_loss = 0.0
-            total_correct = 0
-            log_steps = 0
-            t0 = time.time()
+            total_loss, total_correct, log_steps, t0 = interval_reset()
 
         if step % args.save_interval == 0:
             torch.save({"net_state": net.state_dict(), "step": step}, args.checkpoint)
             TrainingLogger.info(f"  saved checkpoint to {args.checkpoint}")
 
     torch.save({"net_state": net.state_dict(), "step": step}, args.checkpoint)
+
+
+def main() -> None:
+    args = parse_args()
+
+    # Init resources
+    TrainingLogger.setup(
+        run_name="pretrain", console_level=getattr(logging, args.log_level)
+    )
+    os.makedirs(os.path.dirname(args.checkpoint) or ".", exist_ok=True)
+    device = torch.device(args.device)
+
+    # Custom board size and fleet config
+    try:
+        setup_board_and_fleet(args)
+    except ValueError as e:
+        raise e
+
+    run_training_loop(args, device)
+
     TrainingLogger.info(f"Pretraining complete. Checkpoint: {args.checkpoint}")
     TrainingLogger.close()
 

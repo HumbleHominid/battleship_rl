@@ -55,7 +55,7 @@ class BattleshipEnv:
         sunk_name: str | None = None
         if cell_state is CellState.MISS:
             reward -= 0.1
-        if cell_state is CellState.HIT:
+        elif cell_state is CellState.HIT:
             reward += 1.0
         if ship is not None and ship.is_sunk:
             sunk_name = ship.ship_type.name

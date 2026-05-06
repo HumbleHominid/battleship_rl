@@ -50,8 +50,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--log-level",
         choices=["DEBUG", "INFO", "WARNING", "ERROR"],
-        default="WARNING",
-        help="Logging verbosity (default: WARNING)",
+        default="INFO",
+        help="Logging verbosity (default: INFO)",
     )
     parser.add_argument(
         "--headless",
