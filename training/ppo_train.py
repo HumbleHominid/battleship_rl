@@ -392,6 +392,9 @@ def main() -> None:
 
     if args.value_warmup_iters > 0:
         TrainingLogger.info(f"Value head warmup ({args.value_warmup_iters} iters)...")
+        warmup_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+            value_optimizer, T_max=args.value_warmup_iters, eta_min=args.value_lr * 0.01
+        )
         for wu in range(1, args.value_warmup_iters + 1):
             TrainingLogger.debug(f"Warmup iteration {wu} / {args.value_warmup_iters}")
             buffer = RolloutBuffer()
@@ -410,14 +413,19 @@ def main() -> None:
                     args.max_grad_norm,
                     args.minibatch,
                 )
+            warmup_scheduler.step()
 
-            msg = f"Value warmup iter {wu:4d}/{args.value_warmup_iters} | value loss {v_loss:.4f}"
-            if wu % 10 == 0:
+            current_lr = warmup_scheduler.get_last_lr()[0]
+            msg = f"Value warmup iter {wu:4d}/{args.value_warmup_iters} | value loss {v_loss:.4f} | lr {current_lr:.2e}"
+            if wu % 5 == 0:
                 TrainingLogger.info(
-                    f"  warmup {wu:4d}/{args.value_warmup_iters} | value {v_loss:.4f}"
+                    f"  warmup {wu:4d}/{args.value_warmup_iters} | value {v_loss:.4f} | lr {current_lr:.2e}"
                 )
             else:
                 print(msg, end="\r")
+        # Reset value LR to base rate for main PPO loop
+        for pg in value_optimizer.param_groups:
+            pg["lr"] = args.value_lr
         TrainingLogger.info("Value warmup complete.")
 
     for iteration in range(1, args.iters + 1):
