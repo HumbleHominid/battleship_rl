@@ -2,24 +2,28 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Setup
+## Core Principles
 
-```bash
-conda env create -n battleship-rl -f environment.yaml
-conda activate battleship-rl
-```
+- Never use emojis.
 
-## Running the Game
+## Commit Authorship
 
-```bash
-python main.py --mode automated          # both players use stubs (RL training mode)
-python main.py --mode interactive        # human places ships and fires manually
-python main.py --no-ws                   # disable WebSocket server
-python main.py --ws-host 0.0.0.0 --ws-port 8765
-python main.py --log-level DEBUG
-```
+When committing code changes:
+- Never add Claude as a commit author.
+- Always commit as using the default git settings
 
-There is no test suite yet.
+## Documentation Style
+
+When creating or updating markdown documentation files:
+- **Never create .md files unless explicitly instructed.**
+- **Be extremely concise** - engineers scan, they don't read novels
+- **Only include essential information** - what they need to know, not what's possible to explain
+- **Prefer examples over prose** - show the pattern, not the theory
+- **Assume technical competence** - skip obvious explanations
+- **Front-load critical info** - put warnings and key concepts first
+- **Delete verbose explanations** - if it takes more than 3 sentences, it's probably too long
+
+Default to 1-2 sentence explanations. Only expand when complexity absolutely requires it.
 
 ## Architecture
 
@@ -55,10 +59,6 @@ Only one RL agent is allowed per game; additional `rl_agent` connections are dow
 ### Fog of War
 
 `_build_state_dict()` (observer view) hides ship positions except where hit. `_build_agent_view_dict()` sends the agent its own board unobscured plus the fog-hidden enemy board. This distinction matters whenever serializing or testing state output.
-
-### RLAgent Stub
-
-`game/agents/agent.py` documents the intended interface for a real RL agent. In automated mode with no WS connection, `GameEngine` calls `agent.select_move()` (random untried cell) and `agent.receive_result()` (no-op). Methods like `connect_to_server()` raise `NotImplementedError` — the real agent is a separate process, not a subclass.
 
 ## graphify
 

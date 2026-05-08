@@ -1,7 +1,5 @@
 # Claude
-.claude/
-.obsidian/
-**/graphify-out/
+.claude/settings.local.json
 
 # Python/ Conda
 **/__pycache__/

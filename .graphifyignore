@@ -1,0 +1,13 @@
+# Blanket ignore
+*
+# Allow game
+!game/
+!game/**
+# Allow training
+!training/
+!training/**
+# Top-level files
+!analysis.md
+!main.py
+pyproject.toml
+readme.md
