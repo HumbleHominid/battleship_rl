@@ -4,14 +4,14 @@ from pathlib import Path
 from logger import AppLogger
 
 
-class TrainingLogger(AppLogger):
+class GameLogger(AppLogger):
     _log_dir = Path(__file__).parent / "logs"
 
     @classmethod
     def setup(
         cls,
-        name: str = "training",
-        run_name: str = "train",
+        name: str = "game",
+        run_name: str = "game",
         console_level: int = logging.INFO,
     ) -> None:
         super().setup(name=name, run_name=run_name, console_level=console_level)

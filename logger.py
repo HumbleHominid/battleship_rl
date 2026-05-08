@@ -12,7 +12,9 @@ class AppLogger:
     _log: ClassVar[logging.Logger | None] = None
 
     @classmethod
-    def setup(cls, name: str, run_name: str = "run", console_level: int = logging.INFO) -> None:
+    def setup(
+        cls, name: str, run_name: str = "run", console_level: int = logging.INFO
+    ) -> None:
         cls._log_dir.mkdir(exist_ok=True)
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         cls.log_file = cls._log_dir / f"{run_name}_{timestamp}.log"
@@ -42,16 +44,24 @@ class AppLogger:
 
     @classmethod
     def debug(cls, msg: str, *args) -> None:
+        if cls._log is None:
+            raise RuntimeError("Logger not initialized. Call setup() first.")
         cls._log.debug(msg, *args)
 
     @classmethod
     def info(cls, msg: str, *args) -> None:
+        if cls._log is None:
+            raise RuntimeError("Logger not initialized. Call setup() first.")
         cls._log.info(msg, *args)
 
     @classmethod
     def warn(cls, msg: str, *args) -> None:
+        if cls._log is None:
+            raise RuntimeError("Logger not initialized. Call setup() first.")
         cls._log.warning(msg, *args)
 
     @classmethod
     def error(cls, msg: str, *args) -> None:
+        if cls._log is None:
+            raise RuntimeError("Logger not initialized. Call setup() first.")
         cls._log.error(msg, *args)

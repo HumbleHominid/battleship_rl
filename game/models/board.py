@@ -1,4 +1,4 @@
-from game.logger import GameLogger
+from game.game_logger import GameLogger
 
 from .cell_state import CellState
 from .ship import Ship

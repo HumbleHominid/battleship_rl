@@ -3,7 +3,7 @@ from typing import Optional
 
 from game.agents.base_agent import BaseAgent
 from game.coordinate_methods import format_coordinate, parse_coordinate
-from game.logger import GameLogger
+from game.game_logger import GameLogger
 from game.models import Board, ShipType
 
 

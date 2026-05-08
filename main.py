@@ -7,7 +7,7 @@ import zipfile
 
 from game.agents import AGENT_REGISTRY
 from game.game_engine import GameEngine
-from game.logger import GameLogger
+from game.game_logger import GameLogger
 from game.models import Board, Ship, ShipType
 
 

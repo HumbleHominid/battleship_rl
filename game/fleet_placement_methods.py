@@ -6,7 +6,7 @@ from game.coordinate_methods import format_coordinate
 from game.models import Board
 
 from .directions import DIRECTIONS
-from .logger import GameLogger
+from .game_logger import GameLogger
 from .models import Ship
 from .placement_protocol import PlacementTarget
 
