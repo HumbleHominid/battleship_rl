@@ -21,7 +21,7 @@ from torch.optim.lr_scheduler import CosineAnnealingLR, LinearLR, SequentialLR
 
 from game.agents.bayesian_agent import BayesianAgent
 from game.agents.feature_extractor import FeatureExtractor
-from game.agents.transformer_ppo_agent import TransformerPPONet
+from game.agents.ppo_net import TransformerPPONet
 from game.coordinate_methods import parse_coordinate
 from game.models import Board, Ship, ShipType
 from training.battleship_env import BattleshipEnv
@@ -84,11 +84,7 @@ def init_transformer_ppo(
 ]:
     net = TransformerPPONet().to(device)
     net.train()
-    policy_params = (
-        list(net.policy_cell_proj.parameters())
-        + list(net.policy_encoder.parameters())
-        + list(net.policy_head.parameters())
-    )
+    policy_params = net.policy_params()
     optimizer = optim.Adam(policy_params, lr=args.lr, weight_decay=args.weight_decay)
     scheduler = SequentialLR(
         optimizer,
