@@ -77,10 +77,13 @@ class RolloutBuffer:
         mask = np.stack([t.legal_mask for t in self.transitions])  # (N, 100)
         actions = np.array([t.action for t in self.transitions])  # (N,)
         old_lp = np.array([t.log_prob for t in self.transitions])  # (N,)
+        old_values = np.array([t.value for t in self.transitions])  # (N,)
 
         returns, advantages = self.compute_returns_advantages(gamma, lam)
-        returns = (returns - returns.mean()) / (returns.std() + 1e-8)
-        advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+        # Normalize advantages only — returns stay raw so value head learns real scale.
+        # Clamp std floor to prevent explosion when all episodes have similar length.
+        adv_std = max(float(advantages.std()), 0.5)
+        advantages = (advantages - advantages.mean()) / adv_std
 
         return {
             "cell": torch.tensor(cell, dtype=torch.float32, device=device),
@@ -88,6 +91,7 @@ class RolloutBuffer:
             "mask": torch.tensor(mask, dtype=torch.bool, device=device),
             "actions": torch.tensor(actions, dtype=torch.long, device=device),
             "old_log_probs": torch.tensor(old_lp, dtype=torch.float32, device=device),
+            "old_values": torch.tensor(old_values, dtype=torch.float32, device=device),
             "returns": torch.tensor(returns, dtype=torch.float32, device=device),
             "advantages": torch.tensor(advantages, dtype=torch.float32, device=device),
         }
@@ -159,13 +163,15 @@ def ppo_update(
     entropy_coef: float,
     max_grad_norm: float,
     minibatch: int,
+    n_value_epochs: int = 1,
 ) -> dict[str, float]:
     n = batch["cell"].shape[0]
-    indices = torch.randperm(n, device=batch["cell"].device)
 
     total_policy_loss = total_value_loss = total_entropy = 0.0
     n_updates = 0
 
+    # Policy + value pass (n_epochs controlled by caller)
+    indices = torch.randperm(n, device=batch["cell"].device)
     for start in range(0, n, minibatch):
         idx = indices[start : start + minibatch]
         cell = batch["cell"][idx]
@@ -173,6 +179,7 @@ def ppo_update(
         mask = batch["mask"][idx]
         actions = batch["actions"][idx]
         old_lp = batch["old_log_probs"][idx]
+        old_v = batch["old_values"][idx]
         returns = batch["returns"][idx]
         advs = batch["advantages"][idx]
 
@@ -189,8 +196,11 @@ def ppo_update(
         probs = log_probs.exp()
         entropy = -(probs * log_probs.clamp(min=-100)).sum(dim=-1).mean()
 
-        # Value loss
-        value_loss = nn.functional.mse_loss(value, returns)
+        # Value loss with clipping (PPO paper §4)
+        v_clipped = old_v + (value - old_v).clamp(-clip_eps, clip_eps)
+        v_loss1 = (value - returns).pow(2)
+        v_loss2 = (v_clipped - returns).pow(2)
+        value_loss = 0.5 * torch.max(v_loss1, v_loss2).mean()
 
         # Policy trunk update (retain graph so value backward can follow)
         policy_optimizer.zero_grad()
@@ -209,10 +219,31 @@ def ppo_update(
         total_entropy += entropy.item()
         n_updates += 1
 
+    # Extra value-only epochs so value head keeps pace with policy
+    for _ in range(n_value_epochs - 1):
+        indices = torch.randperm(n, device=batch["cell"].device)
+        epoch_v_loss = 0.0
+        epoch_v_updates = 0
+        for start in range(0, n, minibatch):
+            idx = indices[start : start + minibatch]
+            _, value = net(batch["cell"][idx], batch["glob"][idx], batch["mask"][idx])
+            old_v = batch["old_values"][idx]
+            returns = batch["returns"][idx]
+            v_clipped = old_v + (value - old_v).clamp(-clip_eps, clip_eps)
+            v_loss = 0.5 * torch.max((value - returns).pow(2), (v_clipped - returns).pow(2)).mean()
+            value_optimizer.zero_grad()
+            v_loss.backward()
+            nn.utils.clip_grad_norm_(value_params, max_grad_norm)
+            value_optimizer.step()
+            epoch_v_loss += v_loss.item()
+            epoch_v_updates += 1
+        total_value_loss += epoch_v_loss / max(epoch_v_updates, 1)
+
     k = max(n_updates, 1)
+    v_k = max(n_updates * n_value_epochs, 1)
     return {
         "policy_loss": total_policy_loss / k,
-        "value_loss": total_value_loss / k,
+        "value_loss": total_value_loss / v_k,
         "entropy": total_entropy / k,
     }
 
@@ -308,7 +339,7 @@ def parse_args() -> argparse.Namespace:
     # Training control
     p.add_argument("--iters", type=int, default=500)
     p.add_argument("--policy-lr", type=float, default=1e-4)
-    p.add_argument("--value-lr", type=float, default=1e-4)
+    p.add_argument("--value-lr", type=float, default=3e-4)
     p.add_argument(
         "--checkpoint",
         type=str,
@@ -328,6 +359,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--n-episodes-per-iter", type=int, default=32)
     # PPO update
     p.add_argument("--n-epochs", type=int, default=2)
+    p.add_argument("--n-value-epochs", type=int, default=4)
     p.add_argument("--minibatch", type=int, default=512)
     p.add_argument("--gamma", type=float, default=0.99)
     p.add_argument("--lam", type=float, default=0.95)
@@ -454,6 +486,7 @@ def main() -> None:
                 entropy_coef=args.entropy_coef,
                 max_grad_norm=args.max_grad_norm,
                 minibatch=args.minibatch,
+                n_value_epochs=args.n_value_epochs,
             )
 
         elapsed = time.time() - t0
