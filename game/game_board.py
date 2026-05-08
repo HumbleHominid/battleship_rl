@@ -4,7 +4,7 @@ from typing import Optional
 from .coordinate_methods import ROW_LABELS, format_coordinate, parse_coordinate
 from .directions import DIRECTIONS
 from .fleet_placement_methods import PLACEMENT_METHODS
-from .logger import GameLogger
+from .game_logger import GameLogger
 from .models import Board, CellState, Ship, ShipType, get_ship_size
 
 

@@ -5,7 +5,7 @@ from typing import Optional
 from .agents.base_agent import BaseAgent
 from .coordinate_methods import format_coordinate, parse_coordinate
 from .game_board import GameBoard
-from .logger import GameLogger
+from .game_logger import GameLogger
 from .models import CellState, Ship, get_ship_size
 from .websocket import GameWebSocketServer
 
