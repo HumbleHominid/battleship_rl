@@ -1,5 +1,3 @@
-.obsidian/
-
 # Python/ Conda
 **/__pycache__/
 battleship_rl.egg-info/
