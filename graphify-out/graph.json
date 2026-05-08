@@ -79,7 +79,7 @@
       "source_file": "training/pretrain.py",
       "source_location": "L1",
       "id": "training_pretrain_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "pretrain.py"
     },
     {
@@ -88,7 +88,7 @@
       "source_file": "training/pretrain.py",
       "source_location": "L31",
       "id": "training_pretrain_coord_to_index",
-      "community": 0,
+      "community": 1,
       "norm_label": "coord_to_index()"
     },
     {
@@ -97,7 +97,7 @@
       "source_file": "training/pretrain.py",
       "source_location": "L36",
       "id": "training_pretrain_parse_args",
-      "community": 0,
+      "community": 1,
       "norm_label": "parse_args()"
     },
     {
@@ -106,7 +106,7 @@
       "source_file": "training/pretrain.py",
       "source_location": "L64",
       "id": "training_pretrain_setup_board_and_fleet",
-      "community": 0,
+      "community": 1,
       "norm_label": "setup_board_and_fleet()"
     },
     {
@@ -115,7 +115,7 @@
       "source_file": "training/pretrain.py",
       "source_location": "L80",
       "id": "training_pretrain_init_transformer_ppo",
-      "community": 0,
+      "community": 1,
       "norm_label": "init_transformer_ppo()"
     },
     {
@@ -124,7 +124,7 @@
       "source_file": "training/pretrain.py",
       "source_location": "L108",
       "id": "training_pretrain_run_training_loop",
-      "community": 0,
+      "community": 1,
       "norm_label": "run_training_loop()"
     },
     {
@@ -133,7 +133,7 @@
       "source_file": "training/pretrain.py",
       "source_location": "L199",
       "id": "training_pretrain_main",
-      "community": 0,
+      "community": 1,
       "norm_label": "main()"
     },
     {
@@ -142,7 +142,7 @@
       "source_file": "training/pretrain.py",
       "source_location": "L1",
       "id": "training_pretrain_rationale_1",
-      "community": 0,
+      "community": 1,
       "norm_label": "imitation pretraining: train transformerpponet to mimic bayesianagent.  for each"
     },
     {
@@ -151,7 +151,7 @@
       "source_file": "training/ppo_update.py",
       "source_location": "L1",
       "id": "training_ppo_update_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "ppo_update.py"
     },
     {
@@ -160,7 +160,7 @@
       "source_file": "training/ppo_update.py",
       "source_location": "L11",
       "id": "training_ppo_update_ppo_update",
-      "community": 0,
+      "community": 1,
       "norm_label": "ppo_update()"
     },
     {
@@ -169,7 +169,7 @@
       "source_file": "training/ppo_update.py",
       "source_location": "L109",
       "id": "training_ppo_update_value_warmup_update",
-      "community": 0,
+      "community": 1,
       "norm_label": "value_warmup_update()"
     },
     {
@@ -178,7 +178,7 @@
       "source_file": "training/ppo_update.py",
       "source_location": "L117",
       "id": "training_ppo_update_rationale_117",
-      "community": 0,
+      "community": 1,
       "norm_label": "one epoch of value-trunk-only updates \u2014 policy trunk receives zero gradient."
     },
     {
@@ -196,7 +196,7 @@
       "source_file": "training/rollout.py",
       "source_location": "L1",
       "id": "training_rollout_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "rollout.py"
     },
     {
@@ -205,7 +205,7 @@
       "source_file": "training/rollout.py",
       "source_location": "L14",
       "id": "training_rollout_transition",
-      "community": 0,
+      "community": 1,
       "norm_label": "transition"
     },
     {
@@ -214,7 +214,7 @@
       "source_file": "training/rollout.py",
       "source_location": "L26",
       "id": "training_rollout_rolloutbuffer",
-      "community": 0,
+      "community": 1,
       "norm_label": "rolloutbuffer"
     },
     {
@@ -223,7 +223,7 @@
       "source_file": "training/rollout.py",
       "source_location": "L29",
       "id": "training_rollout_rolloutbuffer_add",
-      "community": 0,
+      "community": 1,
       "norm_label": ".add()"
     },
     {
@@ -232,7 +232,7 @@
       "source_file": "training/rollout.py",
       "source_location": "L32",
       "id": "training_rollout_rolloutbuffer_compute_returns_advantages",
-      "community": 0,
+      "community": 1,
       "norm_label": ".compute_returns_advantages()"
     },
     {
@@ -241,7 +241,7 @@
       "source_file": "training/rollout.py",
       "source_location": "L52",
       "id": "training_rollout_rolloutbuffer_to_tensors",
-      "community": 0,
+      "community": 1,
       "norm_label": ".to_tensors()"
     },
     {
@@ -250,7 +250,7 @@
       "source_file": "training/rollout.py",
       "source_location": "L80",
       "id": "training_rollout_collect_episode",
-      "community": 0,
+      "community": 1,
       "norm_label": "collect_episode()"
     },
     {
@@ -259,7 +259,7 @@
       "source_file": "training/rollout.py",
       "source_location": "L86",
       "id": "training_rollout_rationale_86",
-      "community": 0,
+      "community": 1,
       "norm_label": "run one episode, collecting transitions. returns (transitions, turns_to_win)."
     },
     {
@@ -376,7 +376,7 @@
       "source_file": "training/evaluate.py",
       "source_location": "L1",
       "id": "training_evaluate_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "evaluate.py"
     },
     {
@@ -385,7 +385,7 @@
       "source_file": "training/evaluate.py",
       "source_location": "L14",
       "id": "training_evaluate_evaluate",
-      "community": 0,
+      "community": 1,
       "norm_label": "evaluate()"
     },
     {
@@ -394,7 +394,7 @@
       "source_file": "training/evaluate.py",
       "source_location": "L51",
       "id": "training_evaluate_bayes_baseline",
-      "community": 0,
+      "community": 1,
       "norm_label": "bayes_baseline()"
     },
     {
@@ -403,7 +403,7 @@
       "source_file": "training/evaluate.py",
       "source_location": "L19",
       "id": "training_evaluate_rationale_19",
-      "community": 0,
+      "community": 1,
       "norm_label": "return mean turns-to-win over n_games episodes (greedy policy)."
     },
     {
@@ -412,7 +412,7 @@
       "source_file": "training/evaluate.py",
       "source_location": "L52",
       "id": "training_evaluate_rationale_52",
-      "community": 0,
+      "community": 1,
       "norm_label": "return mean turns-to-win for bayesianagent (one-time reference)."
     },
     {
@@ -421,7 +421,7 @@
       "source_file": "training/ppo_train.py",
       "source_location": "L1",
       "id": "training_ppo_train_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "ppo_train.py"
     },
     {
@@ -430,7 +430,7 @@
       "source_file": "training/ppo_train.py",
       "source_location": "L31",
       "id": "training_ppo_train_parse_args",
-      "community": 0,
+      "community": 1,
       "norm_label": "parse_args()"
     },
     {
@@ -439,7 +439,7 @@
       "source_file": "training/ppo_train.py",
       "source_location": "L72",
       "id": "training_ppo_train_main",
-      "community": 0,
+      "community": 1,
       "norm_label": "main()"
     },
     {
@@ -448,7 +448,7 @@
       "source_file": "training/ppo_train.py",
       "source_location": "L1",
       "id": "training_ppo_train_rationale_1",
-      "community": 0,
+      "community": 1,
       "norm_label": "ppo fine-tuning for the transformerppo battleship agent.  collects on-policy rol"
     },
     {
@@ -457,7 +457,7 @@
       "source_file": "training/training_logger.py",
       "source_location": "L1",
       "id": "training_training_logger_py",
-      "community": 8,
+      "community": 6,
       "norm_label": "training_logger.py"
     },
     {
@@ -466,7 +466,7 @@
       "source_file": "training/training_logger.py",
       "source_location": "L7",
       "id": "training_training_logger_traininglogger",
-      "community": 8,
+      "community": 6,
       "norm_label": "traininglogger"
     },
     {
@@ -475,7 +475,7 @@
       "source_file": "",
       "source_location": "",
       "id": "applogger",
-      "community": 8,
+      "community": 6,
       "norm_label": "applogger"
     },
     {
@@ -484,7 +484,7 @@
       "source_file": "training/training_logger.py",
       "source_location": "L11",
       "id": "training_training_logger_setup",
-      "community": 8,
+      "community": 6,
       "norm_label": "setup()"
     },
     {
@@ -493,35 +493,8 @@
       "source_file": "game/directions.py",
       "source_location": "L1",
       "id": "game_directions_py",
-      "community": 4,
+      "community": 2,
       "norm_label": "directions.py"
-    },
-    {
-      "label": "logger.py",
-      "file_type": "code",
-      "source_file": "game/logger.py",
-      "source_location": "L1",
-      "id": "game_logger_py",
-      "community": 4,
-      "norm_label": "logger.py"
-    },
-    {
-      "label": "GameLogger",
-      "file_type": "code",
-      "source_file": "game/logger.py",
-      "source_location": "L7",
-      "id": "game_logger_gamelogger",
-      "community": 8,
-      "norm_label": "gamelogger"
-    },
-    {
-      "label": "setup()",
-      "file_type": "code",
-      "source_file": "game/logger.py",
-      "source_location": "L11",
-      "id": "game_logger_setup",
-      "community": 4,
-      "norm_label": "setup()"
     },
     {
       "label": "game_engine.py",
@@ -529,7 +502,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L1",
       "id": "game_game_engine_py",
-      "community": 4,
+      "community": 2,
       "norm_label": "game_engine.py"
     },
     {
@@ -628,7 +601,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L300",
       "id": "game_game_engine_turn",
-      "community": 4,
+      "community": 2,
       "norm_label": "turn()"
     },
     {
@@ -646,7 +619,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L319",
       "id": "game_game_engine_game_over",
-      "community": 4,
+      "community": 2,
       "norm_label": "game_over()"
     },
     {
@@ -655,7 +628,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L323",
       "id": "game_game_engine_winner",
-      "community": 4,
+      "community": 2,
       "norm_label": "winner()"
     },
     {
@@ -700,7 +673,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L409",
       "id": "game_game_engine_player_score",
-      "community": 4,
+      "community": 2,
       "norm_label": "player_score()"
     },
     {
@@ -709,7 +682,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L416",
       "id": "game_game_engine_agent_score",
-      "community": 4,
+      "community": 2,
       "norm_label": "agent_score()"
     },
     {
@@ -740,12 +713,39 @@
       "norm_label": "orchestrates a full game of battleship.      the game-side agent always runs in-"
     },
     {
+      "label": "game_logger.py",
+      "file_type": "code",
+      "source_file": "game/game_logger.py",
+      "source_location": "L1",
+      "id": "game_game_logger_py",
+      "community": 2,
+      "norm_label": "game_logger.py"
+    },
+    {
+      "label": "GameLogger",
+      "file_type": "code",
+      "source_file": "game/game_logger.py",
+      "source_location": "L7",
+      "id": "game_game_logger_gamelogger",
+      "community": 6,
+      "norm_label": "gamelogger"
+    },
+    {
+      "label": "setup()",
+      "file_type": "code",
+      "source_file": "game/game_logger.py",
+      "source_location": "L11",
+      "id": "game_game_logger_setup",
+      "community": 2,
+      "norm_label": "setup()"
+    },
+    {
       "label": "placement_protocol.py",
       "file_type": "code",
       "source_file": "game/placement_protocol.py",
       "source_location": "L1",
       "id": "game_placement_protocol_py",
-      "community": 6,
+      "community": 2,
       "norm_label": "placement_protocol.py"
     },
     {
@@ -754,7 +754,7 @@
       "source_file": "game/placement_protocol.py",
       "source_location": "L7",
       "id": "game_placement_protocol_placementtarget",
-      "community": 6,
+      "community": 2,
       "norm_label": "placementtarget"
     },
     {
@@ -763,7 +763,7 @@
       "source_file": "",
       "source_location": "",
       "id": "protocol",
-      "community": 6,
+      "community": 2,
       "norm_label": "protocol"
     },
     {
@@ -772,7 +772,7 @@
       "source_file": "game/placement_protocol.py",
       "source_location": "L8",
       "id": "game_placement_protocol_placementtarget_can_place_ship",
-      "community": 6,
+      "community": 2,
       "norm_label": ".can_place_ship()"
     },
     {
@@ -781,7 +781,7 @@
       "source_file": "game/placement_protocol.py",
       "source_location": "L12",
       "id": "game_placement_protocol_placementtarget_place_ship",
-      "community": 6,
+      "community": 2,
       "norm_label": ".place_ship()"
     },
     {
@@ -790,7 +790,7 @@
       "source_file": "game/placement_protocol.py",
       "source_location": "L16",
       "id": "game_placement_protocol_placementtarget_get_placed_cells",
-      "community": 6,
+      "community": 2,
       "norm_label": ".get_placed_cells()"
     },
     {
@@ -799,7 +799,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L1",
       "id": "game_fleet_placement_methods_py",
-      "community": 4,
+      "community": 2,
       "norm_label": "fleet_placement_methods.py"
     },
     {
@@ -808,7 +808,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L31",
       "id": "game_fleet_placement_methods_edge_dist",
-      "community": 4,
+      "community": 2,
       "norm_label": "_edge_dist()"
     },
     {
@@ -817,7 +817,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L35",
       "id": "game_fleet_placement_methods_corner_dist",
-      "community": 4,
+      "community": 2,
       "norm_label": "_corner_dist()"
     },
     {
@@ -826,7 +826,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L39",
       "id": "game_fleet_placement_methods_center_dist",
-      "community": 4,
+      "community": 2,
       "norm_label": "_center_dist()"
     },
     {
@@ -835,7 +835,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L43",
       "id": "game_fleet_placement_methods_diag_dist",
-      "community": 4,
+      "community": 2,
       "norm_label": "_diag_dist()"
     },
     {
@@ -844,7 +844,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L47",
       "id": "game_fleet_placement_methods_best_scored_candidate",
-      "community": 4,
+      "community": 2,
       "norm_label": "_best_scored_candidate()"
     },
     {
@@ -853,7 +853,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L71",
       "id": "game_fleet_placement_methods_place_with_score",
-      "community": 4,
+      "community": 2,
       "norm_label": "_place_with_score()"
     },
     {
@@ -862,7 +862,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L113",
       "id": "game_fleet_placement_methods_placement_error",
-      "community": 4,
+      "community": 2,
       "norm_label": "_placement_error()"
     },
     {
@@ -871,7 +871,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L117",
       "id": "game_fleet_placement_methods_place_fleet_random",
-      "community": 4,
+      "community": 2,
       "norm_label": "place_fleet_random()"
     },
     {
@@ -880,7 +880,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L142",
       "id": "game_fleet_placement_methods_place_fleet_gaussian",
-      "community": 4,
+      "community": 2,
       "norm_label": "place_fleet_gaussian()"
     },
     {
@@ -889,7 +889,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L179",
       "id": "game_fleet_placement_methods_place_fleet_spread",
-      "community": 4,
+      "community": 2,
       "norm_label": "place_fleet_spread()"
     },
     {
@@ -898,7 +898,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L235",
       "id": "game_fleet_placement_methods_place_fleet_edges",
-      "community": 4,
+      "community": 2,
       "norm_label": "place_fleet_edges()"
     },
     {
@@ -907,7 +907,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L240",
       "id": "game_fleet_placement_methods_place_fleet_corners",
-      "community": 4,
+      "community": 2,
       "norm_label": "place_fleet_corners()"
     },
     {
@@ -916,7 +916,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L245",
       "id": "game_fleet_placement_methods_place_fleet_clustered",
-      "community": 4,
+      "community": 2,
       "norm_label": "place_fleet_clustered()"
     },
     {
@@ -925,7 +925,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L277",
       "id": "game_fleet_placement_methods_place_fleet_quadrant",
-      "community": 4,
+      "community": 2,
       "norm_label": "place_fleet_quadrant()"
     },
     {
@@ -934,7 +934,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L319",
       "id": "game_fleet_placement_methods_place_fleet_dense_center",
-      "community": 4,
+      "community": 2,
       "norm_label": "place_fleet_dense_center()"
     },
     {
@@ -943,7 +943,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L324",
       "id": "game_fleet_placement_methods_place_fleet_diagonal",
-      "community": 4,
+      "community": 2,
       "norm_label": "place_fleet_diagonal()"
     },
     {
@@ -952,7 +952,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L236",
       "id": "game_fleet_placement_methods_rationale_236",
-      "community": 4,
+      "community": 2,
       "norm_label": "bias ships toward the board perimeter (minimise distance to nearest edge)."
     },
     {
@@ -961,7 +961,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L241",
       "id": "game_fleet_placement_methods_rationale_241",
-      "community": 4,
+      "community": 2,
       "norm_label": "bias ships toward the four corners (minimise distance to nearest corner)."
     },
     {
@@ -970,7 +970,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L246",
       "id": "game_fleet_placement_methods_rationale_246",
-      "community": 4,
+      "community": 2,
       "norm_label": "pack all ships tightly around a single random hotspot (opposite of spread)."
     },
     {
@@ -979,7 +979,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L278",
       "id": "game_fleet_placement_methods_rationale_278",
-      "community": 4,
+      "community": 2,
       "norm_label": "confine the entire fleet to one randomly chosen quadrant."
     },
     {
@@ -988,7 +988,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L320",
       "id": "game_fleet_placement_methods_rationale_320",
-      "community": 4,
+      "community": 2,
       "norm_label": "bias ships toward the centre (minimise distance to board centre at 4.5, 4.5)."
     },
     {
@@ -997,7 +997,7 @@
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L325",
       "id": "game_fleet_placement_methods_rationale_325",
-      "community": 4,
+      "community": 2,
       "norm_label": "bias ships toward the main diagonal (where row == col)."
     },
     {
@@ -1006,7 +1006,7 @@
       "source_file": "game/coordinate_methods.py",
       "source_location": "L1",
       "id": "game_coordinate_methods_py",
-      "community": 4,
+      "community": 2,
       "norm_label": "coordinate_methods.py"
     },
     {
@@ -1015,7 +1015,7 @@
       "source_file": "game/coordinate_methods.py",
       "source_location": "L6",
       "id": "game_coordinate_methods_parse_coordinate",
-      "community": 0,
+      "community": 1,
       "norm_label": "parse_coordinate()"
     },
     {
@@ -1024,7 +1024,7 @@
       "source_file": "game/coordinate_methods.py",
       "source_location": "L25",
       "id": "game_coordinate_methods_format_coordinate",
-      "community": 4,
+      "community": 2,
       "norm_label": "format_coordinate()"
     },
     {
@@ -1033,7 +1033,7 @@
       "source_file": "game/coordinate_methods.py",
       "source_location": "L7",
       "id": "game_coordinate_methods_rationale_7",
-      "community": 0,
+      "community": 1,
       "norm_label": "parse 'a1'-'j10' to zero-indexed (row, col). raises valueerror on bad input."
     },
     {
@@ -1042,7 +1042,7 @@
       "source_file": "game/coordinate_methods.py",
       "source_location": "L26",
       "id": "game_coordinate_methods_rationale_26",
-      "community": 4,
+      "community": 2,
       "norm_label": "format zero-indexed (row, col) to 'a1'-'j10'."
     },
     {
@@ -1051,7 +1051,7 @@
       "source_file": "game/game_board.py",
       "source_location": "L1",
       "id": "game_game_board_py",
-      "community": 4,
+      "community": 2,
       "norm_label": "game_board.py"
     },
     {
@@ -1069,7 +1069,7 @@
       "source_file": "game/game_board.py",
       "source_location": "L12",
       "id": "game_game_board_gameboard_init",
-      "community": 3,
+      "community": 4,
       "norm_label": ".__init__()"
     },
     {
@@ -1312,7 +1312,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L1",
       "id": "game_websocket_py",
-      "community": 4,
+      "community": 2,
       "norm_label": "websocket.py"
     },
     {
@@ -1321,7 +1321,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L12",
       "id": "game_websocket_gamewebsocketserver",
-      "community": 12,
+      "community": 6,
       "norm_label": "gamewebsocketserver"
     },
     {
@@ -1330,7 +1330,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L27",
       "id": "game_websocket_gamewebsocketserver_init",
-      "community": 12,
+      "community": 6,
       "norm_label": ".__init__()"
     },
     {
@@ -1339,7 +1339,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L41",
       "id": "game_websocket_gamewebsocketserver_start",
-      "community": 12,
+      "community": 6,
       "norm_label": ".start()"
     },
     {
@@ -1348,7 +1348,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L58",
       "id": "game_websocket_gamewebsocketserver_stop",
-      "community": 12,
+      "community": 6,
       "norm_label": ".stop()"
     },
     {
@@ -1357,7 +1357,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L74",
       "id": "game_websocket_gamewebsocketserver_handler",
-      "community": 12,
+      "community": 6,
       "norm_label": "._handler()"
     },
     {
@@ -1366,7 +1366,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L112",
       "id": "game_websocket_gamewebsocketserver_handle_player",
-      "community": 12,
+      "community": 6,
       "norm_label": "._handle_player()"
     },
     {
@@ -1375,7 +1375,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L137",
       "id": "game_websocket_gamewebsocketserver_handle_observer",
-      "community": 12,
+      "community": 6,
       "norm_label": "._handle_observer()"
     },
     {
@@ -1384,7 +1384,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L160",
       "id": "game_websocket_gamewebsocketserver_broadcast_state",
-      "community": 12,
+      "community": 6,
       "norm_label": ".broadcast_state()"
     },
     {
@@ -1393,7 +1393,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L173",
       "id": "game_websocket_gamewebsocketserver_send_to_player",
-      "community": 12,
+      "community": 6,
       "norm_label": ".send_to_player()"
     },
     {
@@ -1402,7 +1402,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L182",
       "id": "game_websocket_gamewebsocketserver_wait_for_player_move",
-      "community": 12,
+      "community": 6,
       "norm_label": ".wait_for_player_move()"
     },
     {
@@ -1411,7 +1411,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L186",
       "id": "game_websocket_gamewebsocketserver_wait_for_player_placement",
-      "community": 12,
+      "community": 6,
       "norm_label": ".wait_for_player_placement()"
     },
     {
@@ -1420,7 +1420,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L195",
       "id": "game_websocket_player_connected",
-      "community": 4,
+      "community": 2,
       "norm_label": "player_connected()"
     },
     {
@@ -1429,7 +1429,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L13",
       "id": "game_websocket_rationale_13",
-      "community": 12,
+      "community": 6,
       "norm_label": "embedded websocket server that:       - broadcasts game state to all connected o"
     },
     {
@@ -1438,7 +1438,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L42",
       "id": "game_websocket_rationale_42",
-      "community": 12,
+      "community": 6,
       "norm_label": "launch the websocket server and keep it alive until this coroutine is cancelled."
     },
     {
@@ -1447,7 +1447,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L59",
       "id": "game_websocket_rationale_59",
-      "community": 12,
+      "community": 6,
       "norm_label": "send close frames to all connected clients."
     },
     {
@@ -1456,7 +1456,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L75",
       "id": "game_websocket_rationale_75",
-      "community": 12,
+      "community": 6,
       "norm_label": "entry point for each new connection. reads role, routes accordingly."
     },
     {
@@ -1465,7 +1465,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L113",
       "id": "game_websocket_rationale_113",
-      "community": 12,
+      "community": 6,
       "norm_label": "receive move and placement commands from the player and enqueue them."
     },
     {
@@ -1474,7 +1474,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L138",
       "id": "game_websocket_rationale_138",
-      "community": 12,
+      "community": 6,
       "norm_label": "register an observer and hold its connection open until disconnect."
     },
     {
@@ -1483,7 +1483,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L161",
       "id": "game_websocket_rationale_161",
-      "community": 12,
+      "community": 6,
       "norm_label": "serialize state_dict to json and send to all connected observers."
     },
     {
@@ -1492,7 +1492,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L174",
       "id": "game_websocket_rationale_174",
-      "community": 12,
+      "community": 6,
       "norm_label": "send a json message to the connected player. no-op if none connected."
     },
     {
@@ -1501,7 +1501,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L183",
       "id": "game_websocket_rationale_183",
-      "community": 12,
+      "community": 6,
       "norm_label": "await the next move coordinate from the player's move queue."
     },
     {
@@ -1510,7 +1510,7 @@
       "source_file": "game/websocket.py",
       "source_location": "L187",
       "id": "game_websocket_rationale_187",
-      "community": 12,
+      "community": 6,
       "norm_label": "await the next ship placement message from the player's placement queue."
     },
     {
@@ -1519,7 +1519,7 @@
       "source_file": "game/agents/random_agent.py",
       "source_location": "L1",
       "id": "game_agents_random_agent_py",
-      "community": 8,
+      "community": 6,
       "norm_label": "random_agent.py"
     },
     {
@@ -1528,7 +1528,7 @@
       "source_file": "game/agents/random_agent.py",
       "source_location": "L9",
       "id": "agents_random_agent_randomagent",
-      "community": 8,
+      "community": 6,
       "norm_label": "randomagent"
     },
     {
@@ -1537,7 +1537,7 @@
       "source_file": "",
       "source_location": "",
       "id": "baseagent",
-      "community": 7,
+      "community": 9,
       "norm_label": "baseagent"
     },
     {
@@ -1546,7 +1546,7 @@
       "source_file": "game/agents/random_agent.py",
       "source_location": "L10",
       "id": "agents_random_agent_randomagent_init",
-      "community": 8,
+      "community": 6,
       "norm_label": ".__init__()"
     },
     {
@@ -1555,7 +1555,7 @@
       "source_file": "game/agents/random_agent.py",
       "source_location": "L17",
       "id": "agents_random_agent_randomagent_select_move",
-      "community": 8,
+      "community": 6,
       "norm_label": ".select_move()"
     },
     {
@@ -1564,7 +1564,7 @@
       "source_file": "game/agents/random_agent.py",
       "source_location": "L25",
       "id": "agents_random_agent_randomagent_reset",
-      "community": 8,
+      "community": 6,
       "norm_label": ".reset()"
     },
     {
@@ -1573,7 +1573,7 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L1",
       "id": "game_agents_bayesian_agent_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "bayesian_agent.py"
     },
     {
@@ -1582,7 +1582,7 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L10",
       "id": "agents_bayesian_agent_bayesianagent",
-      "community": 0,
+      "community": 1,
       "norm_label": "bayesianagent"
     },
     {
@@ -1591,7 +1591,7 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L21",
       "id": "agents_bayesian_agent_bayesianagent_init",
-      "community": 0,
+      "community": 1,
       "norm_label": ".__init__()"
     },
     {
@@ -1600,7 +1600,7 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L33",
       "id": "agents_bayesian_agent_bayesianagent_reset",
-      "community": 0,
+      "community": 1,
       "norm_label": ".reset()"
     },
     {
@@ -1609,7 +1609,7 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L41",
       "id": "agents_bayesian_agent_bayesianagent_initialize_placements",
-      "community": 0,
+      "community": 1,
       "norm_label": "._initialize_placements()"
     },
     {
@@ -1618,7 +1618,7 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L63",
       "id": "agents_bayesian_agent_bayesianagent_recompute_grid",
-      "community": 0,
+      "community": 1,
       "norm_label": "._recompute_grid()"
     },
     {
@@ -1627,7 +1627,7 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L74",
       "id": "agents_bayesian_agent_bayesianagent_receive_result",
-      "community": 0,
+      "community": 1,
       "norm_label": ".receive_result()"
     },
     {
@@ -1636,7 +1636,7 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L99",
       "id": "agents_bayesian_agent_bayesianagent_select_move",
-      "community": 0,
+      "community": 1,
       "norm_label": ".select_move()"
     },
     {
@@ -1645,7 +1645,7 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L11",
       "id": "agents_bayesian_agent_rationale_11",
-      "community": 0,
+      "community": 1,
       "norm_label": "bayesian probability density agent.      enumerates all valid ship placements on"
     },
     {
@@ -1654,7 +1654,7 @@
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L1",
       "id": "game_agents_transformer_ppo_agent_py",
-      "community": 0,
+      "community": 9,
       "norm_label": "transformer_ppo_agent.py"
     },
     {
@@ -1663,7 +1663,7 @@
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L14",
       "id": "agents_transformer_ppo_agent_transformerppoagent",
-      "community": 0,
+      "community": 9,
       "norm_label": "transformerppoagent"
     },
     {
@@ -1672,7 +1672,7 @@
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L25",
       "id": "agents_transformer_ppo_agent_transformerppoagent_init",
-      "community": 0,
+      "community": 9,
       "norm_label": ".__init__()"
     },
     {
@@ -1681,7 +1681,7 @@
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L38",
       "id": "agents_transformer_ppo_agent_transformerppoagent_reset",
-      "community": 0,
+      "community": 9,
       "norm_label": ".reset()"
     },
     {
@@ -1690,7 +1690,7 @@
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L41",
       "id": "agents_transformer_ppo_agent_transformerppoagent_select_move",
-      "community": 0,
+      "community": 9,
       "norm_label": ".select_move()"
     },
     {
@@ -1699,7 +1699,7 @@
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L63",
       "id": "agents_transformer_ppo_agent_transformerppoagent_receive_result",
-      "community": 0,
+      "community": 9,
       "norm_label": ".receive_result()"
     },
     {
@@ -1708,7 +1708,7 @@
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L68",
       "id": "agents_transformer_ppo_agent_transformerppoagent_save",
-      "community": 0,
+      "community": 9,
       "norm_label": ".save()"
     },
     {
@@ -1717,7 +1717,7 @@
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L72",
       "id": "agents_transformer_ppo_agent_load",
-      "community": 0,
+      "community": 9,
       "norm_label": "load()"
     },
     {
@@ -1726,7 +1726,7 @@
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L15",
       "id": "agents_transformer_ppo_agent_rationale_15",
-      "community": 0,
+      "community": 9,
       "norm_label": "battleship agent backed by a transformer actor-critic network.      operates in"
     },
     {
@@ -1735,7 +1735,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L1",
       "id": "game_agents_base_agent_py",
-      "community": 8,
+      "community": 9,
       "norm_label": "base_agent.py"
     },
     {
@@ -1744,7 +1744,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L8",
       "id": "agents_base_agent_baseagent",
-      "community": 8,
+      "community": 9,
       "norm_label": "baseagent"
     },
     {
@@ -1753,7 +1753,7 @@
       "source_file": "",
       "source_location": "",
       "id": "abc",
-      "community": 8,
+      "community": 9,
       "norm_label": "abc"
     },
     {
@@ -1762,7 +1762,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L10",
       "id": "agents_base_agent_select_move",
-      "community": 8,
+      "community": 9,
       "norm_label": "select_move()"
     },
     {
@@ -1771,7 +1771,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L14",
       "id": "agents_base_agent_baseagent_place_fleet",
-      "community": 8,
+      "community": 9,
       "norm_label": ".place_fleet()"
     },
     {
@@ -1780,7 +1780,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L18",
       "id": "agents_base_agent_baseagent_receive_result",
-      "community": 8,
+      "community": 9,
       "norm_label": ".receive_result()"
     },
     {
@@ -1789,7 +1789,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L23",
       "id": "agents_base_agent_baseagent_reset",
-      "community": 8,
+      "community": 9,
       "norm_label": ".reset()"
     },
     {
@@ -1807,7 +1807,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L15",
       "id": "agents_base_agent_rationale_15",
-      "community": 8,
+      "community": 9,
       "norm_label": "place this agent's fleet. defaults to gameboard.place_fleet()."
     },
     {
@@ -1816,7 +1816,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L21",
       "id": "agents_base_agent_rationale_21",
-      "community": 8,
+      "community": 9,
       "norm_label": "called after each move. hook for training feedback; no-op by default."
     },
     {
@@ -1825,7 +1825,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L24",
       "id": "agents_base_agent_rationale_24",
-      "community": 8,
+      "community": 9,
       "norm_label": "reset agent state for a new episode."
     },
     {
@@ -1834,7 +1834,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L1",
       "id": "game_agents_hunt_agent_py",
-      "community": 15,
+      "community": 14,
       "norm_label": "hunt_agent.py"
     },
     {
@@ -1843,7 +1843,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L10",
       "id": "agents_hunt_agent_huntagent",
-      "community": 15,
+      "community": 14,
       "norm_label": "huntagent"
     },
     {
@@ -1852,7 +1852,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L31",
       "id": "agents_hunt_agent_huntagent_init",
-      "community": 15,
+      "community": 14,
       "norm_label": ".__init__()"
     },
     {
@@ -1861,7 +1861,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L42",
       "id": "agents_hunt_agent_huntagent_reset_state",
-      "community": 15,
+      "community": 14,
       "norm_label": "._reset_state()"
     },
     {
@@ -1870,7 +1870,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L59",
       "id": "agents_hunt_agent_huntagent_reset",
-      "community": 15,
+      "community": 14,
       "norm_label": ".reset()"
     },
     {
@@ -1879,7 +1879,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L63",
       "id": "agents_hunt_agent_huntagent_enqueue_back",
-      "community": 15,
+      "community": 14,
       "norm_label": "._enqueue_back()"
     },
     {
@@ -1888,7 +1888,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L67",
       "id": "agents_hunt_agent_huntagent_enqueue_front",
-      "community": 15,
+      "community": 14,
       "norm_label": "._enqueue_front()"
     },
     {
@@ -1897,7 +1897,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L71",
       "id": "agents_hunt_agent_huntagent_cardinal_neighbors",
-      "community": 15,
+      "community": 14,
       "norm_label": "._cardinal_neighbors()"
     },
     {
@@ -1906,7 +1906,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L78",
       "id": "agents_hunt_agent_huntagent_prepend_axis_ends",
-      "community": 15,
+      "community": 14,
       "norm_label": "._prepend_axis_ends()"
     },
     {
@@ -1915,7 +1915,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L94",
       "id": "agents_hunt_agent_huntagent_queue_unresolved_from_board",
-      "community": 15,
+      "community": 14,
       "norm_label": "._queue_unresolved_from_board()"
     },
     {
@@ -1924,7 +1924,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L104",
       "id": "agents_hunt_agent_huntagent_receive_result",
-      "community": 15,
+      "community": 14,
       "norm_label": ".receive_result()"
     },
     {
@@ -1933,7 +1933,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L146",
       "id": "agents_hunt_agent_huntagent_select_move",
-      "community": 15,
+      "community": 14,
       "norm_label": ".select_move()"
     },
     {
@@ -1942,7 +1942,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L11",
       "id": "agents_hunt_agent_rationale_11",
-      "community": 15,
+      "community": 14,
       "norm_label": "hunt-and-target agent.      search phase: shoots only checkerboard cells (row+co"
     },
     {
@@ -1951,7 +1951,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L79",
       "id": "agents_hunt_agent_rationale_79",
-      "community": 15,
+      "community": 14,
       "norm_label": "prepend the two axis-aligned end cells to the front of the queue."
     },
     {
@@ -1960,7 +1960,7 @@
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L95",
       "id": "agents_hunt_agent_rationale_95",
-      "community": 15,
+      "community": 14,
       "norm_label": "scan board for unresolved hit cells and enqueue their unshot neighbors."
     },
     {
@@ -1978,7 +1978,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L1",
       "id": "game_agents_feature_extractor_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "feature_extractor.py"
     },
     {
@@ -1987,7 +1987,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L16",
       "id": "agents_feature_extractor_featureextractor",
-      "community": 0,
+      "community": 1,
       "norm_label": "featureextractor"
     },
     {
@@ -1996,7 +1996,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L29",
       "id": "agents_feature_extractor_featureextractor_init",
-      "community": 0,
+      "community": 1,
       "norm_label": ".__init__()"
     },
     {
@@ -2005,7 +2005,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L36",
       "id": "agents_feature_extractor_featureextractor_reset",
-      "community": 0,
+      "community": 1,
       "norm_label": ".reset()"
     },
     {
@@ -2014,7 +2014,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L40",
       "id": "agents_feature_extractor_featureextractor_update",
-      "community": 0,
+      "community": 1,
       "norm_label": ".update()"
     },
     {
@@ -2023,7 +2023,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L46",
       "id": "agents_feature_extractor_featureextractor_compute_cell_features",
-      "community": 0,
+      "community": 1,
       "norm_label": ".compute_cell_features()"
     },
     {
@@ -2032,7 +2032,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L120",
       "id": "agents_feature_extractor_featureextractor_compute_global_features",
-      "community": 0,
+      "community": 1,
       "norm_label": ".compute_global_features()"
     },
     {
@@ -2041,7 +2041,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L17",
       "id": "agents_feature_extractor_rationale_17",
-      "community": 0,
+      "community": 1,
       "norm_label": "computes per-cell (100, 16) and global (4,) features for the transformerppo agen"
     },
     {
@@ -2050,7 +2050,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L41",
       "id": "agents_feature_extractor_rationale_41",
-      "community": 0,
+      "community": 1,
       "norm_label": "record the outcome of a shot and propagate to the internal bayesian model."
     },
     {
@@ -2059,7 +2059,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L47",
       "id": "agents_feature_extractor_rationale_47",
-      "community": 0,
+      "community": 1,
       "norm_label": "return shape (100, 16) float32 feature array for all cells.          calls bayes"
     },
     {
@@ -2068,7 +2068,7 @@
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L121",
       "id": "agents_feature_extractor_rationale_121",
-      "community": 0,
+      "community": 1,
       "norm_label": "return shape (4,) float32 global context vector."
     },
     {
@@ -2077,7 +2077,7 @@
       "source_file": "game/agents/ppo_net/value_net.py",
       "source_location": "L1",
       "id": "game_agents_ppo_net_value_net_py",
-      "community": 13,
+      "community": 12,
       "norm_label": "value_net.py"
     },
     {
@@ -2086,7 +2086,7 @@
       "source_file": "game/agents/ppo_net/value_net.py",
       "source_location": "L10",
       "id": "ppo_net_value_net_valuenet",
-      "community": 13,
+      "community": 12,
       "norm_label": "valuenet"
     },
     {
@@ -2095,7 +2095,7 @@
       "source_file": "game/agents/ppo_net/value_net.py",
       "source_location": "L18",
       "id": "ppo_net_value_net_valuenet_init",
-      "community": 13,
+      "community": 12,
       "norm_label": ".__init__()"
     },
     {
@@ -2104,7 +2104,7 @@
       "source_file": "game/agents/ppo_net/value_net.py",
       "source_location": "L38",
       "id": "ppo_net_value_net_valuenet_forward",
-      "community": 13,
+      "community": 12,
       "norm_label": ".forward()"
     },
     {
@@ -2113,7 +2113,7 @@
       "source_file": "game/agents/ppo_net/value_net.py",
       "source_location": "L11",
       "id": "ppo_net_value_net_rationale_11",
-      "community": 13,
+      "community": 12,
       "norm_label": "value trunk: cell + global features \u2192 scalar state value.      a learned global"
     },
     {
@@ -2122,7 +2122,7 @@
       "source_file": "game/agents/ppo_net/value_net.py",
       "source_location": "L41",
       "id": "ppo_net_value_net_rationale_41",
-      "community": 13,
+      "community": 12,
       "norm_label": "args:             cell_feats:   (b, 100, cell_feature_dim)             global_fe"
     },
     {
@@ -2140,7 +2140,7 @@
       "source_file": "game/agents/ppo_net/policy_net.py",
       "source_location": "L1",
       "id": "game_agents_ppo_net_policy_net_py",
-      "community": 13,
+      "community": 12,
       "norm_label": "policy_net.py"
     },
     {
@@ -2149,7 +2149,7 @@
       "source_file": "game/agents/ppo_net/policy_net.py",
       "source_location": "L11",
       "id": "ppo_net_policy_net_policynet",
-      "community": 13,
+      "community": 12,
       "norm_label": "policynet"
     },
     {
@@ -2158,7 +2158,7 @@
       "source_file": "game/agents/ppo_net/policy_net.py",
       "source_location": "L14",
       "id": "ppo_net_policy_net_policynet_init",
-      "community": 13,
+      "community": 12,
       "norm_label": ".__init__()"
     },
     {
@@ -2167,7 +2167,7 @@
       "source_file": "game/agents/ppo_net/policy_net.py",
       "source_location": "L32",
       "id": "ppo_net_policy_net_policynet_forward",
-      "community": 13,
+      "community": 12,
       "norm_label": ".forward()"
     },
     {
@@ -2176,7 +2176,7 @@
       "source_file": "game/agents/ppo_net/policy_net.py",
       "source_location": "L12",
       "id": "ppo_net_policy_net_rationale_12",
-      "community": 13,
+      "community": 12,
       "norm_label": "policy trunk: cell features \u2192 transformer encoder \u2192 per-cell log-probabilities."
     },
     {
@@ -2185,7 +2185,7 @@
       "source_file": "game/agents/ppo_net/policy_net.py",
       "source_location": "L35",
       "id": "ppo_net_policy_net_rationale_35",
-      "community": 13,
+      "community": 12,
       "norm_label": "args:             cell_feats:  (b, 100, cell_feature_dim)             legal_mask"
     },
     {
@@ -2194,7 +2194,7 @@
       "source_file": "game/agents/ppo_net/__init__.py",
       "source_location": "L1",
       "id": "game_agents_ppo_net_init_py",
-      "community": 13,
+      "community": 12,
       "norm_label": "__init__.py"
     },
     {
@@ -2203,7 +2203,7 @@
       "source_file": "game/agents/ppo_net/__init__.py",
       "source_location": "L11",
       "id": "ppo_net_init_transformerpponet",
-      "community": 13,
+      "community": 12,
       "norm_label": "transformerpponet"
     },
     {
@@ -2212,7 +2212,7 @@
       "source_file": "game/agents/ppo_net/__init__.py",
       "source_location": "L21",
       "id": "ppo_net_init_transformerpponet_init",
-      "community": 13,
+      "community": 12,
       "norm_label": ".__init__()"
     },
     {
@@ -2221,7 +2221,7 @@
       "source_file": "game/agents/ppo_net/__init__.py",
       "source_location": "L26",
       "id": "ppo_net_init_transformerpponet_forward",
-      "community": 13,
+      "community": 12,
       "norm_label": ".forward()"
     },
     {
@@ -2230,7 +2230,7 @@
       "source_file": "game/agents/ppo_net/__init__.py",
       "source_location": "L44",
       "id": "ppo_net_init_transformerpponet_policy_params",
-      "community": 13,
+      "community": 12,
       "norm_label": ".policy_params()"
     },
     {
@@ -2239,7 +2239,7 @@
       "source_file": "game/agents/ppo_net/__init__.py",
       "source_location": "L47",
       "id": "ppo_net_init_transformerpponet_value_params",
-      "community": 13,
+      "community": 12,
       "norm_label": ".value_params()"
     },
     {
@@ -2248,7 +2248,7 @@
       "source_file": "game/agents/ppo_net/__init__.py",
       "source_location": "L12",
       "id": "ppo_net_init_rationale_12",
-      "community": 13,
+      "community": 12,
       "norm_label": "transformer actor-critic with fully separate policy and value trunks.      polic"
     },
     {
@@ -2257,7 +2257,7 @@
       "source_file": "game/agents/ppo_net/__init__.py",
       "source_location": "L32",
       "id": "ppo_net_init_rationale_32",
-      "community": 13,
+      "community": 12,
       "norm_label": "args:             cell_feats:   (b, 100, cell_feature_dim)             global_fe"
     },
     {
@@ -2266,7 +2266,7 @@
       "source_file": "game/models/ship_type.py",
       "source_location": "L1",
       "id": "game_models_ship_type_py",
-      "community": 3,
+      "community": 4,
       "norm_label": "ship_type.py"
     },
     {
@@ -2275,7 +2275,7 @@
       "source_file": "game/models/ship_type.py",
       "source_location": "L5",
       "id": "models_ship_type_shiptype",
-      "community": 3,
+      "community": 4,
       "norm_label": "shiptype"
     },
     {
@@ -2284,7 +2284,7 @@
       "source_file": "",
       "source_location": "",
       "id": "enum",
-      "community": 3,
+      "community": 4,
       "norm_label": "enum"
     },
     {
@@ -2293,7 +2293,7 @@
       "source_file": "game/models/board.py",
       "source_location": "L1",
       "id": "game_models_board_py",
-      "community": 3,
+      "community": 4,
       "norm_label": "board.py"
     },
     {
@@ -2302,7 +2302,7 @@
       "source_file": "game/models/board.py",
       "source_location": "L8",
       "id": "models_board_board",
-      "community": 3,
+      "community": 4,
       "norm_label": "board"
     },
     {
@@ -2311,7 +2311,7 @@
       "source_file": "game/models/board.py",
       "source_location": "L11",
       "id": "models_board_board_init",
-      "community": 3,
+      "community": 4,
       "norm_label": ".__init__()"
     },
     {
@@ -2320,7 +2320,7 @@
       "source_file": "game/models/board.py",
       "source_location": "L22",
       "id": "models_board_board_get_cell",
-      "community": 3,
+      "community": 4,
       "norm_label": ".get_cell()"
     },
     {
@@ -2329,7 +2329,7 @@
       "source_file": "game/models/board.py",
       "source_location": "L25",
       "id": "models_board_board_set_cell",
-      "community": 3,
+      "community": 4,
       "norm_label": ".set_cell()"
     },
     {
@@ -2338,7 +2338,7 @@
       "source_file": "game/models/board.py",
       "source_location": "L30",
       "id": "models_board_board_reset",
-      "community": 3,
+      "community": 4,
       "norm_label": ".reset()"
     },
     {
@@ -2347,7 +2347,7 @@
       "source_file": "game/models/__init__.py",
       "source_location": "L1",
       "id": "game_models_init_py",
-      "community": 3,
+      "community": 4,
       "norm_label": "__init__.py"
     },
     {
@@ -2356,7 +2356,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L1",
       "id": "game_models_ship_py",
-      "community": 3,
+      "community": 4,
       "norm_label": "ship.py"
     },
     {
@@ -2365,7 +2365,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L17",
       "id": "models_ship_get_ship_size",
-      "community": 3,
+      "community": 4,
       "norm_label": "get_ship_size()"
     },
     {
@@ -2374,7 +2374,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L21",
       "id": "models_ship_get_ship_name",
-      "community": 3,
+      "community": 4,
       "norm_label": "get_ship_name()"
     },
     {
@@ -2383,7 +2383,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L26",
       "id": "models_ship_ship",
-      "community": 3,
+      "community": 4,
       "norm_label": "ship"
     },
     {
@@ -2392,7 +2392,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L32",
       "id": "models_ship_get_fleet",
-      "community": 3,
+      "community": 4,
       "norm_label": "get_fleet()"
     },
     {
@@ -2401,7 +2401,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L40",
       "id": "models_ship_size",
-      "community": 3,
+      "community": 4,
       "norm_label": "size()"
     },
     {
@@ -2410,7 +2410,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L44",
       "id": "models_ship_is_sunk",
-      "community": 3,
+      "community": 4,
       "norm_label": "is_sunk()"
     },
     {
@@ -2419,7 +2419,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L47",
       "id": "models_ship_ship_register_hit",
-      "community": 3,
+      "community": 4,
       "norm_label": ".register_hit()"
     },
     {
@@ -2428,7 +2428,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L50",
       "id": "models_ship_ship_repr",
-      "community": 3,
+      "community": 4,
       "norm_label": ".__repr__()"
     },
     {
@@ -2437,7 +2437,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L6",
       "id": "models_ship_rationale_6",
-      "community": 3,
+      "community": 4,
       "norm_label": "# note: shiptype enum values are priority ids, not sizes."
     },
     {
@@ -2446,7 +2446,7 @@
       "source_file": "game/models/ship.py",
       "source_location": "L30",
       "id": "models_ship_rationale_30",
-      "community": 3,
+      "community": 4,
       "norm_label": "# note: dicts are ordered in python 3.7+, _ship_sizes.keys() is consistent"
     },
     {
@@ -2455,7 +2455,7 @@
       "source_file": "game/models/cell_state.py",
       "source_location": "L1",
       "id": "game_models_cell_state_py",
-      "community": 3,
+      "community": 4,
       "norm_label": "cell_state.py"
     },
     {
@@ -2464,7 +2464,7 @@
       "source_file": "game/models/cell_state.py",
       "source_location": "L4",
       "id": "models_cell_state_cellstate",
-      "community": 3,
+      "community": 4,
       "norm_label": "cellstate"
     },
     {
@@ -2675,11 +2675,38 @@
       "norm_label": "code:bash (# play 100 automated games and report avg turns)"
     },
     {
+      "label": "logger.py",
+      "file_type": "code",
+      "source_file": "game/logger.py",
+      "source_location": "L1",
+      "community": 2,
+      "norm_label": "logger.py",
+      "id": "game_logger_py"
+    },
+    {
+      "label": "GameLogger",
+      "file_type": "code",
+      "source_file": "game/logger.py",
+      "source_location": "L7",
+      "community": 6,
+      "norm_label": "gamelogger",
+      "id": "game_logger_gamelogger"
+    },
+    {
+      "label": "setup()",
+      "file_type": "code",
+      "source_file": "game/logger.py",
+      "source_location": "L11",
+      "community": 2,
+      "norm_label": "setup()",
+      "id": "game_logger_setup"
+    },
+    {
       "label": "close()",
       "file_type": "code",
       "source_file": "training/training_logger.py",
       "source_location": "L41",
-      "community": 8,
+      "community": 6,
       "norm_label": "close()",
       "id": "training_training_logger_close"
     },
@@ -2688,7 +2715,7 @@
       "file_type": "code",
       "source_file": "training/training_logger.py",
       "source_location": "L49",
-      "community": 8,
+      "community": 6,
       "norm_label": "debug()",
       "id": "training_training_logger_debug"
     },
@@ -2697,7 +2724,7 @@
       "file_type": "code",
       "source_file": "training/training_logger.py",
       "source_location": "L53",
-      "community": 8,
+      "community": 6,
       "norm_label": "info()",
       "id": "training_training_logger_info"
     },
@@ -2706,7 +2733,7 @@
       "file_type": "code",
       "source_file": "training/training_logger.py",
       "source_location": "L57",
-      "community": 8,
+      "community": 6,
       "norm_label": "warn()",
       "id": "training_training_logger_warn"
     },
@@ -2715,7 +2742,7 @@
       "file_type": "code",
       "source_file": "training/training_logger.py",
       "source_location": "L61",
-      "community": 8,
+      "community": 6,
       "norm_label": "error()",
       "id": "training_training_logger_error"
     },
@@ -2724,7 +2751,7 @@
       "file_type": "rationale",
       "source_file": "training/training_logger.py",
       "source_location": "L12",
-      "community": 8,
+      "community": 6,
       "norm_label": "statically accessible logger for training scripts.      call traininglogger.setu",
       "id": "training_training_logger_rationale_12"
     },
@@ -2733,7 +2760,7 @@
       "file_type": "code",
       "source_file": "game/logger.py",
       "source_location": "L44",
-      "community": 4,
+      "community": 2,
       "norm_label": "close()",
       "id": "game_logger_close"
     },
@@ -2742,7 +2769,7 @@
       "file_type": "code",
       "source_file": "game/logger.py",
       "source_location": "L53",
-      "community": 4,
+      "community": 2,
       "norm_label": "debug()",
       "id": "game_logger_debug"
     },
@@ -2751,7 +2778,7 @@
       "file_type": "code",
       "source_file": "game/logger.py",
       "source_location": "L57",
-      "community": 4,
+      "community": 2,
       "norm_label": "info()",
       "id": "game_logger_info"
     },
@@ -2760,7 +2787,7 @@
       "file_type": "code",
       "source_file": "game/logger.py",
       "source_location": "L61",
-      "community": 4,
+      "community": 2,
       "norm_label": "warn()",
       "id": "game_logger_warn"
     },
@@ -2769,7 +2796,7 @@
       "file_type": "code",
       "source_file": "game/logger.py",
       "source_location": "L65",
-      "community": 4,
+      "community": 2,
       "norm_label": "error()",
       "id": "game_logger_error"
     },
@@ -2778,7 +2805,7 @@
       "file_type": "rationale",
       "source_file": "game/logger.py",
       "source_location": "L12",
-      "community": 8,
+      "community": 6,
       "norm_label": "statically accessible logger. call gamelogger.info() / .warn() / .error() / .deb",
       "id": "game_logger_rationale_12"
     },
@@ -2823,7 +2850,7 @@
       "file_type": "code",
       "source_file": "game/logger.py",
       "source_location": "L11",
-      "community": 2,
+      "community": 3,
       "norm_label": "gamelogger",
       "id": "logger_gamelogger"
     },
@@ -2886,7 +2913,7 @@
       "file_type": "rationale",
       "source_file": "game/logger.py",
       "source_location": "L12",
-      "community": 2,
+      "community": 3,
       "norm_label": "statically accessible logger. call gamelogger.info() / .warn() / .error() / .deb",
       "id": "logger_rationale_12"
     },
@@ -2922,7 +2949,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L13",
-      "community": 14,
+      "community": 13,
       "norm_label": "gameengine",
       "id": "game_engine_gameengine"
     },
@@ -2931,7 +2958,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L28",
-      "community": 14,
+      "community": 13,
       "norm_label": ".__init__()",
       "id": "game_engine_gameengine_init"
     },
@@ -2940,7 +2967,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L54",
-      "community": 14,
+      "community": 13,
       "norm_label": ".reset()",
       "id": "game_engine_gameengine_reset"
     },
@@ -2949,7 +2976,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L70",
-      "community": 14,
+      "community": 13,
       "norm_label": ".run()",
       "id": "game_engine_gameengine_run"
     },
@@ -2958,7 +2985,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L95",
-      "community": 14,
+      "community": 13,
       "norm_label": "._setup()",
       "id": "game_engine_gameengine_setup"
     },
@@ -2967,7 +2994,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L104",
-      "community": 14,
+      "community": 13,
       "norm_label": "._setup_ws_player()",
       "id": "game_engine_gameengine_setup_ws_player"
     },
@@ -2976,7 +3003,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L149",
-      "community": 14,
+      "community": 13,
       "norm_label": "._game_loop()",
       "id": "game_engine_gameengine_game_loop"
     },
@@ -2985,7 +3012,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L178",
-      "community": 14,
+      "community": 13,
       "norm_label": "._take_player_turn()",
       "id": "game_engine_gameengine_take_player_turn"
     },
@@ -2994,7 +3021,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L221",
-      "community": 14,
+      "community": 13,
       "norm_label": "._fire_on_agent_board()",
       "id": "game_engine_gameengine_fire_on_agent_board"
     },
@@ -3003,7 +3030,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L255",
-      "community": 14,
+      "community": 13,
       "norm_label": "._take_agent_turn()",
       "id": "game_engine_gameengine_take_agent_turn"
     },
@@ -3021,7 +3048,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L307",
-      "community": 14,
+      "community": 13,
       "norm_label": "._check_win_condition()",
       "id": "game_engine_gameengine_check_win_condition"
     },
@@ -3048,7 +3075,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L330",
-      "community": 14,
+      "community": 13,
       "norm_label": "._build_agent_obs()",
       "id": "game_engine_gameengine_build_agent_obs"
     },
@@ -3057,7 +3084,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L341",
-      "community": 14,
+      "community": 13,
       "norm_label": "._build_player_view()",
       "id": "game_engine_gameengine_build_player_view"
     },
@@ -3066,7 +3093,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L353",
-      "community": 14,
+      "community": 13,
       "norm_label": "._build_state_dict()",
       "id": "game_engine_gameengine_build_state_dict"
     },
@@ -3075,7 +3102,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L388",
-      "community": 14,
+      "community": 13,
       "norm_label": "._build_game_over_dict()",
       "id": "game_engine_gameengine_build_game_over_dict"
     },
@@ -3102,7 +3129,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L426",
-      "community": 14,
+      "community": 13,
       "norm_label": "._display_boards()",
       "id": "game_engine_gameengine_display_boards"
     },
@@ -3111,7 +3138,7 @@
       "file_type": "code",
       "source_file": "game/game_engine.py",
       "source_location": "L433",
-      "community": 14,
+      "community": 13,
       "norm_label": "._display_game_over()",
       "id": "game_engine_gameengine_display_game_over"
     },
@@ -3120,7 +3147,7 @@
       "file_type": "rationale",
       "source_file": "game/game_engine.py",
       "source_location": "L14",
-      "community": 2,
+      "community": 13,
       "norm_label": "orchestrates a full game of battleship.      the game-side agent always runs in-",
       "id": "game_engine_rationale_14"
     },
@@ -3129,7 +3156,7 @@
       "file_type": "code",
       "source_file": "game/placement_protocol.py",
       "source_location": "L1",
-      "community": 6,
+      "community": 3,
       "norm_label": "placement_protocol.py",
       "id": "placement_protocol"
     },
@@ -3138,7 +3165,7 @@
       "file_type": "code",
       "source_file": "game/placement_protocol.py",
       "source_location": "L7",
-      "community": 6,
+      "community": 3,
       "norm_label": "placementtarget",
       "id": "placement_protocol_placementtarget"
     },
@@ -3147,7 +3174,7 @@
       "file_type": "code",
       "source_file": "game/placement_protocol.py",
       "source_location": "L8",
-      "community": 6,
+      "community": 3,
       "norm_label": ".can_place_ship()",
       "id": "placement_protocol_placementtarget_can_place_ship"
     },
@@ -3156,7 +3183,7 @@
       "file_type": "code",
       "source_file": "game/placement_protocol.py",
       "source_location": "L12",
-      "community": 6,
+      "community": 3,
       "norm_label": ".place_ship()",
       "id": "placement_protocol_placementtarget_place_ship"
     },
@@ -3165,7 +3192,7 @@
       "file_type": "code",
       "source_file": "game/placement_protocol.py",
       "source_location": "L16",
-      "community": 6,
+      "community": 3,
       "norm_label": ".get_placed_cells()",
       "id": "placement_protocol_placementtarget_get_placed_cells"
     },
@@ -3174,7 +3201,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L1",
-      "community": 6,
+      "community": 3,
       "norm_label": "fleet_placement_methods.py",
       "id": "fleet_placement_methods"
     },
@@ -3183,7 +3210,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L31",
-      "community": 6,
+      "community": 3,
       "norm_label": "_edge_dist()",
       "id": "fleet_placement_methods_edge_dist"
     },
@@ -3192,7 +3219,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L35",
-      "community": 6,
+      "community": 3,
       "norm_label": "_corner_dist()",
       "id": "fleet_placement_methods_corner_dist"
     },
@@ -3201,7 +3228,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L39",
-      "community": 6,
+      "community": 3,
       "norm_label": "_center_dist()",
       "id": "fleet_placement_methods_center_dist"
     },
@@ -3210,7 +3237,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L43",
-      "community": 6,
+      "community": 3,
       "norm_label": "_diag_dist()",
       "id": "fleet_placement_methods_diag_dist"
     },
@@ -3219,7 +3246,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L47",
-      "community": 6,
+      "community": 3,
       "norm_label": "_best_scored_candidate()",
       "id": "fleet_placement_methods_best_scored_candidate"
     },
@@ -3228,7 +3255,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L71",
-      "community": 6,
+      "community": 3,
       "norm_label": "_place_with_score()",
       "id": "fleet_placement_methods_place_with_score"
     },
@@ -3237,7 +3264,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L113",
-      "community": 6,
+      "community": 3,
       "norm_label": "_placement_error()",
       "id": "fleet_placement_methods_placement_error"
     },
@@ -3246,7 +3273,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L117",
-      "community": 6,
+      "community": 3,
       "norm_label": "place_fleet_random()",
       "id": "fleet_placement_methods_place_fleet_random"
     },
@@ -3255,7 +3282,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L142",
-      "community": 6,
+      "community": 3,
       "norm_label": "place_fleet_gaussian()",
       "id": "fleet_placement_methods_place_fleet_gaussian"
     },
@@ -3264,7 +3291,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L179",
-      "community": 6,
+      "community": 3,
       "norm_label": "place_fleet_spread()",
       "id": "fleet_placement_methods_place_fleet_spread"
     },
@@ -3273,7 +3300,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L235",
-      "community": 6,
+      "community": 3,
       "norm_label": "place_fleet_edges()",
       "id": "fleet_placement_methods_place_fleet_edges"
     },
@@ -3282,7 +3309,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L240",
-      "community": 6,
+      "community": 3,
       "norm_label": "place_fleet_corners()",
       "id": "fleet_placement_methods_place_fleet_corners"
     },
@@ -3291,7 +3318,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L245",
-      "community": 6,
+      "community": 3,
       "norm_label": "place_fleet_clustered()",
       "id": "fleet_placement_methods_place_fleet_clustered"
     },
@@ -3300,7 +3327,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L277",
-      "community": 6,
+      "community": 3,
       "norm_label": "place_fleet_quadrant()",
       "id": "fleet_placement_methods_place_fleet_quadrant"
     },
@@ -3309,7 +3336,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L319",
-      "community": 6,
+      "community": 3,
       "norm_label": "place_fleet_dense_center()",
       "id": "fleet_placement_methods_place_fleet_dense_center"
     },
@@ -3318,7 +3345,7 @@
       "file_type": "code",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L324",
-      "community": 6,
+      "community": 3,
       "norm_label": "place_fleet_diagonal()",
       "id": "fleet_placement_methods_place_fleet_diagonal"
     },
@@ -3327,7 +3354,7 @@
       "file_type": "rationale",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L236",
-      "community": 6,
+      "community": 3,
       "norm_label": "bias ships toward the board perimeter (minimise distance to nearest edge).",
       "id": "fleet_placement_methods_rationale_236"
     },
@@ -3336,7 +3363,7 @@
       "file_type": "rationale",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L241",
-      "community": 6,
+      "community": 3,
       "norm_label": "bias ships toward the four corners (minimise distance to nearest corner).",
       "id": "fleet_placement_methods_rationale_241"
     },
@@ -3345,7 +3372,7 @@
       "file_type": "rationale",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L246",
-      "community": 6,
+      "community": 3,
       "norm_label": "pack all ships tightly around a single random hotspot (opposite of spread).",
       "id": "fleet_placement_methods_rationale_246"
     },
@@ -3354,7 +3381,7 @@
       "file_type": "rationale",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L278",
-      "community": 6,
+      "community": 3,
       "norm_label": "confine the entire fleet to one randomly chosen quadrant.",
       "id": "fleet_placement_methods_rationale_278"
     },
@@ -3363,7 +3390,7 @@
       "file_type": "rationale",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L320",
-      "community": 6,
+      "community": 3,
       "norm_label": "bias ships toward the centre (minimise distance to board centre at 4.5, 4.5).",
       "id": "fleet_placement_methods_rationale_320"
     },
@@ -3372,7 +3399,7 @@
       "file_type": "rationale",
       "source_file": "game/fleet_placement_methods.py",
       "source_location": "L325",
-      "community": 6,
+      "community": 3,
       "norm_label": "bias ships toward the main diagonal (where row == col).",
       "id": "fleet_placement_methods_rationale_325"
     },
@@ -3435,7 +3462,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L11",
-      "community": 2,
+      "community": 7,
       "norm_label": "gameboard",
       "id": "game_board_gameboard"
     },
@@ -3444,7 +3471,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L12",
-      "community": 2,
+      "community": 7,
       "norm_label": ".__init__()",
       "id": "game_board_gameboard_init"
     },
@@ -3453,7 +3480,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L20",
-      "community": 2,
+      "community": 7,
       "norm_label": "._ship_cells()",
       "id": "game_board_gameboard_ship_cells"
     },
@@ -3462,7 +3489,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L33",
-      "community": 2,
+      "community": 7,
       "norm_label": ".can_place_ship()",
       "id": "game_board_gameboard_can_place_ship"
     },
@@ -3471,7 +3498,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L55",
-      "community": 2,
+      "community": 7,
       "norm_label": ".place_ship()",
       "id": "game_board_gameboard_place_ship"
     },
@@ -3480,7 +3507,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L73",
-      "community": 2,
+      "community": 7,
       "norm_label": ".place_ship_from_str()",
       "id": "game_board_gameboard_place_ship_from_str"
     },
@@ -3489,7 +3516,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L80",
-      "community": 2,
+      "community": 7,
       "norm_label": ".get_placed_cells()",
       "id": "game_board_gameboard_get_placed_cells"
     },
@@ -3498,7 +3525,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L83",
-      "community": 2,
+      "community": 7,
       "norm_label": ".place_fleet()",
       "id": "game_board_gameboard_place_fleet"
     },
@@ -3507,7 +3534,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L102",
-      "community": 2,
+      "community": 7,
       "norm_label": ".find_ship_at()",
       "id": "game_board_gameboard_find_ship_at"
     },
@@ -3516,7 +3543,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L109",
-      "community": 2,
+      "community": 7,
       "norm_label": ".receive_shot()",
       "id": "game_board_gameboard_receive_shot"
     },
@@ -3525,7 +3552,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L135",
-      "community": 2,
+      "community": 7,
       "norm_label": ".all_ships_sunk()",
       "id": "game_board_gameboard_all_ships_sunk"
     },
@@ -3534,7 +3561,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L138",
-      "community": 2,
+      "community": 7,
       "norm_label": ".ships_sunk_count()",
       "id": "game_board_gameboard_ships_sunk_count"
     },
@@ -3543,7 +3570,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L141",
-      "community": 2,
+      "community": 7,
       "norm_label": ".cells_hit_count()",
       "id": "game_board_gameboard_cells_hit_count"
     },
@@ -3552,7 +3579,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L146",
-      "community": 2,
+      "community": 7,
       "norm_label": ".cells_targeted()",
       "id": "game_board_gameboard_cells_targeted"
     },
@@ -3561,7 +3588,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L154",
-      "community": 2,
+      "community": 7,
       "norm_label": ".get_unhit_cells()",
       "id": "game_board_gameboard_get_unhit_cells"
     },
@@ -3570,7 +3597,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L163",
-      "community": 2,
+      "community": 7,
       "norm_label": ".board_as_matrix()",
       "id": "game_board_gameboard_board_as_matrix"
     },
@@ -3579,7 +3606,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L183",
-      "community": 2,
+      "community": 7,
       "norm_label": "._cell_symbol()",
       "id": "game_board_gameboard_cell_symbol"
     },
@@ -3588,7 +3615,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L193",
-      "community": 2,
+      "community": 7,
       "norm_label": ".display()",
       "id": "game_board_gameboard_display"
     },
@@ -3597,7 +3624,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L23",
-      "community": 2,
+      "community": 7,
       "norm_label": "compute the list of (row, col) cells a ship would occupy.",
       "id": "game_board_rationale_23"
     },
@@ -3606,7 +3633,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L36",
-      "community": 2,
+      "community": 7,
       "norm_label": "return (true, '') if the placement is valid.         return (false, reason) if o",
       "id": "game_board_rationale_36"
     },
@@ -3615,7 +3642,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L58",
-      "community": 2,
+      "community": 7,
       "norm_label": "place a ship on the board. raises valueerror if placement is invalid.         re",
       "id": "game_board_rationale_58"
     },
@@ -3624,7 +3651,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L76",
-      "community": 2,
+      "community": 7,
       "norm_label": "convenience wrapper: place_ship_from_str(shiptype.carrier, 'a1', 'right').",
       "id": "game_board_rationale_76"
     },
@@ -3633,7 +3660,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L84",
-      "community": 2,
+      "community": 7,
       "norm_label": "place the full fleet using a weighted-random placement algorithm.          algor",
       "id": "game_board_rationale_84"
     },
@@ -3642,7 +3669,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L103",
-      "community": 2,
+      "community": 7,
       "norm_label": "return the ship occupying this cell, or none.",
       "id": "game_board_rationale_103"
     },
@@ -3651,7 +3678,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L110",
-      "community": 2,
+      "community": 7,
       "norm_label": "process an incoming shot.         returns (cellstate.hit, ship) on hit, (cellsta",
       "id": "game_board_rationale_110"
     },
@@ -3660,7 +3687,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L155",
-      "community": 2,
+      "community": 7,
       "norm_label": "return all (row, col) pairs not yet shot (empty or ship still there).",
       "id": "game_board_rationale_155"
     },
@@ -3669,7 +3696,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L164",
-      "community": 2,
+      "community": 7,
       "norm_label": "serialize board to a 10x10 list of 'shiptype:cellstate' strings.         if fog_",
       "id": "game_board_rationale_164"
     },
@@ -3678,7 +3705,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L194",
-      "community": 2,
+      "community": 7,
       "norm_label": "print the board to stdout with row/col headers.",
       "id": "game_board_rationale_194"
     },
@@ -3696,7 +3723,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L12",
-      "community": 2,
+      "community": 3,
       "norm_label": "gamewebsocketserver",
       "id": "websocket_gamewebsocketserver"
     },
@@ -3705,7 +3732,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L27",
-      "community": 2,
+      "community": 3,
       "norm_label": ".__init__()",
       "id": "websocket_gamewebsocketserver_init"
     },
@@ -3714,7 +3741,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L41",
-      "community": 2,
+      "community": 3,
       "norm_label": ".start()",
       "id": "websocket_gamewebsocketserver_start"
     },
@@ -3723,7 +3750,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L58",
-      "community": 2,
+      "community": 3,
       "norm_label": ".stop()",
       "id": "websocket_gamewebsocketserver_stop"
     },
@@ -3732,7 +3759,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L74",
-      "community": 2,
+      "community": 3,
       "norm_label": "._handler()",
       "id": "websocket_gamewebsocketserver_handler"
     },
@@ -3741,7 +3768,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L112",
-      "community": 2,
+      "community": 3,
       "norm_label": "._handle_player()",
       "id": "websocket_gamewebsocketserver_handle_player"
     },
@@ -3750,7 +3777,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L137",
-      "community": 2,
+      "community": 3,
       "norm_label": "._handle_observer()",
       "id": "websocket_gamewebsocketserver_handle_observer"
     },
@@ -3759,7 +3786,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L160",
-      "community": 2,
+      "community": 3,
       "norm_label": ".broadcast_state()",
       "id": "websocket_gamewebsocketserver_broadcast_state"
     },
@@ -3768,7 +3795,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L173",
-      "community": 2,
+      "community": 3,
       "norm_label": ".send_to_player()",
       "id": "websocket_gamewebsocketserver_send_to_player"
     },
@@ -3777,7 +3804,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L182",
-      "community": 2,
+      "community": 3,
       "norm_label": ".wait_for_player_move()",
       "id": "websocket_gamewebsocketserver_wait_for_player_move"
     },
@@ -3786,7 +3813,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L186",
-      "community": 2,
+      "community": 3,
       "norm_label": ".wait_for_player_placement()",
       "id": "websocket_gamewebsocketserver_wait_for_player_placement"
     },
@@ -3804,7 +3831,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L13",
-      "community": 2,
+      "community": 3,
       "norm_label": "embedded websocket server that:       - broadcasts game state to all connected o",
       "id": "websocket_rationale_13"
     },
@@ -3813,7 +3840,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L42",
-      "community": 2,
+      "community": 3,
       "norm_label": "launch the websocket server and keep it alive until this coroutine is cancelled.",
       "id": "websocket_rationale_42"
     },
@@ -3822,7 +3849,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L59",
-      "community": 2,
+      "community": 3,
       "norm_label": "send close frames to all connected clients.",
       "id": "websocket_rationale_59"
     },
@@ -3831,7 +3858,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L75",
-      "community": 2,
+      "community": 3,
       "norm_label": "entry point for each new connection. reads role, routes accordingly.",
       "id": "websocket_rationale_75"
     },
@@ -3840,7 +3867,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L113",
-      "community": 2,
+      "community": 3,
       "norm_label": "receive move and placement commands from the player and enqueue them.",
       "id": "websocket_rationale_113"
     },
@@ -3849,7 +3876,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L138",
-      "community": 2,
+      "community": 3,
       "norm_label": "register an observer and hold its connection open until disconnect.",
       "id": "websocket_rationale_138"
     },
@@ -3858,7 +3885,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L161",
-      "community": 2,
+      "community": 3,
       "norm_label": "serialize state_dict to json and send to all connected observers.",
       "id": "websocket_rationale_161"
     },
@@ -3867,7 +3894,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L174",
-      "community": 2,
+      "community": 3,
       "norm_label": "send a json message to the connected player. no-op if none connected.",
       "id": "websocket_rationale_174"
     },
@@ -3876,7 +3903,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L183",
-      "community": 2,
+      "community": 3,
       "norm_label": "await the next move coordinate from the player's move queue.",
       "id": "websocket_rationale_183"
     },
@@ -3885,7 +3912,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L187",
-      "community": 2,
+      "community": 3,
       "norm_label": "await the next ship placement message from the player's placement queue.",
       "id": "websocket_rationale_187"
     },
@@ -3894,7 +3921,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L1",
-      "community": 7,
+      "community": 9,
       "norm_label": "random_agent.py",
       "id": "random_agent"
     },
@@ -3903,7 +3930,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L9",
-      "community": 7,
+      "community": 9,
       "norm_label": "randomagent",
       "id": "random_agent_randomagent"
     },
@@ -3912,7 +3939,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L10",
-      "community": 7,
+      "community": 9,
       "norm_label": ".__init__()",
       "id": "random_agent_randomagent_init"
     },
@@ -3921,7 +3948,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L17",
-      "community": 7,
+      "community": 9,
       "norm_label": ".select_move()",
       "id": "random_agent_randomagent_select_move"
     },
@@ -3930,7 +3957,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L25",
-      "community": 7,
+      "community": 9,
       "norm_label": ".reset()",
       "id": "random_agent_randomagent_reset"
     },
@@ -3939,7 +3966,7 @@
       "file_type": "code",
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "bayesian_agent.py",
       "id": "bayesian_agent"
     },
@@ -3948,7 +3975,7 @@
       "file_type": "code",
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L10",
-      "community": 1,
+      "community": 0,
       "norm_label": "bayesianagent",
       "id": "bayesian_agent_bayesianagent"
     },
@@ -3957,7 +3984,7 @@
       "file_type": "code",
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L21",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__init__()",
       "id": "bayesian_agent_bayesianagent_init"
     },
@@ -3966,7 +3993,7 @@
       "file_type": "code",
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L33",
-      "community": 1,
+      "community": 0,
       "norm_label": ".reset()",
       "id": "bayesian_agent_bayesianagent_reset"
     },
@@ -3975,7 +4002,7 @@
       "file_type": "code",
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L41",
-      "community": 1,
+      "community": 0,
       "norm_label": "._initialize_placements()",
       "id": "bayesian_agent_bayesianagent_initialize_placements"
     },
@@ -3984,7 +4011,7 @@
       "file_type": "code",
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L63",
-      "community": 1,
+      "community": 0,
       "norm_label": "._recompute_grid()",
       "id": "bayesian_agent_bayesianagent_recompute_grid"
     },
@@ -3993,7 +4020,7 @@
       "file_type": "code",
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L74",
-      "community": 1,
+      "community": 0,
       "norm_label": ".receive_result()",
       "id": "bayesian_agent_bayesianagent_receive_result"
     },
@@ -4002,7 +4029,7 @@
       "file_type": "code",
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L99",
-      "community": 1,
+      "community": 0,
       "norm_label": ".select_move()",
       "id": "bayesian_agent_bayesianagent_select_move"
     },
@@ -4011,7 +4038,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L11",
-      "community": 1,
+      "community": 0,
       "norm_label": "bayesian probability density agent.      enumerates all valid ship placements on",
       "id": "bayesian_agent_rationale_11"
     },
@@ -4020,7 +4047,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "transformer_ppo_agent.py",
       "id": "transformer_ppo_agent"
     },
@@ -4029,7 +4056,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L25",
-      "community": 1,
+      "community": 0,
       "norm_label": "transformerpponet",
       "id": "transformer_ppo_agent_transformerpponet"
     },
@@ -4038,7 +4065,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L33",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__init__()",
       "id": "transformer_ppo_agent_transformerpponet_init"
     },
@@ -4047,7 +4074,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L72",
-      "community": 1,
+      "community": 0,
       "norm_label": ".forward()",
       "id": "transformer_ppo_agent_transformerpponet_forward"
     },
@@ -4056,7 +4083,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L107",
-      "community": 7,
+      "community": 0,
       "norm_label": "transformerppoagent",
       "id": "transformer_ppo_agent_transformerppoagent"
     },
@@ -4065,7 +4092,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L118",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__init__()",
       "id": "transformer_ppo_agent_transformerppoagent_init"
     },
@@ -4074,7 +4101,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L131",
-      "community": 7,
+      "community": 0,
       "norm_label": ".reset()",
       "id": "transformer_ppo_agent_transformerppoagent_reset"
     },
@@ -4083,7 +4110,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L134",
-      "community": 7,
+      "community": 0,
       "norm_label": ".select_move()",
       "id": "transformer_ppo_agent_transformerppoagent_select_move"
     },
@@ -4092,7 +4119,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L156",
-      "community": 7,
+      "community": 0,
       "norm_label": ".receive_result()",
       "id": "transformer_ppo_agent_transformerppoagent_receive_result"
     },
@@ -4101,7 +4128,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L161",
-      "community": 7,
+      "community": 0,
       "norm_label": ".save()",
       "id": "transformer_ppo_agent_transformerppoagent_save"
     },
@@ -4110,7 +4137,7 @@
       "file_type": "code",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L165",
-      "community": 1,
+      "community": 0,
       "norm_label": "load()",
       "id": "transformer_ppo_agent_load"
     },
@@ -4119,7 +4146,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L26",
-      "community": 1,
+      "community": 0,
       "norm_label": "transformer actor-critic network for battleship with separate policy and value t",
       "id": "transformer_ppo_agent_rationale_26"
     },
@@ -4128,7 +4155,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L78",
-      "community": 1,
+      "community": 0,
       "norm_label": "args:             cell_feats:  (b, 100, cell_feature_dim)             global_fea",
       "id": "transformer_ppo_agent_rationale_78"
     },
@@ -4137,7 +4164,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/transformer_ppo_agent.py",
       "source_location": "L108",
-      "community": 7,
+      "community": 0,
       "norm_label": "battleship agent backed by a transformer actor-critic network.      operates in",
       "id": "transformer_ppo_agent_rationale_108"
     },
@@ -4146,7 +4173,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L1",
-      "community": 8,
+      "community": 9,
       "norm_label": "base_agent.py",
       "id": "base_agent"
     },
@@ -4155,7 +4182,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L8",
-      "community": 7,
+      "community": 0,
       "norm_label": "baseagent",
       "id": "base_agent_baseagent"
     },
@@ -4164,7 +4191,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L10",
-      "community": 8,
+      "community": 9,
       "norm_label": "select_move()",
       "id": "base_agent_select_move"
     },
@@ -4200,7 +4227,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L11",
-      "community": 2,
+      "community": 7,
       "norm_label": "return a coordinate string (e.g. 'b5') given an observation dict.",
       "id": "base_agent_rationale_11"
     },
@@ -4236,7 +4263,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L1",
-      "community": 7,
+      "community": 15,
       "norm_label": "hunt_agent.py",
       "id": "hunt_agent"
     },
@@ -4245,7 +4272,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L10",
-      "community": 7,
+      "community": 15,
       "norm_label": "huntagent",
       "id": "hunt_agent_huntagent"
     },
@@ -4254,7 +4281,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L31",
-      "community": 7,
+      "community": 15,
       "norm_label": ".__init__()",
       "id": "hunt_agent_huntagent_init"
     },
@@ -4263,7 +4290,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L42",
-      "community": 7,
+      "community": 15,
       "norm_label": "._reset_state()",
       "id": "hunt_agent_huntagent_reset_state"
     },
@@ -4272,7 +4299,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L59",
-      "community": 7,
+      "community": 15,
       "norm_label": ".reset()",
       "id": "hunt_agent_huntagent_reset"
     },
@@ -4281,7 +4308,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L63",
-      "community": 7,
+      "community": 15,
       "norm_label": "._enqueue_back()",
       "id": "hunt_agent_huntagent_enqueue_back"
     },
@@ -4290,7 +4317,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L67",
-      "community": 7,
+      "community": 15,
       "norm_label": "._enqueue_front()",
       "id": "hunt_agent_huntagent_enqueue_front"
     },
@@ -4299,7 +4326,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L71",
-      "community": 7,
+      "community": 15,
       "norm_label": "._cardinal_neighbors()",
       "id": "hunt_agent_huntagent_cardinal_neighbors"
     },
@@ -4308,7 +4335,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L78",
-      "community": 7,
+      "community": 15,
       "norm_label": "._prepend_axis_ends()",
       "id": "hunt_agent_huntagent_prepend_axis_ends"
     },
@@ -4317,7 +4344,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L94",
-      "community": 7,
+      "community": 15,
       "norm_label": "._queue_unresolved_from_board()",
       "id": "hunt_agent_huntagent_queue_unresolved_from_board"
     },
@@ -4326,7 +4353,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L104",
-      "community": 7,
+      "community": 15,
       "norm_label": ".receive_result()",
       "id": "hunt_agent_huntagent_receive_result"
     },
@@ -4335,7 +4362,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L146",
-      "community": 7,
+      "community": 15,
       "norm_label": ".select_move()",
       "id": "hunt_agent_huntagent_select_move"
     },
@@ -4344,7 +4371,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L11",
-      "community": 7,
+      "community": 15,
       "norm_label": "hunt-and-target agent.      search phase: shoots only checkerboard cells (row+co",
       "id": "hunt_agent_rationale_11"
     },
@@ -4353,7 +4380,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L79",
-      "community": 7,
+      "community": 15,
       "norm_label": "prepend the two axis-aligned end cells to the front of the queue.",
       "id": "hunt_agent_rationale_79"
     },
@@ -4362,7 +4389,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L95",
-      "community": 7,
+      "community": 15,
       "norm_label": "scan board for unresolved hit cells and enqueue their unshot neighbors.",
       "id": "hunt_agent_rationale_95"
     },
@@ -4371,7 +4398,7 @@
       "file_type": "code",
       "source_file": "training/__init__.py",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "__init__.py",
       "id": "init"
     },
@@ -4380,7 +4407,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "feature_extractor.py",
       "id": "feature_extractor"
     },
@@ -4389,7 +4416,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L16",
-      "community": 1,
+      "community": 0,
       "norm_label": "featureextractor",
       "id": "feature_extractor_featureextractor"
     },
@@ -4398,7 +4425,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L29",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__init__()",
       "id": "feature_extractor_featureextractor_init"
     },
@@ -4407,7 +4434,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L36",
-      "community": 1,
+      "community": 0,
       "norm_label": ".reset()",
       "id": "feature_extractor_featureextractor_reset"
     },
@@ -4416,7 +4443,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L40",
-      "community": 1,
+      "community": 0,
       "norm_label": ".update()",
       "id": "feature_extractor_featureextractor_update"
     },
@@ -4425,7 +4452,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L46",
-      "community": 1,
+      "community": 0,
       "norm_label": ".compute_cell_features()",
       "id": "feature_extractor_featureextractor_compute_cell_features"
     },
@@ -4434,7 +4461,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L120",
-      "community": 1,
+      "community": 0,
       "norm_label": ".compute_global_features()",
       "id": "feature_extractor_featureextractor_compute_global_features"
     },
@@ -4443,7 +4470,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L17",
-      "community": 1,
+      "community": 0,
       "norm_label": "computes per-cell (100, 16) and global (4,) features for the transformerppo agen",
       "id": "feature_extractor_rationale_17"
     },
@@ -4452,7 +4479,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L41",
-      "community": 1,
+      "community": 0,
       "norm_label": "record the outcome of a shot and propagate to the internal bayesian model.",
       "id": "feature_extractor_rationale_41"
     },
@@ -4461,7 +4488,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L47",
-      "community": 1,
+      "community": 0,
       "norm_label": "return shape (100, 16) float32 feature array for all cells.          calls bayes",
       "id": "feature_extractor_rationale_47"
     },
@@ -4470,7 +4497,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L121",
-      "community": 1,
+      "community": 0,
       "norm_label": "return shape (4,) float32 global context vector.",
       "id": "feature_extractor_rationale_121"
     },
@@ -4479,7 +4506,7 @@
       "file_type": "code",
       "source_file": "game/models/ship_type.py",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "ship_type.py",
       "id": "ship_type"
     },
@@ -4488,7 +4515,7 @@
       "file_type": "code",
       "source_file": "game/models/ship_type.py",
       "source_location": "L5",
-      "community": 3,
+      "community": 4,
       "norm_label": "shiptype",
       "id": "ship_type_shiptype"
     },
@@ -4497,7 +4524,7 @@
       "file_type": "code",
       "source_file": "game/models/board.py",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "board.py",
       "id": "board"
     },
@@ -4506,7 +4533,7 @@
       "file_type": "code",
       "source_file": "game/models/board.py",
       "source_location": "L8",
-      "community": 3,
+      "community": 4,
       "norm_label": "board",
       "id": "board_board"
     },
@@ -4515,7 +4542,7 @@
       "file_type": "code",
       "source_file": "game/models/board.py",
       "source_location": "L11",
-      "community": 3,
+      "community": 4,
       "norm_label": ".__init__()",
       "id": "board_board_init"
     },
@@ -4524,7 +4551,7 @@
       "file_type": "code",
       "source_file": "game/models/board.py",
       "source_location": "L22",
-      "community": 3,
+      "community": 4,
       "norm_label": ".get_cell()",
       "id": "board_board_get_cell"
     },
@@ -4533,7 +4560,7 @@
       "file_type": "code",
       "source_file": "game/models/board.py",
       "source_location": "L25",
-      "community": 3,
+      "community": 4,
       "norm_label": ".set_cell()",
       "id": "board_board_set_cell"
     },
@@ -4542,7 +4569,7 @@
       "file_type": "code",
       "source_file": "game/models/board.py",
       "source_location": "L30",
-      "community": 3,
+      "community": 4,
       "norm_label": ".reset()",
       "id": "board_board_reset"
     },
@@ -4551,7 +4578,7 @@
       "file_type": "code",
       "source_file": "game/models/ship.py",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "ship.py",
       "id": "ship"
     },
@@ -4560,7 +4587,7 @@
       "file_type": "code",
       "source_file": "game/models/ship.py",
       "source_location": "L17",
-      "community": 3,
+      "community": 4,
       "norm_label": "get_ship_size()",
       "id": "ship_get_ship_size"
     },
@@ -4569,7 +4596,7 @@
       "file_type": "code",
       "source_file": "game/models/ship.py",
       "source_location": "L21",
-      "community": 3,
+      "community": 4,
       "norm_label": "get_ship_name()",
       "id": "ship_get_ship_name"
     },
@@ -4578,7 +4605,7 @@
       "file_type": "code",
       "source_file": "game/models/ship.py",
       "source_location": "L26",
-      "community": 3,
+      "community": 4,
       "norm_label": "ship",
       "id": "ship_ship"
     },
@@ -4587,7 +4614,7 @@
       "file_type": "code",
       "source_file": "game/models/ship.py",
       "source_location": "L32",
-      "community": 3,
+      "community": 4,
       "norm_label": "get_fleet()",
       "id": "ship_get_fleet"
     },
@@ -4596,7 +4623,7 @@
       "file_type": "code",
       "source_file": "game/models/ship.py",
       "source_location": "L40",
-      "community": 3,
+      "community": 4,
       "norm_label": "size()",
       "id": "ship_size"
     },
@@ -4605,7 +4632,7 @@
       "file_type": "code",
       "source_file": "game/models/ship.py",
       "source_location": "L44",
-      "community": 3,
+      "community": 4,
       "norm_label": "is_sunk()",
       "id": "ship_is_sunk"
     },
@@ -4614,7 +4641,7 @@
       "file_type": "code",
       "source_file": "game/models/ship.py",
       "source_location": "L47",
-      "community": 3,
+      "community": 4,
       "norm_label": ".register_hit()",
       "id": "ship_ship_register_hit"
     },
@@ -4623,7 +4650,7 @@
       "file_type": "code",
       "source_file": "game/models/ship.py",
       "source_location": "L50",
-      "community": 3,
+      "community": 4,
       "norm_label": ".__repr__()",
       "id": "ship_ship_repr"
     },
@@ -4632,7 +4659,7 @@
       "file_type": "rationale",
       "source_file": "game/models/ship.py",
       "source_location": "L6",
-      "community": 3,
+      "community": 4,
       "norm_label": "# note: shiptype enum values are priority ids, not sizes.",
       "id": "ship_rationale_6"
     },
@@ -4641,7 +4668,7 @@
       "file_type": "rationale",
       "source_file": "game/models/ship.py",
       "source_location": "L30",
-      "community": 3,
+      "community": 4,
       "norm_label": "# note: dicts are ordered in python 3.7+, _ship_sizes.keys() is consistent",
       "id": "ship_rationale_30"
     },
@@ -4650,7 +4677,7 @@
       "file_type": "code",
       "source_file": "game/models/cell_state.py",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "cell_state.py",
       "id": "cell_state"
     },
@@ -4659,7 +4686,7 @@
       "file_type": "code",
       "source_file": "game/models/cell_state.py",
       "source_location": "L4",
-      "community": 3,
+      "community": 4,
       "norm_label": "cellstate",
       "id": "cell_state_cellstate"
     },
@@ -4731,7 +4758,7 @@
       "file_type": "rationale",
       "source_file": "training/pretrain.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "imitation pretraining: train transformerpponet to mimic bayesianagent.  for each",
       "id": "pretrain_rationale_1"
     },
@@ -4740,7 +4767,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "battleship_env.py",
       "id": "battleship_env"
     },
@@ -4749,7 +4776,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L8",
-      "community": 1,
+      "community": 0,
       "norm_label": "battleshipenv",
       "id": "battleship_env_battleshipenv"
     },
@@ -4758,7 +4785,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L25",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__init__()",
       "id": "battleship_env_battleshipenv_init"
     },
@@ -4767,7 +4794,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L32",
-      "community": 1,
+      "community": 0,
       "norm_label": ".reset()",
       "id": "battleship_env_battleshipenv_reset"
     },
@@ -4776,7 +4803,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L39",
-      "community": 1,
+      "community": 0,
       "norm_label": ".step()",
       "id": "battleship_env_battleshipenv_step"
     },
@@ -4785,7 +4812,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L75",
-      "community": 2,
+      "community": 7,
       "norm_label": ".legal_actions()",
       "id": "battleship_env_battleshipenv_legal_actions"
     },
@@ -4794,7 +4821,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L80",
-      "community": 1,
+      "community": 0,
       "norm_label": "done()",
       "id": "battleship_env_done"
     },
@@ -4803,7 +4830,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L84",
-      "community": 1,
+      "community": 0,
       "norm_label": "turn()",
       "id": "battleship_env_turn"
     },
@@ -4812,7 +4839,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L89",
-      "community": 1,
+      "community": 0,
       "norm_label": "._get_obs()",
       "id": "battleship_env_battleshipenv_get_obs"
     },
@@ -4821,7 +4848,7 @@
       "file_type": "rationale",
       "source_file": "training/battleship_env.py",
       "source_location": "L9",
-      "community": 1,
+      "community": 0,
       "norm_label": "fast single-game battleship environment for rl training.      wraps gameboard di",
       "id": "battleship_env_rationale_9"
     },
@@ -4830,7 +4857,7 @@
       "file_type": "rationale",
       "source_file": "training/battleship_env.py",
       "source_location": "L40",
-      "community": 1,
+      "community": 0,
       "norm_label": "take a shot at cell index `action` (row * 10 + col).          returns:",
       "id": "battleship_env_rationale_40"
     },
@@ -4839,7 +4866,7 @@
       "file_type": "rationale",
       "source_file": "training/battleship_env.py",
       "source_location": "L76",
-      "community": 2,
+      "community": 7,
       "norm_label": "return list of cell indices (0\u201399) that have not yet been shot.",
       "id": "battleship_env_rationale_76"
     },
@@ -4848,7 +4875,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "ppo_train.py",
       "id": "ppo_train"
     },
@@ -4857,7 +4884,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L34",
-      "community": 1,
+      "community": 0,
       "norm_label": "transition",
       "id": "ppo_train_transition"
     },
@@ -4866,7 +4893,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L46",
-      "community": 1,
+      "community": 0,
       "norm_label": "rolloutbuffer",
       "id": "ppo_train_rolloutbuffer"
     },
@@ -4875,7 +4902,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L49",
-      "community": 1,
+      "community": 0,
       "norm_label": ".add()",
       "id": "ppo_train_rolloutbuffer_add"
     },
@@ -4884,7 +4911,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L52",
-      "community": 1,
+      "community": 0,
       "norm_label": ".compute_returns_advantages()",
       "id": "ppo_train_rolloutbuffer_compute_returns_advantages"
     },
@@ -4893,7 +4920,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L72",
-      "community": 1,
+      "community": 0,
       "norm_label": ".to_tensors()",
       "id": "ppo_train_rolloutbuffer_to_tensors"
     },
@@ -4902,7 +4929,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L100",
-      "community": 1,
+      "community": 0,
       "norm_label": "coord_to_index()",
       "id": "ppo_train_coord_to_index"
     },
@@ -4911,7 +4938,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L105",
-      "community": 1,
+      "community": 0,
       "norm_label": "collect_episode()",
       "id": "ppo_train_collect_episode"
     },
@@ -4920,7 +4947,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L155",
-      "community": 1,
+      "community": 0,
       "norm_label": "ppo_update()",
       "id": "ppo_train_ppo_update"
     },
@@ -4929,7 +4956,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L251",
-      "community": 1,
+      "community": 0,
       "norm_label": "value_warmup_update()",
       "id": "ppo_train_value_warmup_update"
     },
@@ -4938,7 +4965,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L282",
-      "community": 1,
+      "community": 0,
       "norm_label": "evaluate()",
       "id": "ppo_train_evaluate"
     },
@@ -4947,7 +4974,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L319",
-      "community": 1,
+      "community": 0,
       "norm_label": "bayes_baseline()",
       "id": "ppo_train_bayes_baseline"
     },
@@ -4956,7 +4983,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L337",
-      "community": 1,
+      "community": 0,
       "norm_label": "parse_args()",
       "id": "ppo_train_parse_args"
     },
@@ -4965,7 +4992,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L378",
-      "community": 1,
+      "community": 0,
       "norm_label": "main()",
       "id": "ppo_train_main"
     },
@@ -4974,7 +5001,7 @@
       "file_type": "rationale",
       "source_file": "training/ppo_train.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "ppo fine-tuning for the transformerppo battleship agent.  collects on-policy rol",
       "id": "ppo_train_rationale_1"
     },
@@ -4983,7 +5010,7 @@
       "file_type": "rationale",
       "source_file": "training/ppo_train.py",
       "source_location": "L111",
-      "community": 1,
+      "community": 0,
       "norm_label": "run one episode, collecting transitions. returns (transitions, turns_to_win).",
       "id": "ppo_train_rationale_111"
     },
@@ -4992,7 +5019,7 @@
       "file_type": "rationale",
       "source_file": "training/ppo_train.py",
       "source_location": "L259",
-      "community": 1,
+      "community": 0,
       "norm_label": "one epoch of value-trunk-only updates \u2014 policy trunk receives zero gradient.",
       "id": "ppo_train_rationale_259"
     },
@@ -5001,7 +5028,7 @@
       "file_type": "rationale",
       "source_file": "training/ppo_train.py",
       "source_location": "L287",
-      "community": 1,
+      "community": 0,
       "norm_label": "return mean turns-to-win over n_games episodes (greedy policy).",
       "id": "ppo_train_rationale_287"
     },
@@ -5010,7 +5037,7 @@
       "file_type": "rationale",
       "source_file": "training/ppo_train.py",
       "source_location": "L320",
-      "community": 1,
+      "community": 0,
       "norm_label": "return mean turns-to-win for bayesianagent (one-time reference).",
       "id": "ppo_train_rationale_320"
     },
@@ -5028,7 +5055,7 @@
       "file_type": "code",
       "source_file": "training/training_logger.py",
       "source_location": "L11",
-      "community": 1,
+      "community": 0,
       "norm_label": "traininglogger",
       "id": "training_logger_traininglogger"
     },
@@ -5091,7 +5118,7 @@
       "file_type": "rationale",
       "source_file": "training/training_logger.py",
       "source_location": "L12",
-      "community": 1,
+      "community": 0,
       "norm_label": "statically accessible logger for training scripts.      call traininglogger.setu",
       "id": "training_logger_rationale_12"
     },
@@ -5131,7 +5158,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "transformerppo training readme",
       "id": "readme_training_transformerppo"
     },
@@ -5144,7 +5171,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "transformerpponet architecture",
       "id": "readme_transformerpponet"
     },
@@ -5157,7 +5184,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "policy trunk",
       "id": "readme_policy_trunk"
     },
@@ -5170,7 +5197,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "value trunk",
       "id": "readme_value_trunk"
     },
@@ -5183,7 +5210,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "rationale: separate policy and value trunks",
       "id": "readme_separate_trunks_rationale"
     },
@@ -5196,7 +5223,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "phase 1: imitation pretraining",
       "id": "readme_imitation_pretraining"
     },
@@ -5209,7 +5236,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "phase 2: ppo fine-tuning",
       "id": "readme_ppo_finetuning"
     },
@@ -5222,7 +5249,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "value warmup phase",
       "id": "readme_value_warmup"
     },
@@ -5235,7 +5262,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "rationale: value warmup preserves policy entropy",
       "id": "readme_value_warmup_rationale"
     },
@@ -5248,7 +5275,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "reward structure",
       "id": "readme_reward_structure"
     },
@@ -5261,7 +5288,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "pretrain.py script",
       "id": "readme_pretrain_script"
     },
@@ -5274,7 +5301,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "ppo_train.py script",
       "id": "readme_ppo_train_script"
     },
@@ -5287,7 +5314,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "bayesianagent baseline (training)",
       "id": "readme_bayesian_agent_baseline"
     },
@@ -5300,7 +5327,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "return batch normalization",
       "id": "readme_return_normalization"
     },
@@ -5313,7 +5340,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "generalized advantage estimation (gae)",
       "id": "readme_gae"
     },
@@ -5326,7 +5353,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "ppo clipping",
       "id": "readme_ppo_clip"
     },
@@ -5339,7 +5366,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "entropy bonus",
       "id": "readme_entropy_bonus"
     },
@@ -5352,7 +5379,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "cosine lr with linear warmup",
       "id": "readme_cosine_lr"
     },
@@ -5365,7 +5392,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "transformerppoagent.load()",
       "id": "readme_transformerppo_agent_load"
     },
@@ -5378,7 +5405,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "battleship rl analysis document",
       "id": "analysis_battleship_rl"
     },
@@ -5391,7 +5418,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "battleship state space (2^100)",
       "id": "analysis_state_space"
     },
@@ -5404,7 +5431,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "random agent baseline",
       "id": "analysis_random_agent"
     },
@@ -5417,7 +5444,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "hunt agent baseline",
       "id": "analysis_hunt_agent"
     },
@@ -5430,7 +5457,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "bayesian agent baseline",
       "id": "analysis_bayesian_agent"
     },
@@ -5443,7 +5470,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "random ship placement strategy",
       "id": "analysis_random_placement"
     },
@@ -5456,7 +5483,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "spread ship placement strategy",
       "id": "analysis_spread_placement"
     },
@@ -5469,7 +5496,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "gaussian ship placement strategy",
       "id": "analysis_gaussian_placement"
     },
@@ -5482,7 +5509,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "baseline analysis findings",
       "id": "analysis_baseline_analysis"
     },
@@ -5495,7 +5522,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 8,
       "norm_label": "performance target: sub-50 turns",
       "id": "analysis_performance_target"
     }
@@ -6302,9 +6329,9 @@
       "source_file": "training/training_logger.py",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_training_logger_py",
-      "target": "logger",
-      "confidence_score": 1.0
+      "target": "logger"
     },
     {
       "relation": "contains",
@@ -6382,9 +6409,9 @@
       "source_file": "training/training_logger.py",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_training_logger_traininglogger",
-      "target": "applogger",
-      "confidence_score": 1.0
+      "target": "applogger"
     },
     {
       "relation": "rationale_for",
@@ -6399,14 +6426,24 @@
     {
       "relation": "inherits",
       "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
+      "source_file": "game/game_logger.py",
       "source_location": "L7",
       "weight": 1.0,
-      "source": "game_logger_gamelogger",
+      "source": "game_game_logger_gamelogger",
       "target": "applogger",
       "confidence_score": 1.0
     },
     {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_gamelogger",
+      "target": "applogger"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -6427,211 +6464,6 @@
       "confidence_score": 1.0,
       "source": "game_game_board_py",
       "target": "game_directions_py"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "game_logger_py",
-      "target": "logger",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_logger_py",
-      "target": "game_logger_gamelogger"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_logger_py",
-      "target": "game_logger_setup"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "game/game_engine.py",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_game_engine_py",
-      "target": "game_logger_py"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "game/fleet_placement_methods.py",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_fleet_placement_methods_py",
-      "target": "game_logger_py"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "game/game_board.py",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_game_board_py",
-      "target": "game_logger_py"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "game/websocket.py",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_websocket_py",
-      "target": "game_logger_py"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
-      "source_location": "L44",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_logger_py",
-      "target": "game_logger_close"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
-      "source_location": "L53",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_logger_py",
-      "target": "game_logger_debug"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
-      "source_location": "L57",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_logger_py",
-      "target": "game_logger_info"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
-      "source_location": "L61",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_logger_py",
-      "target": "game_logger_warn"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
-      "source_location": "L65",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_logger_py",
-      "target": "game_logger_error"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "game/game_engine.py",
-      "source_location": "L8",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "game_game_engine_gameengine",
-      "target": "game_logger_gamelogger"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "game/game_board.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "game_game_board_gameboard",
-      "target": "game_logger_gamelogger"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "game/websocket.py",
-      "source_location": "L9",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "game_websocket_gamewebsocketserver",
-      "target": "game_logger_gamelogger"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "game/agents/random_agent.py",
-      "source_location": "L5",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "agents_random_agent_randomagent",
-      "target": "game_logger_gamelogger"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "game/agents/bayesian_agent.py",
-      "source_location": "L6",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "agents_bayesian_agent_bayesianagent",
-      "target": "game_logger_gamelogger"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "game/agents/hunt_agent.py",
-      "source_location": "L6",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "agents_hunt_agent_huntagent",
-      "target": "game_logger_gamelogger"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "game/models/board.py",
-      "source_location": "L1",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "models_board_board",
-      "target": "game_logger_gamelogger"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "game/logger.py",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_logger_rationale_12",
-      "target": "game_logger_gamelogger"
     },
     {
       "relation": "imports_from",
@@ -6665,6 +6497,17 @@
       "confidence_score": 1.0,
       "source": "game_game_engine_py",
       "target": "game_game_board_py"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/game_engine.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "game_game_engine_py",
+      "target": "game_game_logger_py",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6736,6 +6579,17 @@
       "confidence_score": 1.0,
       "source": "game_game_engine_py",
       "target": "game_game_engine_agent_score"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/game_engine.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_game_engine_py",
+      "target": "game_logger_py"
     },
     {
       "relation": "method",
@@ -6931,11 +6785,31 @@
       "relation": "uses",
       "confidence": "INFERRED",
       "source_file": "game/game_engine.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "source": "game_game_engine_gameengine",
+      "target": "game_game_logger_gamelogger",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/game_engine.py",
       "source_location": "L10",
       "weight": 0.8,
       "confidence_score": 0.5,
       "source": "game_game_engine_gameengine",
       "target": "game_websocket_gamewebsocketserver"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/game_engine.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "game_game_engine_gameengine",
+      "target": "game_logger_gamelogger"
     },
     {
       "relation": "calls",
@@ -7156,6 +7030,130 @@
       "weight": 1.0,
       "source": "game_game_engine_gameengine_take_agent_turn",
       "target": "game_coordinate_methods_parse_coordinate"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/game_logger.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "game_game_logger_py",
+      "target": "logger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "game/game_logger.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "game_game_logger_py",
+      "target": "game_game_logger_gamelogger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "game/game_logger.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "game_game_logger_py",
+      "target": "game_game_logger_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/fleet_placement_methods.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "game_fleet_placement_methods_py",
+      "target": "game_game_logger_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/game_board.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "game_game_board_py",
+      "target": "game_game_logger_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/websocket.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "game_websocket_py",
+      "target": "game_game_logger_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/game_board.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "source": "game_game_board_gameboard",
+      "target": "game_game_logger_gamelogger",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/websocket.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "source": "game_websocket_gamewebsocketserver",
+      "target": "game_game_logger_gamelogger",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/agents/random_agent.py",
+      "source_location": "L5",
+      "weight": 0.8,
+      "source": "agents_random_agent_randomagent",
+      "target": "game_game_logger_gamelogger",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/agents/bayesian_agent.py",
+      "source_location": "L6",
+      "weight": 0.8,
+      "source": "agents_bayesian_agent_bayesianagent",
+      "target": "game_game_logger_gamelogger",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/agents/hunt_agent.py",
+      "source_location": "L6",
+      "weight": 0.8,
+      "source": "agents_hunt_agent_huntagent",
+      "target": "game_game_logger_gamelogger",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/models/board.py",
+      "source_location": "L1",
+      "weight": 0.8,
+      "source": "models_board_board",
+      "target": "game_game_logger_gamelogger",
+      "confidence_score": 0.5
     },
     {
       "relation": "contains",
@@ -7398,6 +7396,17 @@
       "confidence_score": 1.0,
       "source": "game_game_board_py",
       "target": "game_fleet_placement_methods_py"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/fleet_placement_methods.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_fleet_placement_methods_py",
+      "target": "game_logger_py"
     },
     {
       "relation": "calls",
@@ -7818,6 +7827,17 @@
       "target": "game_game_board_gameboard"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/game_board.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_game_board_py",
+      "target": "game_logger_py"
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "game/game_board.py",
@@ -7996,6 +8016,16 @@
       "confidence_score": 0.5,
       "source": "agents_base_agent_baseagent",
       "target": "game_game_board_gameboard"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/game_board.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "game_game_board_gameboard",
+      "target": "game_logger_gamelogger"
     },
     {
       "relation": "calls",
@@ -8217,6 +8247,17 @@
       "target": "game_websocket_player_connected"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/websocket.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_websocket_py",
+      "target": "game_logger_py"
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "game/websocket.py",
@@ -8325,6 +8366,16 @@
       "confidence_score": 1.0,
       "source": "game_websocket_rationale_13",
       "target": "game_websocket_gamewebsocketserver"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/websocket.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "game_websocket_gamewebsocketserver",
+      "target": "game_logger_gamelogger"
     },
     {
       "relation": "rationale_for",
@@ -8497,6 +8548,16 @@
       "confidence_score": 0.5,
       "source": "agents_random_agent_randomagent",
       "target": "agents_base_agent_baseagent"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/agents/random_agent.py",
+      "source_location": "L5",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "agents_random_agent_randomagent",
+      "target": "game_logger_gamelogger"
     },
     {
       "relation": "inherits",
@@ -8678,6 +8739,16 @@
       "weight": 1.0,
       "source": "agents_feature_extractor_featureextractor_init",
       "target": "agents_bayesian_agent_bayesianagent"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/agents/bayesian_agent.py",
+      "source_location": "L6",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "agents_bayesian_agent_bayesianagent",
+      "target": "game_logger_gamelogger"
     },
     {
       "relation": "calls",
@@ -9106,6 +9177,16 @@
       "confidence_score": 1.0,
       "source": "agents_hunt_agent_rationale_11",
       "target": "agents_hunt_agent_huntagent"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/agents/hunt_agent.py",
+      "source_location": "L6",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "agents_hunt_agent_huntagent",
+      "target": "game_logger_gamelogger"
     },
     {
       "relation": "calls",
@@ -9798,6 +9879,16 @@
       "target": "models_ship_ship"
     },
     {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "game/models/board.py",
+      "source_location": "L1",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "models_board_board",
+      "target": "game_logger_gamelogger"
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -10171,6 +10262,97 @@
       "confidence_score": 1.0,
       "source": "training_readme_running_the_trained_agent",
       "target": "training_readme_codeblock_4"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_py",
+      "target": "logger"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_py",
+      "target": "game_logger_gamelogger"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_py",
+      "target": "game_logger_setup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_py",
+      "target": "game_logger_close"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_py",
+      "target": "game_logger_debug"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_py",
+      "target": "game_logger_info"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_py",
+      "target": "game_logger_warn"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_py",
+      "target": "game_logger_error"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "game/logger.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_logger_rationale_12",
+      "target": "game_logger_gamelogger"
     },
     {
       "relation": "imports_from",
@@ -15085,5 +15267,5 @@
       "source_file": "analysis.md"
     }
   ],
-  "built_at_commit": "b51d98ec00b8aa426ee7f4cd61cdf0d8f4f0da4e"
+  "built_at_commit": "cd3e82b618738eb7ea64f44c556146edcf237509"
 }
