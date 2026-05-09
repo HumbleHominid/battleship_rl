@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from game.coordinate_methods import format_coordinate
 from game.game_board import GameBoard
+from game.game_logger import GameLogger
 from game.models import Board, CellState
 
 
@@ -23,6 +24,7 @@ class BattleshipEnv:
     """
 
     def __init__(self) -> None:
+        GameLogger.setup()
         self._board = GameBoard()
         self._turn = 0
         self._done = False

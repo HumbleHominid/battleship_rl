@@ -36,7 +36,7 @@ class BayesianAgent(BaseAgent):
         self._unresolved_hits = set()
         self._sunk_ship_types = set()
         self._initialized = False
-        GameLogger.info("ProbabilityAgent state reset")
+        GameLogger.debug("ProbabilityAgent state reset")
 
     def _initialize_placements(self) -> None:
         for ship_type in Ship.get_fleet():
