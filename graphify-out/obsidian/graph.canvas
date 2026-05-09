@@ -1,0 +1,3965 @@
+{
+  "nodes": [
+    {
+      "id": "g0",
+      "type": "group",
+      "label": "Game Board & Actions",
+      "x": 0,
+      "y": 0,
+      "width": 1760,
+      "height": 2020,
+      "color": "1"
+    },
+    {
+      "id": "n_game_board_gameboard_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_1.md",
+      "x": 20,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_2.md",
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_cell_symbol",
+      "type": "file",
+      "file": "graphify/obsidian/._cell_symbol().md",
+      "x": 420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_handle_observer",
+      "type": "file",
+      "file": "graphify/obsidian/._handle_observer().md",
+      "x": 20,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_handle_player",
+      "type": "file",
+      "file": "graphify/obsidian/._handle_player().md",
+      "x": 220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_handler",
+      "type": "file",
+      "file": "graphify/obsidian/._handler().md",
+      "x": 420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_ship_cells",
+      "type": "file",
+      "file": "graphify/obsidian/._ship_cells().md",
+      "x": 20,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_all_ships_sunk",
+      "type": "file",
+      "file": "graphify/obsidian/.all_ships_sunk().md",
+      "x": 220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_board_as_matrix",
+      "type": "file",
+      "file": "graphify/obsidian/.board_as_matrix().md",
+      "x": 420,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_broadcast_state",
+      "type": "file",
+      "file": "graphify/obsidian/.broadcast_state().md",
+      "x": 20,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_can_place_ship",
+      "type": "file",
+      "file": "graphify/obsidian/.can_place_ship()_1.md",
+      "x": 220,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_cells_hit_count",
+      "type": "file",
+      "file": "graphify/obsidian/.cells_hit_count().md",
+      "x": 420,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_cells_targeted",
+      "type": "file",
+      "file": "graphify/obsidian/.cells_targeted().md",
+      "x": 20,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_display",
+      "type": "file",
+      "file": "graphify/obsidian/.display().md",
+      "x": 220,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_find_ship_at",
+      "type": "file",
+      "file": "graphify/obsidian/.find_ship_at().md",
+      "x": 420,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_get_placed_cells",
+      "type": "file",
+      "file": "graphify/obsidian/.get_placed_cells()_1.md",
+      "x": 20,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_get_unhit_cells",
+      "type": "file",
+      "file": "graphify/obsidian/.get_unhit_cells().md",
+      "x": 220,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_battleshipenv_legal_actions",
+      "type": "file",
+      "file": "graphify/obsidian/.legal_actions().md",
+      "x": 420,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_place_fleet",
+      "type": "file",
+      "file": "graphify/obsidian/.place_fleet().md",
+      "x": 20,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_place_ship",
+      "type": "file",
+      "file": "graphify/obsidian/.place_ship()_1.md",
+      "x": 220,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_place_ship_from_str",
+      "type": "file",
+      "file": "graphify/obsidian/.place_ship_from_str().md",
+      "x": 420,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_receive_shot",
+      "type": "file",
+      "file": "graphify/obsidian/.receive_shot().md",
+      "x": 20,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_send_to_player",
+      "type": "file",
+      "file": "graphify/obsidian/.send_to_player().md",
+      "x": 220,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard_ships_sunk_count",
+      "type": "file",
+      "file": "graphify/obsidian/.ships_sunk_count().md",
+      "x": 420,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_start",
+      "type": "file",
+      "file": "graphify/obsidian/.start().md",
+      "x": 20,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_stop",
+      "type": "file",
+      "file": "graphify/obsidian/.stop().md",
+      "x": 220,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_wait_for_player_move",
+      "type": "file",
+      "file": "graphify/obsidian/.wait_for_player_move().md",
+      "x": 420,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver_wait_for_player_placement",
+      "type": "file",
+      "file": "graphify/obsidian/.wait_for_player_placement().md",
+      "x": 20,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_183",
+      "type": "file",
+      "file": "graphify/obsidian/Await the next move coordinate from the player's move queue..md",
+      "x": 220,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_187",
+      "type": "file",
+      "file": "graphify/obsidian/Await the next ship placement message from the player's placement queue..md",
+      "x": 420,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_23",
+      "type": "file",
+      "file": "graphify/obsidian/Compute the list of (row, col) cells a ship would occupy..md",
+      "x": 20,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_76",
+      "type": "file",
+      "file": "graphify/obsidian/Convenience wrapper place_ship_from_str(ShipType.CARRIER, 'A1', 'right')..md",
+      "x": 220,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_13",
+      "type": "file",
+      "file": "graphify/obsidian/Embedded WebSocket server that       - Broadcasts game state to all connected o.md",
+      "x": 420,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_75",
+      "type": "file",
+      "file": "graphify/obsidian/Entry point for each new connection. Reads role, routes accordingly..md",
+      "x": 20,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_gameboard",
+      "type": "file",
+      "file": "graphify/obsidian/GameBoard.md",
+      "x": 220,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_logger_gamelogger",
+      "type": "file",
+      "file": "graphify/obsidian/GameLogger.md",
+      "x": 420,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_gamewebsocketserver",
+      "type": "file",
+      "file": "graphify/obsidian/GameWebSocketServer.md",
+      "x": 20,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_42",
+      "type": "file",
+      "file": "graphify/obsidian/Launch the WebSocket server and keep it alive until this coroutine is cancelled..md",
+      "x": 220,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_rationale_14",
+      "type": "file",
+      "file": "graphify/obsidian/Orchestrates a full game of Battleship.      The game-side agent always runs in-.md",
+      "x": 420,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_58",
+      "type": "file",
+      "file": "graphify/obsidian/Place a ship on the board. Raises ValueError if placement is invalid.         Re.md",
+      "x": 20,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_84",
+      "type": "file",
+      "file": "graphify/obsidian/Place the full fleet using a weighted-random placement algorithm.          Algor.md",
+      "x": 220,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_194",
+      "type": "file",
+      "file": "graphify/obsidian/Print the board to stdout with rowcol headers..md",
+      "x": 420,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_110",
+      "type": "file",
+      "file": "graphify/obsidian/Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta.md",
+      "x": 20,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_113",
+      "type": "file",
+      "file": "graphify/obsidian/Receive move and placement commands from the player and enqueue them..md",
+      "x": 220,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_138",
+      "type": "file",
+      "file": "graphify/obsidian/Register an observer and hold its connection open until disconnect..md",
+      "x": 420,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_36",
+      "type": "file",
+      "file": "graphify/obsidian/Return (True, '') if the placement is valid.         Return (False, reason) if o.md",
+      "x": 20,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent_rationale_11",
+      "type": "file",
+      "file": "graphify/obsidian/Return a coordinate string (e.g. 'B5') given an observation dict..md",
+      "x": 220,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_155",
+      "type": "file",
+      "file": "graphify/obsidian/Return all (row, col) pairs not yet shot (EMPTY or ship still there)..md",
+      "x": 420,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_rationale_76",
+      "type": "file",
+      "file": "graphify/obsidian/Return list of cell indices (0\u201399) that have not yet been shot..md",
+      "x": 20,
+      "y": 1360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_103",
+      "type": "file",
+      "file": "graphify/obsidian/Return the Ship occupying this cell, or None..md",
+      "x": 220,
+      "y": 1360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_174",
+      "type": "file",
+      "file": "graphify/obsidian/Send a JSON message to the connected player. No-op if none connected..md",
+      "x": 420,
+      "y": 1360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_59",
+      "type": "file",
+      "file": "graphify/obsidian/Send close frames to all connected clients..md",
+      "x": 20,
+      "y": 1440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board_rationale_164",
+      "type": "file",
+      "file": "graphify/obsidian/Serialize board to a 10x10 list of 'SHIPTYPECELLSTATE' strings.         If fog_.md",
+      "x": 220,
+      "y": 1440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_rationale_161",
+      "type": "file",
+      "file": "graphify/obsidian/Serialize state_dict to JSON and send to all connected observers..md",
+      "x": 420,
+      "y": 1440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_logger_rationale_12",
+      "type": "file",
+      "file": "graphify/obsidian/Statically accessible logger. Call GameLogger.info()  .warn()  .error()  .deb.md",
+      "x": 20,
+      "y": 1520,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "Training Environment",
+      "x": 1840,
+      "y": 0,
+      "width": 1760,
+      "height": 2020,
+      "color": "2"
+    },
+    {
+      "id": "n_battleship_env_battleshipenv_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_10.md",
+      "x": 1860,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_bayesian_agent_bayesianagent_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_4.md",
+      "x": 2060,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_featureextractor_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_8.md",
+      "x": 2260,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_battleshipenv_get_obs",
+      "type": "file",
+      "file": "graphify/obsidian/._get_obs().md",
+      "x": 1860,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_bayesian_agent_bayesianagent_initialize_placements",
+      "type": "file",
+      "file": "graphify/obsidian/._initialize_placements().md",
+      "x": 2060,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_bayesian_agent_bayesianagent_recompute_grid",
+      "type": "file",
+      "file": "graphify/obsidian/._recompute_grid().md",
+      "x": 2260,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_rolloutbuffer_add",
+      "type": "file",
+      "file": "graphify/obsidian/.add().md",
+      "x": 1860,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_featureextractor_compute_cell_features",
+      "type": "file",
+      "file": "graphify/obsidian/.compute_cell_features().md",
+      "x": 2060,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_featureextractor_compute_global_features",
+      "type": "file",
+      "file": "graphify/obsidian/.compute_global_features().md",
+      "x": 2260,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_rolloutbuffer_compute_returns_advantages",
+      "type": "file",
+      "file": "graphify/obsidian/.compute_returns_advantages().md",
+      "x": 1860,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_transformerpponet_forward",
+      "type": "file",
+      "file": "graphify/obsidian/.forward().md",
+      "x": 2060,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_bayesian_agent_bayesianagent_receive_result",
+      "type": "file",
+      "file": "graphify/obsidian/.receive_result().md",
+      "x": 2260,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_battleshipenv_reset",
+      "type": "file",
+      "file": "graphify/obsidian/.reset()_8.md",
+      "x": 1860,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_bayesian_agent_bayesianagent_reset",
+      "type": "file",
+      "file": "graphify/obsidian/.reset()_2.md",
+      "x": 2060,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_featureextractor_reset",
+      "type": "file",
+      "file": "graphify/obsidian/.reset()_6.md",
+      "x": 2260,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_bayesian_agent_bayesianagent_select_move",
+      "type": "file",
+      "file": "graphify/obsidian/.select_move()_1.md",
+      "x": 1860,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_battleshipenv_step",
+      "type": "file",
+      "file": "graphify/obsidian/.step().md",
+      "x": 2060,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_rolloutbuffer_to_tensors",
+      "type": "file",
+      "file": "graphify/obsidian/.to_tensors().md",
+      "x": 2260,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_featureextractor_update",
+      "type": "file",
+      "file": "graphify/obsidian/.update().md",
+      "x": 1860,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_rationale_78",
+      "type": "file",
+      "file": "graphify/obsidian/Args             cell_feats  (B, 100, CELL_FEATURE_DIM)             global_fea.md",
+      "x": 2060,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_battleshipenv",
+      "type": "file",
+      "file": "graphify/obsidian/BattleshipEnv.md",
+      "x": 2260,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_bayesian_agent_bayesianagent",
+      "type": "file",
+      "file": "graphify/obsidian/BayesianAgent.md",
+      "x": 1860,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_rationale_17",
+      "type": "file",
+      "file": "graphify/obsidian/Computes per-cell (100, 16) and global (4,) features for the TransformerPPO agen.md",
+      "x": 2060,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_rationale_9",
+      "type": "file",
+      "file": "graphify/obsidian/Fast single-game Battleship environment for RL training.      Wraps GameBoard di.md",
+      "x": 2260,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_featureextractor",
+      "type": "file",
+      "file": "graphify/obsidian/FeatureExtractor.md",
+      "x": 1860,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_pretrain_rationale_1",
+      "type": "file",
+      "file": "graphify/obsidian/Imitation pretraining train TransformerPPONet to mimic BayesianAgent.  For each.md",
+      "x": 2060,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_rationale_259",
+      "type": "file",
+      "file": "graphify/obsidian/One epoch of value-trunk-only updates \u2014 policy trunk receives zero gradient..md",
+      "x": 2260,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_rationale_1",
+      "type": "file",
+      "file": "graphify/obsidian/PPO fine-tuning for the TransformerPPO Battleship agent.  Collects on-policy rol.md",
+      "x": 1860,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_rationale_41",
+      "type": "file",
+      "file": "graphify/obsidian/Record the outcome of a shot and propagate to the internal Bayesian model..md",
+      "x": 2060,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_rationale_320",
+      "type": "file",
+      "file": "graphify/obsidian/Return mean turns-to-win for BayesianAgent (one-time reference)..md",
+      "x": 2260,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_rationale_287",
+      "type": "file",
+      "file": "graphify/obsidian/Return mean turns-to-win over n_games episodes (greedy policy)..md",
+      "x": 1860,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_rationale_47",
+      "type": "file",
+      "file": "graphify/obsidian/Return shape (100, 16) float32 feature array for all cells.          Calls Bayes.md",
+      "x": 2060,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor_rationale_121",
+      "type": "file",
+      "file": "graphify/obsidian/Return shape (4,) float32 global context vector..md",
+      "x": 2260,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_rolloutbuffer",
+      "type": "file",
+      "file": "graphify/obsidian/RolloutBuffer.md",
+      "x": 1860,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_rationale_111",
+      "type": "file",
+      "file": "graphify/obsidian/Run one episode, collecting transitions. Returns (transitions, turns_to_win)..md",
+      "x": 2060,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_training_logger_rationale_12",
+      "type": "file",
+      "file": "graphify/obsidian/Statically accessible logger for training scripts.      Call TrainingLogger.setu.md",
+      "x": 2260,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_rationale_40",
+      "type": "file",
+      "file": "graphify/obsidian/Take a shot at cell index `action` (row  10 + col).          Returns.md",
+      "x": 1860,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_training_logger_traininglogger",
+      "type": "file",
+      "file": "graphify/obsidian/TrainingLogger.md",
+      "x": 2060,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_rationale_26",
+      "type": "file",
+      "file": "graphify/obsidian/Transformer actor-critic network for Battleship with separate policy and value t.md",
+      "x": 2260,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_transformerpponet",
+      "type": "file",
+      "file": "graphify/obsidian/TransformerPPONet.md",
+      "x": 1860,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_transition",
+      "type": "file",
+      "file": "graphify/obsidian/Transition.md",
+      "x": 2060,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env",
+      "type": "file",
+      "file": "graphify/obsidian/battleship_env.py.md",
+      "x": 2260,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_bayes_baseline",
+      "type": "file",
+      "file": "graphify/obsidian/bayes_baseline().md",
+      "x": 1860,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_bayesian_agent",
+      "type": "file",
+      "file": "graphify/obsidian/bayesian_agent.py.md",
+      "x": 2060,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_collect_episode",
+      "type": "file",
+      "file": "graphify/obsidian/collect_episode().md",
+      "x": 2260,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_coord_to_index",
+      "type": "file",
+      "file": "graphify/obsidian/coord_to_index()_1.md",
+      "x": 1860,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_done",
+      "type": "file",
+      "file": "graphify/obsidian/done().md",
+      "x": 2060,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_evaluate",
+      "type": "file",
+      "file": "graphify/obsidian/evaluate().md",
+      "x": 2260,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_feature_extractor",
+      "type": "file",
+      "file": "graphify/obsidian/feature_extractor.py.md",
+      "x": 1860,
+      "y": 1360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_main",
+      "type": "file",
+      "file": "graphify/obsidian/main()_1.md",
+      "x": 2060,
+      "y": 1360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_parse_args",
+      "type": "file",
+      "file": "graphify/obsidian/parse_args()_1.md",
+      "x": 2260,
+      "y": 1360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train",
+      "type": "file",
+      "file": "graphify/obsidian/ppo_train.py.md",
+      "x": 1860,
+      "y": 1440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_ppo_update",
+      "type": "file",
+      "file": "graphify/obsidian/ppo_update().md",
+      "x": 2060,
+      "y": 1440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_battleship_env_turn",
+      "type": "file",
+      "file": "graphify/obsidian/turn()_1.md",
+      "x": 2260,
+      "y": 1440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ppo_train_value_warmup_update",
+      "type": "file",
+      "file": "graphify/obsidian/value_warmup_update().md",
+      "x": 1860,
+      "y": 1520,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "label": "Fleet Placement",
+      "x": 3680,
+      "y": 0,
+      "width": 1320,
+      "height": 1120,
+      "color": "3"
+    },
+    {
+      "id": "n_placement_protocol_placementtarget_can_place_ship",
+      "type": "file",
+      "file": "graphify/obsidian/.can_place_ship().md",
+      "x": 3700,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_placement_protocol_placementtarget_get_placed_cells",
+      "type": "file",
+      "file": "graphify/obsidian/.get_placed_cells().md",
+      "x": 3900,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_placement_protocol_placementtarget_place_ship",
+      "type": "file",
+      "file": "graphify/obsidian/.place_ship().md",
+      "x": 4100,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_rationale_236",
+      "type": "file",
+      "file": "graphify/obsidian/Bias ships toward the board perimeter (minimise distance to nearest edge)..md",
+      "x": 3700,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_rationale_320",
+      "type": "file",
+      "file": "graphify/obsidian/Bias ships toward the centre (minimise distance to board centre at 4.5, 4.5)..md",
+      "x": 3900,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_rationale_241",
+      "type": "file",
+      "file": "graphify/obsidian/Bias ships toward the four corners (minimise distance to nearest corner)..md",
+      "x": 4100,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_rationale_325",
+      "type": "file",
+      "file": "graphify/obsidian/Bias ships toward the main diagonal (where row == col)..md",
+      "x": 3700,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_rationale_278",
+      "type": "file",
+      "file": "graphify/obsidian/Confine the entire fleet to one randomly chosen quadrant..md",
+      "x": 3900,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_rationale_246",
+      "type": "file",
+      "file": "graphify/obsidian/Pack all ships tightly around a single random hotspot (opposite of spread)..md",
+      "x": 4100,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_placement_protocol_placementtarget",
+      "type": "file",
+      "file": "graphify/obsidian/PlacementTarget.md",
+      "x": 3700,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_protocol",
+      "type": "file",
+      "file": "graphify/obsidian/Protocol.md",
+      "x": 3900,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_best_scored_candidate",
+      "type": "file",
+      "file": "graphify/obsidian/_best_scored_candidate().md",
+      "x": 4100,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_center_dist",
+      "type": "file",
+      "file": "graphify/obsidian/_center_dist().md",
+      "x": 3700,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_corner_dist",
+      "type": "file",
+      "file": "graphify/obsidian/_corner_dist().md",
+      "x": 3900,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_diag_dist",
+      "type": "file",
+      "file": "graphify/obsidian/_diag_dist().md",
+      "x": 4100,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_edge_dist",
+      "type": "file",
+      "file": "graphify/obsidian/_edge_dist().md",
+      "x": 3700,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_with_score",
+      "type": "file",
+      "file": "graphify/obsidian/_place_with_score().md",
+      "x": 3900,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_placement_error",
+      "type": "file",
+      "file": "graphify/obsidian/_placement_error().md",
+      "x": 4100,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods",
+      "type": "file",
+      "file": "graphify/obsidian/fleet_placement_methods.py.md",
+      "x": 3700,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_fleet_clustered",
+      "type": "file",
+      "file": "graphify/obsidian/place_fleet_clustered().md",
+      "x": 3900,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_fleet_corners",
+      "type": "file",
+      "file": "graphify/obsidian/place_fleet_corners().md",
+      "x": 4100,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_fleet_dense_center",
+      "type": "file",
+      "file": "graphify/obsidian/place_fleet_dense_center().md",
+      "x": 3700,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_fleet_diagonal",
+      "type": "file",
+      "file": "graphify/obsidian/place_fleet_diagonal().md",
+      "x": 3900,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_fleet_edges",
+      "type": "file",
+      "file": "graphify/obsidian/place_fleet_edges().md",
+      "x": 4100,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_fleet_gaussian",
+      "type": "file",
+      "file": "graphify/obsidian/place_fleet_gaussian().md",
+      "x": 3700,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_fleet_quadrant",
+      "type": "file",
+      "file": "graphify/obsidian/place_fleet_quadrant().md",
+      "x": 3900,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_fleet_random",
+      "type": "file",
+      "file": "graphify/obsidian/place_fleet_random().md",
+      "x": 4100,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fleet_placement_methods_place_fleet_spread",
+      "type": "file",
+      "file": "graphify/obsidian/place_fleet_spread().md",
+      "x": 3700,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_placement_protocol",
+      "type": "file",
+      "file": "graphify/obsidian/placement_protocol.py.md",
+      "x": 3900,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g3",
+      "type": "group",
+      "label": "Agent Analysis & Baselines",
+      "x": 5080,
+      "y": 0,
+      "width": 1320,
+      "height": 1120,
+      "color": "4"
+    },
+    {
+      "id": "n_analysis_baseline_analysis",
+      "type": "file",
+      "file": "graphify/obsidian/Baseline Analysis Findings.md",
+      "x": 5100,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_analysis_battleship_rl",
+      "type": "file",
+      "file": "graphify/obsidian/Battleship RL Analysis Document.md",
+      "x": 5300,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_analysis_state_space",
+      "type": "file",
+      "file": "graphify/obsidian/Battleship State Space (2100).md",
+      "x": 5500,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_analysis_bayesian_agent",
+      "type": "file",
+      "file": "graphify/obsidian/Bayesian Agent Baseline.md",
+      "x": 5100,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_bayesian_agent_baseline",
+      "type": "file",
+      "file": "graphify/obsidian/BayesianAgent Baseline (Training).md",
+      "x": 5300,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_cosine_lr",
+      "type": "file",
+      "file": "graphify/obsidian/Cosine LR with Linear Warmup.md",
+      "x": 5500,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_entropy_bonus",
+      "type": "file",
+      "file": "graphify/obsidian/Entropy Bonus.md",
+      "x": 5100,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_analysis_gaussian_placement",
+      "type": "file",
+      "file": "graphify/obsidian/Gaussian Ship Placement Strategy.md",
+      "x": 5300,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_gae",
+      "type": "file",
+      "file": "graphify/obsidian/Generalized Advantage Estimation (GAE).md",
+      "x": 5500,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_analysis_hunt_agent",
+      "type": "file",
+      "file": "graphify/obsidian/Hunt Agent Baseline.md",
+      "x": 5100,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_ppo_clip",
+      "type": "file",
+      "file": "graphify/obsidian/PPO Clipping.md",
+      "x": 5300,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_analysis_performance_target",
+      "type": "file",
+      "file": "graphify/obsidian/Performance Target Sub-50 Turns.md",
+      "x": 5500,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_imitation_pretraining",
+      "type": "file",
+      "file": "graphify/obsidian/Phase 1 Imitation Pretraining.md",
+      "x": 5100,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_ppo_finetuning",
+      "type": "file",
+      "file": "graphify/obsidian/Phase 2 PPO Fine-tuning.md",
+      "x": 5300,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_policy_trunk",
+      "type": "file",
+      "file": "graphify/obsidian/Policy Trunk.md",
+      "x": 5500,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_analysis_random_agent",
+      "type": "file",
+      "file": "graphify/obsidian/Random Agent Baseline.md",
+      "x": 5100,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_analysis_random_placement",
+      "type": "file",
+      "file": "graphify/obsidian/Random Ship Placement Strategy.md",
+      "x": 5300,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_separate_trunks_rationale",
+      "type": "file",
+      "file": "graphify/obsidian/Rationale Separate Policy and Value Trunks.md",
+      "x": 5500,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_value_warmup_rationale",
+      "type": "file",
+      "file": "graphify/obsidian/Rationale Value Warmup Preserves Policy Entropy.md",
+      "x": 5100,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_return_normalization",
+      "type": "file",
+      "file": "graphify/obsidian/Return Batch Normalization.md",
+      "x": 5300,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_reward_structure",
+      "type": "file",
+      "file": "graphify/obsidian/Reward Structure.md",
+      "x": 5500,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_analysis_spread_placement",
+      "type": "file",
+      "file": "graphify/obsidian/Spread Ship Placement Strategy.md",
+      "x": 5100,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_training_transformerppo",
+      "type": "file",
+      "file": "graphify/obsidian/TransformerPPO Training README.md",
+      "x": 5300,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_transformerppo_agent_load",
+      "type": "file",
+      "file": "graphify/obsidian/TransformerPPOAgent.load().md",
+      "x": 5500,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_transformerpponet",
+      "type": "file",
+      "file": "graphify/obsidian/TransformerPPONet Architecture.md",
+      "x": 5100,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_value_trunk",
+      "type": "file",
+      "file": "graphify/obsidian/Value Trunk.md",
+      "x": 5300,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_value_warmup",
+      "type": "file",
+      "file": "graphify/obsidian/Value Warmup Phase.md",
+      "x": 5500,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_ppo_train_script",
+      "type": "file",
+      "file": "graphify/obsidian/ppo_train.py Script.md",
+      "x": 5100,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_pretrain_script",
+      "type": "file",
+      "file": "graphify/obsidian/pretrain.py Script.md",
+      "x": 5300,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g4",
+      "type": "group",
+      "label": "Agent Interface",
+      "x": 0,
+      "y": 2100,
+      "width": 1320,
+      "height": 1020,
+      "color": "5"
+    },
+    {
+      "id": "n_hunt_agent_huntagent_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_7.md",
+      "x": 20,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent_cardinal_neighbors",
+      "type": "file",
+      "file": "graphify/obsidian/._cardinal_neighbors().md",
+      "x": 220,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent_enqueue_back",
+      "type": "file",
+      "file": "graphify/obsidian/._enqueue_back().md",
+      "x": 420,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent_enqueue_front",
+      "type": "file",
+      "file": "graphify/obsidian/._enqueue_front().md",
+      "x": 20,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent_prepend_axis_ends",
+      "type": "file",
+      "file": "graphify/obsidian/._prepend_axis_ends().md",
+      "x": 220,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent_queue_unresolved_from_board",
+      "type": "file",
+      "file": "graphify/obsidian/._queue_unresolved_from_board().md",
+      "x": 420,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent_reset_state",
+      "type": "file",
+      "file": "graphify/obsidian/._reset_state().md",
+      "x": 20,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent_baseagent_place_fleet",
+      "type": "file",
+      "file": "graphify/obsidian/.place_fleet()_1.md",
+      "x": 220,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent_baseagent_receive_result",
+      "type": "file",
+      "file": "graphify/obsidian/.receive_result()_2.md",
+      "x": 420,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent_receive_result",
+      "type": "file",
+      "file": "graphify/obsidian/.receive_result()_3.md",
+      "x": 20,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent_baseagent_reset",
+      "type": "file",
+      "file": "graphify/obsidian/.reset()_4.md",
+      "x": 220,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent_reset",
+      "type": "file",
+      "file": "graphify/obsidian/.reset()_5.md",
+      "x": 420,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent_select_move",
+      "type": "file",
+      "file": "graphify/obsidian/.select_move()_3.md",
+      "x": 20,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_abc",
+      "type": "file",
+      "file": "graphify/obsidian/ABC.md",
+      "x": 220,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent_baseagent",
+      "type": "file",
+      "file": "graphify/obsidian/BaseAgent_1.md",
+      "x": 420,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_bayesian_agent_rationale_11",
+      "type": "file",
+      "file": "graphify/obsidian/Bayesian probability density agent.      Enumerates all valid ship placements on.md",
+      "x": 20,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent_rationale_21",
+      "type": "file",
+      "file": "graphify/obsidian/Called after each move. Hook for training feedback; no-op by default..md",
+      "x": 220,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_rationale_11",
+      "type": "file",
+      "file": "graphify/obsidian/Hunt-and-target agent.      Search phase shoots only checkerboard cells (row+co.md",
+      "x": 420,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_huntagent",
+      "type": "file",
+      "file": "graphify/obsidian/HuntAgent.md",
+      "x": 20,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent_rationale_15",
+      "type": "file",
+      "file": "graphify/obsidian/Place this agent's fleet. Defaults to GameBoard.place_fleet()..md",
+      "x": 220,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_rationale_79",
+      "type": "file",
+      "file": "graphify/obsidian/Prepend the two axis-aligned end cells to the front of the queue..md",
+      "x": 420,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent_rationale_24",
+      "type": "file",
+      "file": "graphify/obsidian/Reset agent state for a new episode..md",
+      "x": 20,
+      "y": 2740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent_rationale_95",
+      "type": "file",
+      "file": "graphify/obsidian/Scan board for unresolved hit cells and enqueue their unshot neighbors..md",
+      "x": 220,
+      "y": 2740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent",
+      "type": "file",
+      "file": "graphify/obsidian/base_agent.py.md",
+      "x": 420,
+      "y": 2740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_hunt_agent",
+      "type": "file",
+      "file": "graphify/obsidian/hunt_agent.py.md",
+      "x": 20,
+      "y": 2820,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_base_agent_select_move",
+      "type": "file",
+      "file": "graphify/obsidian/select_move().md",
+      "x": 220,
+      "y": 2820,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g5",
+      "type": "group",
+      "label": "Game State Models",
+      "x": 1840,
+      "y": 2100,
+      "width": 1100,
+      "height": 920,
+      "color": "6"
+    },
+    {
+      "id": "n_ship_rationale_6",
+      "type": "file",
+      "file": "graphify/obsidian/NOTE ShipType enum values are priority IDs, not sizes..md",
+      "x": 1860,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_rationale_30",
+      "type": "file",
+      "file": "graphify/obsidian/NOTE dicts are ordered in Python 3.7+, _SHIP_SIZES.keys() is consistent.md",
+      "x": 2060,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_board_board_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_9.md",
+      "x": 2260,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_ship_repr",
+      "type": "file",
+      "file": "graphify/obsidian/.__repr__().md",
+      "x": 1860,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_board_board_get_cell",
+      "type": "file",
+      "file": "graphify/obsidian/.get_cell().md",
+      "x": 2060,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_ship_register_hit",
+      "type": "file",
+      "file": "graphify/obsidian/.register_hit().md",
+      "x": 2260,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_board_board_reset",
+      "type": "file",
+      "file": "graphify/obsidian/.reset()_7.md",
+      "x": 1860,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_board_board_set_cell",
+      "type": "file",
+      "file": "graphify/obsidian/.set_cell().md",
+      "x": 2060,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_board_board",
+      "type": "file",
+      "file": "graphify/obsidian/Board.md",
+      "x": 2260,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_cell_state_cellstate",
+      "type": "file",
+      "file": "graphify/obsidian/CellState.md",
+      "x": 1860,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_enum",
+      "type": "file",
+      "file": "graphify/obsidian/Enum.md",
+      "x": 2060,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_ship",
+      "type": "file",
+      "file": "graphify/obsidian/Ship.md",
+      "x": 2260,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_type_shiptype",
+      "type": "file",
+      "file": "graphify/obsidian/ShipType.md",
+      "x": 1860,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_init",
+      "type": "file",
+      "file": "graphify/obsidian/__init__.py.md",
+      "x": 2060,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_board",
+      "type": "file",
+      "file": "graphify/obsidian/board.py.md",
+      "x": 2260,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_cell_state",
+      "type": "file",
+      "file": "graphify/obsidian/cell_state.py.md",
+      "x": 1860,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_get_fleet",
+      "type": "file",
+      "file": "graphify/obsidian/get_fleet().md",
+      "x": 2060,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_get_ship_name",
+      "type": "file",
+      "file": "graphify/obsidian/get_ship_name().md",
+      "x": 2260,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_get_ship_size",
+      "type": "file",
+      "file": "graphify/obsidian/get_ship_size().md",
+      "x": 1860,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_is_sunk",
+      "type": "file",
+      "file": "graphify/obsidian/is_sunk().md",
+      "x": 2060,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship",
+      "type": "file",
+      "file": "graphify/obsidian/ship.py.md",
+      "x": 2260,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_type",
+      "type": "file",
+      "file": "graphify/obsidian/ship_type.py.md",
+      "x": 1860,
+      "y": 2740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ship_size",
+      "type": "file",
+      "file": "graphify/obsidian/size().md",
+      "x": 2060,
+      "y": 2740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g6",
+      "type": "group",
+      "label": "Coordinate & Game Core",
+      "x": 3680,
+      "y": 2100,
+      "width": 1100,
+      "height": 920,
+      "color": "1"
+    },
+    {
+      "id": "n_coordinate_methods_rationale_26",
+      "type": "file",
+      "file": "graphify/obsidian/Format zero-indexed (row, col) to 'A1'-'J10'..md",
+      "x": 3700,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_coordinate_methods_rationale_7",
+      "type": "file",
+      "file": "graphify/obsidian/Parse 'A1'-'J10' to zero-indexed (row, col). Raises ValueError on bad input..md",
+      "x": 3900,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_agent_score",
+      "type": "file",
+      "file": "graphify/obsidian/agent_score().md",
+      "x": 4100,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_logger_close",
+      "type": "file",
+      "file": "graphify/obsidian/close().md",
+      "x": 3700,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_coordinate_methods",
+      "type": "file",
+      "file": "graphify/obsidian/coordinate_methods.py.md",
+      "x": 3900,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_logger_debug",
+      "type": "file",
+      "file": "graphify/obsidian/debug().md",
+      "x": 4100,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_directions",
+      "type": "file",
+      "file": "graphify/obsidian/directions.py.md",
+      "x": 3700,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_logger_error",
+      "type": "file",
+      "file": "graphify/obsidian/error().md",
+      "x": 3900,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_coordinate_methods_format_coordinate",
+      "type": "file",
+      "file": "graphify/obsidian/format_coordinate().md",
+      "x": 4100,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_board",
+      "type": "file",
+      "file": "graphify/obsidian/game_board.py.md",
+      "x": 3700,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine",
+      "type": "file",
+      "file": "graphify/obsidian/game_engine.py.md",
+      "x": 3900,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_game_over",
+      "type": "file",
+      "file": "graphify/obsidian/game_over().md",
+      "x": 4100,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_logger_info",
+      "type": "file",
+      "file": "graphify/obsidian/info().md",
+      "x": 3700,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_logger",
+      "type": "file",
+      "file": "graphify/obsidian/logger.py.md",
+      "x": 3900,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_coordinate_methods_parse_coordinate",
+      "type": "file",
+      "file": "graphify/obsidian/parse_coordinate().md",
+      "x": 4100,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket_player_connected",
+      "type": "file",
+      "file": "graphify/obsidian/player_connected().md",
+      "x": 3700,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_player_score",
+      "type": "file",
+      "file": "graphify/obsidian/player_score().md",
+      "x": 3900,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_logger_setup",
+      "type": "file",
+      "file": "graphify/obsidian/setup().md",
+      "x": 4100,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_turn",
+      "type": "file",
+      "file": "graphify/obsidian/turn().md",
+      "x": 3700,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_logger_warn",
+      "type": "file",
+      "file": "graphify/obsidian/warn().md",
+      "x": 3900,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_websocket",
+      "type": "file",
+      "file": "graphify/obsidian/websocket.py.md",
+      "x": 4100,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_winner",
+      "type": "file",
+      "file": "graphify/obsidian/winner().md",
+      "x": 3700,
+      "y": 2740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g7",
+      "type": "group",
+      "label": "Game Engine Loop",
+      "x": 5080,
+      "y": 2100,
+      "width": 1100,
+      "height": 720,
+      "color": "2"
+    },
+    {
+      "id": "n_game_engine_gameengine_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__().md",
+      "x": 5100,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_build_agent_obs",
+      "type": "file",
+      "file": "graphify/obsidian/._build_agent_obs().md",
+      "x": 5300,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_build_game_over_dict",
+      "type": "file",
+      "file": "graphify/obsidian/._build_game_over_dict().md",
+      "x": 5500,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_build_player_view",
+      "type": "file",
+      "file": "graphify/obsidian/._build_player_view().md",
+      "x": 5100,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_build_state_dict",
+      "type": "file",
+      "file": "graphify/obsidian/._build_state_dict().md",
+      "x": 5300,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_check_win_condition",
+      "type": "file",
+      "file": "graphify/obsidian/._check_win_condition().md",
+      "x": 5500,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_display_boards",
+      "type": "file",
+      "file": "graphify/obsidian/._display_boards().md",
+      "x": 5100,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_display_game_over",
+      "type": "file",
+      "file": "graphify/obsidian/._display_game_over().md",
+      "x": 5300,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_fire_on_agent_board",
+      "type": "file",
+      "file": "graphify/obsidian/._fire_on_agent_board().md",
+      "x": 5500,
+      "y": 2340,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_game_loop",
+      "type": "file",
+      "file": "graphify/obsidian/._game_loop().md",
+      "x": 5100,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_setup",
+      "type": "file",
+      "file": "graphify/obsidian/._setup().md",
+      "x": 5300,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_setup_ws_player",
+      "type": "file",
+      "file": "graphify/obsidian/._setup_ws_player().md",
+      "x": 5500,
+      "y": 2420,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_take_agent_turn",
+      "type": "file",
+      "file": "graphify/obsidian/._take_agent_turn().md",
+      "x": 5100,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_take_player_turn",
+      "type": "file",
+      "file": "graphify/obsidian/._take_player_turn().md",
+      "x": 5300,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_reset",
+      "type": "file",
+      "file": "graphify/obsidian/.reset().md",
+      "x": 5500,
+      "y": 2500,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine_run",
+      "type": "file",
+      "file": "graphify/obsidian/.run().md",
+      "x": 5100,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_game_engine_gameengine",
+      "type": "file",
+      "file": "graphify/obsidian/GameEngine.md",
+      "x": 5300,
+      "y": 2580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g8",
+      "type": "group",
+      "label": "Agent Implementations",
+      "x": 0,
+      "y": 3200,
+      "width": 880,
+      "height": 720,
+      "color": "3"
+    },
+    {
+      "id": "n_random_agent_randomagent_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_3.md",
+      "x": 20,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_transformerppoagent_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_6.md",
+      "x": 220,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_transformerpponet_init",
+      "type": "file",
+      "file": "graphify/obsidian/.__init__()_5.md",
+      "x": 420,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_transformerppoagent_receive_result",
+      "type": "file",
+      "file": "graphify/obsidian/.receive_result()_1.md",
+      "x": 20,
+      "y": 3360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_random_agent_randomagent_reset",
+      "type": "file",
+      "file": "graphify/obsidian/.reset()_1.md",
+      "x": 220,
+      "y": 3360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_transformerppoagent_reset",
+      "type": "file",
+      "file": "graphify/obsidian/.reset()_3.md",
+      "x": 420,
+      "y": 3360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_transformerppoagent_save",
+      "type": "file",
+      "file": "graphify/obsidian/.save().md",
+      "x": 20,
+      "y": 3440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_random_agent_randomagent_select_move",
+      "type": "file",
+      "file": "graphify/obsidian/.select_move().md",
+      "x": 220,
+      "y": 3440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_transformerppoagent_select_move",
+      "type": "file",
+      "file": "graphify/obsidian/.select_move()_2.md",
+      "x": 420,
+      "y": 3440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_baseagent",
+      "type": "file",
+      "file": "graphify/obsidian/BaseAgent.md",
+      "x": 20,
+      "y": 3520,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_rationale_108",
+      "type": "file",
+      "file": "graphify/obsidian/Battleship agent backed by a Transformer actor-critic network.      Operates in.md",
+      "x": 220,
+      "y": 3520,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_random_agent_randomagent",
+      "type": "file",
+      "file": "graphify/obsidian/RandomAgent.md",
+      "x": 420,
+      "y": 3520,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_transformerppoagent",
+      "type": "file",
+      "file": "graphify/obsidian/TransformerPPOAgent.md",
+      "x": 20,
+      "y": 3600,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent_load",
+      "type": "file",
+      "file": "graphify/obsidian/load().md",
+      "x": 220,
+      "y": 3600,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_random_agent",
+      "type": "file",
+      "file": "graphify/obsidian/random_agent.py.md",
+      "x": 420,
+      "y": 3600,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_transformer_ppo_agent",
+      "type": "file",
+      "file": "graphify/obsidian/transformer_ppo_agent.py.md",
+      "x": 20,
+      "y": 3680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g9",
+      "type": "group",
+      "label": "Pretraining Pipeline",
+      "x": 1840,
+      "y": 3200,
+      "width": 660,
+      "height": 420,
+      "color": "4"
+    },
+    {
+      "id": "n_pretrain_coord_to_index",
+      "type": "file",
+      "file": "graphify/obsidian/coord_to_index().md",
+      "x": 1860,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_pretrain_init_transformer_ppo",
+      "type": "file",
+      "file": "graphify/obsidian/init_transformer_ppo().md",
+      "x": 2060,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_pretrain_main",
+      "type": "file",
+      "file": "graphify/obsidian/main().md",
+      "x": 2260,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_pretrain_parse_args",
+      "type": "file",
+      "file": "graphify/obsidian/parse_args().md",
+      "x": 1860,
+      "y": 3360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_pretrain",
+      "type": "file",
+      "file": "graphify/obsidian/pretrain.py.md",
+      "x": 2060,
+      "y": 3360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_pretrain_run_training_loop",
+      "type": "file",
+      "file": "graphify/obsidian/run_training_loop().md",
+      "x": 2260,
+      "y": 3360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_pretrain_setup_board_and_fleet",
+      "type": "file",
+      "file": "graphify/obsidian/setup_board_and_fleet().md",
+      "x": 1860,
+      "y": 3440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g10",
+      "type": "group",
+      "label": "Training Logger",
+      "x": 3680,
+      "y": 3200,
+      "width": 660,
+      "height": 420,
+      "color": "5"
+    },
+    {
+      "id": "n_training_logger_close",
+      "type": "file",
+      "file": "graphify/obsidian/close()_1.md",
+      "x": 3700,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_training_logger_debug",
+      "type": "file",
+      "file": "graphify/obsidian/debug()_1.md",
+      "x": 3900,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_training_logger_error",
+      "type": "file",
+      "file": "graphify/obsidian/error()_1.md",
+      "x": 4100,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_training_logger_info",
+      "type": "file",
+      "file": "graphify/obsidian/info()_1.md",
+      "x": 3700,
+      "y": 3360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_training_logger_setup",
+      "type": "file",
+      "file": "graphify/obsidian/setup()_1.md",
+      "x": 3900,
+      "y": 3360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_training_logger",
+      "type": "file",
+      "file": "graphify/obsidian/training_logger.py.md",
+      "x": 4100,
+      "y": 3360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_training_logger_warn",
+      "type": "file",
+      "file": "graphify/obsidian/warn()_1.md",
+      "x": 3700,
+      "y": 3440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g11",
+      "type": "group",
+      "label": "CLI Entry Point",
+      "x": 5080,
+      "y": 3200,
+      "width": 600,
+      "height": 400,
+      "color": "6"
+    },
+    {
+      "id": "n_main_main",
+      "type": "file",
+      "file": "graphify/obsidian/main()_2.md",
+      "x": 5100,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_main",
+      "type": "file",
+      "file": "graphify/obsidian/main.py.md",
+      "x": 5300,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_main_parse_args",
+      "type": "file",
+      "file": "graphify/obsidian/parse_args()_2.md",
+      "x": 5500,
+      "y": 3280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g12",
+      "type": "group",
+      "label": "Training Logger",
+      "x": 0,
+      "y": 4000,
+      "width": 600,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_logger_rationale_25",
+      "type": "file",
+      "file": "graphify/obsidian/Configure handlers. Called once from main.py at process start..md",
+      "x": 20,
+      "y": 4080,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g13",
+      "type": "group",
+      "label": "Training Logger",
+      "x": 1840,
+      "y": 4000,
+      "width": 600,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_logger_rationale_45",
+      "type": "file",
+      "file": "graphify/obsidian/Flush and close all file handlers. Call before archiving the log file..md",
+      "x": 1860,
+      "y": 4080,
+      "width": 180,
+      "height": 60
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_directions_fleet_placement_methods",
+      "fromNode": "n_directions",
+      "toNode": "n_fleet_placement_methods",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_directions_game_board",
+      "fromNode": "n_directions",
+      "toNode": "n_game_board",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_logger_gamelogger",
+      "fromNode": "n_logger",
+      "toNode": "n_logger_gamelogger",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_logger_setup",
+      "fromNode": "n_logger",
+      "toNode": "n_logger_setup",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_logger_close",
+      "fromNode": "n_logger",
+      "toNode": "n_logger_close",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_logger_debug",
+      "fromNode": "n_logger",
+      "toNode": "n_logger_debug",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_logger_info",
+      "fromNode": "n_logger",
+      "toNode": "n_logger_info",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_logger_warn",
+      "fromNode": "n_logger",
+      "toNode": "n_logger_warn",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_logger_error",
+      "fromNode": "n_logger",
+      "toNode": "n_logger_error",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_game_engine",
+      "fromNode": "n_logger",
+      "toNode": "n_game_engine",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_fleet_placement_methods",
+      "fromNode": "n_logger",
+      "toNode": "n_fleet_placement_methods",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_game_board",
+      "fromNode": "n_logger",
+      "toNode": "n_game_board",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_websocket",
+      "fromNode": "n_logger",
+      "toNode": "n_websocket",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_logger_gamelogger_logger_rationale_12",
+      "fromNode": "n_logger_gamelogger",
+      "toNode": "n_logger_rationale_12",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_coordinate_methods",
+      "fromNode": "n_game_engine",
+      "toNode": "n_coordinate_methods",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_game_board",
+      "fromNode": "n_game_engine",
+      "toNode": "n_game_board",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_websocket",
+      "fromNode": "n_game_engine",
+      "toNode": "n_websocket",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_game_engine_gameengine",
+      "fromNode": "n_game_engine",
+      "toNode": "n_game_engine_gameengine",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_game_engine_turn",
+      "fromNode": "n_game_engine",
+      "toNode": "n_game_engine_turn",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_game_engine_game_over",
+      "fromNode": "n_game_engine",
+      "toNode": "n_game_engine_game_over",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_game_engine_winner",
+      "fromNode": "n_game_engine",
+      "toNode": "n_game_engine_winner",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_game_engine_player_score",
+      "fromNode": "n_game_engine",
+      "toNode": "n_game_engine_player_score",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_game_engine_agent_score",
+      "fromNode": "n_game_engine",
+      "toNode": "n_game_engine_agent_score",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_init",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_reset",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_reset",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_run",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_run",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_setup",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_setup",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_setup_ws_player",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_setup_ws_player",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_game_loop",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_game_loop",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_take_player_turn",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_take_player_turn",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_fire_on_agent_board",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_fire_on_agent_board",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_take_agent_turn",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_take_agent_turn",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_check_win_condition",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_check_win_condition",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_build_agent_obs",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_build_agent_obs",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_build_player_view",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_build_player_view",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_build_state_dict",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_build_state_dict",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_build_game_over_dict",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_build_game_over_dict",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_display_boards",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_display_boards",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_gameengine_display_game_over",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_gameengine_display_game_over",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_engine_rationale_14",
+      "fromNode": "n_game_engine_gameengine",
+      "toNode": "n_game_engine_rationale_14",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_init_game_engine_gameengine_reset",
+      "fromNode": "n_game_engine_gameengine_init",
+      "toNode": "n_game_engine_gameengine_reset",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_run_game_engine_gameengine_setup",
+      "fromNode": "n_game_engine_gameengine_run",
+      "toNode": "n_game_engine_gameengine_setup",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_run_game_engine_gameengine_game_loop",
+      "fromNode": "n_game_engine_gameengine_run",
+      "toNode": "n_game_engine_gameengine_game_loop",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_run_game_engine_gameengine_display_game_over",
+      "fromNode": "n_game_engine_gameengine_run",
+      "toNode": "n_game_engine_gameengine_display_game_over",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_setup_game_engine_gameengine_setup_ws_player",
+      "fromNode": "n_game_engine_gameengine_setup",
+      "toNode": "n_game_engine_gameengine_setup_ws_player",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_loop_game_engine_gameengine_take_player_turn",
+      "fromNode": "n_game_engine_gameengine_game_loop",
+      "toNode": "n_game_engine_gameengine_take_player_turn",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_loop_game_engine_gameengine_take_agent_turn",
+      "fromNode": "n_game_engine_gameengine_game_loop",
+      "toNode": "n_game_engine_gameengine_take_agent_turn",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_loop_game_engine_gameengine_display_boards",
+      "fromNode": "n_game_engine_gameengine_game_loop",
+      "toNode": "n_game_engine_gameengine_display_boards",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_loop_game_engine_gameengine_build_state_dict",
+      "fromNode": "n_game_engine_gameengine_game_loop",
+      "toNode": "n_game_engine_gameengine_build_state_dict",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_loop_game_engine_gameengine_check_win_condition",
+      "fromNode": "n_game_engine_gameengine_game_loop",
+      "toNode": "n_game_engine_gameengine_check_win_condition",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_game_loop_game_engine_gameengine_build_game_over_dict",
+      "fromNode": "n_game_engine_gameengine_game_loop",
+      "toNode": "n_game_engine_gameengine_build_game_over_dict",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_take_player_turn_game_engine_gameengine_build_player_view",
+      "fromNode": "n_game_engine_gameengine_take_player_turn",
+      "toNode": "n_game_engine_gameengine_build_player_view",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_take_player_turn_game_engine_gameengine_fire_on_agent_board",
+      "fromNode": "n_game_engine_gameengine_take_player_turn",
+      "toNode": "n_game_engine_gameengine_fire_on_agent_board",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_engine_gameengine_take_agent_turn_game_engine_gameengine_build_agent_obs",
+      "fromNode": "n_game_engine_gameengine_take_agent_turn",
+      "toNode": "n_game_engine_gameengine_build_agent_obs",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_placement_protocol_placement_protocol_placementtarget",
+      "fromNode": "n_placement_protocol",
+      "toNode": "n_placement_protocol_placementtarget",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_placement_protocol_fleet_placement_methods",
+      "fromNode": "n_placement_protocol",
+      "toNode": "n_fleet_placement_methods",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_placement_protocol_placementtarget_protocol",
+      "fromNode": "n_placement_protocol_placementtarget",
+      "toNode": "n_protocol",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_placement_protocol_placementtarget_placement_protocol_placementtarget_can_place_ship",
+      "fromNode": "n_placement_protocol_placementtarget",
+      "toNode": "n_placement_protocol_placementtarget_can_place_ship",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_placement_protocol_placementtarget_placement_protocol_placementtarget_place_ship",
+      "fromNode": "n_placement_protocol_placementtarget",
+      "toNode": "n_placement_protocol_placementtarget_place_ship",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_placement_protocol_placementtarget_placement_protocol_placementtarget_get_placed_cells",
+      "fromNode": "n_placement_protocol_placementtarget",
+      "toNode": "n_placement_protocol_placementtarget_get_placed_cells",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_edge_dist",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_edge_dist",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_corner_dist",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_corner_dist",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_center_dist",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_center_dist",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_diag_dist",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_diag_dist",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_best_scored_candidate",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_best_scored_candidate",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_with_score",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_with_score",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_placement_error",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_placement_error",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_fleet_random",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_fleet_random",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_fleet_gaussian",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_fleet_gaussian",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_fleet_spread",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_fleet_spread",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_fleet_edges",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_fleet_edges",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_fleet_corners",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_fleet_corners",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_fleet_clustered",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_fleet_clustered",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_fleet_quadrant",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_fleet_quadrant",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_fleet_dense_center",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_fleet_dense_center",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_fleet_placement_methods_place_fleet_diagonal",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_fleet_placement_methods_place_fleet_diagonal",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_game_board",
+      "fromNode": "n_fleet_placement_methods",
+      "toNode": "n_game_board",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_best_scored_candidate_fleet_placement_methods_place_with_score",
+      "fromNode": "n_fleet_placement_methods_best_scored_candidate",
+      "toNode": "n_fleet_placement_methods_place_with_score",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_with_score_fleet_placement_methods_placement_error",
+      "fromNode": "n_fleet_placement_methods_place_with_score",
+      "toNode": "n_fleet_placement_methods_placement_error",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_with_score_fleet_placement_methods_place_fleet_edges",
+      "fromNode": "n_fleet_placement_methods_place_with_score",
+      "toNode": "n_fleet_placement_methods_place_fleet_edges",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_with_score_fleet_placement_methods_place_fleet_corners",
+      "fromNode": "n_fleet_placement_methods_place_with_score",
+      "toNode": "n_fleet_placement_methods_place_fleet_corners",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_with_score_fleet_placement_methods_place_fleet_dense_center",
+      "fromNode": "n_fleet_placement_methods_place_with_score",
+      "toNode": "n_fleet_placement_methods_place_fleet_dense_center",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_with_score_fleet_placement_methods_place_fleet_diagonal",
+      "fromNode": "n_fleet_placement_methods_place_with_score",
+      "toNode": "n_fleet_placement_methods_place_fleet_diagonal",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_placement_error_fleet_placement_methods_place_fleet_random",
+      "fromNode": "n_fleet_placement_methods_placement_error",
+      "toNode": "n_fleet_placement_methods_place_fleet_random",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_placement_error_fleet_placement_methods_place_fleet_gaussian",
+      "fromNode": "n_fleet_placement_methods_placement_error",
+      "toNode": "n_fleet_placement_methods_place_fleet_gaussian",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_placement_error_fleet_placement_methods_place_fleet_spread",
+      "fromNode": "n_fleet_placement_methods_placement_error",
+      "toNode": "n_fleet_placement_methods_place_fleet_spread",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_placement_error_fleet_placement_methods_place_fleet_clustered",
+      "fromNode": "n_fleet_placement_methods_placement_error",
+      "toNode": "n_fleet_placement_methods_place_fleet_clustered",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_placement_error_fleet_placement_methods_place_fleet_quadrant",
+      "fromNode": "n_fleet_placement_methods_placement_error",
+      "toNode": "n_fleet_placement_methods_place_fleet_quadrant",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_fleet_edges_fleet_placement_methods_rationale_236",
+      "fromNode": "n_fleet_placement_methods_place_fleet_edges",
+      "toNode": "n_fleet_placement_methods_rationale_236",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_fleet_corners_fleet_placement_methods_rationale_241",
+      "fromNode": "n_fleet_placement_methods_place_fleet_corners",
+      "toNode": "n_fleet_placement_methods_rationale_241",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_fleet_clustered_fleet_placement_methods_rationale_246",
+      "fromNode": "n_fleet_placement_methods_place_fleet_clustered",
+      "toNode": "n_fleet_placement_methods_rationale_246",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_fleet_quadrant_fleet_placement_methods_rationale_278",
+      "fromNode": "n_fleet_placement_methods_place_fleet_quadrant",
+      "toNode": "n_fleet_placement_methods_rationale_278",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_fleet_dense_center_fleet_placement_methods_rationale_320",
+      "fromNode": "n_fleet_placement_methods_place_fleet_dense_center",
+      "toNode": "n_fleet_placement_methods_rationale_320",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_fleet_placement_methods_place_fleet_diagonal_fleet_placement_methods_rationale_325",
+      "fromNode": "n_fleet_placement_methods_place_fleet_diagonal",
+      "toNode": "n_fleet_placement_methods_rationale_325",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_coordinate_methods_coordinate_methods_parse_coordinate",
+      "fromNode": "n_coordinate_methods",
+      "toNode": "n_coordinate_methods_parse_coordinate",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_coordinate_methods_coordinate_methods_format_coordinate",
+      "fromNode": "n_coordinate_methods",
+      "toNode": "n_coordinate_methods_format_coordinate",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_coordinate_methods_game_board",
+      "fromNode": "n_coordinate_methods",
+      "toNode": "n_game_board",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_coordinate_methods_parse_coordinate_coordinate_methods_rationale_7",
+      "fromNode": "n_coordinate_methods_parse_coordinate",
+      "toNode": "n_coordinate_methods_rationale_7",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_coordinate_methods_format_coordinate_coordinate_methods_rationale_26",
+      "fromNode": "n_coordinate_methods_format_coordinate",
+      "toNode": "n_coordinate_methods_rationale_26",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_game_board_gameboard",
+      "fromNode": "n_game_board",
+      "toNode": "n_game_board_gameboard",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_init",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_ship_cells",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_ship_cells",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_can_place_ship",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_can_place_ship",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_place_ship",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_place_ship",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_place_ship_from_str",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_place_ship_from_str",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_get_placed_cells",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_get_placed_cells",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_place_fleet",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_place_fleet",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_find_ship_at",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_find_ship_at",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_receive_shot",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_receive_shot",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_all_ships_sunk",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_all_ships_sunk",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_ships_sunk_count",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_ships_sunk_count",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_cells_hit_count",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_cells_hit_count",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_cells_targeted",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_cells_targeted",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_get_unhit_cells",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_get_unhit_cells",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_board_as_matrix",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_board_as_matrix",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_cell_symbol",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_cell_symbol",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_game_board_gameboard_display",
+      "fromNode": "n_game_board_gameboard",
+      "toNode": "n_game_board_gameboard_display",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_ship_cells_game_board_gameboard_can_place_ship",
+      "fromNode": "n_game_board_gameboard_ship_cells",
+      "toNode": "n_game_board_gameboard_can_place_ship",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_ship_cells_game_board_gameboard_place_ship",
+      "fromNode": "n_game_board_gameboard_ship_cells",
+      "toNode": "n_game_board_gameboard_place_ship",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_ship_cells_game_board_rationale_23",
+      "fromNode": "n_game_board_gameboard_ship_cells",
+      "toNode": "n_game_board_rationale_23",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_can_place_ship_game_board_gameboard_place_ship",
+      "fromNode": "n_game_board_gameboard_can_place_ship",
+      "toNode": "n_game_board_gameboard_place_ship",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_can_place_ship_game_board_rationale_36",
+      "fromNode": "n_game_board_gameboard_can_place_ship",
+      "toNode": "n_game_board_rationale_36",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_place_ship_game_board_gameboard_place_ship_from_str",
+      "fromNode": "n_game_board_gameboard_place_ship",
+      "toNode": "n_game_board_gameboard_place_ship_from_str",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_place_ship_game_board_rationale_58",
+      "fromNode": "n_game_board_gameboard_place_ship",
+      "toNode": "n_game_board_rationale_58",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_place_ship_from_str_game_board_rationale_76",
+      "fromNode": "n_game_board_gameboard_place_ship_from_str",
+      "toNode": "n_game_board_rationale_76",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_place_fleet_game_board_rationale_84",
+      "fromNode": "n_game_board_gameboard_place_fleet",
+      "toNode": "n_game_board_rationale_84",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_find_ship_at_game_board_gameboard_receive_shot",
+      "fromNode": "n_game_board_gameboard_find_ship_at",
+      "toNode": "n_game_board_gameboard_receive_shot",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_find_ship_at_game_board_rationale_103",
+      "fromNode": "n_game_board_gameboard_find_ship_at",
+      "toNode": "n_game_board_rationale_103",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_receive_shot_game_board_rationale_110",
+      "fromNode": "n_game_board_gameboard_receive_shot",
+      "toNode": "n_game_board_rationale_110",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_get_unhit_cells_game_board_rationale_155",
+      "fromNode": "n_game_board_gameboard_get_unhit_cells",
+      "toNode": "n_game_board_rationale_155",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_board_as_matrix_game_board_rationale_164",
+      "fromNode": "n_game_board_gameboard_board_as_matrix",
+      "toNode": "n_game_board_rationale_164",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_cell_symbol_game_board_gameboard_display",
+      "fromNode": "n_game_board_gameboard_cell_symbol",
+      "toNode": "n_game_board_gameboard_display",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_game_board_gameboard_display_game_board_rationale_194",
+      "fromNode": "n_game_board_gameboard_display",
+      "toNode": "n_game_board_rationale_194",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_websocket_gamewebsocketserver",
+      "fromNode": "n_websocket",
+      "toNode": "n_websocket_gamewebsocketserver",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_websocket_player_connected",
+      "fromNode": "n_websocket",
+      "toNode": "n_websocket_player_connected",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_init",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_start",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_start",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_stop",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_stop",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_handler",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_handler",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_handle_player",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_handle_player",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_handle_observer",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_handle_observer",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_broadcast_state",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_broadcast_state",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_send_to_player",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_send_to_player",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_wait_for_player_move",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_wait_for_player_move",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_gamewebsocketserver_wait_for_player_placement",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_gamewebsocketserver_wait_for_player_placement",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_websocket_rationale_13",
+      "fromNode": "n_websocket_gamewebsocketserver",
+      "toNode": "n_websocket_rationale_13",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_start_websocket_rationale_42",
+      "fromNode": "n_websocket_gamewebsocketserver_start",
+      "toNode": "n_websocket_rationale_42",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_stop_websocket_rationale_59",
+      "fromNode": "n_websocket_gamewebsocketserver_stop",
+      "toNode": "n_websocket_rationale_59",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_handler_websocket_gamewebsocketserver_handle_player",
+      "fromNode": "n_websocket_gamewebsocketserver_handler",
+      "toNode": "n_websocket_gamewebsocketserver_handle_player",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_handler_websocket_gamewebsocketserver_handle_observer",
+      "fromNode": "n_websocket_gamewebsocketserver_handler",
+      "toNode": "n_websocket_gamewebsocketserver_handle_observer",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_handler_websocket_rationale_75",
+      "fromNode": "n_websocket_gamewebsocketserver_handler",
+      "toNode": "n_websocket_rationale_75",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_handle_player_websocket_rationale_113",
+      "fromNode": "n_websocket_gamewebsocketserver_handle_player",
+      "toNode": "n_websocket_rationale_113",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_handle_observer_websocket_rationale_138",
+      "fromNode": "n_websocket_gamewebsocketserver_handle_observer",
+      "toNode": "n_websocket_rationale_138",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_broadcast_state_websocket_rationale_161",
+      "fromNode": "n_websocket_gamewebsocketserver_broadcast_state",
+      "toNode": "n_websocket_rationale_161",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_send_to_player_websocket_rationale_174",
+      "fromNode": "n_websocket_gamewebsocketserver_send_to_player",
+      "toNode": "n_websocket_rationale_174",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_wait_for_player_move_websocket_rationale_183",
+      "fromNode": "n_websocket_gamewebsocketserver_wait_for_player_move",
+      "toNode": "n_websocket_rationale_183",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_websocket_gamewebsocketserver_wait_for_player_placement_websocket_rationale_187",
+      "fromNode": "n_websocket_gamewebsocketserver_wait_for_player_placement",
+      "toNode": "n_websocket_rationale_187",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_random_agent_random_agent_randomagent",
+      "fromNode": "n_random_agent",
+      "toNode": "n_random_agent_randomagent",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_random_agent_randomagent_baseagent",
+      "fromNode": "n_random_agent_randomagent",
+      "toNode": "n_baseagent",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_random_agent_randomagent_random_agent_randomagent_init",
+      "fromNode": "n_random_agent_randomagent",
+      "toNode": "n_random_agent_randomagent_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_random_agent_randomagent_random_agent_randomagent_select_move",
+      "fromNode": "n_random_agent_randomagent",
+      "toNode": "n_random_agent_randomagent_select_move",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_random_agent_randomagent_random_agent_randomagent_reset",
+      "fromNode": "n_random_agent_randomagent",
+      "toNode": "n_random_agent_randomagent_reset",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_baseagent_bayesian_agent_bayesianagent",
+      "fromNode": "n_baseagent",
+      "toNode": "n_bayesian_agent_bayesianagent",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_baseagent_transformer_ppo_agent_transformerppoagent",
+      "fromNode": "n_baseagent",
+      "toNode": "n_transformer_ppo_agent_transformerppoagent",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_baseagent_hunt_agent_huntagent",
+      "fromNode": "n_baseagent",
+      "toNode": "n_hunt_agent_huntagent",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesian_agent_bayesianagent",
+      "fromNode": "n_bayesian_agent",
+      "toNode": "n_bayesian_agent_bayesianagent",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_bayesian_agent_bayesianagent_init",
+      "fromNode": "n_bayesian_agent_bayesianagent",
+      "toNode": "n_bayesian_agent_bayesianagent_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_bayesian_agent_bayesianagent_reset",
+      "fromNode": "n_bayesian_agent_bayesianagent",
+      "toNode": "n_bayesian_agent_bayesianagent_reset",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_bayesian_agent_bayesianagent_initialize_placements",
+      "fromNode": "n_bayesian_agent_bayesianagent",
+      "toNode": "n_bayesian_agent_bayesianagent_initialize_placements",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_bayesian_agent_bayesianagent_recompute_grid",
+      "fromNode": "n_bayesian_agent_bayesianagent",
+      "toNode": "n_bayesian_agent_bayesianagent_recompute_grid",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_bayesian_agent_bayesianagent_receive_result",
+      "fromNode": "n_bayesian_agent_bayesianagent",
+      "toNode": "n_bayesian_agent_bayesianagent_receive_result",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_bayesian_agent_bayesianagent_select_move",
+      "fromNode": "n_bayesian_agent_bayesianagent",
+      "toNode": "n_bayesian_agent_bayesianagent_select_move",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_bayesian_agent_rationale_11",
+      "fromNode": "n_bayesian_agent_bayesianagent",
+      "toNode": "n_bayesian_agent_rationale_11",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_initialize_placements_bayesian_agent_bayesianagent_select_move",
+      "fromNode": "n_bayesian_agent_bayesianagent_initialize_placements",
+      "toNode": "n_bayesian_agent_bayesianagent_select_move",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_recompute_grid_bayesian_agent_bayesianagent_receive_result",
+      "fromNode": "n_bayesian_agent_bayesianagent_recompute_grid",
+      "toNode": "n_bayesian_agent_bayesianagent_receive_result",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_bayesian_agent_bayesianagent_recompute_grid_bayesian_agent_bayesianagent_select_move",
+      "fromNode": "n_bayesian_agent_bayesianagent_recompute_grid",
+      "toNode": "n_bayesian_agent_bayesianagent_select_move",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformer_ppo_agent_transformerpponet",
+      "fromNode": "n_transformer_ppo_agent",
+      "toNode": "n_transformer_ppo_agent_transformerpponet",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformer_ppo_agent_transformerppoagent",
+      "fromNode": "n_transformer_ppo_agent",
+      "toNode": "n_transformer_ppo_agent_transformerppoagent",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformer_ppo_agent_load",
+      "fromNode": "n_transformer_ppo_agent",
+      "toNode": "n_transformer_ppo_agent_load",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerpponet_transformer_ppo_agent_transformerpponet_init",
+      "fromNode": "n_transformer_ppo_agent_transformerpponet",
+      "toNode": "n_transformer_ppo_agent_transformerpponet_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerpponet_transformer_ppo_agent_transformerpponet_forward",
+      "fromNode": "n_transformer_ppo_agent_transformerpponet",
+      "toNode": "n_transformer_ppo_agent_transformerpponet_forward",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerpponet_transformer_ppo_agent_transformerppoagent_init",
+      "fromNode": "n_transformer_ppo_agent_transformerpponet",
+      "toNode": "n_transformer_ppo_agent_transformerppoagent_init",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerpponet_transformer_ppo_agent_rationale_26",
+      "fromNode": "n_transformer_ppo_agent_transformerpponet",
+      "toNode": "n_transformer_ppo_agent_rationale_26",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerpponet_init_transformer_ppo_agent_transformerppoagent_init",
+      "fromNode": "n_transformer_ppo_agent_transformerpponet_init",
+      "toNode": "n_transformer_ppo_agent_transformerppoagent_init",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerpponet_forward_transformer_ppo_agent_rationale_78",
+      "fromNode": "n_transformer_ppo_agent_transformerpponet_forward",
+      "toNode": "n_transformer_ppo_agent_rationale_78",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerppoagent_transformer_ppo_agent_transformerppoagent_init",
+      "fromNode": "n_transformer_ppo_agent_transformerppoagent",
+      "toNode": "n_transformer_ppo_agent_transformerppoagent_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerppoagent_transformer_ppo_agent_transformerppoagent_reset",
+      "fromNode": "n_transformer_ppo_agent_transformerppoagent",
+      "toNode": "n_transformer_ppo_agent_transformerppoagent_reset",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerppoagent_transformer_ppo_agent_transformerppoagent_select_move",
+      "fromNode": "n_transformer_ppo_agent_transformerppoagent",
+      "toNode": "n_transformer_ppo_agent_transformerppoagent_select_move",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerppoagent_transformer_ppo_agent_transformerppoagent_receive_result",
+      "fromNode": "n_transformer_ppo_agent_transformerppoagent",
+      "toNode": "n_transformer_ppo_agent_transformerppoagent_receive_result",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerppoagent_transformer_ppo_agent_transformerppoagent_save",
+      "fromNode": "n_transformer_ppo_agent_transformerppoagent",
+      "toNode": "n_transformer_ppo_agent_transformerppoagent_save",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerppoagent_transformer_ppo_agent_rationale_108",
+      "fromNode": "n_transformer_ppo_agent_transformerppoagent",
+      "toNode": "n_transformer_ppo_agent_rationale_108",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_transformer_ppo_agent_transformerppoagent_init_transformer_ppo_agent_load",
+      "fromNode": "n_transformer_ppo_agent_transformerppoagent_init",
+      "toNode": "n_transformer_ppo_agent_load",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_base_agent_abc",
+      "fromNode": "n_base_agent",
+      "toNode": "n_abc",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_base_agent_base_agent_baseagent",
+      "fromNode": "n_base_agent",
+      "toNode": "n_base_agent_baseagent",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_base_agent_base_agent_select_move",
+      "fromNode": "n_base_agent",
+      "toNode": "n_base_agent_select_move",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_base_agent_baseagent_abc",
+      "fromNode": "n_base_agent_baseagent",
+      "toNode": "n_abc",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_base_agent_baseagent_base_agent_baseagent_place_fleet",
+      "fromNode": "n_base_agent_baseagent",
+      "toNode": "n_base_agent_baseagent_place_fleet",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_base_agent_baseagent_base_agent_baseagent_receive_result",
+      "fromNode": "n_base_agent_baseagent",
+      "toNode": "n_base_agent_baseagent_receive_result",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_base_agent_baseagent_base_agent_baseagent_reset",
+      "fromNode": "n_base_agent_baseagent",
+      "toNode": "n_base_agent_baseagent_reset",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_base_agent_baseagent_place_fleet_base_agent_rationale_15",
+      "fromNode": "n_base_agent_baseagent_place_fleet",
+      "toNode": "n_base_agent_rationale_15",
+      "label": "rationale_for [EXTRACTED]"
+    }
+  ]
+}

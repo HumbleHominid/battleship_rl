@@ -6,7 +6,7 @@ from typing import Optional
 import websockets
 from websockets.server import WebSocketServerProtocol  # type: ignore
 
-from .logger import GameLogger
+from .game_logger import GameLogger
 
 
 class GameWebSocketServer:

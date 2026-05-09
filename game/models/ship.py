@@ -18,11 +18,6 @@ def get_ship_size(ship_type: ShipType) -> int:
     return _SHIP_SIZES[ship_type]
 
 
-# NOTE: dicts are ordered in Python 3.7+, _SHIP_SIZES.keys() is consistent
-def get_fleet() -> list[ShipType]:
-    return list(_SHIP_SIZES.keys())
-
-
 def get_ship_name(ship_type: ShipType) -> str:
     return f"{ship_type.name.capitalize()} ({get_ship_size(ship_type)})"
 
@@ -30,6 +25,13 @@ def get_ship_name(ship_type: ShipType) -> str:
 @dataclass
 class Ship:
     ship_type: ShipType
+    valid_ships = list(_SHIP_SIZES.keys())
+
+    # NOTE: dicts are ordered in Python 3.7+, _SHIP_SIZES.keys() is consistent
+    @staticmethod
+    def get_fleet() -> list[ShipType]:
+        return Ship.valid_ships
+
     # Zero-indexed (row, col) pairs occupied by this ship.
     cells: list[tuple[int, int]]
     hits: int = field(default=0, init=False)
