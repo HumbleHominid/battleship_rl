@@ -20,8 +20,8 @@
     "hash": "a5eb5d09318926fb8f95551713d7750c"
   },
   "/Users/mfryer/Code/battleship-rl/training/battleship_env.py": {
-    "mtime": 1778065098.9395866,
-    "hash": "fc58417a024a75af09099e18a814ffae"
+    "mtime": 1778318552.3723068,
+    "hash": "e17b2e0f01f8f1b19aed6b2e0f4d762e"
   },
   "/Users/mfryer/Code/battleship-rl/training/evaluate.py": {
     "mtime": 1778233273.9629524,
@@ -32,8 +32,8 @@
     "hash": "07bba2faba2c572ee82bfdf9d565afdd"
   },
   "/Users/mfryer/Code/battleship-rl/training/training_logger.py": {
-    "mtime": 1778258513.5832245,
-    "hash": "d559b582769050543c0cce62359f7c14"
+    "mtime": 1778318143.6721087,
+    "hash": "cb93ef0f994ab9c14e43cb18c5fb2956"
   },
   "/Users/mfryer/Code/battleship-rl/game/directions.py": {
     "mtime": 1776516222.712051,
@@ -44,16 +44,16 @@
     "hash": "7636217c5f31613ae55cba46a3cbb410"
   },
   "/Users/mfryer/Code/battleship-rl/game/game_logger.py": {
-    "mtime": 1778258530.19922,
-    "hash": "8aaae9d512bc3dec8264ab59653994ce"
+    "mtime": 1778318385.7955766,
+    "hash": "f1fd8992d80782327f425e90d96b0a2c"
   },
   "/Users/mfryer/Code/battleship-rl/game/placement_protocol.py": {
     "mtime": 1777794801.070661,
     "hash": "fce14f6d235c0f040dee6571fcb3e451"
   },
   "/Users/mfryer/Code/battleship-rl/game/fleet_placement_methods.py": {
-    "mtime": 1778254028.722307,
-    "hash": "eedce1364a5cb85da62ba39458b7a4b3"
+    "mtime": 1778318713.1547346,
+    "hash": "65023ea5c682244a39ac5d086c49cca7"
   },
   "/Users/mfryer/Code/battleship-rl/game/coordinate_methods.py": {
     "mtime": 1777963212.8903391,
@@ -72,8 +72,8 @@
     "hash": "558a1760f32cb49a23da3a31eee345fd"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/bayesian_agent.py": {
-    "mtime": 1778254035.6758168,
-    "hash": "31de9bfd111c7f04d7c380488bf99c7e"
+    "mtime": 1778318873.156816,
+    "hash": "5166c97c007133da9ff485bfc8653a2a"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/transformer_ppo_agent.py": {
     "mtime": 1778233221.8021321,
