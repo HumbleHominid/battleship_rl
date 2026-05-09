@@ -1,16 +1,16 @@
 # Graph Report - battleship-rl  (2026-05-09)
 
 ## Corpus Check
-- 35 files · ~11,283 words
+- 35 files · ~11,322 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 599 nodes · 959 edges · 28 communities (21 shown, 7 thin omitted)
+- 603 nodes · 963 edges · 31 communities (23 shown, 8 thin omitted)
 - Extraction: 78% EXTRACTED · 22% INFERRED · 0% AMBIGUOUS · INFERRED: 213 edges (avg confidence: 0.57)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e58a2526`
+- Built from commit: `93da586d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -33,12 +33,15 @@
 - [[_COMMUNITY_Community 15|Community 15]]
 - [[_COMMUNITY_Community 16|Community 16]]
 - [[_COMMUNITY_Community 17|Community 17]]
+- [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_Community 19|Community 19]]
 - [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 22|Community 22]]
 - [[_COMMUNITY_Community 24|Community 24]]
-- [[_COMMUNITY_Community 25|Community 25]]
-- [[_COMMUNITY_Community 26|Community 26]]
 - [[_COMMUNITY_Community 27|Community 27]]
+- [[_COMMUNITY_Community 28|Community 28]]
+- [[_COMMUNITY_Community 29|Community 29]]
+- [[_COMMUNITY_Community 30|Community 30]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `GameLogger` - 40 edges
@@ -49,7 +52,7 @@
 6. `GameEngine` - 22 edges
 7. `FeatureExtractor` - 21 edges
 8. `BaseAgent` - 20 edges
-9. `BattleshipEnv` - 16 edges
+9. `BattleshipEnv` - 17 edges
 10. `format_coordinate()` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -61,98 +64,106 @@
   training/README.md → analysis.md
 - `init_transformer_ppo()` --calls--> `TransformerPPONet`  [INFERRED]
   training/pretrain.py → game/agents/ppo_net/__init__.py
-- `BattleshipEnv` --uses--> `GameLogger`  [INFERRED]
-  training/battleship_env.py → game/game_logger.py
+- `Transition` --uses--> `FeatureExtractor`  [INFERRED]
+  training/rollout.py → game/agents/feature_extractor.py
 
 ## Hyperedges (group relationships)
 - **Two-Phase Training Pipeline: Imitation Pretraining then PPO Fine-tuning** — readme_imitation_pretraining, readme_ppo_finetuning, readme_transformerpponet [EXTRACTED 1.00]
 - **Separate Trunk Design Enabling Independent Policy and Value Training** — readme_policy_trunk, readme_value_trunk, readme_separate_trunks_rationale, readme_value_warmup [EXTRACTED 0.95]
 - **Three Baseline Agents Evaluated Across Ship Placement Strategies** — analysis_random_agent, analysis_hunt_agent, analysis_bayesian_agent [EXTRACTED 1.00]
 
-## Communities (28 total, 7 thin omitted)
+## Communities (31 total, 8 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.07
-Nodes (31): BattleshipEnv, Take a shot at cell index `action` (row * 10 + col).          Returns:, Fast single-game Battleship environment for RL training.      Wraps GameBoard di, BayesianAgent, Bayesian probability density agent.      Enumerates all valid ship placements on, FeatureExtractor, Return shape (4,) float32 global context vector., Computes per-cell (100, 16) and global (4,) features for the TransformerPPO agen (+23 more)
+Cohesion: 0.06
+Nodes (34): BaseAgent, BattleshipEnv, Take a shot at cell index `action` (row * 10 + col).          Returns:, Fast single-game Battleship environment for RL training.      Wraps GameBoard di, BayesianAgent, Bayesian probability density agent.      Enumerates all valid ship placements on, FeatureExtractor, Return shape (4,) float32 global context vector. (+26 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.06
-Nodes (34): _best_scored_candidate(), place_fleet_clustered(), place_fleet_corners(), place_fleet_dense_center(), place_fleet_diagonal(), place_fleet_edges(), place_fleet_gaussian(), place_fleet_quadrant() (+26 more)
+Cohesion: 0.07
+Nodes (32): _best_scored_candidate(), place_fleet_clustered(), place_fleet_corners(), place_fleet_dense_center(), place_fleet_diagonal(), place_fleet_edges(), place_fleet_gaussian(), place_fleet_quadrant() (+24 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.06
-Nodes (30): BayesianAgent, Bayesian probability density agent.      Enumerates all valid ship placements on, FeatureExtractor, Return shape (4,) float32 global context vector., Computes per-cell (100, 16) and global (4,) features for the TransformerPPO agen, Record the outcome of a shot and propagate to the internal Bayesian model., Return shape (100, 16) float32 feature array for all cells.          Calls Bayes, parse_coordinate() (+22 more)
+Cohesion: 0.07
+Nodes (20): Board, CellState, Enum, Board, CellState, get_ship_name(), get_ship_size(), # NOTE: dicts are ordered in Python 3.7+, _SHIP_SIZES.keys() is consistent (+12 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.07
-Nodes (19): Board, CellState, Enum, Board, CellState, get_ship_name(), get_ship_size(), # NOTE: dicts are ordered in Python 3.7+, _SHIP_SIZES.keys() is consistent (+11 more)
+Nodes (20): format_coordinate(), Format zero-indexed (row, col) to 'A1'-'J10'., _best_scored_candidate(), place_fleet_clustered(), place_fleet_corners(), place_fleet_dense_center(), place_fleet_diagonal(), place_fleet_edges() (+12 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.06
-Nodes (17): ABC, BaseAgent, Place this agent's fleet. Defaults to GameBoard.place_fleet()., Called after each move. Hook for training feedback; no-op by default., Reset agent state for a new episode., BaseAgent, Place this agent's fleet. Defaults to GameBoard.place_fleet()., Called after each move. Hook for training feedback; no-op by default. (+9 more)
+Cohesion: 0.07
+Nodes (24): BattleshipEnv, Fast single-game Battleship environment for RL training.      Wraps GameBoard di, Fast single-game Battleship environment for RL training.      Wraps GameBoard di, Take a shot at cell index `action` (row * 10 + col).          Returns:, Take a shot at cell index `action` (row * 10 + col).          Returns:, Take a shot at cell index `action` (row * 10 + col).          Returns:, Return list of cell indices (0–99) that have not yet been shot., Return list of cell indices (0–99) that have not yet been shot. (+16 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.07
-Nodes (20): format_coordinate(), Format zero-indexed (row, col) to 'A1'-'J10'., _best_scored_candidate(), place_fleet_clustered(), place_fleet_corners(), place_fleet_dense_center(), place_fleet_diagonal(), place_fleet_edges() (+12 more)
+Nodes (19): BayesianAgent, Bayesian probability density agent.      Enumerates all valid ship placements on, FeatureExtractor, Return shape (4,) float32 global context vector., Computes per-cell (100, 16) and global (4,) features for the TransformerPPO agen, Record the outcome of a shot and propagate to the internal Bayesian model., Return shape (100, 16) float32 feature array for all cells.          Calls Bayes, load() (+11 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.06
-Nodes (18): GameBoard, Return the Ship occupying this cell, or None., Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta, Return all (row, col) pairs not yet shot (EMPTY or ship still there)., Serialize board to a 10x10 list of 'SHIPTYPE:CELLSTATE' strings.         If fog_, Print the board to stdout with row/col headers., Compute the list of (row, col) cells a ship would occupy., Return (True, '') if the placement is valid.         Return (False, reason) if o (+10 more)
+Cohesion: 0.07
+Nodes (13): HuntAgent, Hunt-and-target agent.      Search phase: shoots only checkerboard cells (row+co, Prepend the two axis-aligned end cells to the front of the queue., Scan board for unresolved hit cells and enqueue their unshot neighbors., RandomAgent, AppLogger, BaseAgent, GameLogger (+5 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.06
-Nodes (18): RandomAgent, AppLogger, GameLogger, GameLogger, Statically accessible logger. Call GameLogger.info() / .warn() / .error() / .deb, GameWebSocketServer, Receive move and placement commands from the player and enqueue them., Embedded WebSocket server that:       - Broadcasts game state to all connected o (+10 more)
+Nodes (16): Return a coordinate string (e.g. 'B5') given an observation dict., Place this agent's fleet. Defaults to GameBoard.place_fleet()., Called after each move. Hook for training feedback; no-op by default., Reset agent state for a new episode., Return list of cell indices (0–99) that have not yet been shot., GameBoard, Return the Ship occupying this cell, or None., Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta (+8 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.08
-Nodes (13): Return a coordinate string (e.g. 'B5') given an observation dict., Return list of cell indices (0–99) that have not yet been shot., GameBoard, Return the Ship occupying this cell, or None., Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta, Return all (row, col) pairs not yet shot (EMPTY or ship still there)., Serialize board to a 10x10 list of 'SHIPTYPE:CELLSTATE' strings.         If fog_, Print the board to stdout with row/col headers. (+5 more)
-
-### Community 9 - "Community 9"
-Cohesion: 0.08
-Nodes (12): load(), Battleship agent backed by a Transformer actor-critic network.      Operates in, TransformerPPOAgent, Transformer actor-critic with fully separate policy and value trunks.      Polic, Args:             cell_feats:   (B, 100, CELL_FEATURE_DIM)             global_fe, TransformerPPONet, PolicyNet, Policy trunk: cell features → transformer encoder → per-cell log-probabilities. (+4 more)
-
-### Community 10 - "Community 10"
 Cohesion: 0.09
 Nodes (28): Baseline Analysis Findings, Battleship RL Analysis Document, Bayesian Agent Baseline, Gaussian Ship Placement Strategy, Hunt Agent Baseline, Performance Target: Sub-50 Turns, Random Agent Baseline, Random Ship Placement Strategy (+20 more)
 
-### Community 11 - "Community 11"
+### Community 9 - "Community 9"
+Cohesion: 0.09
+Nodes (11): GameBoard, Return the Ship occupying this cell, or None., Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta, Return all (row, col) pairs not yet shot (EMPTY or ship still there)., Serialize board to a 10x10 list of 'SHIPTYPE:CELLSTATE' strings.         If fog_, Print the board to stdout with row/col headers., Compute the list of (row, col) cells a ship would occupy., Return (True, '') if the placement is valid.         Return (False, reason) if o (+3 more)
+
+### Community 10 - "Community 10"
 Cohesion: 0.1
 Nodes (4): format_coordinate(), parse_coordinate(), Format zero-indexed (row, col) to 'A1'-'J10'., Parse 'A1'-'J10' to zero-indexed (row, col). Raises ValueError on bad input.
 
-### Community 12 - "Community 12"
+### Community 11 - "Community 11"
 Cohesion: 0.17
 Nodes (4): main(), parse_args(), GameEngine, Orchestrates a full game of Battleship.      The game-side agent always runs in-
 
-### Community 14 - "Community 14"
+### Community 12 - "Community 12"
+Cohesion: 0.1
+Nodes (11): GameWebSocketServer, Receive move and placement commands from the player and enqueue them., Embedded WebSocket server that:       - Broadcasts game state to all connected o, Register an observer and hold its connection open until disconnect., Serialize state_dict to JSON and send to all connected observers., Send a JSON message to the connected player. No-op if none connected., Await the next move coordinate from the player's move queue., Await the next ship placement message from the player's placement queue. (+3 more)
+
+### Community 13 - "Community 13"
+Cohesion: 0.11
+Nodes (9): Transformer actor-critic with fully separate policy and value trunks.      Polic, Args:             cell_feats:   (B, 100, CELL_FEATURE_DIM)             global_fe, TransformerPPONet, PolicyNet, Policy trunk: cell features → transformer encoder → per-cell log-probabilities., Args:             cell_feats:  (B, 100, CELL_FEATURE_DIM)             legal_mask, Value trunk: cell + global features → scalar state value.      A learned global, Args:             cell_feats:   (B, 100, CELL_FEATURE_DIM)             global_fe (+1 more)
+
+### Community 15 - "Community 15"
 Cohesion: 0.23
 Nodes (4): HuntAgent, Hunt-and-target agent.      Search phase: shoots only checkerboard cells (row+co, Prepend the two axis-aligned end cells to the front of the queue., Scan board for unresolved hit cells and enqueue their unshot neighbors.
 
-### Community 15 - "Community 15"
+### Community 16 - "Community 16"
+Cohesion: 0.18
+Nodes (5): ABC, BaseAgent, Place this agent's fleet. Defaults to GameBoard.place_fleet()., Called after each move. Hook for training feedback; no-op by default., Reset agent state for a new episode.
+
+### Community 17 - "Community 17"
 Cohesion: 0.17
 Nodes (11): Architecture, code:bash (python training/pretrain.py \), code:bash (python training/ppo_train.py \), code:bash (python training/ppo_train.py --iters 500 --from-scratch), code:bash (# Play 100 automated games and report avg turns), Phase 1 — Imitation pretraining, Phase 2 — PPO fine-tuning, Reward structure (+3 more)
 
-### Community 16 - "Community 16"
+### Community 18 - "Community 18"
 Cohesion: 0.18
 Nodes (10): Baseline Analysis, Baseline Approach, Baseline Performance, Bayesian Agent, Gaussian Placement, Hunt Agent, Random Agent, Random Placement (+2 more)
 
-### Community 17 - "Community 17"
+### Community 19 - "Community 19"
 Cohesion: 0.52
 Nodes (6): coord_to_index(), init_transformer_ppo(), main(), parse_args(), run_training_loop(), setup_board_and_fleet()
 
 ## Knowledge Gaps
-- **95 isolated node(s):** `Imitation pretraining: train TransformerPPONet to mimic BayesianAgent.  For each`, `One epoch of value-trunk-only updates — policy trunk receives zero gradient.`, `Run one episode, collecting transitions. Returns (transitions, turns_to_win).`, `Fast single-game Battleship environment for RL training.      Wraps GameBoard di`, `Take a shot at cell index `action` (row * 10 + col).          Returns:` (+90 more)
+- **99 isolated node(s):** `Imitation pretraining: train TransformerPPONet to mimic BayesianAgent.  For each`, `One epoch of value-trunk-only updates — policy trunk receives zero gradient.`, `Run one episode, collecting transitions. Returns (transitions, turns_to_win).`, `Fast single-game Battleship environment for RL training.      Wraps GameBoard di`, `Take a shot at cell index `action` (row * 10 + col).          Returns:` (+94 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `GameLogger` connect `Community 1` to `Community 0`, `Community 3`, `Community 4`, `Community 8`, `Community 11`, `Community 13`?**
-  _High betweenness centrality (0.234) - this node is a cross-community bridge._
-- **Why does `BayesianAgent` connect `Community 0` to `Community 1`, `Community 4`?**
-  _High betweenness centrality (0.155) - this node is a cross-community bridge._
-- **Why does `GameLogger` connect `Community 7` to `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 12`, `Community 14`?**
-  _High betweenness centrality (0.111) - this node is a cross-community bridge._
+- **Why does `GameLogger` connect `Community 1` to `Community 0`, `Community 2`, `Community 6`, `Community 7`, `Community 10`, `Community 14`, `Community 15`?**
+  _High betweenness centrality (0.232) - this node is a cross-community bridge._
+- **Why does `BayesianAgent` connect `Community 0` to `Community 1`, `Community 6`?**
+  _High betweenness centrality (0.154) - this node is a cross-community bridge._
+- **Why does `GameLogger` connect `Community 6` to `Community 2`, `Community 3`, `Community 4`, `Community 5`, `Community 9`, `Community 11`, `Community 12`?**
+  _High betweenness centrality (0.115) - this node is a cross-community bridge._
 - **Are the 38 inferred relationships involving `GameLogger` (e.g. with `GameEngine` and `Orchestrates a full game of Battleship.      The game-side agent always runs in-`) actually correct?**
   _`GameLogger` has 38 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 12 inferred relationships involving `GameBoard` (e.g. with `GameLogger` and `GameEngine`) actually correct?**
