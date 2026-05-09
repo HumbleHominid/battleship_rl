@@ -132,11 +132,9 @@ def main() -> None:
             warmup_scheduler.step()
 
             current_lr = warmup_scheduler.get_last_lr()[0]
-            msg = f"Value warmup iter {wu:4d}/{args.value_warmup_iters} | value loss {v_loss:.4f} | lr {current_lr:.2e}"
+            msg = f"  warmup {wu:4d}/{args.value_warmup_iters} | value {v_loss:.4f} | lr {current_lr:.2e}"
             if wu % 5 == 0:
-                TrainingLogger.info(
-                    f"  warmup {wu:4d}/{args.value_warmup_iters} | value {v_loss:.4f} | lr {current_lr:.2e}"
-                )
+                TrainingLogger.info(msg + " " * 5)
             else:
                 print(msg, end="\r")
         # Reset value LR to base rate for main PPO loop

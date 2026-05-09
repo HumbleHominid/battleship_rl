@@ -15,6 +15,9 @@ class AppLogger:
     def setup(
         cls, name: str, run_name: str = "run", console_level: int = logging.INFO
     ) -> None:
+        # Check if already initialized
+        if cls._log is not None:
+            return
         cls._log_dir.mkdir(exist_ok=True)
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         cls.log_file = cls._log_dir / f"{run_name}_{timestamp}.log"

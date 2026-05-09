@@ -93,7 +93,7 @@ def parse_args() -> argparse.Namespace:
 async def main() -> None:
     args = parse_args()
 
-    GameLogger.setup(getattr(logging, args.log_level))
+    GameLogger.setup(console_level=getattr(logging, args.log_level))
 
     agent_cls = AGENT_REGISTRY.get(args.agent)
     if agent_cls is None:
