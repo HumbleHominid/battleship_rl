@@ -5,8 +5,8 @@ from typing import Optional
 from .agents.base_agent import BaseAgent
 from .coordinate_methods import format_coordinate, parse_coordinate
 from .game_board import GameBoard
-from .logger import GameLogger
-from .models import CellState, get_fleet, get_ship_size
+from .game_logger import GameLogger
+from .models import CellState, Ship, get_ship_size
 from .websocket import GameWebSocketServer
 
 
@@ -35,6 +35,7 @@ class GameEngine:
         enable_ws: bool = True,
         headless: bool = False,
         log_boards: bool = False,
+        player_agent: BaseAgent | None = None,
     ) -> None:
         self.agent = agent
         self.player_type = player_type
@@ -42,6 +43,7 @@ class GameEngine:
         self.enable_ws = enable_ws
         self.headless = headless
         self.log_boards = log_boards
+        self.player_agent = player_agent
 
         self.reset()
 
@@ -58,6 +60,8 @@ class GameEngine:
         self._winner = None
         self._last_move = None
         self.agent.reset()
+        if self.player_agent:
+            self.player_agent.reset()
 
     # ------------------------------------------------------------------
     # Entry point
@@ -105,7 +109,7 @@ class GameEngine:
         GameLogger.info("WebSocket player connected")
 
         if self.player_placement == "manual":
-            for ship_type in get_fleet():
+            for ship_type in Ship.get_fleet():
                 await self.ws_server.send_to_player(
                     {
                         "type": "place_ship",
@@ -191,6 +195,23 @@ class GameEngine:
                         "ship_sunk": self._last_move["ship_sunk"],
                         "game_over": self._game_over,
                     }
+                )
+        elif self.player_agent:
+            obs = self._build_player_view()
+            coord = self.player_agent.select_move(obs)
+            try:
+                row, col = parse_coordinate(coord)
+            except ValueError as e:
+                GameLogger.warn(
+                    "Player agent sent invalid coordinate '%s': %s", coord, e
+                )
+                return
+            await self._fire_on_agent_board(row, col)
+            if self._last_move:
+                self.player_agent.receive_result(
+                    coord,
+                    self._last_move["result"],
+                    self._last_move["ship_sunk"],
                 )
         else:
             unhit = self.agent_board.get_unhit_cells()

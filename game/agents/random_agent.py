@@ -2,13 +2,14 @@ import random
 
 from game.agents.base_agent import BaseAgent
 from game.coordinate_methods import format_coordinate
-from game.logger import GameLogger
+from game.game_logger import GameLogger
+from game.models import Board
 
 
 class RandomAgent(BaseAgent):
     def __init__(self) -> None:
         self._untried_cells: list[tuple[int, int]] = [
-            (r, c) for r in range(10) for c in range(10)
+            (r, c) for r in range(Board.board_size) for c in range(Board.board_size)
         ]
         self._rng = random.Random()
         GameLogger.info("Initialized RandomAgent")
@@ -22,5 +23,7 @@ class RandomAgent(BaseAgent):
         return formatted_cell
 
     def reset(self) -> None:
-        self._untried_cells = [(r, c) for r in range(10) for c in range(10)]
+        self._untried_cells = [
+            (r, c) for r in range(Board.board_size) for c in range(Board.board_size)
+        ]
         GameLogger.info("RandomAgent state reset")

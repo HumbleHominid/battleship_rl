@@ -3,9 +3,19 @@ name:
 channels:
   - conda-forge
   - defaults
+  - pytorch
 dependencies:
-  - python
+  - python=3.11
+  - pip
   - ipykernel
   - numpy
   - polars
   - websockets
+  - matplotlib
+  - altair
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pip:
+    - tensorflow-macos
+    - tensorflow-metal

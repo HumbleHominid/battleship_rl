@@ -3,10 +3,8 @@ from typing import Optional
 
 from game.agents.base_agent import BaseAgent
 from game.coordinate_methods import format_coordinate, parse_coordinate
-from game.logger import GameLogger
-from game.models import ShipType
-
-_BOARD_SIZE = 10
+from game.game_logger import GameLogger
+from game.models import Board, ShipType
 
 
 class HuntAgent(BaseAgent):
@@ -42,11 +40,13 @@ class HuntAgent(BaseAgent):
         GameLogger.info("Initialized HuntAgent")
 
     def _reset_state(self) -> None:
-        self._untried = {(r, c) for r in range(_BOARD_SIZE) for c in range(_BOARD_SIZE)}
+        self._untried = {
+            (r, c) for r in range(Board.board_size) for c in range(Board.board_size)
+        }
         checkerboard = [
             (r, c)
-            for r in range(_BOARD_SIZE)
-            for c in range(_BOARD_SIZE)
+            for r in range(Board.board_size)
+            for c in range(Board.board_size)
             if (r + c) % 2 == 0
         ]
         self._rng.shuffle(checkerboard)
@@ -72,7 +72,7 @@ class HuntAgent(BaseAgent):
         return [
             (nr, nc)
             for nr, nc in [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-            if 0 <= nr < _BOARD_SIZE and 0 <= nc < _BOARD_SIZE
+            if 0 <= nr < Board.board_size and 0 <= nc < Board.board_size
         ]
 
     def _prepend_axis_ends(self) -> None:
@@ -88,14 +88,14 @@ class HuntAgent(BaseAgent):
             ends = [(row, cols[0] - 1), (row, cols[-1] + 1)]
         # Insert in reverse so the "forward" end lands at index 0
         for r, c in reversed(ends):
-            if 0 <= r < _BOARD_SIZE and 0 <= c < _BOARD_SIZE:
+            if 0 <= r < Board.board_size and 0 <= c < Board.board_size:
                 self._enqueue_front((r, c))
 
     def _queue_unresolved_from_board(self, board: list[list[str]]) -> None:
         """Scan board for unresolved hit cells and enqueue their unshot neighbors."""
         sunk_names = {st.name for st in self._sunk_ship_types}
-        for r in range(_BOARD_SIZE):
-            for c in range(_BOARD_SIZE):
+        for r in range(Board.board_size):
+            for c in range(Board.board_size):
                 ship_name, state = board[r][c].split(":")
                 if state == "HIT" and ship_name not in sunk_names:
                     for neighbor in self._cardinal_neighbors(r, c):
@@ -134,7 +134,7 @@ class HuntAgent(BaseAgent):
                 # Axis locked — extend in both directions at high priority
                 dr, dc = self._axis
                 for nr, nc in [(row - dr, col - dc), (row + dr, col + dc)]:
-                    if 0 <= nr < _BOARD_SIZE and 0 <= nc < _BOARD_SIZE:
+                    if 0 <= nr < Board.board_size and 0 <= nc < Board.board_size:
                         self._enqueue_front((nr, nc))
 
         if ship_sunk:

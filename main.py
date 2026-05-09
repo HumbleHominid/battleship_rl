@@ -1,12 +1,14 @@
 import argparse
 import asyncio
 import logging
+import sys
 import time
 import zipfile
 
 from game.agents import AGENT_REGISTRY
 from game.game_engine import GameEngine
-from game.logger import GameLogger
+from game.game_logger import GameLogger
+from game.models import Board, Ship, ShipType
 
 
 def parse_args() -> argparse.Namespace:
@@ -20,9 +22,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--player-type",
-        choices=["random", "websocket"],
         default="random",
-        help="Player type: 'random' stub or 'websocket' human (default: random)",
+        help="Agent key from AGENT_REGISTRY or 'websocket' (default: random)",
     )
     parser.add_argument(
         "--player-placement",
@@ -49,8 +50,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--log-level",
         choices=["DEBUG", "INFO", "WARNING", "ERROR"],
-        default="WARNING",
-        help="Logging verbosity (default: WARNING)",
+        default="INFO",
+        help="Logging verbosity (default: INFO)",
     )
     parser.add_argument(
         "--headless",
@@ -68,23 +69,60 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Log the game boards to the log file (like terminal output in gui mode)",
     )
+    parser.add_argument(
+        "--board-size",
+        type=int,
+        default=10,
+        help="Size of the game board (default: 10)",
+    )
+    parser.add_argument(
+        "--fleet-config",
+        nargs="+",
+        default=[
+            ShipType.CARRIER.name,
+            ShipType.BATTLESHIP.name,
+            ShipType.CRUISER.name,
+            ShipType.SUBMARINE.name,
+            ShipType.DESTROYER.name,
+        ],
+        help="List of ship types to include in the fleet (default: all standard ships) e.g. --fleet-config CARRIER DESTROYER",
+    )
     return parser.parse_args()
 
 
 async def main() -> None:
     args = parse_args()
 
-    GameLogger.setup(getattr(logging, args.log_level))
+    GameLogger.setup(console_level=getattr(logging, args.log_level))
 
     agent_cls = AGENT_REGISTRY.get(args.agent)
     if agent_cls is None:
-        import sys
-
-        print(
-            f"error: Unknown agent '{args.agent}'. Available: {list(AGENT_REGISTRY)}",
-            file=sys.stderr,
+        GameLogger.error(
+            f"Unknown agent '{args.agent}'. Available: {list(AGENT_REGISTRY)}"
         )
         sys.exit(2)
+
+    player_cls = None
+    if args.player_type in AGENT_REGISTRY:
+        player_cls = AGENT_REGISTRY[args.player_type]
+    elif args.player_type != "websocket":
+        GameLogger.error(
+            f"Invalid player type '{args.player_type}'. Defaulting to random"
+        )
+        player_cls = AGENT_REGISTRY["random"]
+
+    Board.board_size = args.board_size
+    valid_ships = set(ship.name for ship in ShipType if ship != ShipType.NONE)
+    fleet_config = []
+    for ship in args.fleet_config:
+        if ship not in valid_ships:
+            GameLogger.error(f"Invalid ship '{ship}'. Valid options: {valid_ships}")
+            sys.exit(2)
+        fleet_config.append(ShipType[ship])
+    Ship.valid_ships = fleet_config
+    GameLogger.debug(
+        f"Selected ships for fleet: {[ship.name for ship in Ship.valid_ships]}"
+    )
 
     engine = GameEngine(
         agent=agent_cls(),
@@ -95,6 +133,7 @@ async def main() -> None:
         enable_ws=not args.no_ws,
         headless=args.headless,
         log_boards=args.log_boards,
+        player_agent=player_cls() if player_cls else None,
     )
     game_num = 1
     max_games = args.max_games
