@@ -5,7 +5,7 @@ from enum import Enum
 class ShipType(Enum):
     CARRIER = 5
     BATTLESHIP = 4
-    CRUISER = 3
+    DESTROYER = 3
     SUBMARINE = 2
-    DESTROYER = 1
+    PATROL_BOAT = 1
     NONE = 0

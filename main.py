@@ -81,11 +81,11 @@ def parse_args() -> argparse.Namespace:
         default=[
             ShipType.CARRIER.name,
             ShipType.BATTLESHIP.name,
-            ShipType.CRUISER.name,
-            ShipType.SUBMARINE.name,
             ShipType.DESTROYER.name,
+            ShipType.SUBMARINE.name,
+            ShipType.PATROL_BOAT.name,
         ],
-        help="List of ship types to include in the fleet (default: all standard ships) e.g. --fleet-config CARRIER DESTROYER",
+        help="List of ship types to include in the fleet (default: all standard ships) e.g. --fleet-config CARRIER BATTLESHIP",
     )
     return parser.parse_args()
 
