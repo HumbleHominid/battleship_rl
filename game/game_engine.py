@@ -192,6 +192,7 @@ class GameEngine:
                         "type": "move_ack",
                         "coordinate": self._last_move["coordinate"],
                         "result": self._last_move["result"],
+                        "ship_hit": self._last_move["ship_hit"],
                         "ship_sunk": self._last_move["ship_sunk"],
                         "game_over": self._game_over,
                     }
@@ -226,14 +227,17 @@ class GameEngine:
             GameLogger.warn("Player fired invalid cell: %s", e)
             return
 
+        hit_name = ship.ship_type.name if (ship and state is CellState.HIT) else None
         sunk_name = ship.ship_type.name if (ship and ship.is_sunk) else None
         result_str = "HIT" if state is CellState.HIT else "MISS"
         msg = f"Player fires {coord}: {result_str}"
+        if hit_name:
+            msg += f" — {hit_name}"
         if sunk_name:
-            msg += f" — {sunk_name} sunk!"
+            msg += " sunk!"
         if not self.headless:
             print(msg)
-        GameLogger.info(msg)
+        GameLogger.debug(msg)
 
         if ship and ship.is_sunk and self.ws_server:
             await self.ws_server.broadcast_state(
@@ -249,6 +253,7 @@ class GameEngine:
             "player": "player",
             "coordinate": coord,
             "result": result_str,
+            "ship_hit": hit_name,
             "ship_sunk": sunk_name,
         }
 
@@ -268,14 +273,17 @@ class GameEngine:
             GameLogger.warn("Agent double-fired at %s: %s", coord, e)
             return
 
+        hit_name = ship.ship_type.name if (ship and state is CellState.HIT) else None
         sunk_name = ship.ship_type.name if (ship and ship.is_sunk) else None
         result_str = "HIT" if state is CellState.HIT else "MISS"
         msg = f"Agent fires {coord}: {result_str}"
+        if hit_name:
+            msg += f" — {hit_name}"
         if sunk_name:
-            msg += f" — {sunk_name} sunk!"
+            msg += " sunk!"
         if not self.headless:
             print(msg)
-        GameLogger.info(msg)
+        GameLogger.debug(msg)
 
         self.agent.receive_result(coord, result_str, sunk_name)
 
@@ -293,6 +301,7 @@ class GameEngine:
             "player": "agent",
             "coordinate": coord,
             "result": result_str,
+            "ship_hit": hit_name,
             "ship_sunk": sunk_name,
         }
 
@@ -445,13 +454,8 @@ class GameEngine:
         player_report = _report_score("Player", self.player_score)
         agent_report = _report_score("Agent", self.agent_score)
 
-        print(gameover_msg)
-        print(placement_msg)
-        print(player_report)
-        print(agent_report)
-        print("-" * len(gameover_msg))
-
         GameLogger.info(gameover_msg)
         GameLogger.debug(placement_msg)
         GameLogger.info(player_report)
         GameLogger.info(agent_report)
+        GameLogger.info("-" * len(gameover_msg))

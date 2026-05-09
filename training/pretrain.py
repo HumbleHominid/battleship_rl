@@ -53,9 +53,9 @@ def parse_args() -> argparse.Namespace:
         default=[
             ShipType.CARRIER.name,
             ShipType.BATTLESHIP.name,
-            ShipType.CRUISER.name,
-            ShipType.SUBMARINE.name,
             ShipType.DESTROYER.name,
+            ShipType.SUBMARINE.name,
+            ShipType.PATROL_BOAT.name,
         ],
     )
     return p.parse_args()

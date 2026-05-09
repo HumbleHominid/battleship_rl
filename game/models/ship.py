@@ -4,13 +4,13 @@ from .ship_type import ShipType
 
 # Actual cell counts per ship type.
 # NOTE: ShipType enum values are priority IDs, not sizes.
-# SUBMARINE.value=2 but size=3; DESTROYER.value=1 but size=2.
+# SUBMARINE.value=2 but size=3; PATROL_BOAT.value=1 but size=2.
 _SHIP_SIZES: dict[ShipType, int] = {
     ShipType.CARRIER: 5,
     ShipType.BATTLESHIP: 4,
-    ShipType.CRUISER: 3,
+    ShipType.DESTROYER: 3,
     ShipType.SUBMARINE: 3,
-    ShipType.DESTROYER: 2,
+    ShipType.PATROL_BOAT: 2,
 }
 
 
@@ -19,7 +19,8 @@ def get_ship_size(ship_type: ShipType) -> int:
 
 
 def get_ship_name(ship_type: ShipType) -> str:
-    return f"{ship_type.name.capitalize()} ({get_ship_size(ship_type)})"
+    display = "Patrol Boat" if ship_type is ShipType.PATROL_BOAT else ship_type.name.capitalize()
+    return f"{display} ({get_ship_size(ship_type)})"
 
 
 @dataclass
