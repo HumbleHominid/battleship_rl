@@ -79,7 +79,7 @@ def _place_with_score(
         best = _best_scored_candidate(board, ship_type, score_fn, lower_is_better)
         if best is not None:
             board.place_ship(ship_type, *best)
-            GameLogger.info(
+            GameLogger.debug(
                 "Placed %s at %s facing %s",
                 ship_type.name,
                 format_coordinate(*best[:2]),
@@ -95,7 +95,7 @@ def _place_with_score(
                 valid, _ = board.can_place_ship(ship_type, row, col, direction)
                 if valid:
                     board.place_ship(ship_type, row, col, direction)
-                    GameLogger.info(
+                    GameLogger.debug(
                         "Placed %s at %s facing %s",
                         ship_type.name,
                         format_coordinate(row, col),
@@ -125,7 +125,7 @@ def place_fleet_random(board: PlacementTarget) -> None:
             if valid:
                 board.place_ship(ship_type, row, col, direction)
                 cell = format_coordinate(row, col)
-                GameLogger.info(
+                GameLogger.debug(
                     "Placed %s at %s facing %s",
                     ship_type.name,
                     cell,
@@ -162,7 +162,7 @@ def place_fleet_gaussian(board: PlacementTarget) -> None:
             if valid:
                 board.place_ship(ship_type, row, col, direction)
                 cell = format_coordinate(row, col)
-                GameLogger.info(
+                GameLogger.debug(
                     "Placed %s at %s facing %s",
                     ship_type.name,
                     cell,
@@ -200,7 +200,7 @@ def place_fleet_spread(board: PlacementTarget) -> None:
             if best is not None:
                 board.place_ship(ship_type, *best)
                 cell = format_coordinate(*best[:2])
-                GameLogger.info(
+                GameLogger.debug(
                     "Placed %s at %s facing %s",
                     ship_type.name,
                     cell,
@@ -217,7 +217,7 @@ def place_fleet_spread(board: PlacementTarget) -> None:
                 if valid:
                     board.place_ship(ship_type, row, col, direction)
                     cell = format_coordinate(row, col)
-                    GameLogger.info(
+                    GameLogger.debug(
                         "Placed %s at %s facing %s",
                         ship_type.name,
                         cell,
@@ -260,7 +260,7 @@ def place_fleet_clustered(board: PlacementTarget) -> None:
             valid, _ = board.can_place_ship(ship_type, row, col, direction)
             if valid:
                 board.place_ship(ship_type, row, col, direction)
-                GameLogger.info(
+                GameLogger.debug(
                     "Placed %s at %s facing %s",
                     ship_type.name,
                     format_coordinate(row, col),
@@ -302,7 +302,7 @@ def place_fleet_quadrant(board: PlacementTarget) -> None:
             valid, _ = board.can_place_ship(ship_type, row, col, direction)
             if valid:
                 board.place_ship(ship_type, row, col, direction)
-                GameLogger.info(
+                GameLogger.debug(
                     "Placed %s at %s facing %s",
                     ship_type.name,
                     format_coordinate(row, col),

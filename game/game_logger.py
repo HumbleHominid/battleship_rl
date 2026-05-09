@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from logger import AppLogger
+from app_logger import AppLogger
 
 
 class GameLogger(AppLogger):
