@@ -25,6 +25,10 @@ When creating or updating markdown documentation files:
 
 Default to 1-2 sentence explanations. Only expand when complexity absolutely requires it.
 
+## Python Environment
+
+Use the conda environment `battleship-rl` when running all python code.
+
 ## Architecture
 
 The game is designed as a training harness for an external RL agent that connects via WebSocket. The engine runs locally; the agent is a separate process.
