@@ -1,0 +1,220 @@
+"""Vanilla DQN training for the Battleship Q-learning agent.
+
+Usage:
+    python training/q_learning/q_train.py
+    python training/q_learning/q_train.py --episodes 100000 --save-path checkpoints/q_agent.pt
+"""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import os
+import random
+
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+from game.agents.q_net import QNetwork
+from game.agents.q_net.state_encoder import encode_obs
+from training.battleship_env import BattleshipEnv
+from training.q_learning.q_replay_buffer import ReplayBuffer
+from training.training_logger import TrainingLogger
+
+# ---------------------------------------------------------------------------
+# Hyperparameters
+# ---------------------------------------------------------------------------
+EPISODES = 50_000
+GAMMA = 0.99
+LR = 1e-4
+BATCH_SIZE = 64
+BUFFER_CAP = 100_000
+TARGET_SYNC = 500  # steps between target network syncs
+EPS_START = 1.0
+EPS_END = 0.05
+EPS_DECAY = 0.9999  # multiplicative per episode
+EVAL_INTERVAL = 1_000  # episodes between evaluations
+EVAL_GAMES = 200
+DEFAULT_SAVE = "checkpoints/q_agent.pt"
+
+
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser()
+    p.add_argument("--episodes", type=int, default=EPISODES)
+    p.add_argument("--lr", type=float, default=LR)
+    p.add_argument("--batch-size", type=int, default=BATCH_SIZE)
+    p.add_argument("--buffer-cap", type=int, default=BUFFER_CAP)
+    p.add_argument("--target-sync", type=int, default=TARGET_SYNC)
+    p.add_argument("--eps-start", type=float, default=EPS_START)
+    p.add_argument("--eps-end", type=float, default=EPS_END)
+    p.add_argument("--eps-decay", type=float, default=EPS_DECAY)
+    p.add_argument("--eval-interval", type=int, default=EVAL_INTERVAL)
+    p.add_argument("--eval-games", type=int, default=EVAL_GAMES)
+    p.add_argument("--save-path", type=str, default=DEFAULT_SAVE)
+    p.add_argument("--device", type=str, default="cpu")
+    return p.parse_args()
+
+
+def _build_legal_mask(cell_feats: np.ndarray) -> np.ndarray:
+    """Return bool array of shape (100,) marking unknown (unshot) cells."""
+    return cell_feats[:, 0] == 1.0
+
+
+def evaluate(net: QNetwork, n_games: int, device: torch.device) -> float:
+    """Return mean turns-to-win over n_games episodes with greedy policy."""
+    net.eval()
+    env = BattleshipEnv()
+    turns = []
+
+    for _ in range(n_games):
+        obs, _ = env.reset()
+        while not env.done:
+            cell_np, global_np = encode_obs(obs)
+            legal = _build_legal_mask(cell_np)
+
+            cell_t = torch.tensor(
+                cell_np, dtype=torch.float32, device=device
+            ).unsqueeze(0)
+            global_t = torch.tensor(
+                global_np, dtype=torch.float32, device=device
+            ).unsqueeze(0)
+            mask_t = torch.tensor(legal, dtype=torch.bool, device=device).unsqueeze(0)
+
+            with torch.no_grad():
+                q = net(cell_t, global_t, mask_t)
+            action = q[0].argmax().item()
+            obs, _, _, _, _ = env.step(action)
+        turns.append(env.turn)
+
+    net.train()
+    return float(np.mean(turns))
+
+
+def train(args: argparse.Namespace) -> None:
+    TrainingLogger.setup(run_name="q_train")
+    device = torch.device(args.device)
+
+    online_net = QNetwork().to(device)
+    target_net = copy.deepcopy(online_net)
+    target_net.eval()
+
+    optimizer = optim.Adam(online_net.parameters(), lr=args.lr)
+    loss_fn = nn.MSELoss()
+    buffer = ReplayBuffer(args.buffer_cap)
+    env = BattleshipEnv()
+
+    os.makedirs(os.path.dirname(args.save_path) or ".", exist_ok=True)
+
+    epsilon = args.eps_start
+    total_steps = 0
+    best_turns = float("inf")
+
+    TrainingLogger.info("Starting training...")
+
+    for episode in range(1, args.episodes + 1):
+        print(f"Episode {episode}/{args.episodes} - Epsilon: {epsilon:.4f}", end="\r")
+        obs, _ = env.reset()
+        cell_feats, global_feats = encode_obs(obs)
+
+        while not env.done:
+            legal_mask = _build_legal_mask(cell_feats)
+            legal_indices = np.where(legal_mask)[0]
+
+            # Epsilon-greedy action selection
+            if random.random() < epsilon:
+                action = int(random.choice(legal_indices))
+            else:
+                cell_t = torch.tensor(
+                    cell_feats, dtype=torch.float32, device=device
+                ).unsqueeze(0)
+                global_t = torch.tensor(
+                    global_feats, dtype=torch.float32, device=device
+                ).unsqueeze(0)
+                mask_t = torch.tensor(
+                    legal_mask, dtype=torch.bool, device=device
+                ).unsqueeze(0)
+                with torch.no_grad():
+                    q = online_net(cell_t, global_t, mask_t)
+                action = int(q[0].argmax().item())
+
+            next_obs, reward, done, _, _ = env.step(action)
+            next_cell_feats, next_global_feats = encode_obs(next_obs)
+            next_legal_mask = _build_legal_mask(next_cell_feats)
+
+            buffer.push(
+                cell_feats,
+                global_feats,
+                action,
+                reward,
+                next_cell_feats,
+                next_global_feats,
+                done,
+                next_legal_mask,
+            )
+
+            cell_feats = next_cell_feats
+            global_feats = next_global_feats
+            total_steps += 1
+
+            # --- Learning step ---
+            if len(buffer) >= args.batch_size:
+                batch = buffer.sample(args.batch_size)
+                b = {k: v.to(device) for k, v in batch.items()}
+
+                # Current Q-values
+                q_all = online_net(
+                    b["cell_feats"],
+                    b["global_feats"],
+                    torch.ones(args.batch_size, 100, dtype=torch.bool, device=device),
+                )
+                q_pred = q_all.gather(1, b["actions"].unsqueeze(1)).squeeze(1)
+
+                # Target Q-values (vanilla DQN)
+                with torch.no_grad():
+                    q_next = target_net(
+                        b["next_cell_feats"],
+                        b["next_global_feats"],
+                        b["next_legal_mask"],
+                    )
+                    q_next_max = q_next.max(dim=1).values
+                    td_target = b["rewards"] + args.gamma * q_next_max * (
+                        1.0 - b["dones"]
+                    )
+
+                loss = loss_fn(q_pred, td_target)
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+
+            # --- Sync target network ---
+            if total_steps % args.target_sync == 0:
+                target_net.load_state_dict(online_net.state_dict())
+
+        epsilon = max(args.eps_end, epsilon * args.eps_decay)
+
+        # --- Periodic evaluation ---
+        if episode % args.eval_interval == 0:
+            mean_turns = evaluate(online_net, args.eval_games, device)
+            TrainingLogger.info(
+                f"ep={episode:6d}  eps={epsilon:.4f}  steps={total_steps:7d}  "
+                f"mean_turns={mean_turns:.1f}"
+            )
+            if mean_turns < best_turns:
+                best_turns = mean_turns
+                torch.save({"net_state": online_net.state_dict()}, args.save_path)
+                TrainingLogger.info(
+                    f"checkpoint saved -> {args.save_path} (best={best_turns:.1f})"
+                )
+
+
+def main() -> None:
+    args = parse_args()
+    # Attach gamma to args namespace for use in train()
+    args.gamma = GAMMA
+    train(args)
+
+
+if __name__ == "__main__":
+    main()

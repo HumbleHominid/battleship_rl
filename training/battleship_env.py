@@ -26,7 +26,7 @@ class BattleshipEnv:
     """
 
     def __init__(self) -> None:
-        GameLogger.setup(console_level=logging.DEBUG)
+        GameLogger.setup(console_level=logging.WARNING)
         self._board = GameBoard()
         self._turn = 0
         self._done = False

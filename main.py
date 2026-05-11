@@ -1,5 +1,6 @@
 import argparse
 import asyncio
+import inspect
 import logging
 import sys
 import time
@@ -46,6 +47,12 @@ def parse_args() -> argparse.Namespace:
         "--no-ws",
         action="store_true",
         help="Disable the WebSocket server (pure terminal play)",
+    )
+    parser.add_argument(
+        "--checkpoint",
+        type=str,
+        default=None,
+        help="Path to a checkpoint file for agents that support it (e.g. q_learning, transformer_ppo)",
     )
     parser.add_argument(
         "--log-level",
@@ -124,8 +131,12 @@ async def main() -> None:
         f"Selected ships for fleet: {[ship.name for ship in Ship.valid_ships]}"
     )
 
+    agent_kwargs: dict = {}
+    if args.checkpoint and "checkpoint_path" in inspect.signature(agent_cls.__init__).parameters:
+        agent_kwargs["checkpoint_path"] = args.checkpoint
+
     engine = GameEngine(
-        agent=agent_cls(),
+        agent=agent_cls(**agent_kwargs),
         player_type=args.player_type,
         player_placement=args.player_placement,
         ws_host=args.ws_host,
