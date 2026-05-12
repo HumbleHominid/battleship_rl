@@ -35,13 +35,17 @@
     "mtime": 1778350510.18575,
     "hash": "cb93ef0f994ab9c14e43cb18c5fb2956"
   },
+  "/Users/mfryer/Code/battleship-rl/training/q_learning/reward_fns.py": {
+    "mtime": 1778593308.2714684,
+    "hash": "8b8c4d88161a9127d1587557f0c8ddf2"
+  },
   "/Users/mfryer/Code/battleship-rl/training/q_learning/__init__.py": {
     "mtime": 1778507902.0499182,
     "hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "/Users/mfryer/Code/battleship-rl/training/q_learning/q_train.py": {
-    "mtime": 1778512426.203269,
-    "hash": "40f555499495173ab842d1023dc04175"
+    "mtime": 1778593674.5675793,
+    "hash": "3c3f57780983f2d38a978fea1ab5a775"
   },
   "/Users/mfryer/Code/battleship-rl/training/q_learning/q_replay_buffer.py": {
     "mtime": 1778507908.3368366,
