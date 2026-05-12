@@ -21,6 +21,7 @@ from game.agents.q_net import QNetwork
 from game.agents.q_net.state_encoder import BayesEncoder, legal_mask_from_obs
 from training.battleship_env import BattleshipEnv
 from training.q_learning.q_replay_buffer import ReplayBuffer
+from training.q_learning.reward_fns import REWARD_REGISTRY, make_reward_fn
 from training.training_logger import TrainingLogger
 
 # ---------------------------------------------------------------------------
@@ -53,7 +54,21 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--eval-interval", type=int, default=EVAL_INTERVAL)
     p.add_argument("--eval-games", type=int, default=EVAL_GAMES)
     p.add_argument("--save-path", type=str, default=DEFAULT_SAVE)
+    p.add_argument("--resume", type=str, default=None,
+                   help="Path to a checkpoint to resume training from")
     p.add_argument("--device", type=str, default="cpu")
+    p.add_argument(
+        "--reward-fn",
+        default="default",
+        choices=list(REWARD_REGISTRY),
+        help=f"Reward function to use. Options: {list(REWARD_REGISTRY)}",
+    )
+    p.add_argument(
+        "--alpha",
+        type=float,
+        default=0.5,
+        help="Bayesian probability bonus scale factor (used by --reward-fn bayes)",
+    )
     return p.parse_args()
 
 
@@ -86,6 +101,30 @@ def evaluate(net: QNetwork, n_games: int, device: torch.device) -> float:
     return float(np.mean(turns))
 
 
+def _save(
+    path: str,
+    online_net: QNetwork,
+    target_net: QNetwork,
+    optimizer: optim.Optimizer,
+    episode: int,
+    total_steps: int,
+    epsilon: float,
+    best_turns: float,
+) -> None:
+    torch.save(
+        {
+            "net_state": online_net.state_dict(),
+            "target_net_state": target_net.state_dict(),
+            "optimizer_state": optimizer.state_dict(),
+            "episode": episode,
+            "total_steps": total_steps,
+            "epsilon": epsilon,
+            "best_turns": best_turns,
+        },
+        path,
+    )
+
+
 def train(args: argparse.Namespace) -> None:
     TrainingLogger.setup(run_name="q_train")
     device = torch.device(args.device)
@@ -99,16 +138,30 @@ def train(args: argparse.Namespace) -> None:
     buffer = ReplayBuffer(args.buffer_cap)
     env = BattleshipEnv()
     encoder = BayesEncoder()
+    reward_fn = make_reward_fn(args.reward_fn, args.alpha)
 
     os.makedirs(os.path.dirname(args.save_path) or ".", exist_ok=True)
 
+    start_episode = 1
     epsilon = args.eps_start
     total_steps = 0
     best_turns = float("inf")
 
+    if args.resume:
+        ckpt = torch.load(args.resume, map_location=device)
+        online_net.load_state_dict(ckpt["net_state"])
+        target_net.load_state_dict(ckpt.get("target_net_state", ckpt["net_state"]))
+        if "optimizer_state" in ckpt:
+            optimizer.load_state_dict(ckpt["optimizer_state"])
+        start_episode = ckpt.get("episode", 1) + 1
+        total_steps = ckpt.get("total_steps", 0)
+        epsilon = ckpt.get("epsilon", args.eps_start)
+        best_turns = ckpt.get("best_turns", float("inf"))
+        TrainingLogger.info(f"Resumed from {args.resume} at episode {start_episode - 1}")
+
     TrainingLogger.info("Starting training...")
 
-    for episode in range(1, args.episodes + 1):
+    for episode in range(start_episode, args.episodes + 1):
         print(f"Episode {episode}/{args.episodes} - Epsilon: {epsilon:.4f}", end="\r")
         obs, _ = env.reset()
         encoder.reset()
@@ -129,7 +182,8 @@ def train(args: argparse.Namespace) -> None:
                     q = online_net(cell_t, global_t, mask_t)
                 action = int(q[0].argmax().item())
 
-            next_obs, reward, done, _, info = env.step(action)
+            next_obs, env_reward, done, _, info = env.step(action)
+            reward = reward_fn(action, cell_feats, env_reward, info["result"], info["ship_sunk"], done)
             encoder.update(info["coordinate"], info["result"], info["ship_sunk"])
             if not done:
                 next_cell_feats, next_global_feats = encoder.encode(next_obs)
@@ -196,9 +250,18 @@ def train(args: argparse.Namespace) -> None:
                 f"ep={episode:6d}  eps={epsilon:.4f}  steps={total_steps:7d}  "
                 f"mean_turns={mean_turns:.1f}"
             )
+            _save(
+                args.save_path + ".latest",
+                online_net, target_net, optimizer,
+                episode, total_steps, epsilon, best_turns,
+            )
             if mean_turns < best_turns:
                 best_turns = mean_turns
-                torch.save({"net_state": online_net.state_dict()}, args.save_path)
+                _save(
+                    args.save_path,
+                    online_net, target_net, optimizer,
+                    episode, total_steps, epsilon, best_turns,
+                )
                 TrainingLogger.info(
                     f"checkpoint saved -> {args.save_path} (best={best_turns:.1f})"
                 )
