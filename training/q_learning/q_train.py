@@ -18,7 +18,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 from game.agents.q_net import QNetwork
-from game.agents.q_net.state_encoder import encode_obs
+from game.agents.q_net.state_encoder import BayesEncoder, legal_mask_from_obs
 from training.battleship_env import BattleshipEnv
 from training.q_learning.q_replay_buffer import ReplayBuffer
 from training.training_logger import TrainingLogger
@@ -57,35 +57,29 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
-def _build_legal_mask(cell_feats: np.ndarray) -> np.ndarray:
-    """Return bool array of shape (100,) marking unknown (unshot) cells."""
-    return cell_feats[:, 0] == 1.0
-
-
 def evaluate(net: QNetwork, n_games: int, device: torch.device) -> float:
     """Return mean turns-to-win over n_games episodes with greedy policy."""
     net.eval()
     env = BattleshipEnv()
+    encoder = BayesEncoder()
     turns = []
 
     for _ in range(n_games):
         obs, _ = env.reset()
+        encoder.reset()
         while not env.done:
-            cell_np, global_np = encode_obs(obs)
-            legal = _build_legal_mask(cell_np)
+            cell_np, global_np = encoder.encode(obs)
+            legal = legal_mask_from_obs(obs)
 
-            cell_t = torch.tensor(
-                cell_np, dtype=torch.float32, device=device
-            ).unsqueeze(0)
-            global_t = torch.tensor(
-                global_np, dtype=torch.float32, device=device
-            ).unsqueeze(0)
+            cell_t = torch.tensor(cell_np, dtype=torch.float32, device=device).unsqueeze(0)
+            global_t = torch.tensor(global_np, dtype=torch.float32, device=device).unsqueeze(0)
             mask_t = torch.tensor(legal, dtype=torch.bool, device=device).unsqueeze(0)
 
             with torch.no_grad():
                 q = net(cell_t, global_t, mask_t)
             action = q[0].argmax().item()
-            obs, _, _, _, _ = env.step(action)
+            obs, _, _, _, info = env.step(action)
+            encoder.update(info["coordinate"], info["result"], info["ship_sunk"])
         turns.append(env.turn)
 
     net.train()
@@ -104,6 +98,7 @@ def train(args: argparse.Namespace) -> None:
     loss_fn = nn.MSELoss()
     buffer = ReplayBuffer(args.buffer_cap)
     env = BattleshipEnv()
+    encoder = BayesEncoder()
 
     os.makedirs(os.path.dirname(args.save_path) or ".", exist_ok=True)
 
@@ -116,32 +111,33 @@ def train(args: argparse.Namespace) -> None:
     for episode in range(1, args.episodes + 1):
         print(f"Episode {episode}/{args.episodes} - Epsilon: {epsilon:.4f}", end="\r")
         obs, _ = env.reset()
-        cell_feats, global_feats = encode_obs(obs)
+        encoder.reset()
+        cell_feats, global_feats = encoder.encode(obs)
 
         while not env.done:
-            legal_mask = _build_legal_mask(cell_feats)
+            legal_mask = legal_mask_from_obs(obs)
             legal_indices = np.where(legal_mask)[0]
 
             # Epsilon-greedy action selection
             if random.random() < epsilon:
                 action = int(random.choice(legal_indices))
             else:
-                cell_t = torch.tensor(
-                    cell_feats, dtype=torch.float32, device=device
-                ).unsqueeze(0)
-                global_t = torch.tensor(
-                    global_feats, dtype=torch.float32, device=device
-                ).unsqueeze(0)
-                mask_t = torch.tensor(
-                    legal_mask, dtype=torch.bool, device=device
-                ).unsqueeze(0)
+                cell_t = torch.tensor(cell_feats, dtype=torch.float32, device=device).unsqueeze(0)
+                global_t = torch.tensor(global_feats, dtype=torch.float32, device=device).unsqueeze(0)
+                mask_t = torch.tensor(legal_mask, dtype=torch.bool, device=device).unsqueeze(0)
                 with torch.no_grad():
                     q = online_net(cell_t, global_t, mask_t)
                 action = int(q[0].argmax().item())
 
-            next_obs, reward, done, _, _ = env.step(action)
-            next_cell_feats, next_global_feats = encode_obs(next_obs)
-            next_legal_mask = _build_legal_mask(next_cell_feats)
+            next_obs, reward, done, _, info = env.step(action)
+            encoder.update(info["coordinate"], info["result"], info["ship_sunk"])
+            if not done:
+                next_cell_feats, next_global_feats = encoder.encode(next_obs)
+                next_legal_mask = legal_mask_from_obs(next_obs)
+            else:
+                next_cell_feats = np.zeros_like(cell_feats)
+                next_global_feats = np.zeros_like(global_feats)
+                next_legal_mask = np.zeros(100, dtype=bool)
 
             buffer.push(
                 cell_feats,
@@ -154,6 +150,7 @@ def train(args: argparse.Namespace) -> None:
                 next_legal_mask,
             )
 
+            obs = next_obs
             cell_feats = next_cell_feats
             global_feats = next_global_feats
             total_steps += 1
@@ -163,7 +160,7 @@ def train(args: argparse.Namespace) -> None:
                 batch = buffer.sample(args.batch_size)
                 b = {k: v.to(device) for k, v in batch.items()}
 
-                # Current Q-values
+                # Current Q-values (no legal masking — we want the raw Q for the taken action)
                 q_all = online_net(
                     b["cell_feats"],
                     b["global_feats"],
@@ -179,9 +176,7 @@ def train(args: argparse.Namespace) -> None:
                         b["next_legal_mask"],
                     )
                     q_next_max = q_next.max(dim=1).values
-                    td_target = b["rewards"] + args.gamma * q_next_max * (
-                        1.0 - b["dones"]
-                    )
+                    td_target = b["rewards"] + args.gamma * q_next_max * (1.0 - b["dones"])
 
                 loss = loss_fn(q_pred, td_target)
                 optimizer.zero_grad()
@@ -211,7 +206,6 @@ def train(args: argparse.Namespace) -> None:
 
 def main() -> None:
     args = parse_args()
-    # Attach gamma to args namespace for use in train()
     args.gamma = GAMMA
     train(args)
 

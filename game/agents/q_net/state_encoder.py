@@ -1,42 +1,71 @@
 from __future__ import annotations
 
+from typing import Optional
+
 import numpy as np
 
-from game.models import Board
-
-# Cell state indices in the one-hot encoding
-_UNKNOWN = 0
-_HIT = 1
-_MISS = 2
+from game.agents.bayesian_agent import BayesianAgent
+from game.models import Board, Ship
 
 
-def encode_obs(obs: dict) -> tuple[np.ndarray, np.ndarray]:
-    """Encode a game observation into flat tensors for the Q-network.
-
-    Returns:
-        cell_feats:   (100, 3) float32 — one-hot {unknown, hit, miss} per cell
-        global_feats: (2,)    float32 — [ships_sunk / 5.0, min(turn / 100, 1.0)]
-    """
+def legal_mask_from_obs(obs: dict) -> np.ndarray:
+    """Return (100,) bool array — True for cells that have not yet been shot."""
     board = obs["enemy_board"]
     size = Board.board_size
-    cell_feats = np.zeros((size * size, 3), dtype=np.float32)
-
+    mask = np.zeros(size * size, dtype=bool)
     for r in range(size):
         for c in range(size):
-            cell_str = board[r][c]
-            _, cell_state = cell_str.split(":")
-            idx = r * size + c
-            if cell_state == "HIT":
-                cell_feats[idx, _HIT] = 1.0
-            elif cell_state == "MISS":
-                cell_feats[idx, _MISS] = 1.0
-            else:
-                cell_feats[idx, _UNKNOWN] = 1.0
+            _, cell_state = board[r][c].split(":")
+            if cell_state == "EMPTY":
+                mask[r * size + c] = True
+    return mask
 
-    ships_sunk = obs["ships_sunk"]["by_you"]
-    turn = obs["turn"]
-    global_feats = np.array(
-        [ships_sunk / 5.0, min(turn / 100.0, 1.0)], dtype=np.float32
-    )
 
-    return cell_feats, global_feats
+class BayesEncoder:
+    """Stateful encoder that wraps BayesianAgent to produce Q-network features.
+
+    Must be reset at the start of each episode and updated after each shot.
+
+    Usage:
+        encoder.reset()
+        cell_feats, global_feats = encoder.encode(obs)   # before action
+        encoder.update(coord, result, ship_sunk)          # after action result
+    """
+
+    def __init__(self) -> None:
+        self._bayes = BayesianAgent()
+        self._sunk_ships: set[str] = set()
+
+    def reset(self) -> None:
+        self._bayes.reset()
+        self._sunk_ships = set()
+
+    def update(
+        self, coordinate: str, result: str, ship_sunk: Optional[str]
+    ) -> None:
+        self._bayes.receive_result(coordinate, result, ship_sunk)
+        if ship_sunk is not None:
+            self._sunk_ships.add(ship_sunk)
+
+    def encode(self, obs: dict) -> tuple[np.ndarray, np.ndarray]:
+        """Encode game observation into feature tensors.
+
+        Returns:
+            cell_feats:   (100, 1) float32 — normalized Bayesian occupancy prob
+            global_feats: (5,)    float32 — binary sunk flag per ship
+        """
+        self._bayes.select_move(obs)  # refreshes internal occupancy grid
+
+        total_grid = np.array(self._bayes._grid, dtype=np.float32)
+        total_max = total_grid.max()
+        if total_max > 0:
+            total_grid /= total_max
+        cell_feats = total_grid.reshape(Board.board_size ** 2, 1)
+
+        fleet = Ship.get_fleet()
+        global_feats = np.array(
+            [1.0 if ship_type.name in self._sunk_ships else 0.0 for ship_type in fleet],
+            dtype=np.float32,
+        )
+
+        return cell_feats, global_feats
