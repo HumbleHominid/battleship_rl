@@ -4,19 +4,19 @@ from typing import Callable, Optional
 
 import numpy as np
 
-# (action, pre_shot_cell_feats (100,1), env_reward, result, ship_sunk, done) -> float
-RewardFn = Callable[[int, np.ndarray, float, str, Optional[str], bool], float]
+# (action, pre_shot_cell_feats (100,1) | None, base_reward, result, ship_sunk, done) -> float
+RewardFn = Callable[[int, Optional[np.ndarray], float, str, Optional[str], bool], float]
 
 
 def default_reward(
     action: int,
-    cell_feats: np.ndarray,
-    env_reward: float,
+    cell_feats: Optional[np.ndarray],
+    base_reward: float,
     result: str,
     ship_sunk: Optional[str],
     done: bool,
 ) -> float:
-    return env_reward
+    return base_reward
 
 
 def bayes_augment_reward(alpha: float) -> RewardFn:
@@ -24,16 +24,22 @@ def bayes_augment_reward(alpha: float) -> RewardFn:
 
     The probability is taken from cell_feats[action, 0], the normalized total
     Bayesian occupancy for the selected cell before the shot was taken.
+    Requires pre_shot_cell_feats to be passed to env.step().
     """
+
     def _fn(
         action: int,
-        cell_feats: np.ndarray,
-        env_reward: float,
+        cell_feats: Optional[np.ndarray],
+        base_reward: float,
         result: str,
         ship_sunk: Optional[str],
         done: bool,
     ) -> float:
-        return env_reward + alpha * float(cell_feats[action, 0])
+        if cell_feats is None:
+            raise ValueError(
+                "bayes reward fn requires pre_shot_cell_feats — pass cell_feats to env.step()"
+            )
+        return base_reward + alpha * float(cell_feats[action, 0])
 
     return _fn
 

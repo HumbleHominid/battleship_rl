@@ -96,6 +96,23 @@ class BayesianAgent(BaseAgent):
             self._valid_placements.pop(ship_type, None)
             self._recompute_grid()
 
+    def resolve_sunk_hits(self, obs: dict) -> None:
+        """Remove hit cells of sunk ships from _unresolved_hits and recompute grid."""
+        if not self._initialized:
+            return
+        board = obs["enemy_board"]
+        sunk_names = {st.name for st in self._sunk_ship_types}
+        hits_changed = False
+        for r in range(Board.board_size):
+            for c in range(Board.board_size):
+                ship_name, state = board[r][c].split(":")
+                if state == "HIT" and ship_name in sunk_names:
+                    if (r, c) in self._unresolved_hits:
+                        self._unresolved_hits.discard((r, c))
+                        hits_changed = True
+        if hits_changed:
+            self._recompute_grid()
+
     def select_move(self, obs: dict) -> str:
         if not self._initialized:
             self._initialize_placements()

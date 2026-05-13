@@ -54,7 +54,7 @@ class BayesEncoder:
             cell_feats:   (100, 1) float32 — normalized Bayesian occupancy prob
             global_feats: (5,)    float32 — binary sunk flag per ship
         """
-        self._bayes.select_move(obs)  # refreshes internal occupancy grid
+        self._bayes.resolve_sunk_hits(obs)
 
         total_grid = np.array(self._bayes._grid, dtype=np.float32)
         total_max = total_grid.max()
