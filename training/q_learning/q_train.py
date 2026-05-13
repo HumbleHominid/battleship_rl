@@ -43,6 +43,7 @@ DEFAULT_SAVE = "checkpoints/q_agent.pt"
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
+    p.add_argument("--gamma", type=float, default=GAMMA)
     p.add_argument("--episodes", type=int, default=EPISODES)
     p.add_argument("--lr", type=float, default=LR)
     p.add_argument("--batch-size", type=int, default=BATCH_SIZE)
@@ -72,6 +73,12 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=0.5,
         help="Bayesian probability bonus scale factor (used by --reward-fn bayes)",
+    )
+    p.add_argument(
+        "--demo-games",
+        type=int,
+        default=0,
+        help="Bayesian agent games to pre-load into the replay buffer (0 = skip)",
     )
     p.add_argument(
         "--pretrain-games",
@@ -154,6 +161,7 @@ def pretrain_supervised(
     optimizer = optim.Adam(net.parameters(), lr=lr)
     loss_fn = nn.MSELoss()
     all_mask = torch.ones(1, 100, dtype=torch.bool, device=device)
+    min_loss = 1e-4
 
     net.train()
     for epoch in range(1, n_epochs + 1):
@@ -168,7 +176,7 @@ def pretrain_supervised(
             global_t = torch.tensor(
                 np.stack([g for _, g in chunk]), dtype=torch.float32, device=device
             )
-            target = cell_t.squeeze(-1)  # (B, 100) — Bayesian prob as Q-target
+            target = cell_t[:, :, 0]  # (B, 100) — channel 0 is Bayesian probability
             mask = all_mask.expand(len(chunk), -1)
             q = net(cell_t, global_t, mask)
             loss = loss_fn(q, target)
@@ -177,9 +185,69 @@ def pretrain_supervised(
             optimizer.step()
             total_loss += loss.item()
             steps += 1
-        TrainingLogger.info(
-            "Pretrain epoch %d/%d  loss=%.5f", epoch, n_epochs, total_loss / steps
-        )
+        loss = total_loss / steps
+        TrainingLogger.info("Pretrain epoch %d/%d  loss=%.5f", epoch, n_epochs, loss)
+        if loss < min_loss:
+            TrainingLogger.info(
+                "Pretrain loss %.5f < %.5f, stopping early", loss, min_loss
+            )
+            break
+
+
+def fill_demo_buffer(
+    buffer: ReplayBuffer,
+    n_games: int,
+    reward_fn,
+) -> None:
+    """Pre-populate replay buffer with Bayesian agent game transitions."""
+    from game.agents.bayesian_agent import BayesianAgent
+    from game.coordinate_methods import parse_coordinate
+    from game.models import Board
+
+    TrainingLogger.info("Demo buffer: collecting %d Bayesian games...", n_games)
+    env = BattleshipEnv(reward_fn=reward_fn)
+    encoder = BayesEncoder()
+    agent = BayesianAgent(deterministic_selection=False)
+
+    for _ in range(n_games):
+        obs, _ = env.reset()
+        encoder.reset()
+        agent.reset()
+        cell_feats, global_feats = encoder.encode(obs)
+
+        while not env.done:
+            coord = agent.select_move(obs)
+            row, col = parse_coordinate(coord)
+            action = row * Board.board_size + col
+
+            next_obs, reward, done, _, info = env.step(action, cell_feats)
+            encoder.update(info["coordinate"], info["result"], info["ship_sunk"])
+            agent.receive_result(info["coordinate"], info["result"], info["ship_sunk"])
+
+            if not done:
+                next_cell_feats, next_global_feats = encoder.encode(next_obs)
+                next_legal_mask = legal_mask_from_obs(next_obs)
+            else:
+                next_cell_feats = np.zeros_like(cell_feats)
+                next_global_feats = np.zeros_like(global_feats)
+                next_legal_mask = np.zeros(100, dtype=bool)
+
+            buffer.push(
+                cell_feats,
+                global_feats,
+                action,
+                reward,
+                next_cell_feats,
+                next_global_feats,
+                done,
+                next_legal_mask,
+            )
+
+            obs = next_obs
+            cell_feats = next_cell_feats
+            global_feats = next_global_feats
+
+    TrainingLogger.info("Demo buffer: %d transitions loaded", len(buffer))
 
 
 def _save(
@@ -252,6 +320,9 @@ def train(args: argparse.Namespace) -> None:
             device,
         )
         target_net.load_state_dict(online_net.state_dict())
+
+    if args.demo_games > 0:
+        fill_demo_buffer(buffer, args.demo_games, reward_fn)
 
     TrainingLogger.info("Starting training...")
 
@@ -383,7 +454,6 @@ def train(args: argparse.Namespace) -> None:
 
 def main() -> None:
     args = parse_args()
-    args.gamma = GAMMA
     TrainingLogger.setup(run_name="q_train")
     train(args)
 
