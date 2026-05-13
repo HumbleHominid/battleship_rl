@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import logging
+from typing import Optional
+
+import numpy as np
 
 from game.coordinate_methods import format_coordinate
 from game.game_board import GameBoard
 from game.game_logger import GameLogger
 from game.models import Board, CellState
+from training.reward_fns import RewardFn, default_reward
 
 
 class BattleshipEnv:
@@ -13,10 +17,18 @@ class BattleshipEnv:
 
     Wraps GameBoard directly — no async, no WebSocket.
 
-    Reward structure:
+    Base reward structure (before any reward_fn shaping):
         - Every turn: -0.1
         - Miss: -0.1 (in addition to turn penalty → -0.2 total)
+        - Hit:  +1.0
+        - Ship sunk: +5.0
         - Win:  +10.0
+
+    Args:
+        reward_fn: Optional reward shaping function applied inside step().
+                   Receives (action, pre_shot_cell_feats, base_reward, result,
+                   ship_sunk, done) and returns the final reward. Defaults to
+                   the identity (no shaping).
 
     Observation dict (compatible with GameEngine's agent_obs format):
         enemy_board:  10x10 list[list[str]] "SHIPTYPE:CELLSTATE" with fog of war
@@ -25,11 +37,12 @@ class BattleshipEnv:
         turn:         int
     """
 
-    def __init__(self) -> None:
+    def __init__(self, reward_fn: RewardFn = default_reward) -> None:
         GameLogger.setup(console_level=logging.WARNING)
         self._board = GameBoard()
         self._turn = 0
         self._done = False
+        self._reward_fn = reward_fn
 
     # ------------------------------------------------------------------
 
@@ -40,8 +53,18 @@ class BattleshipEnv:
         self._done = False
         return self._get_obs(), {}
 
-    def step(self, action: int) -> tuple[dict, float, bool, bool, dict]:
+    def step(
+        self,
+        action: int,
+        pre_shot_cell_feats: Optional[np.ndarray] = None,
+    ) -> tuple[dict, float, bool, bool, dict]:
         """Take a shot at cell index `action` (row * 10 + col).
+
+        Args:
+            action: Cell index 0–99 (row * 10 + col).
+            pre_shot_cell_feats: Optional (100, F) feature array encoding the
+                board state before the shot. Required by reward fns that use
+                Bayesian occupancy probabilities (e.g. bayes_augment_reward).
 
         Returns:
             obs, reward, terminated, truncated, info
@@ -54,26 +77,39 @@ class BattleshipEnv:
         cell_state, ship = self._board.receive_shot(row, col)
 
         self._turn += 1
-        reward = -0.1  # per-turn penalty
+        turn_pct = self._turn / (Board.board_size**2)
+
+        def lerp(a: float, b: float = 0.0, t: float = turn_pct) -> float:
+            """Linear interpolation from a to b based on t (0.0 to 1.0). Defaults to
+            interpolating from a to 0.0 based on turn percentage."""
+            return a + (b - a) * t
+
+        base_reward = lerp(0.0, -0.1)
 
         sunk_name: str | None = None
-        if cell_state is CellState.MISS:
-            reward -= 0.1
-        elif cell_state is CellState.HIT:
-            reward += 1.0
+        if cell_state is CellState.HIT:
+            base_reward += lerp(1.0)
         if ship is not None and ship.is_sunk:
             sunk_name = ship.ship_type.name
-            reward += 5.0
+            base_reward += lerp(5.0)
 
         self._done = self._board.all_ships_sunk()
         if self._done:
-            reward += 10.0
+            base_reward += lerp(10.0)
 
         info = {
             "coordinate": coord,
             "result": cell_state.name,
             "ship_sunk": sunk_name,
         }
+        reward = self._reward_fn(
+            action,
+            pre_shot_cell_feats,
+            base_reward,
+            cell_state.name,
+            sunk_name,
+            self._done,
+        )
         return self._get_obs(), reward, self._done, False, info
 
     def legal_actions(self) -> list[int]:

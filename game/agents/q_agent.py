@@ -50,9 +50,11 @@ class QAgent(BaseAgent):
         with torch.no_grad():
             q_values = self.net(cell_t, global_t, legal_t)
 
-        action = q_values[0].argmax().item()
+        action = int(q_values[0].argmax().item())
         row, col = divmod(action, Board.board_size)
-        return format_coordinate(row, col)
+        coord = format_coordinate(row, col)
+        GameLogger.debug("Q-agent shooting %s (q=%.3f)", coord, float(q_values[0, action].item()))
+        return coord
 
     def receive_result(
         self, coordinate: str, result: str, ship_sunk: Optional[str]
