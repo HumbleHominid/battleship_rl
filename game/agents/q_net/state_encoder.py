@@ -51,16 +51,31 @@ class BayesEncoder:
         """Encode game observation into feature tensors.
 
         Returns:
-            cell_feats:   (100, 1) float32 — normalized Bayesian occupancy prob
+            cell_feats:   (100, 3) float32 — [Bayesian prob, is_hit, is_miss] per cell
             global_feats: (5,)    float32 — binary sunk flag per ship
         """
         self._bayes.resolve_sunk_hits(obs)
 
-        total_grid = np.array(self._bayes._grid, dtype=np.float32)
+        # Channel 0: normalized Bayesian occupancy probability
+        total_grid = np.array(self._bayes._grid, dtype=np.float32).reshape(Board.board_size ** 2)
         total_max = total_grid.max()
         if total_max > 0:
             total_grid /= total_max
-        cell_feats = total_grid.reshape(Board.board_size ** 2, 1)
+
+        # Channels 1 & 2: binary hit / miss from observation
+        board = obs["enemy_board"]
+        hit = np.zeros(Board.board_size ** 2, dtype=np.float32)
+        miss = np.zeros(Board.board_size ** 2, dtype=np.float32)
+        for r in range(Board.board_size):
+            for c in range(Board.board_size):
+                _, state = board[r][c].split(":")
+                idx = r * Board.board_size + c
+                if state == "HIT":
+                    hit[idx] = 1.0
+                elif state == "MISS":
+                    miss[idx] = 1.0
+
+        cell_feats = np.stack([total_grid, hit, miss], axis=1)  # (100, 3)
 
         fleet = Ship.get_fleet()
         global_feats = np.array(

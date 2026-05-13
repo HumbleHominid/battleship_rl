@@ -77,25 +77,18 @@ class BattleshipEnv:
         cell_state, ship = self._board.receive_shot(row, col)
 
         self._turn += 1
-        turn_pct = self._turn / (Board.board_size**2)
-
-        def lerp(a: float, b: float = 0.0, t: float = turn_pct) -> float:
-            """Linear interpolation from a to b based on t (0.0 to 1.0). Defaults to
-            interpolating from a to 0.0 based on turn percentage."""
-            return a + (b - a) * t
-
-        base_reward = lerp(0.0, -0.1)
+        base_reward = -0.1
 
         sunk_name: str | None = None
         if cell_state is CellState.HIT:
-            base_reward += lerp(1.0)
+            base_reward += 1.0
         if ship is not None and ship.is_sunk:
             sunk_name = ship.ship_type.name
-            base_reward += lerp(5.0)
+            base_reward += 5.0
 
         self._done = self._board.all_ships_sunk()
         if self._done:
-            base_reward += lerp(10.0)
+            base_reward += 10.0
 
         info = {
             "coordinate": coord,
