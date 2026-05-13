@@ -73,6 +73,18 @@ def parse_args() -> argparse.Namespace:
         default=0.5,
         help="Bayesian probability bonus scale factor (used by --reward-fn bayes)",
     )
+    p.add_argument(
+        "--pretrain-games",
+        type=int,
+        default=0,
+        help="Games of random play to collect for supervised pretraining (0 = skip)",
+    )
+    p.add_argument(
+        "--pretrain-epochs",
+        type=int,
+        default=10,
+        help="Epochs over the pretraining dataset",
+    )
     return p.parse_args()
 
 
@@ -107,6 +119,67 @@ def evaluate(net: QNetwork, n_games: int, device: torch.device) -> float:
 
     net.train()
     return float(np.mean(turns))
+
+
+def pretrain_supervised(
+    net: QNetwork,
+    n_games: int,
+    n_epochs: int,
+    batch_size: int,
+    lr: float,
+    device: torch.device,
+) -> None:
+    """Warm-start net by regression: Q[i] ≈ Bayesian occupancy probability[i].
+
+    Plays n_games with random actions to generate diverse board states, then
+    trains the network for n_epochs so that Q-values track Bayesian probability
+    before any RL updates begin.
+    """
+    TrainingLogger.info("Pretraining: collecting %d games...", n_games)
+    env = BattleshipEnv()
+    encoder = BayesEncoder()
+
+    demos: list[tuple[np.ndarray, np.ndarray]] = []
+    for _ in range(n_games):
+        obs, _ = env.reset()
+        encoder.reset()
+        while not env.done:
+            cell_feats, global_feats = encoder.encode(obs)
+            demos.append((cell_feats.copy(), global_feats.copy()))
+            action = random.choice(env.legal_actions())
+            obs, _, _, _, info = env.step(action)
+            encoder.update(info["coordinate"], info["result"], info["ship_sunk"])
+
+    TrainingLogger.info("Pretraining: %d samples, %d epochs", len(demos), n_epochs)
+    optimizer = optim.Adam(net.parameters(), lr=lr)
+    loss_fn = nn.MSELoss()
+    all_mask = torch.ones(1, 100, dtype=torch.bool, device=device)
+
+    net.train()
+    for epoch in range(1, n_epochs + 1):
+        random.shuffle(demos)
+        total_loss = 0.0
+        steps = 0
+        for i in range(0, len(demos), batch_size):
+            chunk = demos[i : i + batch_size]
+            cell_t = torch.tensor(
+                np.stack([c for c, _ in chunk]), dtype=torch.float32, device=device
+            )
+            global_t = torch.tensor(
+                np.stack([g for _, g in chunk]), dtype=torch.float32, device=device
+            )
+            target = cell_t.squeeze(-1)  # (B, 100) — Bayesian prob as Q-target
+            mask = all_mask.expand(len(chunk), -1)
+            q = net(cell_t, global_t, mask)
+            loss = loss_fn(q, target)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            total_loss += loss.item()
+            steps += 1
+        TrainingLogger.info(
+            "Pretrain epoch %d/%d  loss=%.5f", epoch, n_epochs, total_loss / steps
+        )
 
 
 def _save(
@@ -168,6 +241,17 @@ def train(args: argparse.Namespace) -> None:
         epsilon = args.eps_start
         total_steps = 0
         best_turns = float("inf")
+
+    if args.pretrain_games > 0:
+        pretrain_supervised(
+            online_net,
+            args.pretrain_games,
+            args.pretrain_epochs,
+            args.batch_size,
+            args.lr,
+            device,
+        )
+        target_net.load_state_dict(online_net.state_dict())
 
     TrainingLogger.info("Starting training...")
 
