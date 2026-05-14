@@ -187,7 +187,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L1",
       "id": "training_reward_fns_py",
-      "community": 19,
+      "community": 20,
       "norm_label": "reward_fns.py"
     },
     {
@@ -196,7 +196,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L13",
       "id": "training_reward_fns_default_reward",
-      "community": 19,
+      "community": 20,
       "norm_label": "default_reward()"
     },
     {
@@ -205,7 +205,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L24",
       "id": "training_reward_fns_bayes_augment_reward",
-      "community": 19,
+      "community": 20,
       "norm_label": "bayes_augment_reward()"
     },
     {
@@ -214,7 +214,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L58",
       "id": "training_reward_fns_make_reward_fn",
-      "community": 19,
+      "community": 20,
       "norm_label": "make_reward_fn()"
     },
     {
@@ -223,7 +223,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L25",
       "id": "training_reward_fns_rationale_25",
-      "community": 19,
+      "community": 20,
       "norm_label": "return a reward fn that adds alpha * bayesian probability of the chosen cell."
     },
     {
@@ -232,7 +232,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L59",
       "id": "training_reward_fns_rationale_59",
-      "community": 19,
+      "community": 20,
       "norm_label": "instantiate a reward function by name.      args:         name:  key from reward"
     },
     {
@@ -241,7 +241,7 @@
       "source_file": "training/__init__.py",
       "source_location": "L1",
       "id": "training_init_py",
-      "community": 27,
+      "community": 26,
       "norm_label": "__init__.py"
     },
     {
@@ -547,7 +547,7 @@
       "source_file": "training/q_learning/__init__.py",
       "source_location": "L1",
       "id": "training_q_learning_init_py",
-      "community": 28,
+      "community": 27,
       "norm_label": "__init__.py"
     },
     {
@@ -664,7 +664,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L1",
       "id": "training_q_learning_q_replay_buffer_py",
-      "community": 20,
+      "community": 21,
       "norm_label": "q_replay_buffer.py"
     },
     {
@@ -673,7 +673,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L11",
       "id": "q_learning_q_replay_buffer_transition",
-      "community": 20,
+      "community": 21,
       "norm_label": "transition"
     },
     {
@@ -682,7 +682,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L22",
       "id": "q_learning_q_replay_buffer_replaybuffer",
-      "community": 20,
+      "community": 21,
       "norm_label": "replaybuffer"
     },
     {
@@ -691,7 +691,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L25",
       "id": "q_learning_q_replay_buffer_replaybuffer_init",
-      "community": 20,
+      "community": 21,
       "norm_label": ".__init__()"
     },
     {
@@ -700,7 +700,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L30",
       "id": "q_learning_q_replay_buffer_replaybuffer_push",
-      "community": 20,
+      "community": 21,
       "norm_label": ".push()"
     },
     {
@@ -709,7 +709,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L57",
       "id": "q_learning_q_replay_buffer_replaybuffer_sample",
-      "community": 20,
+      "community": 21,
       "norm_label": ".sample()"
     },
     {
@@ -718,7 +718,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L86",
       "id": "q_learning_q_replay_buffer_replaybuffer_len",
-      "community": 20,
+      "community": 21,
       "norm_label": ".__len__()"
     },
     {
@@ -727,7 +727,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L23",
       "id": "q_learning_q_replay_buffer_rationale_23",
-      "community": 20,
+      "community": 21,
       "norm_label": "circular experience replay buffer for dqn training."
     },
     {
@@ -1780,7 +1780,7 @@
       "source_file": "",
       "source_location": "",
       "id": "baseagent",
-      "community": 25,
+      "community": 17,
       "norm_label": "baseagent"
     },
     {
@@ -2068,7 +2068,7 @@
       "source_file": "game/agents/base_agent.py",
       "source_location": "L11",
       "id": "agents_base_agent_rationale_11",
-      "community": 29,
+      "community": 28,
       "norm_label": "return a coordinate string (e.g. 'b5') given an observation dict."
     },
     {
@@ -2239,7 +2239,7 @@
       "source_file": "game/agents/__init__.py",
       "source_location": "L1",
       "id": "game_agents_init_py",
-      "community": 30,
+      "community": 29,
       "norm_label": "__init__.py"
     },
     {
@@ -2464,7 +2464,7 @@
       "source_file": "game/agents/q_net/__init__.py",
       "source_location": "L1",
       "id": "game_agents_q_net_init_py",
-      "community": 31,
+      "community": 30,
       "norm_label": "__init__.py"
     },
     {
@@ -2617,7 +2617,7 @@
       "source_file": "game/agents/ppo_net/_constants.py",
       "source_location": "L1",
       "id": "game_agents_ppo_net_constants_py",
-      "community": 32,
+      "community": 31,
       "norm_label": "_constants.py"
     },
     {
@@ -2959,7 +2959,7 @@
       "source_file": "analysis.md",
       "source_location": "L1",
       "id": "analysis_md",
-      "community": 18,
+      "community": 19,
       "norm_label": "analysis.md"
     },
     {
@@ -2968,7 +2968,7 @@
       "source_file": "analysis.md",
       "source_location": "L1",
       "id": "battleship_rl_analysis_using_rl_to_play_battleship",
-      "community": 18,
+      "community": 19,
       "norm_label": "using rl to play battleship"
     },
     {
@@ -2977,7 +2977,7 @@
       "source_file": "analysis.md",
       "source_location": "L5",
       "id": "battleship_rl_analysis_baseline_approach",
-      "community": 18,
+      "community": 19,
       "norm_label": "baseline approach"
     },
     {
@@ -2986,7 +2986,7 @@
       "source_file": "analysis.md",
       "source_location": "L9",
       "id": "battleship_rl_analysis_random_agent",
-      "community": 18,
+      "community": 19,
       "norm_label": "random agent"
     },
     {
@@ -2995,7 +2995,7 @@
       "source_file": "analysis.md",
       "source_location": "L13",
       "id": "battleship_rl_analysis_hunt_agent",
-      "community": 18,
+      "community": 19,
       "norm_label": "hunt agent"
     },
     {
@@ -3004,7 +3004,7 @@
       "source_file": "analysis.md",
       "source_location": "L17",
       "id": "battleship_rl_analysis_bayesian_agent",
-      "community": 18,
+      "community": 19,
       "norm_label": "bayesian agent"
     },
     {
@@ -3013,7 +3013,7 @@
       "source_file": "analysis.md",
       "source_location": "L21",
       "id": "battleship_rl_analysis_baseline_performance",
-      "community": 18,
+      "community": 19,
       "norm_label": "baseline performance"
     },
     {
@@ -3022,7 +3022,7 @@
       "source_file": "analysis.md",
       "source_location": "L25",
       "id": "battleship_rl_analysis_random_placement",
-      "community": 18,
+      "community": 19,
       "norm_label": "random placement"
     },
     {
@@ -3031,7 +3031,7 @@
       "source_file": "analysis.md",
       "source_location": "L35",
       "id": "battleship_rl_analysis_spread_placement",
-      "community": 18,
+      "community": 19,
       "norm_label": "spread placement"
     },
     {
@@ -3040,7 +3040,7 @@
       "source_file": "analysis.md",
       "source_location": "L45",
       "id": "battleship_rl_analysis_gaussian_placement",
-      "community": 18,
+      "community": 19,
       "norm_label": "gaussian placement"
     },
     {
@@ -3049,7 +3049,7 @@
       "source_file": "analysis.md",
       "source_location": "L55",
       "id": "battleship_rl_analysis_baseline_analysis",
-      "community": 18,
+      "community": 19,
       "norm_label": "baseline analysis"
     },
     {
@@ -3058,7 +3058,7 @@
       "source_file": "training/README.md",
       "source_location": "L1",
       "id": "training_readme_md",
-      "community": 17,
+      "community": 18,
       "norm_label": "readme.md"
     },
     {
@@ -3067,7 +3067,7 @@
       "source_file": "training/README.md",
       "source_location": "L1",
       "id": "training_readme_training_the_transformerppo_agent",
-      "community": 17,
+      "community": 18,
       "norm_label": "training the transformerppo agent"
     },
     {
@@ -3076,7 +3076,7 @@
       "source_file": "training/README.md",
       "source_location": "L5",
       "id": "training_readme_architecture",
-      "community": 17,
+      "community": 18,
       "norm_label": "architecture"
     },
     {
@@ -3085,7 +3085,7 @@
       "source_file": "training/README.md",
       "source_location": "L14",
       "id": "training_readme_two_phase_pipeline",
-      "community": 17,
+      "community": 18,
       "norm_label": "two-phase pipeline"
     },
     {
@@ -3094,7 +3094,7 @@
       "source_file": "training/README.md",
       "source_location": "L16",
       "id": "training_readme_phase_1_imitation_pretraining",
-      "community": 17,
+      "community": 18,
       "norm_label": "phase 1 \u2014 imitation pretraining"
     },
     {
@@ -3103,7 +3103,7 @@
       "source_file": "training/README.md",
       "source_location": "L20",
       "id": "training_readme_codeblock_1",
-      "community": 17,
+      "community": 18,
       "norm_label": "code:bash (python training/pretrain.py \\)"
     },
     {
@@ -3112,7 +3112,7 @@
       "source_file": "training/README.md",
       "source_location": "L41",
       "id": "training_readme_phase_2_ppo_fine_tuning",
-      "community": 17,
+      "community": 18,
       "norm_label": "phase 2 \u2014 ppo fine-tuning"
     },
     {
@@ -3121,7 +3121,7 @@
       "source_file": "training/README.md",
       "source_location": "L45",
       "id": "training_readme_codeblock_2",
-      "community": 17,
+      "community": 18,
       "norm_label": "code:bash (python training/ppo_train.py \\)"
     },
     {
@@ -3130,7 +3130,7 @@
       "source_file": "training/README.md",
       "source_location": "L53",
       "id": "training_readme_codeblock_3",
-      "community": 17,
+      "community": 18,
       "norm_label": "code:bash (python training/ppo_train.py --iters 500 --from-scratch)"
     },
     {
@@ -3139,7 +3139,7 @@
       "source_file": "training/README.md",
       "source_location": "L91",
       "id": "training_readme_reward_structure",
-      "community": 17,
+      "community": 18,
       "norm_label": "reward structure"
     },
     {
@@ -3148,7 +3148,7 @@
       "source_file": "training/README.md",
       "source_location": "L99",
       "id": "training_readme_running_the_trained_agent",
-      "community": 17,
+      "community": 18,
       "norm_label": "running the trained agent"
     },
     {
@@ -3157,7 +3157,7 @@
       "source_file": "training/README.md",
       "source_location": "L101",
       "id": "training_readme_codeblock_4",
-      "community": 17,
+      "community": 18,
       "norm_label": "code:bash (# play 100 automated games and report avg turns)"
     },
     {
@@ -3165,7 +3165,7 @@
       "file_type": "rationale",
       "source_file": "training/reward_fns.py",
       "source_location": "L23",
-      "community": 19,
+      "community": 20,
       "norm_label": "return a reward fn that adds alpha * bayesian probability of the chosen cell.",
       "id": "training_reward_fns_rationale_23"
     },
@@ -3174,7 +3174,7 @@
       "file_type": "rationale",
       "source_file": "training/reward_fns.py",
       "source_location": "L54",
-      "community": 19,
+      "community": 20,
       "norm_label": "instantiate a reward function by name.      args:         name:  key from reward",
       "id": "training_reward_fns_rationale_54"
     },
@@ -3597,7 +3597,7 @@
       "file_type": "rationale",
       "source_file": "game/logger.py",
       "source_location": "L25",
-      "community": 33,
+      "community": 32,
       "norm_label": "configure handlers. called once from main.py at process start.",
       "id": "game_logger_rationale_25"
     },
@@ -3606,7 +3606,7 @@
       "file_type": "rationale",
       "source_file": "game/logger.py",
       "source_location": "L45",
-      "community": 34,
+      "community": 33,
       "norm_label": "flush and close all file handlers. call before archiving the log file.",
       "id": "game_logger_rationale_45"
     },
@@ -3705,7 +3705,7 @@
       "file_type": "rationale",
       "source_file": "game/logger.py",
       "source_location": "L25",
-      "community": 35,
+      "community": 34,
       "norm_label": "configure handlers. called once from main.py at process start.",
       "id": "logger_rationale_25"
     },
@@ -3714,7 +3714,7 @@
       "file_type": "rationale",
       "source_file": "game/logger.py",
       "source_location": "L45",
-      "community": 36,
+      "community": 35,
       "norm_label": "flush and close all file handlers. call before archiving the log file.",
       "id": "logger_rationale_45"
     },
@@ -3930,7 +3930,7 @@
       "file_type": "rationale",
       "source_file": "game/game_engine.py",
       "source_location": "L14",
-      "community": 21,
+      "community": 17,
       "norm_label": "orchestrates a full game of battleship.      the game-side agent always runs in-",
       "id": "game_engine_rationale_14"
     },
@@ -4704,7 +4704,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L1",
-      "community": 25,
+      "community": 17,
       "norm_label": "random_agent.py",
       "id": "random_agent"
     },
@@ -4713,7 +4713,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L9",
-      "community": 25,
+      "community": 17,
       "norm_label": "randomagent",
       "id": "random_agent_randomagent"
     },
@@ -4722,7 +4722,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L10",
-      "community": 25,
+      "community": 17,
       "norm_label": ".__init__()",
       "id": "random_agent_randomagent_init"
     },
@@ -4731,7 +4731,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L17",
-      "community": 25,
+      "community": 17,
       "norm_label": ".select_move()",
       "id": "random_agent_randomagent_select_move"
     },
@@ -4740,7 +4740,7 @@
       "file_type": "code",
       "source_file": "game/agents/random_agent.py",
       "source_location": "L25",
-      "community": 25,
+      "community": 17,
       "norm_label": ".reset()",
       "id": "random_agent_randomagent_reset"
     },
@@ -4965,7 +4965,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L8",
-      "community": 21,
+      "community": 17,
       "norm_label": "baseagent",
       "id": "base_agent_baseagent"
     },
@@ -4983,7 +4983,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L14",
-      "community": 21,
+      "community": 17,
       "norm_label": ".place_fleet()",
       "id": "base_agent_baseagent_place_fleet"
     },
@@ -4992,7 +4992,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L18",
-      "community": 21,
+      "community": 17,
       "norm_label": ".receive_result()",
       "id": "base_agent_baseagent_receive_result"
     },
@@ -5001,7 +5001,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L23",
-      "community": 21,
+      "community": 17,
       "norm_label": ".reset()",
       "id": "base_agent_baseagent_reset"
     },
@@ -5019,7 +5019,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L15",
-      "community": 21,
+      "community": 17,
       "norm_label": "place this agent's fleet. defaults to gameboard.place_fleet().",
       "id": "base_agent_rationale_15"
     },
@@ -5028,7 +5028,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L21",
-      "community": 21,
+      "community": 17,
       "norm_label": "called after each move. hook for training feedback; no-op by default.",
       "id": "base_agent_rationale_21"
     },
@@ -5037,7 +5037,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L24",
-      "community": 21,
+      "community": 17,
       "norm_label": "reset agent state for a new episode.",
       "id": "base_agent_rationale_24"
     },
@@ -5910,7 +5910,7 @@
       "file_type": "code",
       "source_file": "main.py",
       "source_location": "L1",
-      "community": 26,
+      "community": 25,
       "norm_label": "main.py",
       "id": "main"
     },
@@ -5919,7 +5919,7 @@
       "file_type": "code",
       "source_file": "main.py",
       "source_location": "L14",
-      "community": 26,
+      "community": 25,
       "norm_label": "parse_args()",
       "id": "main_parse_args"
     },
@@ -5928,7 +5928,7 @@
       "file_type": "code",
       "source_file": "main.py",
       "source_location": "L93",
-      "community": 26,
+      "community": 25,
       "norm_label": "main()",
       "id": "main_main"
     },
@@ -6632,9 +6632,9 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_reward_fns_rationale_25",
-      "target": "training_reward_fns_bayes_augment_reward",
-      "confidence_score": 1.0
+      "target": "training_reward_fns_bayes_augment_reward"
     },
     {
       "relation": "rationale_for",
@@ -6652,9 +6652,9 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_reward_fns_rationale_59",
-      "target": "training_reward_fns_make_reward_fn",
-      "confidence_score": 1.0
+      "target": "training_reward_fns_make_reward_fn"
     },
     {
       "relation": "calls",
@@ -7098,9 +7098,9 @@
       "source_file": "training/battleship_env.py",
       "source_location": "L60",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_battleship_env_rationale_60",
-      "target": "training_battleship_env_battleshipenv_step",
-      "confidence_score": 1.0
+      "target": "training_battleship_env_battleshipenv_step"
     },
     {
       "relation": "calls",
@@ -7159,9 +7159,9 @@
       "source_file": "training/battleship_env.py",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_battleship_env_rationale_108",
-      "target": "training_battleship_env_battleshipenv_legal_actions",
-      "confidence_score": 1.0
+      "target": "training_battleship_env_battleshipenv_legal_actions"
     },
     {
       "relation": "rationale_for",
@@ -7600,9 +7600,9 @@
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L105",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "q_learning_q_train_rationale_105",
-      "target": "q_learning_q_train_evaluate",
-      "confidence_score": 1.0
+      "target": "q_learning_q_train_evaluate"
     },
     {
       "relation": "calls",
@@ -7693,9 +7693,9 @@
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L145",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "q_learning_q_train_rationale_145",
-      "target": "q_learning_q_train_pretrain_supervised",
-      "confidence_score": 1.0
+      "target": "q_learning_q_train_pretrain_supervised"
     },
     {
       "relation": "calls",
@@ -7745,9 +7745,9 @@
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L208",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "q_learning_q_train_rationale_208",
-      "target": "q_learning_q_train_fill_demo_buffer",
-      "confidence_score": 1.0
+      "target": "q_learning_q_train_fill_demo_buffer"
     },
     {
       "relation": "calls",
@@ -10337,9 +10337,9 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_bayesian_agent_bayesianagent_init",
-      "target": "agents_bayesian_agent_bayesianagent_initialize_placements",
-      "confidence_score": 1.0
+      "target": "agents_bayesian_agent_bayesianagent_initialize_placements"
     },
     {
       "relation": "calls",
@@ -10348,9 +10348,9 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_bayesian_agent_bayesianagent_init",
-      "target": "agents_bayesian_agent_bayesianagent_recompute_grid",
-      "confidence_score": 1.0
+      "target": "agents_bayesian_agent_bayesianagent_recompute_grid"
     },
     {
       "relation": "rationale_for",
@@ -10358,9 +10358,9 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_bayesian_agent_rationale_42",
-      "target": "agents_bayesian_agent_bayesianagent_init",
-      "confidence_score": 1.0
+      "target": "agents_bayesian_agent_bayesianagent_init"
     },
     {
       "relation": "calls",
@@ -10423,9 +10423,9 @@
       "source_file": "game/agents/bayesian_agent.py",
       "source_location": "L105",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_bayesian_agent_rationale_105",
-      "target": "agents_bayesian_agent_bayesianagent_resolve_sunk_hits",
-      "confidence_score": 1.0
+      "target": "agents_bayesian_agent_bayesianagent_resolve_sunk_hits"
     },
     {
       "relation": "rationale_for",
@@ -11330,9 +11330,9 @@
       "source_file": "game/agents/q_net/state_encoder.py",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "q_net_state_encoder_rationale_52",
-      "target": "q_net_state_encoder_bayesencoder_encode",
-      "confidence_score": 1.0
+      "target": "q_net_state_encoder_bayesencoder_encode"
     },
     {
       "relation": "rationale_for",
@@ -17264,5 +17264,5 @@
       "source_file": "analysis.md"
     }
   ],
-  "built_at_commit": "5f333208562ee2e61c4dee9f2209520a47f84c70"
+  "built_at_commit": "a97fc3636bf7d5ecb64805554f94df361264761a"
 }

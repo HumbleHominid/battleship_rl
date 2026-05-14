@@ -56,8 +56,8 @@
     "hash": "f78c08fb77c7fa52f08e733a4d89b524"
   },
   "/Users/mfryer/Code/battleship-rl/game/game_engine.py": {
-    "mtime": 1778353101.3043396,
-    "hash": "0da3ae284c9b23adb6f16053b0037012"
+    "mtime": 1778750240.5527947,
+    "hash": "fccf00d4f15f70a96d0a1a57b904157c"
   },
   "/Users/mfryer/Code/battleship-rl/game/game_logger.py": {
     "mtime": 1778350510.1110876,
@@ -170,5 +170,9 @@
   "/Users/mfryer/Code/battleship-rl/training/README.md": {
     "mtime": 1778350510.1834257,
     "hash": "d5f1cdab7b0630ec5e8f4e1bad5a9a0f"
+  },
+  "/Users/mfryer/Code/battleship-rl/training/visualization.png": {
+    "mtime": 1778749053.6925075,
+    "hash": "4c1998cc0e3491d46a5327e454f2cb2f"
   }
 }
