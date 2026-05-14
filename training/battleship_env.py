@@ -19,7 +19,6 @@ class BattleshipEnv:
 
     Base reward structure (before any reward_fn shaping):
         - Every turn: -0.1
-        - Miss: -0.1 (in addition to turn penalty → -0.2 total)
         - Hit:  +1.0
         - Ship sunk: +5.0
         - Win:  +10.0

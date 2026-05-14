@@ -38,6 +38,7 @@ class BayesEncoder:
 
     def reset(self) -> None:
         self._bayes.reset()
+        self._bayes.init()
         self._sunk_ships = set()
 
     def update(

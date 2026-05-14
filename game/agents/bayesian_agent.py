@@ -38,6 +38,11 @@ class BayesianAgent(BaseAgent):
         self._initialized = False
         GameLogger.debug("ProbabilityAgent state reset")
 
+    def init(self) -> None:
+        """Explicitly initialize placements and compute the starting grid."""
+        self._initialize_placements()
+        self._recompute_grid()
+
     def _initialize_placements(self) -> None:
         for ship_type in Ship.get_fleet():
             size = get_ship_size(ship_type)
