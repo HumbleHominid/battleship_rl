@@ -92,6 +92,12 @@ def parse_args() -> argparse.Namespace:
         default=10,
         help="Epochs over the pretraining dataset",
     )
+    p.add_argument(
+        "--log-level",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        default="INFO",
+        help="Logging verbosity (default: INFO)",
+    )
     return p.parse_args()
 
 
@@ -328,7 +334,7 @@ def train(args: argparse.Namespace) -> None:
 
     for episode in range(start_episode, args.episodes + 1):
         print(
-            f"ep: {episode}/{args.episodes} - eps: {epsilon:.4f} - reward: {reward:.2f}",
+            f"ep: {episode}/{args.episodes} - eps: {epsilon:.4f} - reward: {reward:.4f}",
             end="\r",
         )
         obs, _ = env.reset()
@@ -454,7 +460,7 @@ def train(args: argparse.Namespace) -> None:
 
 def main() -> None:
     args = parse_args()
-    TrainingLogger.setup(run_name="q_train")
+    TrainingLogger.setup(run_name="q_train", console_level=args.log_level)
     train(args)
 
 
