@@ -52,7 +52,7 @@
       "source_file": "main.py",
       "source_location": "L1",
       "id": "main_py",
-      "community": 11,
+      "community": 12,
       "norm_label": "main.py"
     },
     {
@@ -61,7 +61,7 @@
       "source_file": "main.py",
       "source_location": "L15",
       "id": "battleship_rl_main_parse_args",
-      "community": 11,
+      "community": 12,
       "norm_label": "parse_args()"
     },
     {
@@ -70,7 +70,7 @@
       "source_file": "main.py",
       "source_location": "L100",
       "id": "battleship_rl_main_main",
-      "community": 11,
+      "community": 12,
       "norm_label": "main()"
     },
     {
@@ -187,7 +187,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L1",
       "id": "training_reward_fns_py",
-      "community": 19,
+      "community": 20,
       "norm_label": "reward_fns.py"
     },
     {
@@ -196,7 +196,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L13",
       "id": "training_reward_fns_default_reward",
-      "community": 19,
+      "community": 20,
       "norm_label": "default_reward()"
     },
     {
@@ -205,7 +205,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L24",
       "id": "training_reward_fns_bayes_augment_reward",
-      "community": 19,
+      "community": 20,
       "norm_label": "bayes_augment_reward()"
     },
     {
@@ -214,7 +214,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L58",
       "id": "training_reward_fns_make_reward_fn",
-      "community": 19,
+      "community": 20,
       "norm_label": "make_reward_fn()"
     },
     {
@@ -223,7 +223,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L25",
       "id": "training_reward_fns_rationale_25",
-      "community": 19,
+      "community": 20,
       "norm_label": "return a reward fn that adds alpha * bayesian probability of the chosen cell."
     },
     {
@@ -232,7 +232,7 @@
       "source_file": "training/reward_fns.py",
       "source_location": "L59",
       "id": "training_reward_fns_rationale_59",
-      "community": 19,
+      "community": 20,
       "norm_label": "instantiate a reward function by name.      args:         name:  key from reward"
     },
     {
@@ -664,7 +664,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L1",
       "id": "training_q_learning_q_replay_buffer_py",
-      "community": 20,
+      "community": 21,
       "norm_label": "q_replay_buffer.py"
     },
     {
@@ -673,7 +673,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L11",
       "id": "q_learning_q_replay_buffer_transition",
-      "community": 20,
+      "community": 21,
       "norm_label": "transition"
     },
     {
@@ -682,7 +682,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L22",
       "id": "q_learning_q_replay_buffer_replaybuffer",
-      "community": 20,
+      "community": 21,
       "norm_label": "replaybuffer"
     },
     {
@@ -691,7 +691,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L25",
       "id": "q_learning_q_replay_buffer_replaybuffer_init",
-      "community": 20,
+      "community": 21,
       "norm_label": ".__init__()"
     },
     {
@@ -700,7 +700,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L30",
       "id": "q_learning_q_replay_buffer_replaybuffer_push",
-      "community": 20,
+      "community": 21,
       "norm_label": ".push()"
     },
     {
@@ -709,7 +709,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L57",
       "id": "q_learning_q_replay_buffer_replaybuffer_sample",
-      "community": 20,
+      "community": 21,
       "norm_label": ".sample()"
     },
     {
@@ -718,7 +718,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L86",
       "id": "q_learning_q_replay_buffer_replaybuffer_len",
-      "community": 20,
+      "community": 21,
       "norm_label": ".__len__()"
     },
     {
@@ -727,7 +727,7 @@
       "source_file": "training/q_learning/q_replay_buffer.py",
       "source_location": "L23",
       "id": "q_learning_q_replay_buffer_rationale_23",
-      "community": 20,
+      "community": 21,
       "norm_label": "circular experience replay buffer for dqn training."
     },
     {
@@ -754,7 +754,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L13",
       "id": "game_game_engine_gameengine",
-      "community": 11,
+      "community": 12,
       "norm_label": "gameengine"
     },
     {
@@ -763,7 +763,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L28",
       "id": "game_game_engine_gameengine_init",
-      "community": 11,
+      "community": 12,
       "norm_label": ".__init__()"
     },
     {
@@ -772,7 +772,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L54",
       "id": "game_game_engine_gameengine_reset",
-      "community": 11,
+      "community": 12,
       "norm_label": ".reset()"
     },
     {
@@ -781,7 +781,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L70",
       "id": "game_game_engine_gameengine_run",
-      "community": 11,
+      "community": 12,
       "norm_label": ".run()"
     },
     {
@@ -790,7 +790,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L95",
       "id": "game_game_engine_gameengine_setup",
-      "community": 11,
+      "community": 12,
       "norm_label": "._setup()"
     },
     {
@@ -799,7 +799,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L104",
       "id": "game_game_engine_gameengine_setup_ws_player",
-      "community": 11,
+      "community": 12,
       "norm_label": "._setup_ws_player()"
     },
     {
@@ -808,7 +808,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L149",
       "id": "game_game_engine_gameengine_game_loop",
-      "community": 11,
+      "community": 12,
       "norm_label": "._game_loop()"
     },
     {
@@ -817,7 +817,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L178",
       "id": "game_game_engine_gameengine_take_player_turn",
-      "community": 11,
+      "community": 12,
       "norm_label": "._take_player_turn()"
     },
     {
@@ -826,7 +826,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L222",
       "id": "game_game_engine_gameengine_fire_on_agent_board",
-      "community": 11,
+      "community": 12,
       "norm_label": "._fire_on_agent_board()"
     },
     {
@@ -835,7 +835,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L260",
       "id": "game_game_engine_gameengine_take_agent_turn",
-      "community": 11,
+      "community": 12,
       "norm_label": "._take_agent_turn()"
     },
     {
@@ -853,7 +853,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L316",
       "id": "game_game_engine_gameengine_check_win_condition",
-      "community": 11,
+      "community": 12,
       "norm_label": "._check_win_condition()"
     },
     {
@@ -880,7 +880,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L339",
       "id": "game_game_engine_gameengine_build_agent_obs",
-      "community": 11,
+      "community": 12,
       "norm_label": "._build_agent_obs()"
     },
     {
@@ -889,7 +889,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L350",
       "id": "game_game_engine_gameengine_build_player_view",
-      "community": 11,
+      "community": 12,
       "norm_label": "._build_player_view()"
     },
     {
@@ -898,7 +898,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L362",
       "id": "game_game_engine_gameengine_build_state_dict",
-      "community": 11,
+      "community": 12,
       "norm_label": "._build_state_dict()"
     },
     {
@@ -907,7 +907,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L397",
       "id": "game_game_engine_gameengine_build_game_over_dict",
-      "community": 11,
+      "community": 12,
       "norm_label": "._build_game_over_dict()"
     },
     {
@@ -934,7 +934,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L435",
       "id": "game_game_engine_gameengine_display_boards",
-      "community": 11,
+      "community": 12,
       "norm_label": "._display_boards()"
     },
     {
@@ -943,7 +943,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L442",
       "id": "game_game_engine_gameengine_display_game_over",
-      "community": 11,
+      "community": 12,
       "norm_label": "._display_game_over()"
     },
     {
@@ -952,7 +952,7 @@
       "source_file": "game/game_engine.py",
       "source_location": "L14",
       "id": "game_game_engine_rationale_14",
-      "community": 11,
+      "community": 12,
       "norm_label": "orchestrates a full game of battleship.      the game-side agent always runs in-"
     },
     {
@@ -1258,7 +1258,7 @@
       "source_file": "game/coordinate_methods.py",
       "source_location": "L6",
       "id": "game_coordinate_methods_parse_coordinate",
-      "community": 11,
+      "community": 12,
       "norm_label": "parse_coordinate()"
     },
     {
@@ -1276,7 +1276,7 @@
       "source_file": "game/coordinate_methods.py",
       "source_location": "L7",
       "id": "game_coordinate_methods_rationale_7",
-      "community": 11,
+      "community": 12,
       "norm_label": "parse 'a1'-'j10' to zero-indexed (row, col). raises valueerror on bad input."
     },
     {
@@ -3058,7 +3058,7 @@
       "source_file": "training/README.md",
       "source_location": "L1",
       "id": "training_readme_md",
-      "community": 17,
+      "community": 16,
       "norm_label": "readme.md"
     },
     {
@@ -3067,7 +3067,7 @@
       "source_file": "training/README.md",
       "source_location": "L1",
       "id": "training_readme_training_the_transformerppo_agent",
-      "community": 17,
+      "community": 16,
       "norm_label": "training the transformerppo agent"
     },
     {
@@ -3076,7 +3076,7 @@
       "source_file": "training/README.md",
       "source_location": "L5",
       "id": "training_readme_architecture",
-      "community": 17,
+      "community": 16,
       "norm_label": "architecture"
     },
     {
@@ -3085,7 +3085,7 @@
       "source_file": "training/README.md",
       "source_location": "L14",
       "id": "training_readme_two_phase_pipeline",
-      "community": 17,
+      "community": 16,
       "norm_label": "two-phase pipeline"
     },
     {
@@ -3094,7 +3094,7 @@
       "source_file": "training/README.md",
       "source_location": "L16",
       "id": "training_readme_phase_1_imitation_pretraining",
-      "community": 17,
+      "community": 16,
       "norm_label": "phase 1 \u2014 imitation pretraining"
     },
     {
@@ -3103,7 +3103,7 @@
       "source_file": "training/README.md",
       "source_location": "L20",
       "id": "training_readme_codeblock_1",
-      "community": 17,
+      "community": 16,
       "norm_label": "code:bash (python training/pretrain.py \\)"
     },
     {
@@ -3112,7 +3112,7 @@
       "source_file": "training/README.md",
       "source_location": "L41",
       "id": "training_readme_phase_2_ppo_fine_tuning",
-      "community": 17,
+      "community": 16,
       "norm_label": "phase 2 \u2014 ppo fine-tuning"
     },
     {
@@ -3121,7 +3121,7 @@
       "source_file": "training/README.md",
       "source_location": "L45",
       "id": "training_readme_codeblock_2",
-      "community": 17,
+      "community": 16,
       "norm_label": "code:bash (python training/ppo_train.py \\)"
     },
     {
@@ -3130,7 +3130,7 @@
       "source_file": "training/README.md",
       "source_location": "L53",
       "id": "training_readme_codeblock_3",
-      "community": 17,
+      "community": 16,
       "norm_label": "code:bash (python training/ppo_train.py --iters 500 --from-scratch)"
     },
     {
@@ -3139,7 +3139,7 @@
       "source_file": "training/README.md",
       "source_location": "L91",
       "id": "training_readme_reward_structure",
-      "community": 17,
+      "community": 16,
       "norm_label": "reward structure"
     },
     {
@@ -3148,7 +3148,7 @@
       "source_file": "training/README.md",
       "source_location": "L99",
       "id": "training_readme_running_the_trained_agent",
-      "community": 17,
+      "community": 16,
       "norm_label": "running the trained agent"
     },
     {
@@ -3157,7 +3157,7 @@
       "source_file": "training/README.md",
       "source_location": "L101",
       "id": "training_readme_codeblock_4",
-      "community": 17,
+      "community": 16,
       "norm_label": "code:bash (# play 100 automated games and report avg turns)"
     },
     {
@@ -3165,7 +3165,7 @@
       "file_type": "rationale",
       "source_file": "training/reward_fns.py",
       "source_location": "L23",
-      "community": 19,
+      "community": 20,
       "norm_label": "return a reward fn that adds alpha * bayesian probability of the chosen cell.",
       "id": "training_reward_fns_rationale_23"
     },
@@ -3174,7 +3174,7 @@
       "file_type": "rationale",
       "source_file": "training/reward_fns.py",
       "source_location": "L54",
-      "community": 19,
+      "community": 20,
       "norm_label": "instantiate a reward function by name.      args:         name:  key from reward",
       "id": "training_reward_fns_rationale_54"
     },
@@ -3633,7 +3633,7 @@
       "file_type": "code",
       "source_file": "game/logger.py",
       "source_location": "L11",
-      "community": 13,
+      "community": 11,
       "norm_label": "gamelogger",
       "id": "logger_gamelogger"
     },
@@ -3696,7 +3696,7 @@
       "file_type": "rationale",
       "source_file": "game/logger.py",
       "source_location": "L12",
-      "community": 13,
+      "community": 11,
       "norm_label": "statically accessible logger. call gamelogger.info() / .warn() / .error() / .deb",
       "id": "logger_rationale_12"
     },
@@ -3930,7 +3930,7 @@
       "file_type": "rationale",
       "source_file": "game/game_engine.py",
       "source_location": "L14",
-      "community": 21,
+      "community": 11,
       "norm_label": "orchestrates a full game of battleship.      the game-side agent always runs in-",
       "id": "game_engine_rationale_14"
     },
@@ -4245,7 +4245,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L11",
-      "community": 12,
+      "community": 13,
       "norm_label": "gameboard",
       "id": "game_board_gameboard"
     },
@@ -4254,7 +4254,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L12",
-      "community": 12,
+      "community": 13,
       "norm_label": ".__init__()",
       "id": "game_board_gameboard_init"
     },
@@ -4299,7 +4299,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L80",
-      "community": 12,
+      "community": 13,
       "norm_label": ".get_placed_cells()",
       "id": "game_board_gameboard_get_placed_cells"
     },
@@ -4308,7 +4308,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L83",
-      "community": 12,
+      "community": 13,
       "norm_label": ".place_fleet()",
       "id": "game_board_gameboard_place_fleet"
     },
@@ -4317,7 +4317,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L102",
-      "community": 12,
+      "community": 13,
       "norm_label": ".find_ship_at()",
       "id": "game_board_gameboard_find_ship_at"
     },
@@ -4326,7 +4326,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L109",
-      "community": 12,
+      "community": 13,
       "norm_label": ".receive_shot()",
       "id": "game_board_gameboard_receive_shot"
     },
@@ -4335,7 +4335,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L135",
-      "community": 12,
+      "community": 13,
       "norm_label": ".all_ships_sunk()",
       "id": "game_board_gameboard_all_ships_sunk"
     },
@@ -4344,7 +4344,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L138",
-      "community": 12,
+      "community": 13,
       "norm_label": ".ships_sunk_count()",
       "id": "game_board_gameboard_ships_sunk_count"
     },
@@ -4353,7 +4353,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L141",
-      "community": 12,
+      "community": 13,
       "norm_label": ".cells_hit_count()",
       "id": "game_board_gameboard_cells_hit_count"
     },
@@ -4362,7 +4362,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L146",
-      "community": 12,
+      "community": 13,
       "norm_label": ".cells_targeted()",
       "id": "game_board_gameboard_cells_targeted"
     },
@@ -4371,7 +4371,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L154",
-      "community": 12,
+      "community": 13,
       "norm_label": ".get_unhit_cells()",
       "id": "game_board_gameboard_get_unhit_cells"
     },
@@ -4380,7 +4380,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L163",
-      "community": 12,
+      "community": 13,
       "norm_label": ".board_as_matrix()",
       "id": "game_board_gameboard_board_as_matrix"
     },
@@ -4389,7 +4389,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L183",
-      "community": 12,
+      "community": 13,
       "norm_label": "._cell_symbol()",
       "id": "game_board_gameboard_cell_symbol"
     },
@@ -4398,7 +4398,7 @@
       "file_type": "code",
       "source_file": "game/game_board.py",
       "source_location": "L193",
-      "community": 12,
+      "community": 13,
       "norm_label": ".display()",
       "id": "game_board_gameboard_display"
     },
@@ -4443,7 +4443,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L84",
-      "community": 12,
+      "community": 13,
       "norm_label": "place the full fleet using a weighted-random placement algorithm.          algor",
       "id": "game_board_rationale_84"
     },
@@ -4452,7 +4452,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L103",
-      "community": 12,
+      "community": 13,
       "norm_label": "return the ship occupying this cell, or none.",
       "id": "game_board_rationale_103"
     },
@@ -4461,7 +4461,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L110",
-      "community": 12,
+      "community": 13,
       "norm_label": "process an incoming shot.         returns (cellstate.hit, ship) on hit, (cellsta",
       "id": "game_board_rationale_110"
     },
@@ -4470,7 +4470,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L155",
-      "community": 12,
+      "community": 13,
       "norm_label": "return all (row, col) pairs not yet shot (empty or ship still there).",
       "id": "game_board_rationale_155"
     },
@@ -4479,7 +4479,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L164",
-      "community": 12,
+      "community": 13,
       "norm_label": "serialize board to a 10x10 list of 'shiptype:cellstate' strings.         if fog_",
       "id": "game_board_rationale_164"
     },
@@ -4488,7 +4488,7 @@
       "file_type": "rationale",
       "source_file": "game/game_board.py",
       "source_location": "L194",
-      "community": 12,
+      "community": 13,
       "norm_label": "print the board to stdout with row/col headers.",
       "id": "game_board_rationale_194"
     },
@@ -4506,7 +4506,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L12",
-      "community": 13,
+      "community": 11,
       "norm_label": "gamewebsocketserver",
       "id": "websocket_gamewebsocketserver"
     },
@@ -4515,7 +4515,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L27",
-      "community": 13,
+      "community": 11,
       "norm_label": ".__init__()",
       "id": "websocket_gamewebsocketserver_init"
     },
@@ -4524,7 +4524,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L41",
-      "community": 13,
+      "community": 11,
       "norm_label": ".start()",
       "id": "websocket_gamewebsocketserver_start"
     },
@@ -4533,7 +4533,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L58",
-      "community": 13,
+      "community": 11,
       "norm_label": ".stop()",
       "id": "websocket_gamewebsocketserver_stop"
     },
@@ -4542,7 +4542,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L74",
-      "community": 13,
+      "community": 11,
       "norm_label": "._handler()",
       "id": "websocket_gamewebsocketserver_handler"
     },
@@ -4551,7 +4551,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L112",
-      "community": 13,
+      "community": 11,
       "norm_label": "._handle_player()",
       "id": "websocket_gamewebsocketserver_handle_player"
     },
@@ -4560,7 +4560,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L137",
-      "community": 13,
+      "community": 11,
       "norm_label": "._handle_observer()",
       "id": "websocket_gamewebsocketserver_handle_observer"
     },
@@ -4569,7 +4569,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L160",
-      "community": 13,
+      "community": 11,
       "norm_label": ".broadcast_state()",
       "id": "websocket_gamewebsocketserver_broadcast_state"
     },
@@ -4578,7 +4578,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L173",
-      "community": 13,
+      "community": 11,
       "norm_label": ".send_to_player()",
       "id": "websocket_gamewebsocketserver_send_to_player"
     },
@@ -4587,7 +4587,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L182",
-      "community": 13,
+      "community": 11,
       "norm_label": ".wait_for_player_move()",
       "id": "websocket_gamewebsocketserver_wait_for_player_move"
     },
@@ -4596,7 +4596,7 @@
       "file_type": "code",
       "source_file": "game/websocket.py",
       "source_location": "L186",
-      "community": 13,
+      "community": 11,
       "norm_label": ".wait_for_player_placement()",
       "id": "websocket_gamewebsocketserver_wait_for_player_placement"
     },
@@ -4614,7 +4614,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L13",
-      "community": 13,
+      "community": 11,
       "norm_label": "embedded websocket server that:       - broadcasts game state to all connected o",
       "id": "websocket_rationale_13"
     },
@@ -4623,7 +4623,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L42",
-      "community": 13,
+      "community": 11,
       "norm_label": "launch the websocket server and keep it alive until this coroutine is cancelled.",
       "id": "websocket_rationale_42"
     },
@@ -4632,7 +4632,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L59",
-      "community": 13,
+      "community": 11,
       "norm_label": "send close frames to all connected clients.",
       "id": "websocket_rationale_59"
     },
@@ -4641,7 +4641,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L75",
-      "community": 13,
+      "community": 11,
       "norm_label": "entry point for each new connection. reads role, routes accordingly.",
       "id": "websocket_rationale_75"
     },
@@ -4650,7 +4650,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L113",
-      "community": 13,
+      "community": 11,
       "norm_label": "receive move and placement commands from the player and enqueue them.",
       "id": "websocket_rationale_113"
     },
@@ -4659,7 +4659,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L138",
-      "community": 13,
+      "community": 11,
       "norm_label": "register an observer and hold its connection open until disconnect.",
       "id": "websocket_rationale_138"
     },
@@ -4668,7 +4668,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L161",
-      "community": 13,
+      "community": 11,
       "norm_label": "serialize state_dict to json and send to all connected observers.",
       "id": "websocket_rationale_161"
     },
@@ -4677,7 +4677,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L174",
-      "community": 13,
+      "community": 11,
       "norm_label": "send a json message to the connected player. no-op if none connected.",
       "id": "websocket_rationale_174"
     },
@@ -4686,7 +4686,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L183",
-      "community": 13,
+      "community": 11,
       "norm_label": "await the next move coordinate from the player's move queue.",
       "id": "websocket_rationale_183"
     },
@@ -4695,7 +4695,7 @@
       "file_type": "rationale",
       "source_file": "game/websocket.py",
       "source_location": "L187",
-      "community": 13,
+      "community": 11,
       "norm_label": "await the next ship placement message from the player's placement queue.",
       "id": "websocket_rationale_187"
     },
@@ -4965,7 +4965,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L8",
-      "community": 21,
+      "community": 19,
       "norm_label": "baseagent",
       "id": "base_agent_baseagent"
     },
@@ -4983,7 +4983,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L14",
-      "community": 21,
+      "community": 19,
       "norm_label": ".place_fleet()",
       "id": "base_agent_baseagent_place_fleet"
     },
@@ -4992,7 +4992,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L18",
-      "community": 21,
+      "community": 19,
       "norm_label": ".receive_result()",
       "id": "base_agent_baseagent_receive_result"
     },
@@ -5001,7 +5001,7 @@
       "file_type": "code",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L23",
-      "community": 21,
+      "community": 19,
       "norm_label": ".reset()",
       "id": "base_agent_baseagent_reset"
     },
@@ -5010,7 +5010,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L11",
-      "community": 12,
+      "community": 13,
       "norm_label": "return a coordinate string (e.g. 'b5') given an observation dict.",
       "id": "base_agent_rationale_11"
     },
@@ -5019,7 +5019,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L15",
-      "community": 21,
+      "community": 19,
       "norm_label": "place this agent's fleet. defaults to gameboard.place_fleet().",
       "id": "base_agent_rationale_15"
     },
@@ -5028,7 +5028,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L21",
-      "community": 21,
+      "community": 19,
       "norm_label": "called after each move. hook for training feedback; no-op by default.",
       "id": "base_agent_rationale_21"
     },
@@ -5037,7 +5037,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/base_agent.py",
       "source_location": "L24",
-      "community": 21,
+      "community": 19,
       "norm_label": "reset agent state for a new episode.",
       "id": "base_agent_rationale_24"
     },
@@ -5046,7 +5046,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L1",
-      "community": 16,
+      "community": 17,
       "norm_label": "hunt_agent.py",
       "id": "hunt_agent"
     },
@@ -5055,7 +5055,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L10",
-      "community": 16,
+      "community": 17,
       "norm_label": "huntagent",
       "id": "hunt_agent_huntagent"
     },
@@ -5064,7 +5064,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L31",
-      "community": 16,
+      "community": 17,
       "norm_label": ".__init__()",
       "id": "hunt_agent_huntagent_init"
     },
@@ -5073,7 +5073,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L42",
-      "community": 16,
+      "community": 17,
       "norm_label": "._reset_state()",
       "id": "hunt_agent_huntagent_reset_state"
     },
@@ -5082,7 +5082,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L59",
-      "community": 16,
+      "community": 17,
       "norm_label": ".reset()",
       "id": "hunt_agent_huntagent_reset"
     },
@@ -5091,7 +5091,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L63",
-      "community": 16,
+      "community": 17,
       "norm_label": "._enqueue_back()",
       "id": "hunt_agent_huntagent_enqueue_back"
     },
@@ -5100,7 +5100,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L67",
-      "community": 16,
+      "community": 17,
       "norm_label": "._enqueue_front()",
       "id": "hunt_agent_huntagent_enqueue_front"
     },
@@ -5109,7 +5109,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L71",
-      "community": 16,
+      "community": 17,
       "norm_label": "._cardinal_neighbors()",
       "id": "hunt_agent_huntagent_cardinal_neighbors"
     },
@@ -5118,7 +5118,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L78",
-      "community": 16,
+      "community": 17,
       "norm_label": "._prepend_axis_ends()",
       "id": "hunt_agent_huntagent_prepend_axis_ends"
     },
@@ -5127,7 +5127,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L94",
-      "community": 16,
+      "community": 17,
       "norm_label": "._queue_unresolved_from_board()",
       "id": "hunt_agent_huntagent_queue_unresolved_from_board"
     },
@@ -5136,7 +5136,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L104",
-      "community": 16,
+      "community": 17,
       "norm_label": ".receive_result()",
       "id": "hunt_agent_huntagent_receive_result"
     },
@@ -5145,7 +5145,7 @@
       "file_type": "code",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L146",
-      "community": 16,
+      "community": 17,
       "norm_label": ".select_move()",
       "id": "hunt_agent_huntagent_select_move"
     },
@@ -5154,7 +5154,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L11",
-      "community": 16,
+      "community": 19,
       "norm_label": "hunt-and-target agent.      search phase: shoots only checkerboard cells (row+co",
       "id": "hunt_agent_rationale_11"
     },
@@ -5163,7 +5163,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L79",
-      "community": 16,
+      "community": 19,
       "norm_label": "prepend the two axis-aligned end cells to the front of the queue.",
       "id": "hunt_agent_rationale_79"
     },
@@ -5172,7 +5172,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/hunt_agent.py",
       "source_location": "L95",
-      "community": 16,
+      "community": 19,
       "norm_label": "scan board for unresolved hit cells and enqueue their unshot neighbors.",
       "id": "hunt_agent_rationale_95"
     },
@@ -5595,7 +5595,7 @@
       "file_type": "code",
       "source_file": "training/battleship_env.py",
       "source_location": "L75",
-      "community": 12,
+      "community": 13,
       "norm_label": ".legal_actions()",
       "id": "battleship_env_battleshipenv_legal_actions"
     },
@@ -5649,7 +5649,7 @@
       "file_type": "rationale",
       "source_file": "training/battleship_env.py",
       "source_location": "L76",
-      "community": 12,
+      "community": 13,
       "norm_label": "return list of cell indices (0\u201399) that have not yet been shot.",
       "id": "battleship_env_rationale_76"
     },
@@ -17264,5 +17264,5 @@
       "source_file": "analysis.md"
     }
   ],
-  "built_at_commit": "de2f00ccf6302c2961046ec6f73764455e6693eb"
+  "built_at_commit": "c96ead8cc1f67fb8819726348aee8a5f68bd6e9b"
 }

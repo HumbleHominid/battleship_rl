@@ -1,16 +1,16 @@
 # Graph Report - battleship-rl  (2026-05-14)
 
 ## Corpus Check
-- 43 files · ~13,896 words
+- 43 files · ~13,902 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 683 nodes · 1073 edges · 37 communities (29 shown, 8 thin omitted)
+- 683 nodes · 1073 edges · 37 communities (28 shown, 9 thin omitted)
 - Extraction: 78% EXTRACTED · 22% INFERRED · 0% AMBIGUOUS · INFERRED: 239 edges (avg confidence: 0.59)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `de2f00cc`
+- Built from commit: `c96ead8c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -76,7 +76,7 @@
 - **Separate Trunk Design Enabling Independent Policy and Value Training** — readme_policy_trunk, readme_value_trunk, readme_separate_trunks_rationale, readme_value_warmup [EXTRACTED 0.95]
 - **Three Baseline Agents Evaluated Across Ship Placement Strategies** — analysis_random_agent, analysis_hunt_agent, analysis_bayesian_agent [EXTRACTED 1.00]
 
-## Communities (37 total, 8 thin omitted)
+## Communities (37 total, 9 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.06
@@ -123,26 +123,22 @@ Cohesion: 0.09
 Nodes (11): GameBoard, Return the Ship occupying this cell, or None., Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta, Return all (row, col) pairs not yet shot (EMPTY or ship still there)., Serialize board to a 10x10 list of 'SHIPTYPE:CELLSTATE' strings.         If fog_, Print the board to stdout with row/col headers., Compute the list of (row, col) cells a ship would occupy., Return (True, '') if the placement is valid.         Return (False, reason) if o (+3 more)
 
 ### Community 11 - "Community 11"
+Cohesion: 0.13
+Nodes (14): Orchestrates a full game of Battleship.      The game-side agent always runs in-, GameLogger, Statically accessible logger. Call GameLogger.info() / .warn() / .error() / .deb, GameWebSocketServer, Receive move and placement commands from the player and enqueue them., Embedded WebSocket server that:       - Broadcasts game state to all connected o, Register an observer and hold its connection open until disconnect., Serialize state_dict to JSON and send to all connected observers. (+6 more)
+
+### Community 12 - "Community 12"
 Cohesion: 0.15
 Nodes (6): main(), parse_args(), parse_coordinate(), Parse 'A1'-'J10' to zero-indexed (row, col). Raises ValueError on bad input., GameEngine, Orchestrates a full game of Battleship.      The game-side agent always runs in-
 
-### Community 12 - "Community 12"
+### Community 13 - "Community 13"
 Cohesion: 0.09
 Nodes (9): Return a coordinate string (e.g. 'B5') given an observation dict., Return list of cell indices (0–99) that have not yet been shot., GameBoard, Return the Ship occupying this cell, or None., Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta, Return all (row, col) pairs not yet shot (EMPTY or ship still there)., Serialize board to a 10x10 list of 'SHIPTYPE:CELLSTATE' strings.         If fog_, Print the board to stdout with row/col headers. (+1 more)
-
-### Community 13 - "Community 13"
-Cohesion: 0.13
-Nodes (13): GameLogger, Statically accessible logger. Call GameLogger.info() / .warn() / .error() / .deb, GameWebSocketServer, Receive move and placement commands from the player and enqueue them., Embedded WebSocket server that:       - Broadcasts game state to all connected o, Register an observer and hold its connection open until disconnect., Serialize state_dict to JSON and send to all connected observers., Send a JSON message to the connected player. No-op if none connected. (+5 more)
 
 ### Community 15 - "Community 15"
 Cohesion: 0.23
 Nodes (4): HuntAgent, Hunt-and-target agent.      Search phase: shoots only checkerboard cells (row+co, Prepend the two axis-aligned end cells to the front of the queue., Scan board for unresolved hit cells and enqueue their unshot neighbors.
 
 ### Community 16 - "Community 16"
-Cohesion: 0.23
-Nodes (4): HuntAgent, Hunt-and-target agent.      Search phase: shoots only checkerboard cells (row+co, Prepend the two axis-aligned end cells to the front of the queue., Scan board for unresolved hit cells and enqueue their unshot neighbors.
-
-### Community 17 - "Community 17"
 Cohesion: 0.17
 Nodes (11): Architecture, code:bash (python training/pretrain.py \), code:bash (python training/ppo_train.py \), code:bash (python training/ppo_train.py --iters 500 --from-scratch), code:bash (# Play 100 automated games and report avg turns), Phase 1 — Imitation pretraining, Phase 2 — PPO fine-tuning, Reward structure (+3 more)
 
@@ -151,16 +147,16 @@ Cohesion: 0.18
 Nodes (10): Baseline Analysis, Baseline Approach, Baseline Performance, Bayesian Agent, Gaussian Placement, Hunt Agent, Random Agent, Random Placement (+2 more)
 
 ### Community 19 - "Community 19"
-Cohesion: 0.29
-Nodes (6): bayes_augment_reward(), make_reward_fn(), Return a reward fn that adds alpha * Bayesian probability of the chosen cell., Return a reward fn that adds alpha * Bayesian probability of the chosen cell., Instantiate a reward function by name.      Args:         name:  Key from REWARD, Instantiate a reward function by name.      Args:         name:  Key from REWARD
+Cohesion: 0.2
+Nodes (7): BaseAgent, Place this agent's fleet. Defaults to GameBoard.place_fleet()., Called after each move. Hook for training feedback; no-op by default., Reset agent state for a new episode., Hunt-and-target agent.      Search phase: shoots only checkerboard cells (row+co, Prepend the two axis-aligned end cells to the front of the queue., Scan board for unresolved hit cells and enqueue their unshot neighbors.
 
 ### Community 20 - "Community 20"
 Cohesion: 0.29
-Nodes (3): Circular experience replay buffer for DQN training., ReplayBuffer, Transition
+Nodes (6): bayes_augment_reward(), make_reward_fn(), Return a reward fn that adds alpha * Bayesian probability of the chosen cell., Return a reward fn that adds alpha * Bayesian probability of the chosen cell., Instantiate a reward function by name.      Args:         name:  Key from REWARD, Instantiate a reward function by name.      Args:         name:  Key from REWARD
 
 ### Community 21 - "Community 21"
-Cohesion: 0.25
-Nodes (5): BaseAgent, Place this agent's fleet. Defaults to GameBoard.place_fleet()., Called after each move. Hook for training feedback; no-op by default., Reset agent state for a new episode., Orchestrates a full game of Battleship.      The game-side agent always runs in-
+Cohesion: 0.29
+Nodes (3): Circular experience replay buffer for DQN training., ReplayBuffer, Transition
 
 ### Community 22 - "Community 22"
 Cohesion: 0.29
@@ -173,14 +169,14 @@ Nodes (6): coord_to_index(), init_transformer_ppo(), main(), parse_args(), run_t
 ## Knowledge Gaps
 - **135 isolated node(s):** `Imitation pretraining: train TransformerPPONet to mimic BayesianAgent.  For each`, `One epoch of value-trunk-only updates — policy trunk receives zero gradient.`, `Return a reward fn that adds alpha * Bayesian probability of the chosen cell.`, `Instantiate a reward function by name.      Args:         name:  Key from REWARD`, `Run one episode, collecting transitions. Returns (transitions, turns_to_win).` (+130 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `GameLogger` connect `Community 13` to `Community 0`, `Community 1`, `Community 3`, `Community 12`, `Community 14`, `Community 16`, `Community 21`, `Community 22`, `Community 25`?**
+- **Why does `GameLogger` connect `Community 11` to `Community 0`, `Community 1`, `Community 3`, `Community 13`, `Community 14`, `Community 17`, `Community 19`, `Community 22`, `Community 25`?**
   _High betweenness centrality (0.205) - this node is a cross-community bridge._
-- **Why does `BayesianAgent` connect `Community 0` to `Community 25`, `Community 21`, `Community 13`?**
+- **Why does `BayesianAgent` connect `Community 0` to `Community 19`, `Community 25`, `Community 11`?**
   _High betweenness centrality (0.151) - this node is a cross-community bridge._
 - **Why does `BattleshipEnv` connect `Community 4` to `Community 9`, `Community 10`, `Community 2`, `Community 7`?**
   _High betweenness centrality (0.146) - this node is a cross-community bridge._
