@@ -99,7 +99,7 @@ class GameEngine:
             await self._setup_ws_player()
         else:
             self.player_board.place_fleet()
-            GameLogger.info("Setup complete: agent vs random player")
+            GameLogger.info(f"Setup complete: agent vs {self.player_type} player")
 
     async def _setup_ws_player(self) -> None:
         assert self.ws_server is not None
