@@ -440,14 +440,18 @@ class GameEngine:
         )
 
     def _display_game_over(self) -> None:
-        winner_label = "Player" if self._winner == "player" else "The Agent"
+        winner_label = "Player" if self._winner == "player" else "Agent"
 
         def _report_score(owner: str, score: dict) -> str:
             return f"  {owner:6s} — sunk: {score['sunk']}, hit: {score['hit']}"
 
-        gameover_msg = (
-            f"GAME OVER — Winner: {winner_label} | Turns: {str(self._turn):3s}"
-        )
+        winner_turns = 0
+        if self._winner == "player":
+            winner_turns = self.agent_board.cells_targeted()
+        else:
+            winner_turns = self.player_board.cells_targeted()
+
+        gameover_msg = f"GAME OVER — Winner: {winner_label} | Turns: {winner_turns:3d}"
         placement_msg = (
             f"  Placement — {self.player_board.placement_method.capitalize()}"
         )

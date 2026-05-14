@@ -16,6 +16,8 @@ dependencies:
   - pytorch
   - torchvision
   - torchaudio
+  - vegafusion
+  - vl-convert-python
   - pip:
     - tensorflow-macos
     - tensorflow-metal
