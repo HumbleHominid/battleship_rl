@@ -316,7 +316,7 @@ def train(args: argparse.Namespace) -> None:
         total_steps = 0
         best_turns = float("inf")
 
-    if args.pretrain_games > 0:
+    if not args.resume and args.pretrain_games > 0:
         pretrain_supervised(
             online_net,
             args.pretrain_games,
@@ -327,7 +327,7 @@ def train(args: argparse.Namespace) -> None:
         )
         target_net.load_state_dict(online_net.state_dict())
 
-    if args.demo_games > 0:
+    if not args.resume and args.demo_games > 0:
         fill_demo_buffer(buffer, args.demo_games, reward_fn)
 
     TrainingLogger.info("Starting training...")
