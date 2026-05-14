@@ -12,8 +12,8 @@
     "hash": "4f1e8dc34c2925e924ed3f87572f82fe"
   },
   "/Users/mfryer/Code/battleship-rl/training/reward_fns.py": {
-    "mtime": 1778667170.8642442,
-    "hash": "3753bc4f7ccd54dbc144554b8132abaf"
+    "mtime": 1778697403.2089143,
+    "hash": "f19fefc93cc5d77d3f9b7e01647cff21"
   },
   "/Users/mfryer/Code/battleship-rl/training/__init__.py": {
     "mtime": 1778350510.1834447,
@@ -24,8 +24,8 @@
     "hash": "a5eb5d09318926fb8f95551713d7750c"
   },
   "/Users/mfryer/Code/battleship-rl/training/battleship_env.py": {
-    "mtime": 1778695346.6498897,
-    "hash": "b09f30bd7dc0a16d4d26bcf4944cedf4"
+    "mtime": 1778696881.572226,
+    "hash": "9ba48962a1ee4c9c3b1415a981f0cee0"
   },
   "/Users/mfryer/Code/battleship-rl/training/evaluate.py": {
     "mtime": 1778350510.1842327,
@@ -44,8 +44,8 @@
     "hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "/Users/mfryer/Code/battleship-rl/training/q_learning/q_train.py": {
-    "mtime": 1778685345.614096,
-    "hash": "8946e683330620b07f58db53db442ccb"
+    "mtime": 1778697273.6573598,
+    "hash": "bb4e2874f51a02c85b672c58dbfec5a1"
   },
   "/Users/mfryer/Code/battleship-rl/training/q_learning/q_replay_buffer.py": {
     "mtime": 1778507908.3368366,
@@ -88,8 +88,8 @@
     "hash": "558a1760f32cb49a23da3a31eee345fd"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/bayesian_agent.py": {
-    "mtime": 1778671337.129986,
-    "hash": "5f8c6fa6c3956247b8eb036d79ffab39"
+    "mtime": 1778698141.4039786,
+    "hash": "8338ce1c4c3f11459fdb0a4cdc3d460f"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/transformer_ppo_agent.py": {
     "mtime": 1778350510.1094825,
@@ -124,8 +124,8 @@
     "hash": "c34e2e85b887ffa0a36af19c1cf6ed91"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/q_net/state_encoder.py": {
-    "mtime": 1778681729.6973426,
-    "hash": "fed1e3f26cb3db6f78c90895c56c6b23"
+    "mtime": 1778698167.7932897,
+    "hash": "4a27fd1e84d7328105c06c7c71eb8c5d"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/ppo_net/value_net.py": {
     "mtime": 1778350510.1089947,
