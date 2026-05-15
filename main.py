@@ -7,6 +7,7 @@ import time
 import zipfile
 
 from game.agents import AGENT_REGISTRY
+from game.fleet_placement_methods import PLACEMENT_METHODS
 from game.game_engine import GameEngine
 from game.game_logger import GameLogger
 from game.models import Board, Ship, ShipType
@@ -24,13 +25,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--player-type",
         default="random",
-        help="Agent key from AGENT_REGISTRY or 'websocket' (default: random)",
+        help="Agent key from AGENT_REGISTRY, 'websocket', or 'terminal' (default: random)",
     )
     parser.add_argument(
         "--player-placement",
         choices=["random", "manual"],
         default="random",
-        help="Fleet placement for WS player: 'random' or 'manual' via WS protocol (default: random)",
+        help="Fleet placement for human players: 'random' (server places) or 'manual' (interactive). Applies to websocket and terminal player types (default: random)",
+    )
+    parser.add_argument(
+        "--player-placement-method",
+        choices=list(PLACEMENT_METHODS.keys()),
+        default=None,
+        help="Force a specific fleet placement algorithm for the player (default: weighted random). "
+        f"Choices: {', '.join(PLACEMENT_METHODS.keys())}",
     )
     parser.add_argument(
         "--ws-host",
@@ -46,12 +54,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--no-ws",
         action="store_true",
-        help="Disable the WebSocket server (pure terminal play)",
+        help="Disable WebSocket server (agent-vs-agent only)",
     )
     parser.add_argument(
         "--checkpoint",
         type=str,
-        default=None,
+        default="checkpoints/q_agent.pt",
         help="Path to a checkpoint file for agents that support it (e.g. q_learning)",
     )
     parser.add_argument(
@@ -102,6 +110,20 @@ async def main() -> None:
 
     GameLogger.setup(console_level=getattr(logging, args.log_level))
 
+    if args.no_ws and args.player_type == "websocket":
+        GameLogger.error(
+            "--player-type websocket requires the WebSocket server. Remove --no-ws."
+        )
+        sys.exit(2)
+
+    if args.player_placement != "random" and args.player_type not in (
+        "websocket",
+        "terminal",
+    ):
+        GameLogger.warn(
+            "--player-placement is ignored when --player-type is not 'websocket' or 'terminal'"
+        )
+
     agent_cls = AGENT_REGISTRY.get(args.agent)
     if agent_cls is None:
         GameLogger.error(
@@ -112,11 +134,11 @@ async def main() -> None:
     player_cls = None
     if args.player_type in AGENT_REGISTRY:
         player_cls = AGENT_REGISTRY[args.player_type]
-    elif args.player_type != "websocket":
+    elif args.player_type not in ("websocket", "terminal"):
         GameLogger.error(
-            f"Invalid player type '{args.player_type}'. Defaulting to random"
+            f"Unknown player type '{args.player_type}'. Available: {list(AGENT_REGISTRY)}, 'websocket', or 'terminal'"
         )
-        player_cls = AGENT_REGISTRY["random"]
+        sys.exit(2)
 
     Board.board_size = args.board_size
     valid_ships = set(ship.name for ship in ShipType if ship != ShipType.NONE)
@@ -132,13 +154,17 @@ async def main() -> None:
     )
 
     agent_kwargs: dict = {}
-    if args.checkpoint and "checkpoint_path" in inspect.signature(agent_cls.__init__).parameters:
+    if (
+        args.checkpoint
+        and "checkpoint_path" in inspect.signature(agent_cls.__init__).parameters
+    ):
         agent_kwargs["checkpoint_path"] = args.checkpoint
 
     engine = GameEngine(
         agent=agent_cls(**agent_kwargs),
         player_type=args.player_type,
         player_placement=args.player_placement,
+        player_placement_method=args.player_placement_method,
         ws_host=args.ws_host,
         ws_port=args.ws_port,
         enable_ws=not args.no_ws,
@@ -153,9 +179,7 @@ async def main() -> None:
 
     begin = time.time()
     while game_num <= max_games:
-        start_text = f"GAME START — {game_num}"
-        print(start_text)
-        GameLogger.info(start_text)
+        GameLogger.info(f"GAME START — {game_num}")
         await engine.run()
 
         if engine.game_over and engine.winner:

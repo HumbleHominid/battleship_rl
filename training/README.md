@@ -30,8 +30,11 @@ python training/q_learning/q_train.py --episodes 100000 --save-path checkpoints/
 | `--resume` | — | Resume from checkpoint |
 | `--demo-games` | 0 | Bayesian agent games to pre-load into replay buffer |
 | `--pretrain-games` | 0 | Games for supervised Q-value warm-start (0 = skip) |
+| `--pretrain-epochs` | 10 | Epochs over the supervised pretraining dataset |
 | `--device` | `cpu` | `cpu`, `mps`, or `cuda` |
 | `--reward-fn` | `default` | Reward function (`default`, `bayes`) |
+| `--alpha` | 0.5 | Bayesian probability bonus scale (used with `--reward-fn bayes`) |
+| `--log-level` | `INFO` | Logging verbosity: `DEBUG`, `INFO`, `WARNING`, `ERROR` |
 
 ## Reward structure
 
@@ -45,5 +48,5 @@ python training/q_learning/q_train.py --episodes 100000 --save-path checkpoints/
 ## Running the trained agent
 
 ```bash
-python main.py --agent q_learning --checkpoint checkpoints/q_agent.pt --no-ws --headless --max-games 100
+python main.py --agent q-agent --checkpoint checkpoints/q_agent.pt --no-ws --headless --max-games 100
 ```

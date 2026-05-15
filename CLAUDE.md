@@ -40,29 +40,29 @@ The game is designed as a training harness for an external RL agent that connect
 | `main.py` | CLI parsing, `asyncio.run()` entry |
 | `game/game_engine.py` — `GameEngine` | Turn-based loop, win detection, state broadcasting |
 | `game/game_board.py` — `GameBoard` | Ship placement, shot processing, coordinate parsing (`"A1"` ↔ zero-indexed row/col) |
-| `game/websocket.py` — `GameWebSocketServer` | WebSocket server; one RL agent + unlimited observers |
-| `game/agents/agent.py` — `RLAgent` | Stub used in automated mode when no WS agent is connected |
+| `game/websocket.py` — `GameWebSocketServer` | WebSocket server; one player + unlimited observers |
+| `game/agents/` | In-process agents (random, hunt, bayes, q-agent) used when no WS player is connected |
 | `game/models/` | Pure data: `Board` (10×10 grid), `Ship`, `ShipType`, `CellState` |
 
 ### WebSocket Protocol
 
 Clients connect and send a handshake:
 ```json
-{"type": "hello", "role": "observer" | "rl_agent"}
+{"type": "hello", "role": "observer" | "player"}
 ```
 
-**Observer** clients receive `{"type": "game_state", ...}` after every move (fog of war applied — ship positions hidden until hit).
+**Observer** clients receive `{"type": "game_state", ...}` after every move.
 
-**RL agent** flow per turn:
-1. Server sends `{"type": "agent_view", "turn": N, "enemy_board_fog": ..., "your_board_fog": ...}`
-2. Agent replies `{"type": "move", "coordinate": "B5"}`
+**Player** flow per turn:
+1. Server sends `{"type": "player_view", "turn": N, "enemy_board": ..., "your_board": ...}`
+2. Player replies `{"type": "move", "coordinate": "B5"}`
 3. Server sends `{"type": "move_ack", "coordinate": ..., "result": ..., "ship_sunk": ..., "game_over": ...}`
 
-Only one RL agent is allowed per game; additional `rl_agent` connections are downgraded to observers. `GameEngine` blocks the agent's turn waiting for a WS move.
+Only one player is allowed per game; additional `player` connections are downgraded to observers. `GameEngine` blocks the player's turn waiting for a WS move.
 
 ### Fog of War
 
-`_build_state_dict()` (observer view) hides ship positions except where hit. `_build_agent_view_dict()` sends the agent its own board unobscured plus the fog-hidden enemy board. This distinction matters whenever serializing or testing state output.
+`_build_state_dict()` (observer view) hides agent ship positions except where hit. `_build_player_view()` sends the player their own board unobscured plus the fog-hidden agent board. This distinction matters whenever serializing or testing state output.
 
 ## graphify
 

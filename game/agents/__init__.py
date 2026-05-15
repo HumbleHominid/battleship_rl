@@ -8,5 +8,5 @@ AGENT_REGISTRY: dict[str, type[BaseAgent]] = {
     "random": RandomAgent,
     "hunt": HuntAgent,
     "bayes": BayesianAgent,
-    "q_learning": QAgent,
+    "q-agent": QAgent,
 }
