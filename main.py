@@ -52,7 +52,7 @@ def parse_args() -> argparse.Namespace:
         "--checkpoint",
         type=str,
         default=None,
-        help="Path to a checkpoint file for agents that support it (e.g. q_learning, transformer_ppo)",
+        help="Path to a checkpoint file for agents that support it (e.g. q_learning)",
     )
     parser.add_argument(
         "--log-level",
