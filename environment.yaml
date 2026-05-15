@@ -18,6 +18,7 @@ dependencies:
   - torchaudio
   - vegafusion
   - vl-convert-python
+  - nbconvert
   - pip:
     - tensorflow-macos
     - tensorflow-metal
