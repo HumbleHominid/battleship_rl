@@ -25,7 +25,7 @@ class QAgent(BaseAgent):
 
     def __init__(
         self,
-        checkpoint_path: Optional[str] = None,
+        checkpoint_path: Optional[str] = "checkpoints/q_agent.pt",
         device: str = "cpu",
     ) -> None:
         self._device = torch.device(device)

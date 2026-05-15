@@ -20,7 +20,7 @@ import torch.optim as optim
 from game.agents.q_net import QNetwork
 from game.agents.q_net.state_encoder import BayesEncoder, legal_mask_from_obs
 from training.battleship_env import BattleshipEnv
-from training.q_learning.q_replay_buffer import ReplayBuffer
+from training.q_replay_buffer import ReplayBuffer
 from training.reward_fns import REWARD_REGISTRY, make_reward_fn
 from training.training_logger import TrainingLogger
 

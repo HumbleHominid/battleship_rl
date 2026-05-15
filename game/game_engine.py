@@ -30,6 +30,7 @@ class GameEngine:
         agent: BaseAgent,
         player_type: str = "random",
         player_placement: str = "random",
+        player_placement_method: str | None = None,
         ws_host: str = "localhost",
         ws_port: int = 8765,
         enable_ws: bool = True,
@@ -40,6 +41,7 @@ class GameEngine:
         self.agent = agent
         self.player_type = player_type
         self.player_placement = player_placement
+        self.player_placement_method = player_placement_method
         self.enable_ws = enable_ws
         self.headless = headless
         self.log_boards = log_boards
@@ -97,9 +99,43 @@ class GameEngine:
 
         if self.player_type == "websocket":
             await self._setup_ws_player()
+        elif self.player_type == "terminal":
+            await self._setup_terminal_player()
         else:
-            self.player_board.place_fleet()
+            self.player_board.place_fleet(method=self.player_placement_method)
             GameLogger.info(f"Setup complete: agent vs {self.player_type} player")
+
+    async def _setup_terminal_player(self) -> None:
+        if self.player_placement == "manual":
+            print("\n--- Place your fleet ---")
+            for ship_type in Ship.get_fleet():
+                while True:
+                    self.player_board.display(fog_of_war=False, label="Your Board")
+                    size = get_ship_size(ship_type)
+                    raw = await asyncio.to_thread(
+                        input,
+                        f"Place {ship_type.name} (size {size}) — e.g. 'A1 right': ",
+                    )
+                    parts = raw.strip().split()
+                    if len(parts) != 2:
+                        print(
+                            "Enter coordinate and direction separated by a space, e.g. 'A1 right'."
+                        )
+                        continue
+                    coord, direction = parts
+                    try:
+                        self.player_board.place_ship_from_str(
+                            ship_type, coord, direction.lower()
+                        )
+                        break
+                    except ValueError as e:
+                        print(f"Invalid placement: {e}. Try again.")
+        else:
+            self.player_board.place_fleet(method=self.player_placement_method)
+
+        print("\nFleet placed. Game starting!")
+        self.player_board.display(fog_of_war=False, label="Your Board")
+        GameLogger.info("Setup complete: agent vs terminal player")
 
     async def _setup_ws_player(self) -> None:
         assert self.ws_server is not None
@@ -132,7 +168,7 @@ class GameEngine:
                             {"type": "placement_ack", "valid": False, "error": str(e)}
                         )
         else:
-            self.player_board.place_fleet()
+            self.player_board.place_fleet(method=self.player_placement_method)
 
         await self.ws_server.send_to_player(
             {
@@ -155,7 +191,7 @@ class GameEngine:
             else:
                 await self._take_agent_turn()
 
-            if not self.headless:
+            if not self.headless and self.player_type != "terminal":
                 self._display_boards()
 
             if self.ws_server:
@@ -197,6 +233,17 @@ class GameEngine:
                         "game_over": self._game_over,
                     }
                 )
+        elif self.player_type == "terminal":
+            self._display_boards()
+            while True:
+                coord = await asyncio.to_thread(input, "Your move (e.g. B5): ")
+                try:
+                    row, col = parse_coordinate(coord.strip())
+                    break
+                except ValueError as e:
+                    print(f"Invalid coordinate: {e}. Try again.")
+            await self._fire_on_agent_board(row, col)
+            return
         elif self.player_agent:
             obs = self._build_player_view()
             coord = self.player_agent.select_move(obs)

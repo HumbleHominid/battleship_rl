@@ -12,7 +12,7 @@ _BOARD = 10
 class QNetwork(nn.Module):
     """CNN Q-network for Battleship.
 
-    Treats the 10×10 board as a spatial grid and extracts features with
+    Treats the 10x10 board as a spatial grid and extracts features with
     convolutions before predicting a Q-value per cell.
 
     Args:
@@ -27,12 +27,16 @@ class QNetwork(nn.Module):
     def __init__(self) -> None:
         super().__init__()
         self.backbone = nn.Sequential(
-            nn.Conv2d(_CELL_DIM, 32, 3, padding=1), nn.ReLU(),
-            nn.Conv2d(32, 64, 3, padding=1),         nn.ReLU(),
-            nn.Conv2d(64, 64, 3, padding=1),         nn.ReLU(),
+            nn.Conv2d(_CELL_DIM, 32, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(32, 64, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(64, 64, 3, padding=1),
+            nn.ReLU(),
         )
         self.head = nn.Sequential(
-            nn.Conv2d(64 + _GLOBAL_DIM, 64, 1), nn.ReLU(),
+            nn.Conv2d(64 + _GLOBAL_DIM, 64, 1),
+            nn.ReLU(),
             nn.Conv2d(64, 1, 1),
         )
 
@@ -44,8 +48,8 @@ class QNetwork(nn.Module):
     ) -> torch.Tensor:
         B = cell_feats.shape[0]
         x = cell_feats.permute(0, 2, 1).reshape(B, _CELL_DIM, _BOARD, _BOARD)
-        x = self.backbone(x)                                                      # (B, 64, 10, 10)
+        x = self.backbone(x)  # (B, 64, 10, 10)
         g = global_feats.unsqueeze(-1).unsqueeze(-1).expand(-1, -1, _BOARD, _BOARD)
-        x = torch.cat([x, g], dim=1)                                              # (B, 69, 10, 10)
-        q = self.head(x).reshape(B, _N_ACTIONS)                                   # (B, 100)
+        x = torch.cat([x, g], dim=1)  # (B, 69, 10, 10)
+        q = self.head(x).reshape(B, _N_ACTIONS)  # (B, 100)
         return q.masked_fill(~legal_mask, -1e9)

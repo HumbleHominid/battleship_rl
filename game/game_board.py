@@ -12,6 +12,7 @@ class GameBoard:
     def __init__(self, log_boards: bool = False) -> None:
         self.board = Board()
         self.log_boards = log_boards
+        self.placement_method = "manual"
 
     # ------------------------------------------------------------------
     # Placement
@@ -80,19 +81,27 @@ class GameBoard:
     def get_placed_cells(self) -> list[tuple[int, int]]:
         return [cell for ship in self.board.ships for cell in ship.cells]
 
-    def place_fleet(self) -> None:
+    def place_fleet(self, method: str | None = None) -> None:
         """Place the full fleet using a weighted-random placement algorithm.
 
+        If *method* is given, that specific algorithm is used directly.
         Algorithm and weights are configured via PLACEMENT_METHODS in
         game/fleet_placement_methods.py.
         """
-
-        weights = [w for w, _ in PLACEMENT_METHODS.values()]
-        placement_names = list(PLACEMENT_METHODS.keys())
-        heuristic = random.choices(placement_names, weights=weights, k=1)[0]
-        self.placement_method = heuristic
-        f = PLACEMENT_METHODS[heuristic][1]
-        GameLogger.debug(f"Placing fleet using '{heuristic}' method")
+        if method is not None:
+            if method not in PLACEMENT_METHODS:
+                raise ValueError(
+                    f"Unknown placement method '{method}'. Valid: {list(PLACEMENT_METHODS)}"
+                )
+            self.placement_method = method
+            f = PLACEMENT_METHODS[method][1]
+        else:
+            weights = [w for w, _ in PLACEMENT_METHODS.values()]
+            placement_names = list(PLACEMENT_METHODS.keys())
+            heuristic = random.choices(placement_names, weights=weights, k=1)[0]
+            self.placement_method = heuristic
+            f = PLACEMENT_METHODS[heuristic][1]
+        GameLogger.debug(f"Placing fleet using '{self.placement_method}' method")
         f(self)
 
     # ------------------------------------------------------------------
@@ -192,22 +201,21 @@ class GameBoard:
 
     def display(self, fog_of_war: bool = False, label: str = "") -> None:
         """Print the board to stdout with row/col headers."""
-        header = f"  {'  '.join(str(c) for c in range(1, Board.board_size + 1))}"
-        if label:
-            if self.log_boards:
-                print(f"\n{label}")
-            GameLogger.debug(label)
 
-        print(header)
-        if self.log_boards:
-            GameLogger.debug(header)
+        def _print(msg: str) -> None:
+            if self.log_boards:
+                GameLogger.info(msg)
+            else:
+                print(msg)
+
+        if label:
+            _print(label)
+
+        _print(f"  {'  '.join(str(c) for c in range(1, Board.board_size + 1))}")
         for r in range(Board.board_size):
             cells = []
             for c in range(Board.board_size):
                 ship_type, state = self.board.get_cell(r, c)
                 cells.append(self._cell_symbol(ship_type, state, fog_of_war))
-            msg = f"{ROW_LABELS[r]} {' '.join(f'{sym:2}' for sym in cells)}"
-            print(msg)
-            if self.log_boards:
-                GameLogger.debug(msg)
+            _print(f"{ROW_LABELS[r]} {' '.join(f'{sym:2}' for sym in cells)}")
         print()
