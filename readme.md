@@ -47,14 +47,10 @@ python main.py --no-ws --log-level DEBUG                 # debug output, no WebS
 
 ## Training
 
-The `transformer_ppo` agent is trained in two phases. See [`training/README.md`](training/README.md) for full details.
+The `q_learning` agent is trained with DQN. See [`training/README.md`](training/README.md) for full details.
 
 ```bash
-# Phase 1 — imitation pretraining (~200k steps)
-python training/pretrain.py --steps 200000 --checkpoint checkpoints/pretrain.pt
-
-# Phase 2 — PPO fine-tuning
-python training/ppo_train.py --checkpoint checkpoints/pretrain.pt --save-path checkpoints/ppo_best.pt
+python training/q_learning/q_train.py --episodes 50000 --save-path checkpoints/q_agent.pt
 ```
 
 Logs are written to `training/logs/`. Checkpoints are saved to `checkpoints/`.
