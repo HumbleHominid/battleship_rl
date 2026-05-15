@@ -11,3 +11,10 @@
 !main.py
 pyproject.toml
 readme.md
+# Ignore generated files and directories
+**/logs/**
+**/img/**
+**/checkpoints/**
+**/data/**
+# Python
+**/__pycache__/**

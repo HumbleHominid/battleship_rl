@@ -9,8 +9,5 @@ battleship_rl.egg-info/
 # Logs
 **/logs/
 
-# Training
-checkpoints/
-
 # Mac
 .DS_Store
