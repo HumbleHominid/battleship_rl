@@ -1,6 +1,6 @@
 {
   "/Users/mfryer/Code/battleship-rl/main.py": {
-    "mtime": 1778834917.3634245,
+    "mtime": 1778839532.785783,
     "hash": "bda5988bbd18499f34c568f5f7a068cf"
   },
   "/Users/mfryer/Code/battleship-rl/training/reward_fns.py": {
@@ -80,7 +80,7 @@
     "hash": "b959330bedb1d899b7ebcd1305ea7115"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/__init__.py": {
-    "mtime": 1778834914.5521114,
+    "mtime": 1778839532.7808874,
     "hash": "2c81113b828ab46b98386153cdf6265e"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/q_agent.py": {
@@ -124,7 +124,11 @@
     "hash": "aa09a498011608cf61af8c2a422f0b27"
   },
   "/Users/mfryer/Code/battleship-rl/training/README.md": {
-    "mtime": 1778834941.9406059,
+    "mtime": 1778839532.786351,
     "hash": "b870a142e9234826f7c3671b0cac784d"
+  },
+  "/Users/mfryer/Code/battleship-rl/training/analysis.pdf": {
+    "mtime": 1778839532.7953196,
+    "hash": "5718ee18f1ae59988f5b361b5dd37b4f"
   }
 }
