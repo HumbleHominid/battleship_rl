@@ -1,5 +1,6 @@
 import argparse
 import asyncio
+import concurrent.futures
 import inspect
 import logging
 import sys
@@ -105,7 +106,98 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-async def main() -> None:
+def _init_global_state(
+    board_size: int = 10,
+    fleet_config: list[ShipType] | None = None,
+) -> None:
+    Board.board_size = board_size
+    if fleet_config is None:
+        fleet_config = [s for s in ShipType if s != ShipType.NONE]
+    Ship.valid_ships = fleet_config
+
+
+def _make_engine(
+    agent_type: str,
+    player_type: str = "random",
+    player_placement_method: str | None = None,
+    enable_ws: bool = False,
+    headless: bool = True,
+    checkpoint_path: str = "checkpoints/q_agent.pt",
+    player_agent_type: str | None = None,
+    ws_host: str = "localhost",
+    ws_port: int = 8765,
+    log_boards: bool = False,
+    player_placement: str = "random",
+) -> GameEngine:
+    agent_cls = AGENT_REGISTRY.get(agent_type)
+    if agent_cls is None:
+        raise ValueError(
+            f"Unknown agent '{agent_type}'. Available: {list(AGENT_REGISTRY)}"
+        )
+
+    agent_kwargs: dict = {}
+    if (
+        checkpoint_path
+        and "checkpoint_path" in inspect.signature(agent_cls.__init__).parameters
+    ):
+        agent_kwargs["checkpoint_path"] = checkpoint_path
+
+    player_cls = AGENT_REGISTRY.get(player_agent_type) if player_agent_type else None
+
+    return GameEngine(
+        agent=agent_cls(**agent_kwargs),
+        player_type=player_type,
+        player_placement=player_placement,
+        player_placement_method=player_placement_method,
+        ws_host=ws_host,
+        ws_port=ws_port,
+        enable_ws=enable_ws,
+        headless=headless,
+        log_boards=log_boards,
+        player_agent=player_cls() if player_cls else None,
+    )
+
+
+def run_games_headless(
+    agent_type: str,
+    player_placement_method: str | None = None,
+    n_games: int = 100,
+    checkpoint_path: str = "checkpoints/q_agent.pt",
+) -> list[dict]:
+    """Run n_games headless agent-vs-random games and return per-game stats.
+
+    Safe to call from Jupyter (runs in a fresh thread to avoid event-loop conflicts).
+    """
+    GameLogger.setup(console_level=logging.WARNING)
+    _init_global_state()
+
+    async def _inner() -> list[dict]:
+        engine = _make_engine(
+            agent_type=agent_type,
+            player_placement_method=player_placement_method,
+            checkpoint_path=checkpoint_path,
+        )
+        results = []
+        for _ in range(n_games):
+            await engine.run()
+            results.append(
+                {
+                    "agent_won": engine.winner == "agent",
+                    "turns": engine.agent_board.turn,
+                    "agent_hits": engine.agent_score["hit"],
+                    "agent_sunk": engine.agent_score["sunk"],
+                    "player_hits": engine.player_score["hit"],
+                    "player_sunk": engine.player_score["sunk"],
+                }
+            )
+            engine.reset()
+        return results
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
+        return pool.submit(asyncio.run, _inner()).result()
+
+
+async def run_game() -> None:
     args = parse_args()
 
     GameLogger.setup(console_level=getattr(logging, args.log_level))
@@ -124,23 +216,21 @@ async def main() -> None:
             "--player-placement is ignored when --player-type is not 'websocket' or 'terminal'"
         )
 
-    agent_cls = AGENT_REGISTRY.get(args.agent)
-    if agent_cls is None:
+    if args.agent not in AGENT_REGISTRY:
         GameLogger.error(
             f"Unknown agent '{args.agent}'. Available: {list(AGENT_REGISTRY)}"
         )
         sys.exit(2)
 
-    player_cls = None
-    if args.player_type in AGENT_REGISTRY:
-        player_cls = AGENT_REGISTRY[args.player_type]
-    elif args.player_type not in ("websocket", "terminal"):
+    if args.player_type not in AGENT_REGISTRY and args.player_type not in (
+        "websocket",
+        "terminal",
+    ):
         GameLogger.error(
             f"Unknown player type '{args.player_type}'. Available: {list(AGENT_REGISTRY)}, 'websocket', or 'terminal'"
         )
         sys.exit(2)
 
-    Board.board_size = args.board_size
     valid_ships = set(ship.name for ship in ShipType if ship != ShipType.NONE)
     fleet_config = []
     for ship in args.fleet_config:
@@ -148,29 +238,26 @@ async def main() -> None:
             GameLogger.error(f"Invalid ship '{ship}'. Valid options: {valid_ships}")
             sys.exit(2)
         fleet_config.append(ShipType[ship])
-    Ship.valid_ships = fleet_config
+
+    _init_global_state(board_size=args.board_size, fleet_config=fleet_config)
     GameLogger.debug(
         f"Selected ships for fleet: {[ship.name for ship in Ship.valid_ships]}"
     )
 
-    agent_kwargs: dict = {}
-    if (
-        args.checkpoint
-        and "checkpoint_path" in inspect.signature(agent_cls.__init__).parameters
-    ):
-        agent_kwargs["checkpoint_path"] = args.checkpoint
-
-    engine = GameEngine(
-        agent=agent_cls(**agent_kwargs),
+    engine = _make_engine(
+        agent_type=args.agent,
         player_type=args.player_type,
-        player_placement=args.player_placement,
         player_placement_method=args.player_placement_method,
-        ws_host=args.ws_host,
-        ws_port=args.ws_port,
         enable_ws=not args.no_ws,
         headless=args.headless,
+        checkpoint_path=args.checkpoint,
+        player_agent_type=(
+            args.player_type if args.player_type in AGENT_REGISTRY else None
+        ),
+        ws_host=args.ws_host,
+        ws_port=args.ws_port,
         log_boards=args.log_boards,
-        player_agent=player_cls() if player_cls else None,
+        player_placement=args.player_placement,
     )
     game_num = 1
     max_games = args.max_games
@@ -220,4 +307,4 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(run_game())
