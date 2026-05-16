@@ -1924,7 +1924,7 @@
       "source_file": "game/agents/q_agent.py",
       "source_location": "L26",
       "id": "agents_q_agent_qagent_init",
-      "community": 28,
+      "community": 29,
       "norm_label": ".__init__()"
     },
     {
@@ -1978,7 +1978,7 @@
       "source_file": "game/agents/q_net/q_network.py",
       "source_location": "L1",
       "id": "game_agents_q_net_q_network_py",
-      "community": 28,
+      "community": 29,
       "norm_label": "q_network.py"
     },
     {
@@ -1987,7 +1987,7 @@
       "source_file": "game/agents/q_net/q_network.py",
       "source_location": "L12",
       "id": "q_net_q_network_qnetwork",
-      "community": 28,
+      "community": 29,
       "norm_label": "qnetwork"
     },
     {
@@ -1996,7 +1996,7 @@
       "source_file": "game/agents/q_net/q_network.py",
       "source_location": "L27",
       "id": "q_net_q_network_qnetwork_init",
-      "community": 28,
+      "community": 29,
       "norm_label": ".__init__()"
     },
     {
@@ -2005,7 +2005,7 @@
       "source_file": "game/agents/q_net/q_network.py",
       "source_location": "L43",
       "id": "q_net_q_network_qnetwork_forward",
-      "community": 28,
+      "community": 29,
       "norm_label": ".forward()"
     },
     {
@@ -2014,7 +2014,7 @@
       "source_file": "game/agents/q_net/q_network.py",
       "source_location": "L13",
       "id": "q_net_q_network_rationale_13",
-      "community": 28,
+      "community": 29,
       "norm_label": "cnn q-network for battleship.      treats the 10x10 board as a spatial grid and"
     },
     {
@@ -2526,7 +2526,7 @@
       "file_type": "code",
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L104",
-      "community": 29,
+      "community": 28,
       "norm_label": "evaluate()",
       "id": "q_learning_q_train_evaluate"
     },
@@ -2589,7 +2589,7 @@
       "file_type": "rationale",
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L105",
-      "community": 29,
+      "community": 28,
       "norm_label": "return mean turns-to-win over n_games episodes with greedy policy.",
       "id": "q_learning_q_train_rationale_105"
     },
@@ -2841,7 +2841,7 @@
       "file_type": "code",
       "source_file": "training/ppo_update.py",
       "source_location": "L1",
-      "community": 26,
+      "community": 24,
       "norm_label": "ppo_update.py",
       "id": "training_ppo_update_py"
     },
@@ -2850,7 +2850,7 @@
       "file_type": "code",
       "source_file": "training/ppo_update.py",
       "source_location": "L11",
-      "community": 26,
+      "community": 24,
       "norm_label": "ppo_update()",
       "id": "training_ppo_update_ppo_update"
     },
@@ -2859,7 +2859,7 @@
       "file_type": "code",
       "source_file": "training/ppo_update.py",
       "source_location": "L109",
-      "community": 26,
+      "community": 24,
       "norm_label": "value_warmup_update()",
       "id": "training_ppo_update_value_warmup_update"
     },
@@ -2868,7 +2868,7 @@
       "file_type": "rationale",
       "source_file": "training/ppo_update.py",
       "source_location": "L117",
-      "community": 26,
+      "community": 24,
       "norm_label": "one epoch of value-trunk-only updates \u2014 policy trunk receives zero gradient.",
       "id": "training_ppo_update_rationale_117"
     },
@@ -2877,7 +2877,7 @@
       "file_type": "code",
       "source_file": "training/rollout.py",
       "source_location": "L1",
-      "community": 25,
+      "community": 26,
       "norm_label": "rollout.py",
       "id": "training_rollout_py"
     },
@@ -2886,7 +2886,7 @@
       "file_type": "code",
       "source_file": "training/rollout.py",
       "source_location": "L14",
-      "community": 25,
+      "community": 26,
       "norm_label": "transition",
       "id": "training_rollout_transition"
     },
@@ -2895,7 +2895,7 @@
       "file_type": "code",
       "source_file": "training/rollout.py",
       "source_location": "L26",
-      "community": 25,
+      "community": 26,
       "norm_label": "rolloutbuffer",
       "id": "training_rollout_rolloutbuffer"
     },
@@ -2904,7 +2904,7 @@
       "file_type": "code",
       "source_file": "training/rollout.py",
       "source_location": "L29",
-      "community": 25,
+      "community": 26,
       "norm_label": ".add()",
       "id": "training_rollout_rolloutbuffer_add"
     },
@@ -2913,7 +2913,7 @@
       "file_type": "code",
       "source_file": "training/rollout.py",
       "source_location": "L32",
-      "community": 25,
+      "community": 26,
       "norm_label": ".compute_returns_advantages()",
       "id": "training_rollout_rolloutbuffer_compute_returns_advantages"
     },
@@ -2922,7 +2922,7 @@
       "file_type": "code",
       "source_file": "training/rollout.py",
       "source_location": "L52",
-      "community": 25,
+      "community": 26,
       "norm_label": ".to_tensors()",
       "id": "training_rollout_rolloutbuffer_to_tensors"
     },
@@ -2931,7 +2931,7 @@
       "file_type": "code",
       "source_file": "training/rollout.py",
       "source_location": "L80",
-      "community": 25,
+      "community": 26,
       "norm_label": "collect_episode()",
       "id": "training_rollout_collect_episode"
     },
@@ -2940,7 +2940,7 @@
       "file_type": "rationale",
       "source_file": "training/rollout.py",
       "source_location": "L86",
-      "community": 25,
+      "community": 26,
       "norm_label": "run one episode, collecting transitions. returns (transitions, turns_to_win).",
       "id": "training_rollout_rationale_86"
     },
@@ -2994,7 +2994,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L1",
-      "community": 26,
+      "community": 24,
       "norm_label": "ppo_train.py",
       "id": "training_ppo_train_py"
     },
@@ -3003,7 +3003,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L31",
-      "community": 26,
+      "community": 24,
       "norm_label": "parse_args()",
       "id": "training_ppo_train_parse_args"
     },
@@ -3012,7 +3012,7 @@
       "file_type": "code",
       "source_file": "training/ppo_train.py",
       "source_location": "L72",
-      "community": 26,
+      "community": 24,
       "norm_label": "main()",
       "id": "training_ppo_train_main"
     },
@@ -3021,7 +3021,7 @@
       "file_type": "rationale",
       "source_file": "training/ppo_train.py",
       "source_location": "L1",
-      "community": 26,
+      "community": 24,
       "norm_label": "ppo fine-tuning for the transformerppo battleship agent.  collects on-policy rol",
       "id": "training_ppo_train_rationale_1"
     },
@@ -3111,7 +3111,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L1",
-      "community": 24,
+      "community": 25,
       "norm_label": "feature_extractor.py",
       "id": "game_agents_feature_extractor_py"
     },
@@ -3120,7 +3120,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L16",
-      "community": 24,
+      "community": 25,
       "norm_label": "featureextractor",
       "id": "agents_feature_extractor_featureextractor"
     },
@@ -3138,7 +3138,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L36",
-      "community": 24,
+      "community": 25,
       "norm_label": ".reset()",
       "id": "agents_feature_extractor_featureextractor_reset"
     },
@@ -3156,7 +3156,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L46",
-      "community": 24,
+      "community": 25,
       "norm_label": ".compute_cell_features()",
       "id": "agents_feature_extractor_featureextractor_compute_cell_features"
     },
@@ -3165,7 +3165,7 @@
       "file_type": "code",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L120",
-      "community": 24,
+      "community": 25,
       "norm_label": ".compute_global_features()",
       "id": "agents_feature_extractor_featureextractor_compute_global_features"
     },
@@ -3174,7 +3174,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L17",
-      "community": 24,
+      "community": 25,
       "norm_label": "computes per-cell (100, 16) and global (4,) features for the transformerppo agen",
       "id": "agents_feature_extractor_rationale_17"
     },
@@ -3192,7 +3192,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L47",
-      "community": 24,
+      "community": 25,
       "norm_label": "return shape (100, 16) float32 feature array for all cells.          calls bayes",
       "id": "agents_feature_extractor_rationale_47"
     },
@@ -3201,7 +3201,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/feature_extractor.py",
       "source_location": "L121",
-      "community": 24,
+      "community": 25,
       "norm_label": "return shape (4,) float32 global context vector.",
       "id": "agents_feature_extractor_rationale_121"
     },
@@ -3498,7 +3498,7 @@
       "file_type": "rationale",
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L99",
-      "community": 29,
+      "community": 28,
       "norm_label": "return mean turns-to-win over n_games episodes with greedy policy.",
       "id": "q_learning_q_train_rationale_99"
     },
@@ -3552,7 +3552,7 @@
       "file_type": "rationale",
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L92",
-      "community": 29,
+      "community": 28,
       "norm_label": "return mean turns-to-win over n_games episodes with greedy policy.",
       "id": "q_learning_q_train_rationale_92"
     },
@@ -3579,7 +3579,7 @@
       "file_type": "rationale",
       "source_file": "game/agents/q_net/q_network.py",
       "source_location": "L12",
-      "community": 28,
+      "community": 29,
       "norm_label": "mlp q-network for battleship.      maps a board state to a q-value for each of t",
       "id": "q_net_q_network_rationale_12"
     },
@@ -3588,7 +3588,7 @@
       "file_type": "rationale",
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L80",
-      "community": 29,
+      "community": 28,
       "norm_label": "return mean turns-to-win over n_games episodes with greedy policy.",
       "id": "q_learning_q_train_rationale_80"
     },
@@ -3678,7 +3678,7 @@
       "file_type": "rationale",
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L76",
-      "community": 29,
+      "community": 28,
       "norm_label": "return mean turns-to-win over n_games episodes with greedy policy.",
       "id": "q_learning_q_train_rationale_76"
     },
@@ -3687,7 +3687,7 @@
       "file_type": "rationale",
       "source_file": "training/q_learning/q_train.py",
       "source_location": "L61",
-      "community": 29,
+      "community": 28,
       "norm_label": "return mean turns-to-win over n_games episodes with greedy policy.",
       "id": "q_learning_q_train_rationale_61"
     },
@@ -7216,9 +7216,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_py",
-      "target": "training_q_train_parse_args",
-      "confidence_score": 1.0
+      "target": "training_q_train_parse_args"
     },
     {
       "relation": "contains",
@@ -7226,9 +7226,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L104",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_py",
-      "target": "training_q_train_evaluate",
-      "confidence_score": 1.0
+      "target": "training_q_train_evaluate"
     },
     {
       "relation": "contains",
@@ -7236,9 +7236,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L137",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_py",
-      "target": "training_q_train_pretrain_supervised",
-      "confidence_score": 1.0
+      "target": "training_q_train_pretrain_supervised"
     },
     {
       "relation": "contains",
@@ -7246,9 +7246,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L203",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_py",
-      "target": "training_q_train_fill_demo_buffer",
-      "confidence_score": 1.0
+      "target": "training_q_train_fill_demo_buffer"
     },
     {
       "relation": "contains",
@@ -7256,9 +7256,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L259",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_py",
-      "target": "training_q_train_save",
-      "confidence_score": 1.0
+      "target": "training_q_train_save"
     },
     {
       "relation": "contains",
@@ -7266,9 +7266,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L283",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_py",
-      "target": "training_q_train_train",
-      "confidence_score": 1.0
+      "target": "training_q_train_train"
     },
     {
       "relation": "contains",
@@ -7276,9 +7276,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L461",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_py",
-      "target": "training_q_train_main",
-      "confidence_score": 1.0
+      "target": "training_q_train_main"
     },
     {
       "relation": "rationale_for",
@@ -7286,9 +7286,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_rationale_1",
-      "target": "training_q_train_py",
-      "confidence_score": 1.0
+      "target": "training_q_train_py"
     },
     {
       "relation": "calls",
@@ -7297,9 +7297,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L462",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_main",
-      "target": "training_q_train_parse_args",
-      "confidence_score": 1.0
+      "target": "training_q_train_parse_args"
     },
     {
       "relation": "calls",
@@ -7308,9 +7308,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L429",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_train",
-      "target": "training_q_train_evaluate",
-      "confidence_score": 1.0
+      "target": "training_q_train_evaluate"
     },
     {
       "relation": "rationale_for",
@@ -7318,9 +7318,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L105",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_rationale_105",
-      "target": "training_q_train_evaluate",
-      "confidence_score": 1.0
+      "target": "training_q_train_evaluate"
     },
     {
       "relation": "calls",
@@ -7351,9 +7351,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L320",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_train",
-      "target": "training_q_train_pretrain_supervised",
-      "confidence_score": 1.0
+      "target": "training_q_train_pretrain_supervised"
     },
     {
       "relation": "rationale_for",
@@ -7361,9 +7361,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L145",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_rationale_145",
-      "target": "training_q_train_pretrain_supervised",
-      "confidence_score": 1.0
+      "target": "training_q_train_pretrain_supervised"
     },
     {
       "relation": "calls",
@@ -7383,9 +7383,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L331",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_train",
-      "target": "training_q_train_fill_demo_buffer",
-      "confidence_score": 1.0
+      "target": "training_q_train_fill_demo_buffer"
     },
     {
       "relation": "rationale_for",
@@ -7393,9 +7393,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L208",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_rationale_208",
-      "target": "training_q_train_fill_demo_buffer",
-      "confidence_score": 1.0
+      "target": "training_q_train_fill_demo_buffer"
     },
     {
       "relation": "calls",
@@ -7448,9 +7448,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L434",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_train",
-      "target": "training_q_train_save",
-      "confidence_score": 1.0
+      "target": "training_q_train_save"
     },
     {
       "relation": "calls",
@@ -7459,9 +7459,9 @@
       "source_file": "training/q_train.py",
       "source_location": "L464",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_train_main",
-      "target": "training_q_train_train",
-      "confidence_score": 1.0
+      "target": "training_q_train_train"
     },
     {
       "relation": "calls",
@@ -7513,9 +7513,9 @@
       "source_file": "training/q_replay_buffer.py",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_replay_buffer_py",
-      "target": "training_q_replay_buffer_transition",
-      "confidence_score": 1.0
+      "target": "training_q_replay_buffer_transition"
     },
     {
       "relation": "contains",
@@ -7523,9 +7523,9 @@
       "source_file": "training/q_replay_buffer.py",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_replay_buffer_py",
-      "target": "training_q_replay_buffer_replaybuffer",
-      "confidence_score": 1.0
+      "target": "training_q_replay_buffer_replaybuffer"
     },
     {
       "relation": "calls",
@@ -7534,9 +7534,9 @@
       "source_file": "training/q_replay_buffer.py",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_replay_buffer_replaybuffer_push",
-      "target": "training_q_replay_buffer_transition",
-      "confidence_score": 1.0
+      "target": "training_q_replay_buffer_transition"
     },
     {
       "relation": "method",
@@ -7544,9 +7544,9 @@
       "source_file": "training/q_replay_buffer.py",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_replay_buffer_replaybuffer",
-      "target": "training_q_replay_buffer_replaybuffer_init",
-      "confidence_score": 1.0
+      "target": "training_q_replay_buffer_replaybuffer_init"
     },
     {
       "relation": "method",
@@ -7554,9 +7554,9 @@
       "source_file": "training/q_replay_buffer.py",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_replay_buffer_replaybuffer",
-      "target": "training_q_replay_buffer_replaybuffer_push",
-      "confidence_score": 1.0
+      "target": "training_q_replay_buffer_replaybuffer_push"
     },
     {
       "relation": "method",
@@ -7564,9 +7564,9 @@
       "source_file": "training/q_replay_buffer.py",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_replay_buffer_replaybuffer",
-      "target": "training_q_replay_buffer_replaybuffer_sample",
-      "confidence_score": 1.0
+      "target": "training_q_replay_buffer_replaybuffer_sample"
     },
     {
       "relation": "method",
@@ -7574,9 +7574,9 @@
       "source_file": "training/q_replay_buffer.py",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_replay_buffer_replaybuffer",
-      "target": "training_q_replay_buffer_replaybuffer_len",
-      "confidence_score": 1.0
+      "target": "training_q_replay_buffer_replaybuffer_len"
     },
     {
       "relation": "rationale_for",
@@ -7584,9 +7584,9 @@
       "source_file": "training/q_replay_buffer.py",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_q_replay_buffer_rationale_23",
-      "target": "training_q_replay_buffer_replaybuffer",
-      "confidence_score": 1.0
+      "target": "training_q_replay_buffer_replaybuffer"
     },
     {
       "relation": "contains",
@@ -7903,9 +7903,9 @@
       "source_file": "game/game_engine.py",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_engine_gameengine",
-      "target": "game_game_engine_gameengine_setup_terminal_player",
-      "confidence_score": 1.0
+      "target": "game_game_engine_gameengine_setup_terminal_player"
     },
     {
       "relation": "method",
@@ -8171,9 +8171,9 @@
       "source_file": "game/game_engine.py",
       "source_location": "L103",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_engine_gameengine_setup",
-      "target": "game_game_engine_gameengine_setup_terminal_player",
-      "confidence_score": 1.0
+      "target": "game_game_engine_gameengine_setup_terminal_player"
     },
     {
       "relation": "calls",
@@ -8292,9 +8292,9 @@
       "source_file": "game/game_engine.py",
       "source_location": "L237",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_engine_gameengine_take_player_turn",
-      "target": "game_game_engine_gameengine_display_boards",
-      "confidence_score": 1.0
+      "target": "game_game_engine_gameengine_display_boards"
     },
     {
       "relation": "calls",
@@ -9429,9 +9429,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_24",
-      "target": "game_game_board_gameboard_ship_cells",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_ship_cells"
     },
     {
       "relation": "calls",
@@ -9471,9 +9471,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_37",
-      "target": "game_game_board_gameboard_can_place_ship",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_can_place_ship"
     },
     {
       "relation": "rationale_for",
@@ -9502,9 +9502,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_59",
-      "target": "game_game_board_gameboard_place_ship",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_place_ship"
     },
     {
       "relation": "calls",
@@ -9533,9 +9533,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L77",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_77",
-      "target": "game_game_board_gameboard_place_ship_from_str",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_place_ship_from_str"
     },
     {
       "relation": "rationale_for",
@@ -9553,9 +9553,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_85",
-      "target": "game_game_board_gameboard_place_fleet",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_place_fleet"
     },
     {
       "relation": "rationale_for",
@@ -9584,9 +9584,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L112",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_112",
-      "target": "game_game_board_gameboard_find_ship_at",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_find_ship_at"
     },
     {
       "relation": "rationale_for",
@@ -9604,9 +9604,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L119",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_119",
-      "target": "game_game_board_gameboard_receive_shot",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_receive_shot"
     },
     {
       "relation": "rationale_for",
@@ -9624,9 +9624,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L164",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_164",
-      "target": "game_game_board_gameboard_get_unhit_cells",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_get_unhit_cells"
     },
     {
       "relation": "rationale_for",
@@ -9644,9 +9644,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L173",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_173",
-      "target": "game_game_board_gameboard_board_as_matrix",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_board_as_matrix"
     },
     {
       "relation": "rationale_for",
@@ -9675,9 +9675,9 @@
       "source_file": "game/game_board.py",
       "source_location": "L203",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_game_board_rationale_203",
-      "target": "game_game_board_gameboard_display",
-      "confidence_score": 1.0
+      "target": "game_game_board_gameboard_display"
     },
     {
       "relation": "rationale_for",
@@ -18207,5 +18207,5 @@
       "source_file": "analysis.md"
     }
   ],
-  "built_at_commit": "a25d86851936ddfb9e79697d6a89bcd52032a09b"
+  "built_at_commit": "6ceca5199b8cd99759875e5a031fab9486ad5594"
 }

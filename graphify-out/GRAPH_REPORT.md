@@ -1,4 +1,4 @@
-# Graph Report - battleship-rl  (2026-05-15)
+# Graph Report - battleship-rl  (2026-05-16)
 
 ## Corpus Check
 - 31 files · ~10,318 words
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a25d8685`
+- Built from commit: `6ceca519`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -181,16 +181,16 @@ Cohesion: 0.29
 Nodes (3): Circular experience replay buffer for DQN training., ReplayBuffer, Transition
 
 ### Community 24 - "Community 24"
+Cohesion: 0.32
+Nodes (6): main(), parse_args(), PPO fine-tuning for the TransformerPPO Battleship agent.  Collects on-policy rol, ppo_update(), One epoch of value-trunk-only updates — policy trunk receives zero gradient., value_warmup_update()
+
+### Community 25 - "Community 25"
 Cohesion: 0.25
 Nodes (4): FeatureExtractor, Return shape (4,) float32 global context vector., Computes per-cell (100, 16) and global (4,) features for the TransformerPPO agen, Return shape (100, 16) float32 feature array for all cells.          Calls Bayes
 
-### Community 25 - "Community 25"
-Cohesion: 0.32
-Nodes (4): collect_episode(), Run one episode, collecting transitions. Returns (transitions, turns_to_win)., RolloutBuffer, Transition
-
 ### Community 26 - "Community 26"
 Cohesion: 0.32
-Nodes (6): main(), parse_args(), PPO fine-tuning for the TransformerPPO Battleship agent.  Collects on-policy rol, ppo_update(), One epoch of value-trunk-only updates — policy trunk receives zero gradient., value_warmup_update()
+Nodes (4): collect_episode(), Run one episode, collecting transitions. Returns (transitions, turns_to_win)., RolloutBuffer, Transition
 
 ### Community 27 - "Community 27"
 Cohesion: 0.29
@@ -198,11 +198,11 @@ Nodes (3): QAgent, Battleship agent backed by a Q-network (DQN).      Operates i
 
 ### Community 28 - "Community 28"
 Cohesion: 0.29
-Nodes (3): QNetwork, MLP Q-network for Battleship.      Maps a board state to a Q-value for each of t, CNN Q-network for Battleship.      Treats the 10x10 board as a spatial grid and
+Nodes (7): evaluate(), Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy.
 
 ### Community 29 - "Community 29"
 Cohesion: 0.29
-Nodes (7): evaluate(), Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy.
+Nodes (3): QNetwork, MLP Q-network for Battleship.      Maps a board state to a Q-value for each of t, CNN Q-network for Battleship.      Treats the 10x10 board as a spatial grid and
 
 ### Community 30 - "Community 30"
 Cohesion: 0.29
@@ -230,7 +230,7 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `GameLogger` connect `Community 2` to `Community 0`, `Community 1`, `Community 3`, `Community 4`, `Community 11`?**
   _High betweenness centrality (0.193) - this node is a cross-community bridge._
-- **Why does `BattleshipEnv` connect `Community 15` to `Community 34`, `Community 36`, `Community 6`, `Community 7`, `Community 9`, `Community 16`, `Community 17`, `Community 25`, `Community 26`, `Community 29`, `Community 30`?**
+- **Why does `BattleshipEnv` connect `Community 15` to `Community 34`, `Community 36`, `Community 6`, `Community 7`, `Community 9`, `Community 16`, `Community 17`, `Community 24`, `Community 26`, `Community 28`, `Community 30`?**
   _High betweenness centrality (0.161) - this node is a cross-community bridge._
 - **Why does `BayesianAgent` connect `Community 0` to `Community 2`, `Community 4`?**
   _High betweenness centrality (0.146) - this node is a cross-community bridge._
