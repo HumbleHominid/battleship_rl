@@ -1,7 +1,7 @@
 {
   "/Users/mfryer/Code/battleship-rl/main.py": {
-    "mtime": 1778925246.9103358,
-    "ast_hash": "8b1c36dba5fdc23d4400b9883d16e739",
+    "mtime": 1778925263.2392724,
+    "ast_hash": "52d2b41888e4f07216ab04de36016fb5",
     "semantic_hash": ""
   },
   "/Users/mfryer/Code/battleship-rl/training/reward_fns.py": {
@@ -65,8 +65,8 @@
     "semantic_hash": ""
   },
   "/Users/mfryer/Code/battleship-rl/game/game_board.py": {
-    "mtime": 1778925246.9048536,
-    "ast_hash": "e00acdbf14179135111638e1b64867e8",
+    "mtime": 1778925263.2315474,
+    "ast_hash": "ff53e5b7f7b5e661a71638d5cd074267",
     "semantic_hash": ""
   },
   "/Users/mfryer/Code/battleship-rl/game/websocket.py": {
@@ -144,19 +144,9 @@
     "ast_hash": "4b1c5c2af1dce454aab1ae0afdce1bad",
     "semantic_hash": ""
   },
-  "/Users/mfryer/Code/battleship-rl/analysis.md": {
-    "mtime": 1778925246.9043398,
-    "ast_hash": "aa09a498011608cf61af8c2a422f0b27",
-    "semantic_hash": ""
-  },
   "/Users/mfryer/Code/battleship-rl/training/README.md": {
     "mtime": 1778862156.2662811,
     "ast_hash": "b2d1a9d8f570e2708286ebcc7ec4f920",
-    "semantic_hash": ""
-  },
-  "/Users/mfryer/Code/battleship-rl/training/analysis.pdf": {
-    "mtime": 1778925246.91447,
-    "ast_hash": "5718ee18f1ae59988f5b361b5dd37b4f",
     "semantic_hash": ""
   }
 }
