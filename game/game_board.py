@@ -13,6 +13,11 @@ class GameBoard:
         self.board = Board()
         self.log_boards = log_boards
         self.placement_method = "manual"
+        self._turn = 0
+
+    @property
+    def turn(self) -> int:
+        return self._turn
 
     # ------------------------------------------------------------------
     # Placement
@@ -121,6 +126,7 @@ class GameBoard:
         Returns (CellState.HIT, Ship) on hit, (CellState.MISS, None) on miss.
         Raises ValueError if the cell has already been shot.
         """
+        self._turn += 1
         ship_type, current_state = self.board.get_cell(row, col)
         if current_state in (CellState.HIT, CellState.MISS):
             raise ValueError(
