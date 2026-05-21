@@ -36,18 +36,34 @@ class BattleshipEnv:
         turn:         int
     """
 
-    def __init__(self, reward_fn: RewardFn = default_reward) -> None:
+    def __init__(
+        self,
+        reward_fn: RewardFn = default_reward,
+        placement_method: Optional[str] = None,
+    ) -> None:
         GameLogger.setup(console_level=logging.WARNING)
         self._board = GameBoard()
         self._turn = 0
         self._done = False
         self._reward_fn = reward_fn
+        self._placement_method = placement_method
 
     # ------------------------------------------------------------------
 
     def reset(self) -> tuple[dict, dict]:
+        import random
+        from game.fleet_placement_methods import PLACEMENT_METHODS
+
         self._board = GameBoard()
-        self._board.place_fleet()
+        
+        # Decide which placement method to use
+        method = self._placement_method
+        if method == "mix":
+            # Exclude manual from mixed selection if it ever exists
+            valid_methods = [m for m in PLACEMENT_METHODS.keys() if m != "manual"]
+            method = random.choice(valid_methods)
+            
+        self._board.place_fleet(method=method)
         self._turn = 0
         self._done = False
         return self._get_obs(), {}

@@ -93,6 +93,12 @@ def parse_args() -> argparse.Namespace:
         help="Epochs over the pretraining dataset",
     )
     p.add_argument(
+        "--placement-method",
+        type=str,
+        default="mix",
+        help="Placement method for training: 'mix' (samples from all available options including cognitive_human), 'random', 'cognitive_human', etc."
+    )
+    p.add_argument(
         "--log-level",
         choices=["DEBUG", "INFO", "WARNING", "ERROR"],
         default="INFO",
@@ -101,10 +107,15 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
-def evaluate(net: QNetwork, n_games: int, device: torch.device) -> float:
+def evaluate(
+    net: QNetwork,
+    n_games: int,
+    device: torch.device,
+    placement_method: str = "mix",
+) -> float:
     """Return mean turns-to-win over n_games episodes with greedy policy."""
     net.eval()
-    env = BattleshipEnv()
+    env = BattleshipEnv(placement_method=placement_method)
     encoder = BayesEncoder()
     turns = []
 
@@ -141,6 +152,7 @@ def pretrain_supervised(
     batch_size: int,
     lr: float,
     device: torch.device,
+    placement_method: str = "mix",
 ) -> None:
     """Warm-start net by regression: Q[i] ≈ Bayesian occupancy probability[i].
 
@@ -149,7 +161,7 @@ def pretrain_supervised(
     before any RL updates begin.
     """
     TrainingLogger.info("Pretraining: collecting %d games...", n_games)
-    env = BattleshipEnv()
+    env = BattleshipEnv(placement_method=placement_method)
     encoder = BayesEncoder()
 
     demos: list[tuple[np.ndarray, np.ndarray]] = []
@@ -204,6 +216,7 @@ def fill_demo_buffer(
     buffer: ReplayBuffer,
     n_games: int,
     reward_fn,
+    placement_method: str = "mix",
 ) -> None:
     """Pre-populate replay buffer with Bayesian agent game transitions."""
     from game.agents.bayesian_agent import BayesianAgent
@@ -211,7 +224,7 @@ def fill_demo_buffer(
     from game.models import Board
 
     TrainingLogger.info("Demo buffer: collecting %d Bayesian games...", n_games)
-    env = BattleshipEnv(reward_fn=reward_fn)
+    env = BattleshipEnv(reward_fn=reward_fn, placement_method=placement_method)
     encoder = BayesEncoder()
     agent = BayesianAgent(deterministic_selection=False)
 
@@ -281,6 +294,9 @@ def _save(
 
 
 def train(args: argparse.Namespace) -> None:
+    # Limit PyTorch to a single thread to avoid thread overhead on CPU
+    torch.set_num_threads(1)
+    
     device = torch.device(args.device)
 
     online_net = QNetwork().to(device)
@@ -291,7 +307,7 @@ def train(args: argparse.Namespace) -> None:
     loss_fn = nn.MSELoss()
     buffer = ReplayBuffer(args.buffer_cap)
     reward_fn = make_reward_fn(args.reward_fn, args.alpha)
-    env = BattleshipEnv(reward_fn=reward_fn)
+    env = BattleshipEnv(reward_fn=reward_fn, placement_method=args.placement_method)
     encoder = BayesEncoder()
     reward = 0.0
 
@@ -324,11 +340,12 @@ def train(args: argparse.Namespace) -> None:
             args.batch_size,
             args.lr,
             device,
+            placement_method=args.placement_method,
         )
         target_net.load_state_dict(online_net.state_dict())
 
     if not args.resume and args.demo_games > 0:
-        fill_demo_buffer(buffer, args.demo_games, reward_fn)
+        fill_demo_buffer(buffer, args.demo_games, reward_fn, placement_method=args.placement_method)
 
     TrainingLogger.info("Starting training...")
 
@@ -401,15 +418,25 @@ def train(args: argparse.Namespace) -> None:
                 )
                 q_pred = q_all.gather(1, b["actions"].unsqueeze(1)).squeeze(1)
 
-                # Target Q-values (vanilla DQN)
+                # Target Q-values (Double DQN)
                 with torch.no_grad():
-                    q_next = target_net(
+                    # Select actions using online_net (with legal mask)
+                    q_next_online = online_net(
                         b["next_cell_feats"],
                         b["next_global_feats"],
                         b["next_legal_mask"],
                     )
-                    q_next_max = q_next.max(dim=1).values
-                    td_target = b["rewards"] + args.gamma * q_next_max * (
+                    best_next_actions = q_next_online.argmax(dim=1)
+
+                    # Evaluate those actions using target_net (with legal mask)
+                    q_next_target = target_net(
+                        b["next_cell_feats"],
+                        b["next_global_feats"],
+                        b["next_legal_mask"],
+                    )
+                    q_next_selected = q_next_target.gather(1, best_next_actions.unsqueeze(1)).squeeze(1)
+
+                    td_target = b["rewards"] + args.gamma * q_next_selected * (
                         1.0 - b["dones"]
                     )
 
@@ -426,7 +453,12 @@ def train(args: argparse.Namespace) -> None:
 
         # --- Periodic evaluation ---
         if episode % args.eval_interval == 0:
-            mean_turns = evaluate(online_net, args.eval_games, device)
+            mean_turns = evaluate(
+                online_net,
+                args.eval_games,
+                device,
+                placement_method=args.placement_method,
+            )
             TrainingLogger.info(
                 f"ep={episode}  eps={epsilon:.4f}  steps={total_steps}  "
                 f"mean_turns={mean_turns:.1f}"

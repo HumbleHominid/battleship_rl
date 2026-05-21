@@ -52,7 +52,7 @@ class BayesEncoder:
         """Encode game observation into feature tensors.
 
         Returns:
-            cell_feats:   (100, 3) float32 — [Bayesian prob, is_hit, is_miss] per cell
+            cell_feats:   (100, 4) float32 — [Bayesian prob, is_hit, is_miss, unshot_mask] per cell
             global_feats: (5,)    float32 — binary sunk flag per ship
         """
         self._bayes.resolve_sunk_hits(obs)
@@ -76,7 +76,11 @@ class BayesEncoder:
                 elif state == "MISS":
                     miss[idx] = 1.0
 
-        cell_feats = np.stack([total_grid, hit, miss], axis=1)  # (100, 3)
+        # Channel 3: unshot mask (1.0 for legal/unshot cells, 0.0 for already shot cells)
+        legal = legal_mask_from_obs(obs)
+        unshot = legal.astype(np.float32)
+
+        cell_feats = np.stack([total_grid, hit, miss, unshot], axis=1)  # (100, 4)
 
         fleet = Ship.get_fleet()
         global_feats = np.array(
