@@ -34,6 +34,14 @@ class GameWebSocketServer:
         self._player_placement_queue: asyncio.Queue[dict] = asyncio.Queue()
         self._server = None
 
+    def reset(self) -> None:
+        """Reset the server state for a new game, generating a new game ID and fresh queues."""
+        self.game_id = str(uuid.uuid4())
+        self._player_move_queue = asyncio.Queue()
+        self._player_placement_queue = asyncio.Queue()
+        self._observers.clear()
+        self._player_ws = None
+
     # ------------------------------------------------------------------
     # Lifecycle
     # ------------------------------------------------------------------
@@ -158,10 +166,18 @@ class GameWebSocketServer:
     # ------------------------------------------------------------------
 
     async def broadcast_state(self, state_dict: dict) -> None:
-        """Serialize state_dict to JSON and send to all connected observers."""
+        """Serialize state_dict to JSON and send to all connected observers and the player."""
+        payload = json.dumps(state_dict)
+        
+        if self._player_ws is not None:
+            try:
+                await self._player_ws.send(payload)
+            except websockets.exceptions.ConnectionClosed:
+                self._player_ws = None
+
         if not self._observers:
             return
-        payload = json.dumps(state_dict)
+            
         disconnected: set[WebSocketServerProtocol] = set()
         for ws in list(self._observers):
             try:
