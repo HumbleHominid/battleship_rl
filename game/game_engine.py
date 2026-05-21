@@ -61,9 +61,12 @@ class GameEngine:
         self._game_over = False
         self._winner = None
         self._last_move = None
+        self.moves_history = []
         self.agent.reset()
         if self.player_agent:
             self.player_agent.reset()
+        if hasattr(self, "ws_server") and self.ws_server:
+            self.ws_server.reset()
 
     # ------------------------------------------------------------------
     # Entry point
@@ -78,6 +81,8 @@ class GameEngine:
         try:
             await self._setup()
             await self._game_loop()
+            if self._game_over:
+                self.save_game_record()
         finally:
             if self.ws_server:
                 await self.ws_server.stop()
@@ -185,11 +190,17 @@ class GameEngine:
     async def _game_loop(self) -> None:
         while not self._game_over:
             self._turn += 1
+            self._last_move = None
 
             if self._current_player == "player":
                 await self._take_player_turn()
             else:
                 await self._take_agent_turn()
+
+            if self._last_move:
+                move_entry = dict(self._last_move)
+                move_entry["turn"] = self._turn
+                self.moves_history.append(move_entry)
 
             if not self.headless and self.player_type != "terminal":
                 self._display_boards()
@@ -510,3 +521,51 @@ class GameEngine:
         GameLogger.info(player_report)
         GameLogger.info(agent_report)
         GameLogger.info("-" * len(gameover_msg))
+
+    def save_game_record(self) -> None:
+        """Save a structured JSON file containing all metadata, placements, and moves of the game."""
+        import json
+        import uuid
+        from pathlib import Path
+        from datetime import datetime
+
+        # Create records directory under battleship_rl/data/game_records
+        records_dir = Path(__file__).parent.parent / "data" / "game_records"
+        records_dir.mkdir(parents=True, exist_ok=True)
+
+        game_id = self.ws_server.game_id if (self.ws_server and hasattr(self.ws_server, "game_id")) else str(uuid.uuid4())
+        timestamp = datetime.now().isoformat()
+
+        record = {
+            "game_id": game_id,
+            "timestamp": timestamp,
+            "winner": self._winner,
+            "total_turns": self._turn,
+            "player_type": self.player_type,
+            "agent_type": self.agent.__class__.__name__ if self.agent else None,
+            "player_placement_method": self.player_board.placement_method if self.player_board else None,
+            "player_fleet": [
+                {
+                    "ship": ship.ship_type.name,
+                    "cells": [[r, c] for r, c in ship.cells]
+                }
+                for ship in self.player_board.board.ships
+            ] if self.player_board else [],
+            "agent_fleet": [
+                {
+                    "ship": ship.ship_type.name,
+                    "cells": [[r, c] for r, c in ship.cells]
+                }
+                for ship in self.agent_board.board.ships
+            ] if self.agent_board else [],
+            "moves": self.moves_history
+        }
+
+        # Use a clean, robust timestamp format for filename
+        filename = records_dir / f"game_{game_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        try:
+            with open(filename, "w", encoding="utf-8") as f:
+                json.dump(record, f, indent=2)
+            GameLogger.info(f"Saved game record to {filename}")
+        except Exception as e:
+            GameLogger.error(f"Failed to save game record: {e}")
