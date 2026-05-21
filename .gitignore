@@ -13,3 +13,11 @@ battleship_rl.egg-info/
 .DS_Store
 
 data/game_records/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+!*.tfvars.example
+backend.conf
