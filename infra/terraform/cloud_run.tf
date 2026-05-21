@@ -39,6 +39,12 @@ resource "google_cloud_run_v2_service" "app" {
     }
   }
 
+  lifecycle {
+    # Image is updated by CI via gcloud run deploy, not terraform.
+    # Without this, a local terraform apply would revert to the placeholder.
+    ignore_changes = [template[0].containers[0].image]
+  }
+
   depends_on = [
     google_project_service.apis,
     google_artifact_registry_repository.app,
