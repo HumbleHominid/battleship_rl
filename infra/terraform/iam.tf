@@ -34,19 +34,6 @@ resource "google_service_account_iam_member" "ci_cloudrun_sa_user" {
   member             = "serviceAccount:${google_service_account.ci.email}"
 }
 
-# Read/write Terraform state in GCS
-resource "google_storage_bucket_iam_member" "ci_tf_state_object_admin" {
-  bucket = var.tf_state_bucket
-  role   = "roles/storage.objectAdmin"
-  member = "serviceAccount:${google_service_account.ci.email}"
-}
-
-resource "google_storage_bucket_iam_member" "ci_tf_state_bucket_reader" {
-  bucket = var.tf_state_bucket
-  role   = "roles/storage.legacyBucketReader"
-  member = "serviceAccount:${google_service_account.ci.email}"
-}
-
 # --- Workload Identity Federation for GitHub Actions ---
 
 resource "google_iam_workload_identity_pool" "github" {
