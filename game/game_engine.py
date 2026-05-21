@@ -1,6 +1,6 @@
 import asyncio
 import random
-from typing import Optional
+from typing import Any, Optional
 
 from .agents.base_agent import BaseAgent
 from .coordinate_methods import format_coordinate, parse_coordinate
@@ -37,6 +37,7 @@ class GameEngine:
         headless: bool = False,
         log_boards: bool = False,
         player_agent: BaseAgent | None = None,
+        ws_server: Any | None = None,
     ) -> None:
         self.agent = agent
         self.player_type = player_type
@@ -49,7 +50,7 @@ class GameEngine:
 
         self.reset()
 
-        self.ws_server = (
+        self.ws_server = ws_server if ws_server is not None else (
             GameWebSocketServer(host=ws_host, port=ws_port) if enable_ws else None
         )
 
