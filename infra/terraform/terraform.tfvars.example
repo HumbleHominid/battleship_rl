@@ -1,0 +1,6 @@
+# Copy to terraform.tfvars (gitignored) and fill in real values.
+project_id      = "your-gcp-project-id"
+region          = "us-central1"
+github_repo     = "mfryer/battleship-rl"
+tf_state_bucket = "your-project-tf-state"
+# image_tag is set by CI; omit it here so the placeholder default is used on local applies.
