@@ -37,6 +37,7 @@ class GameEngine:
         headless: bool = False,
         log_boards: bool = False,
         player_agent: BaseAgent | None = None,
+        report_games: bool = False,
     ) -> None:
         self.agent = agent
         self.player_type = player_type
@@ -46,6 +47,7 @@ class GameEngine:
         self.headless = headless
         self.log_boards = log_boards
         self.player_agent = player_agent
+        self.report_games = report_games
 
         self.reset()
 
@@ -81,8 +83,6 @@ class GameEngine:
         try:
             await self._setup()
             await self._game_loop()
-            if self._game_over:
-                self.save_game_record()
         finally:
             if self.ws_server:
                 await self.ws_server.stop()
@@ -93,6 +93,8 @@ class GameEngine:
                 except asyncio.CancelledError:
                     pass
 
+        if self.report_games:
+            self.save_game_record()
         self._display_game_over()
 
     # ------------------------------------------------------------------
@@ -526,14 +528,18 @@ class GameEngine:
         """Save a structured JSON file containing all metadata, placements, and moves of the game."""
         import json
         import uuid
-        from pathlib import Path
         from datetime import datetime
+        from pathlib import Path
 
         # Create records directory under battleship_rl/data/game_records
         records_dir = Path(__file__).parent.parent / "data" / "game_records"
         records_dir.mkdir(parents=True, exist_ok=True)
 
-        game_id = self.ws_server.game_id if (self.ws_server and hasattr(self.ws_server, "game_id")) else str(uuid.uuid4())
+        game_id = (
+            self.ws_server.game_id
+            if (self.ws_server and hasattr(self.ws_server, "game_id"))
+            else str(uuid.uuid4())
+        )
         timestamp = datetime.now().isoformat()
 
         record = {
@@ -543,26 +549,39 @@ class GameEngine:
             "total_turns": self._turn,
             "player_type": self.player_type,
             "agent_type": self.agent.__class__.__name__ if self.agent else None,
-            "player_placement_method": self.player_board.placement_method if self.player_board else None,
-            "player_fleet": [
-                {
-                    "ship": ship.ship_type.name,
-                    "cells": [[r, c] for r, c in ship.cells]
-                }
-                for ship in self.player_board.board.ships
-            ] if self.player_board else [],
-            "agent_fleet": [
-                {
-                    "ship": ship.ship_type.name,
-                    "cells": [[r, c] for r, c in ship.cells]
-                }
-                for ship in self.agent_board.board.ships
-            ] if self.agent_board else [],
-            "moves": self.moves_history
+            "player_placement_method": (
+                self.player_board.placement_method if self.player_board else None
+            ),
+            "player_fleet": (
+                [
+                    {
+                        "ship": ship.ship_type.name,
+                        "cells": [[r, c] for r, c in ship.cells],
+                    }
+                    for ship in self.player_board.board.ships
+                ]
+                if self.player_board
+                else []
+            ),
+            "agent_fleet": (
+                [
+                    {
+                        "ship": ship.ship_type.name,
+                        "cells": [[r, c] for r, c in ship.cells],
+                    }
+                    for ship in self.agent_board.board.ships
+                ]
+                if self.agent_board
+                else []
+            ),
+            "moves": self.moves_history,
         }
 
         # Use a clean, robust timestamp format for filename
-        filename = records_dir / f"game_{game_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        filename = (
+            records_dir
+            / f"game_{game_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        )
         try:
             with open(filename, "w", encoding="utf-8") as f:
                 json.dump(record, f, indent=2)

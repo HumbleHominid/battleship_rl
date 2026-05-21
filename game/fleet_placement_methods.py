@@ -337,6 +337,7 @@ def place_fleet_cognitive_human(board: PlacementTarget) -> None:
     """
     import math
     import random
+
     from .models import Ship, get_ship_size
 
     placed_ships_info = []  # list of (cells_list, direction_class)
@@ -380,7 +381,7 @@ def place_fleet_cognitive_human(board: PlacementTarget) -> None:
                     avg_r = sum(cr for cr, _ in cells) / size
                     avg_c = sum(cc for _, cc in cells) / size
                     dist_sq = (avg_r - 4.5) ** 2 + (avg_c - 4.5) ** 2
-                    score_center = math.exp(-dist_sq / (2 * (2.0 ** 2)))
+                    score_center = math.exp(-dist_sq / (2 * (2.0**2)))
 
                     # 65% reduction if ship touches absolute edges
                     touches_edge = any(cr in (0, 9) or cc in (0, 9) for cr, cc in cells)
@@ -446,7 +447,7 @@ def place_fleet_cognitive_human(board: PlacementTarget) -> None:
 # Relative weights control how often each algorithm is selected.
 # Edit the first element of each tuple to tune the distribution.
 PLACEMENT_METHODS: dict[str, tuple[int, PlacementMethod]] = {
-    "random": (1, place_fleet_random),
+    "random": (4, place_fleet_random),
     "gaussian": (1, place_fleet_gaussian),
     "spread": (1, place_fleet_spread),
     "edges": (1, place_fleet_edges),
@@ -455,5 +456,5 @@ PLACEMENT_METHODS: dict[str, tuple[int, PlacementMethod]] = {
     "quadrant": (1, place_fleet_quadrant),
     "dense_center": (1, place_fleet_dense_center),
     "diagonal": (1, place_fleet_diagonal),
-    "cognitive_human": (1, place_fleet_cognitive_human),
+    "cognitive_human": (8, place_fleet_cognitive_human),
 }
