@@ -326,6 +326,123 @@ def place_fleet_diagonal(board: PlacementTarget) -> None:
     _place_with_score(board, "diagonal", _diag_dist, lower_is_better=True)
 
 
+def place_fleet_cognitive_human(board: PlacementTarget) -> None:
+    """
+    Biased fleet placement that imitates human placement behavior based on
+    cognitive psychology principles:
+    1. Edge-Aversion: strong bias toward rows 3-8, cols C-H, with 65% weight reduction on the absolute perimeter.
+    2. Hyper-Dispersion: buffer zones around ships (no adjacent/touching ships), quadrant balancing.
+    3. Aesthetic Orientation: near 50/50 split of horizontal/vertical, non-intersecting.
+    4. Non-Strategic Naivety: intuitive geometric heuristics.
+    """
+    import math
+    import random
+    from .models import Ship, get_ship_size
+
+    placed_ships_info = []  # list of (cells_list, direction_class)
+    h_count = 0
+    v_count = 0
+
+    for ship_type in Ship.get_fleet():
+        candidates = []
+        weights = []
+
+        # Calculate quadrant counts of already placed ships
+        quadrant_counts = [0, 0, 0, 0]  # Q1, Q2, Q3, Q4
+        for p_cells, _ in placed_ships_info:
+            q_sum = [0, 0, 0, 0]
+            for pr, pc in p_cells:
+                q_idx = (0 if pr < 5 else 2) + (0 if pc < 5 else 1)
+                q_sum[q_idx] += 1
+            best_q = q_sum.index(max(q_sum))
+            quadrant_counts[best_q] += 1
+
+        # Determine blocked/adjacent cells for hyper-dispersion
+        blocked = set()
+        for p_cells, _ in placed_ships_info:
+            for pr, pc in p_cells:
+                for dr in (-1, 0, 1):
+                    for dc in (-1, 0, 1):
+                        blocked.add((pr + dr, pc + dc))
+
+        for r in range(Board.board_size):
+            for c in range(Board.board_size):
+                for direction in _DIRECTIONS:
+                    valid, _ = board.can_place_ship(ship_type, r, c, direction)
+                    if not valid:
+                        continue
+
+                    size = get_ship_size(ship_type)
+                    dr, dc = DIRECTIONS[direction]
+                    cells = [(r + dr * i, c + dc * i) for i in range(size)]
+
+                    # 1. Edge-Aversion & Center Bias
+                    avg_r = sum(cr for cr, _ in cells) / size
+                    avg_c = sum(cc for _, cc in cells) / size
+                    dist_sq = (avg_r - 4.5) ** 2 + (avg_c - 4.5) ** 2
+                    score_center = math.exp(-dist_sq / (2 * (2.0 ** 2)))
+
+                    # 65% reduction if ship touches absolute edges
+                    touches_edge = any(cr in (0, 9) or cc in (0, 9) for cr, cc in cells)
+                    score_perimeter = 0.35 if touches_edge else 1.0
+
+                    # 2. Hyper-Dispersion (Buffer Zone check)
+                    touches_buffer = any(cell in blocked for cell in cells)
+                    score_buffer = 0.30 if touches_buffer else 1.0
+
+                    # Quadrant balancing score
+                    score_quadrant = 1.0
+                    for cr, cc in cells:
+                        q_idx = (0 if cr < 5 else 2) + (0 if cc < 5 else 1)
+                        score_quadrant *= math.exp(-1.5 * quadrant_counts[q_idx])
+
+                    # 3. Aesthetic Orientation & Symmetry
+                    is_h = direction in ("right", "left")
+                    dir_class = "H" if is_h else "V"
+
+                    score_direction = 1.0
+                    if h_count - v_count >= 2 and dir_class == "H":
+                        score_direction = 0.05
+                    elif v_count - h_count >= 2 and dir_class == "V":
+                        score_direction = 0.05
+
+                    score = (
+                        score_center
+                        * score_perimeter
+                        * score_buffer
+                        * score_quadrant
+                        * score_direction
+                    )
+                    candidates.append((r, c, direction, cells, dir_class))
+                    weights.append(score)
+
+        if not candidates:
+            # Fallback to random if no placements are valid at all (highly unlikely)
+            place_fleet_random(board)
+            return
+
+        # Select using weighted choice
+        total_w = sum(weights)
+        if total_w <= 0:
+            chosen = random.choice(candidates)
+        else:
+            chosen = random.choices(candidates, weights=weights, k=1)[0]
+
+        r, c, direction, cells, dir_class = chosen
+        board.place_ship(ship_type, r, c, direction)
+        GameLogger.debug(
+            "Placed %s at %s facing %s (cognitive)",
+            ship_type.name,
+            format_coordinate(r, c),
+            direction,
+        )
+        placed_ships_info.append((cells, dir_class))
+        if dir_class == "H":
+            h_count += 1
+        else:
+            v_count += 1
+
+
 # Relative weights control how often each algorithm is selected.
 # Edit the first element of each tuple to tune the distribution.
 PLACEMENT_METHODS: dict[str, tuple[int, PlacementMethod]] = {
@@ -338,4 +455,5 @@ PLACEMENT_METHODS: dict[str, tuple[int, PlacementMethod]] = {
     "quadrant": (1, place_fleet_quadrant),
     "dense_center": (1, place_fleet_dense_center),
     "diagonal": (1, place_fleet_diagonal),
+    "cognitive_human": (1, place_fleet_cognitive_human),
 }
