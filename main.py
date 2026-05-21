@@ -103,6 +103,12 @@ def parse_args() -> argparse.Namespace:
         ],
         help="List of ship types to include in the fleet (default: all standard ships) e.g. --fleet-config CARRIER BATTLESHIP",
     )
+    parser.add_argument(
+        "--report-games",
+        action="store_true",
+        help="Report game results (default: False)",
+        default=False,
+    )
     return parser.parse_args()
 
 
@@ -128,6 +134,7 @@ def _make_engine(
     ws_port: int = 8765,
     log_boards: bool = False,
     player_placement: str = "random",
+    report_games: bool = False,
 ) -> GameEngine:
     agent_cls = AGENT_REGISTRY.get(agent_type)
     if agent_cls is None:
@@ -155,6 +162,7 @@ def _make_engine(
         headless=headless,
         log_boards=log_boards,
         player_agent=player_cls() if player_cls else None,
+        report_games=report_games,
     )
 
 
@@ -163,6 +171,7 @@ def run_games_headless(
     player_placement_method: str | None = None,
     n_games: int = 100,
     checkpoint_path: str = "checkpoints/q_agent.pt",
+    report_games: bool = False,
 ) -> list[dict]:
     """Run n_games headless agent-vs-random games and return per-game stats.
 
@@ -176,6 +185,7 @@ def run_games_headless(
             agent_type=agent_type,
             player_placement_method=player_placement_method,
             checkpoint_path=checkpoint_path,
+            report_games=report_games,
         )
         results = []
         for _ in range(n_games):
