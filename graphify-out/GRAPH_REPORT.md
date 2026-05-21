@@ -1,16 +1,16 @@
 # Graph Report - battleship-rl  (2026-05-21)
 
 ## Corpus Check
-- 31 files · ~10,355 words
+- 30 files · ~10,700 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 749 nodes · 1176 edges · 45 communities (38 shown, 7 thin omitted)
-- Extraction: 78% EXTRACTED · 22% INFERRED · 0% AMBIGUOUS · INFERRED: 258 edges (avg confidence: 0.6)
+- 751 nodes · 1179 edges · 46 communities (36 shown, 10 thin omitted)
+- Extraction: 78% EXTRACTED · 22% INFERRED · 0% AMBIGUOUS · INFERRED: 259 edges (avg confidence: 0.61)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3ffe806a`
+- Built from commit: `09c6a0d8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -46,20 +46,22 @@
 - [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
 - [[_COMMUNITY_Community 30|Community 30]]
-- [[_COMMUNITY_Community 31|Community 31]]
-- [[_COMMUNITY_Community 33|Community 33]]
-- [[_COMMUNITY_Community 34|Community 34]]
-- [[_COMMUNITY_Community 36|Community 36]]
+- [[_COMMUNITY_Community 32|Community 32]]
+- [[_COMMUNITY_Community 37|Community 37]]
+- [[_COMMUNITY_Community 38|Community 38]]
+- [[_COMMUNITY_Community 39|Community 39]]
+- [[_COMMUNITY_Community 40|Community 40]]
 - [[_COMMUNITY_Community 41|Community 41]]
 - [[_COMMUNITY_Community 42|Community 42]]
 - [[_COMMUNITY_Community 43|Community 43]]
 - [[_COMMUNITY_Community 44|Community 44]]
+- [[_COMMUNITY_Community 45|Community 45]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `GameLogger` - 40 edges
 2. `GameBoard` - 30 edges
-3. `BattleshipEnv` - 26 edges
-4. `GameEngine` - 26 edges
+3. `GameEngine` - 27 edges
+4. `BattleshipEnv` - 26 edges
 5. `GameBoard` - 26 edges
 6. `BayesianAgent` - 24 edges
 7. `GameEngine` - 22 edges
@@ -84,25 +86,29 @@
 - **Separate Trunk Design Enabling Independent Policy and Value Training** — readme_policy_trunk, readme_value_trunk, readme_separate_trunks_rationale, readme_value_warmup [EXTRACTED 0.95]
 - **Three Baseline Agents Evaluated Across Ship Placement Strategies** — analysis_random_agent, analysis_hunt_agent, analysis_bayesian_agent [EXTRACTED 1.00]
 
-## Communities (45 total, 7 thin omitted)
+## Communities (46 total, 10 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.07
-Nodes (31): BattleshipEnv, Take a shot at cell index `action` (row * 10 + col).          Returns:, Fast single-game Battleship environment for RL training.      Wraps GameBoard di, BayesianAgent, Bayesian probability density agent.      Enumerates all valid ship placements on, FeatureExtractor, Return shape (4,) float32 global context vector., Computes per-cell (100, 16) and global (4,) features for the TransformerPPO agen (+23 more)
+Cohesion: 0.05
+Nodes (25): format_coordinate(), parse_coordinate(), Format zero-indexed (row, col) to 'A1'-'J10'., Parse 'A1'-'J10' to zero-indexed (row, col). Raises ValueError on bad input., _best_scored_candidate(), place_fleet_clustered(), place_fleet_corners(), place_fleet_dense_center() (+17 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.05
-Nodes (27): BayesianAgent, Remove hit cells of sunk ships from _unresolved_hits and recompute grid., Remove hit cells of sunk ships from _unresolved_hits and recompute grid., Bayesian probability density agent.      Enumerates all valid ship placements on, Explicitly initialize placements and compute the starting grid., FeatureExtractor, Return shape (4,) float32 global context vector., Computes per-cell (100, 16) and global (4,) features for the TransformerPPO agen (+19 more)
+Cohesion: 0.06
+Nodes (34): BaseAgent, BattleshipEnv, Take a shot at cell index `action` (row * 10 + col).          Returns:, Fast single-game Battleship environment for RL training.      Wraps GameBoard di, BayesianAgent, Bayesian probability density agent.      Enumerates all valid ship placements on, FeatureExtractor, Return shape (4,) float32 global context vector. (+26 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.06
-Nodes (22): format_coordinate(), Format zero-indexed (row, col) to 'A1'-'J10'., _best_scored_candidate(), place_fleet_clustered(), place_fleet_corners(), place_fleet_dense_center(), place_fleet_diagonal(), place_fleet_edges() (+14 more)
+Nodes (22): BayesianAgent, Remove hit cells of sunk ships from _unresolved_hits and recompute grid., Remove hit cells of sunk ships from _unresolved_hits and recompute grid., Bayesian probability density agent.      Enumerates all valid ship placements on, Explicitly initialize placements and compute the starting grid., FeatureExtractor, Return shape (4,) float32 global context vector., Computes per-cell (100, 16) and global (4,) features for the TransformerPPO agen (+14 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.07
 Nodes (20): Board, CellState, Enum, Board, CellState, get_ship_name(), get_ship_size(), # NOTE: dicts are ordered in Python 3.7+, _SHIP_SIZES.keys() is consistent (+12 more)
 
 ### Community 4 - "Community 4"
+Cohesion: 0.07
+Nodes (22): format_coordinate(), Format zero-indexed (row, col) to 'A1'-'J10'., _best_scored_candidate(), place_fleet_clustered(), place_fleet_cognitive_human(), place_fleet_corners(), place_fleet_dense_center(), place_fleet_diagonal() (+14 more)
+
+### Community 5 - "Community 5"
 Cohesion: 0.05
 Nodes (30): GameBoard, Return the Ship occupying this cell, or None., Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta, Return the Ship occupying this cell, or None., Return the Ship occupying this cell, or None., Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta, Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta, Return all (row, col) pairs not yet shot (EMPTY or ship still there). (+22 more)
 
@@ -111,12 +117,20 @@ Cohesion: 0.06
 Nodes (17): ABC, BaseAgent, Place this agent's fleet. Defaults to GameBoard.place_fleet()., Called after each move. Hook for training feedback; no-op by default., Reset agent state for a new episode., BaseAgent, Place this agent's fleet. Defaults to GameBoard.place_fleet()., Called after each move. Hook for training feedback; no-op by default. (+9 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.06
-Nodes (18): RandomAgent, AppLogger, GameLogger, GameLogger, Statically accessible logger. Call GameLogger.info() / .warn() / .error() / .deb, GameWebSocketServer, Receive move and placement commands from the player and enqueue them., Embedded WebSocket server that:       - Broadcasts game state to all connected o (+10 more)
+Cohesion: 0.23
+Nodes (4): HuntAgent, Hunt-and-target agent.      Search phase: shoots only checkerboard cells (row+co, Prepend the two axis-aligned end cells to the front of the queue., Scan board for unresolved hit cells and enqueue their unshot neighbors.
 
 ### Community 7 - "Community 7"
+Cohesion: 0.07
+Nodes (21): GameWebSocketServer, Receive move and placement commands from the player and enqueue them., Receive move and placement commands from the player and enqueue them., Embedded WebSocket server that:       - Broadcasts game state to all connected o, Register an observer and hold its connection open until disconnect., Register an observer and hold its connection open until disconnect., Serialize state_dict to JSON and send to all connected observers., Serialize state_dict to JSON and send to all connected observers and the player. (+13 more)
+
+### Community 8 - "Community 8"
 Cohesion: 0.13
-Nodes (11): _init_global_state(), main(), _make_engine(), parse_args(), Run n_games headless agent-vs-random games and return per-game stats.      Safe, run_game(), run_games_headless(), parse_coordinate() (+3 more)
+Nodes (14): Orchestrates a full game of Battleship.      The game-side agent always runs in-, GameLogger, Statically accessible logger. Call GameLogger.info() / .warn() / .error() / .deb, GameWebSocketServer, Receive move and placement commands from the player and enqueue them., Embedded WebSocket server that:       - Broadcasts game state to all connected o, Register an observer and hold its connection open until disconnect., Serialize state_dict to JSON and send to all connected observers. (+6 more)
+
+### Community 9 - "Community 9"
+Cohesion: 0.11
+Nodes (13): _init_global_state(), main(), _make_engine(), parse_args(), Run n_games headless agent-vs-random games and return per-game stats.      Safe, Run n_games headless agent-vs-random games and return per-game stats.      Safe, run_game(), run_games_headless() (+5 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.09
@@ -131,32 +145,24 @@ Cohesion: 0.12
 Nodes (19): _best_scored_candidate(), place_fleet_clustered(), place_fleet_corners(), place_fleet_dense_center(), place_fleet_diagonal(), place_fleet_edges(), place_fleet_gaussian(), place_fleet_quadrant() (+11 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.13
-Nodes (13): GameLogger, Statically accessible logger. Call GameLogger.info() / .warn() / .error() / .deb, GameWebSocketServer, Receive move and placement commands from the player and enqueue them., Embedded WebSocket server that:       - Broadcasts game state to all connected o, Register an observer and hold its connection open until disconnect., Serialize state_dict to JSON and send to all connected observers., Send a JSON message to the connected player. No-op if none connected. (+5 more)
+Cohesion: 0.10
+Nodes (8): Return a coordinate string (e.g. 'B5') given an observation dict., Called after each move. Hook for training feedback; no-op by default., Reset agent state for a new episode., Return list of cell indices (0–99) that have not yet been shot., GameBoard, Return all (row, col) pairs not yet shot (EMPTY or ship still there)., Print the board to stdout with row/col headers., Place the full fleet using a weighted-random placement algorithm.          Algor
 
 ### Community 12 - "Community 12"
-Cohesion: 0.09
-Nodes (9): Return a coordinate string (e.g. 'B5') given an observation dict., Return list of cell indices (0–99) that have not yet been shot., GameBoard, Return the Ship occupying this cell, or None., Process an incoming shot.         Returns (CellState.HIT, Ship) on hit, (CellSta, Return all (row, col) pairs not yet shot (EMPTY or ship still there)., Serialize board to a 10x10 list of 'SHIPTYPE:CELLSTATE' strings.         If fog_, Print the board to stdout with row/col headers. (+1 more)
+Cohesion: 0.06
+Nodes (23): Transformer actor-critic with fully separate policy and value trunks.      Polic, Args:             cell_feats:   (B, 100, CELL_FEATURE_DIM)             global_fe, TransformerPPONet, PolicyNet, Policy trunk: cell features → transformer encoder → per-cell log-probabilities., Args:             cell_feats:  (B, 100, CELL_FEATURE_DIM)             legal_mask, Value trunk: cell + global features → scalar state value.      A learned global, Args:             cell_feats:   (B, 100, CELL_FEATURE_DIM)             global_fe (+15 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.1
-Nodes (4): format_coordinate(), parse_coordinate(), Format zero-indexed (row, col) to 'A1'-'J10'., Parse 'A1'-'J10' to zero-indexed (row, col). Raises ValueError on bad input.
-
-### Community 15 - "Community 15"
-Cohesion: 0.13
-Nodes (5): FastAPIWebSocketAdapter, Drop-in replacement for GameWebSocketServer that accepts FastAPI/Starlette     W, Called by GameEngine as asyncio.create_task(adapter.start()).         Suspends u, Called by GameEngine in its finally block. Closes all open connections., Called by the FastAPI WS endpoint for every new connection.         Performs the
-
-### Community 16 - "Community 16"
 Cohesion: 0.13
 Nodes (10): BattleshipEnv, Fast single-game Battleship environment for RL training.      Wraps GameBoard di, Fast single-game Battleship environment for RL training.      Wraps GameBoard di, Fast single-game Battleship environment for RL training.      Wraps GameBoard di, Take a shot at cell index `action` (row * 10 + col).          Returns:, Take a shot at cell index `action` (row * 10 + col).          Returns:, Take a shot at cell index `action` (row * 10 + col).          Returns:, Take a shot at cell index `action` (row * 10 + col).          Args: (+2 more)
 
-### Community 17 - "Community 17"
-Cohesion: 0.19
-Nodes (13): legal_mask_from_obs(), Return (100,) bool array — True for cells that have not yet been shot., evaluate(), fill_demo_buffer(), main(), parse_args(), pretrain_supervised(), Vanilla DQN training for the Battleship Q-learning agent.  Usage:     python tra (+5 more)
+### Community 14 - "Community 14"
+Cohesion: 0.24
+Nodes (11): evaluate(), main(), parse_args(), pretrain_supervised(), Vanilla DQN training for the Battleship Q-learning agent.  Usage:     python tra, Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Warm-start net by regression: Q[i] ≈ Bayesian occupancy probability[i].      Pla (+3 more)
 
-### Community 18 - "Community 18"
-Cohesion: 0.23
-Nodes (4): HuntAgent, Hunt-and-target agent.      Search phase: shoots only checkerboard cells (row+co, Prepend the two axis-aligned end cells to the front of the queue., Scan board for unresolved hit cells and enqueue their unshot neighbors.
+### Community 15 - "Community 15"
+Cohesion: 0.06
+Nodes (16): ABC, BaseAgent, Place this agent's fleet. Defaults to GameBoard.place_fleet()., Called after each move. Hook for training feedback; no-op by default., Reset agent state for a new episode., HuntAgent, Hunt-and-target agent.      Search phase: shoots only checkerboard cells (row+co, Prepend the two axis-aligned end cells to the front of the queue. (+8 more)
 
 ### Community 19 - "Community 19"
 Cohesion: 0.17
@@ -194,13 +200,13 @@ Nodes (4): Compute the list of (row, col) cells a ship would occupy., Return (Tr
 Cohesion: 0.29
 Nodes (7): evaluate(), Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy., Return mean turns-to-win over n_games episodes with greedy policy.
 
-### Community 28 - "Community 28"
+### Community 24 - "Community 24"
+Cohesion: 0.14
+Nodes (6): QAgent, Battleship agent backed by a Q-network (DQN).      Operates in greedy mode (epsi, Battleship agent backed by a Q-network (DQN).      Operates in greedy mode (epsi, QNetwork, MLP Q-network for Battleship.      Maps a board state to a Q-value for each of t, CNN Q-network for Battleship.      Treats the 10x10 board as a spatial grid and
+
+### Community 25 - "Community 25"
 Cohesion: 0.29
 Nodes (6): Return list of cell indices (0–99) that have not yet been shot., Return list of cell indices (0–99) that have not yet been shot., Return list of cell indices (0–99) that have not yet been shot., Return list of cell indices (0–99) that have not yet been shot., Return list of cell indices (0–99) that have not yet been shot., Return list of cell indices (0–99) that have not yet been shot.
-
-### Community 29 - "Community 29"
-Cohesion: 0.29
-Nodes (3): QNetwork, MLP Q-network for Battleship.      Maps a board state to a Q-value for each of t, CNN Q-network for Battleship.      Treats the 10x10 board as a spatial grid and
 
 ### Community 30 - "Community 30"
 Cohesion: 0.29
@@ -210,29 +216,37 @@ Nodes (3): QAgent, Battleship agent backed by a Q-network (DQN).      Operates i
 Cohesion: 0.52
 Nodes (6): coord_to_index(), init_transformer_ppo(), main(), parse_args(), run_training_loop(), setup_board_and_fleet()
 
-### Community 33 - "Community 33"
-Cohesion: 0.4
+### Community 29 - "Community 29"
+Cohesion: 0.40
 Nodes (4): bayes_augment_reward(), make_reward_fn(), Return a reward fn that adds alpha * Bayesian probability of the chosen cell., Instantiate a reward function by name.      Args:         name:  Key from REWARD
 
+### Community 41 - "Community 41"
+Cohesion: 0.29
+Nodes (4): Compute the list of (row, col) cells a ship would occupy., Return (True, '') if the placement is valid.         Return (False, reason) if o, Place a ship on the board. Raises ValueError if placement is invalid.         Re, Convenience wrapper: place_ship_from_str(ShipType.CARRIER, 'A1', 'right').
+
+### Community 42 - "Community 42"
+Cohesion: 0.29
+Nodes (5): legal_mask_from_obs(), Return (100,) bool array — True for cells that have not yet been shot., fill_demo_buffer(), Pre-populate replay buffer with Bayesian agent game transitions., Pre-populate replay buffer with Bayesian agent game transitions.
+
 ## Knowledge Gaps
-- **161 isolated node(s):** `Run n_games headless agent-vs-random games and return per-game stats.      Safe`, `Return a reward fn that adds alpha * Bayesian probability of the chosen cell.`, `Instantiate a reward function by name.      Args:         name:  Key from REWARD`, `Fast single-game Battleship environment for RL training.      Wraps GameBoard di`, `Take a shot at cell index `action` (row * 10 + col).          Args:` (+156 more)
+- **20 isolated node(s):** `Algorithm`, `Random Agent`, `Hunt Agent`, `Bayesian Agent`, `Random Placement` (+15 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `GameLogger` connect `Community 11` to `Community 0`, `Community 3`, `Community 5`, `Community 10`, `Community 12`, `Community 13`, `Community 14`, `Community 26`?**
-  _High betweenness centrality (0.185) - this node is a cross-community bridge._
-- **Why does `GameLogger` connect `Community 6` to `Community 1`, `Community 2`, `Community 3`, `Community 4`, `Community 7`, `Community 15`, `Community 16`, `Community 18`, `Community 30`?**
-  _High betweenness centrality (0.166) - this node is a cross-community bridge._
-- **Why does `BattleshipEnv` connect `Community 16` to `Community 1`, `Community 4`, `Community 6`, `Community 9`, `Community 17`, `Community 20`, `Community 27`, `Community 28`?**
-  _High betweenness centrality (0.163) - this node is a cross-community bridge._
+- **Why does `GameLogger` connect `Community 8` to `Community 0`, `Community 1`, `Community 2`, `Community 3`, `Community 6`, `Community 41`, `Community 11`, `Community 43`, `Community 45`, `Community 26`?**
+  _High betweenness centrality (0.183) - this node is a cross-community bridge._
+- **Why does `BattleshipEnv` connect `Community 13` to `Community 2`, `Community 5`, `Community 42`, `Community 12`, `Community 14`, `Community 15`, `Community 17`, `Community 23`, `Community 25`?**
+  _High betweenness centrality (0.164) - this node is a cross-community bridge._
+- **Why does `GameLogger` connect `Community 15` to `Community 2`, `Community 3`, `Community 4`, `Community 5`, `Community 7`, `Community 9`, `Community 13`, `Community 24`?**
+  _High betweenness centrality (0.147) - this node is a cross-community bridge._
 - **Are the 38 inferred relationships involving `GameLogger` (e.g. with `GameEngine` and `Orchestrates a full game of Battleship.      The game-side agent always runs in-`) actually correct?**
   _`GameLogger` has 38 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 12 inferred relationships involving `GameBoard` (e.g. with `GameLogger` and `GameEngine`) actually correct?**
   _`GameBoard` has 12 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 7 inferred relationships involving `GameEngine` (e.g. with `GameBoard` and `GameLogger`) actually correct?**
+  _`GameEngine` has 7 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 16 inferred relationships involving `BattleshipEnv` (e.g. with `GameBoard` and `GameLogger`) actually correct?**
   _`BattleshipEnv` has 16 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 7 inferred relationships involving `GameEngine` (e.g. with `BaseAgent` and `GameBoard`) actually correct?**
-  _`GameEngine` has 7 INFERRED edges - model-reasoned connections that need verification._

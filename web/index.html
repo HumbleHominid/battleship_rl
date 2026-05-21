@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battleship RL</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <header class="glass-panel">
+      <h1>Battleship <span>RL</span></h1>
+      <div id="status" class="status-indicator">
+        <span class="dot disconnected"></span> Waiting for connection...
+      </div>
+    </header>
+
+    <main class="game-area hidden" id="game-area">
+      <div class="turn-indicator glass-panel" id="turn-indicator">
+        Waiting for game to start...
+      </div>
+      
+      <div class="boards-container">
+        <!-- Player's Board -->
+        <div class="board-wrapper glass-panel">
+          <h2>Your Fleet</h2>
+          <div class="stats">
+            Ships Sunk: <span id="player-sunk">0</span> | Hits: <span id="player-hits">0</span>
+          </div>
+          <div class="grid" id="player-grid"></div>
+        </div>
+
+        <!-- Agent's Board (Enemy Waters) -->
+        <div class="board-wrapper glass-panel enemy-waters">
+          <h2>Enemy Waters</h2>
+          <div class="stats">
+            Ships Sunk: <span id="agent-sunk">0</span> | Hits: <span id="agent-hits">0</span>
+          </div>
+          <div class="grid" id="agent-grid"></div>
+        </div>
+      </div>
+
+      <div class="logs-container">
+        <div class="log-panel glass-panel">
+          <h3>Your Actions</h3>
+          <ul id="player-action-log"></ul>
+        </div>
+        <div class="log-panel glass-panel">
+          <h3>Opponent Actions</h3>
+          <ul id="agent-action-log"></ul>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal for Setup / Game Over -->
+    <div id="modal" class="modal-overlay">
+      <div class="modal-content glass-panel">
+        <h2 id="modal-title">Connect to Game</h2>
+        <p id="modal-desc">Ensure the Python backend is running with `--player-type websocket`</p>
+        <button id="modal-btn" class="btn">Connect</button>
+      </div>
+    </div>
+    
+    <!-- Toast for alerts -->
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

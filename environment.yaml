@@ -1,5 +1,4 @@
-name:
-  - battleship-rl
+name: battleship-rl
 channels:
   - conda-forge
   - defaults
