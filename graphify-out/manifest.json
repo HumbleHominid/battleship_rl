@@ -1,157 +1,126 @@
 {
   "/Users/mfryer/Code/battleship-rl/main.py": {
     "mtime": 1779388846.7972856,
-    "ast_hash": "b8d23061d4bd62b484ddc03c0960de52",
-    "semantic_hash": ""
+    "hash": "b8d23061d4bd62b484ddc03c0960de52"
   },
   "/Users/mfryer/Code/battleship-rl/training/reward_fns.py": {
     "mtime": 1778834697.3379662,
-    "ast_hash": "f19fefc93cc5d77d3f9b7e01647cff21",
-    "semantic_hash": ""
+    "hash": "f19fefc93cc5d77d3f9b7e01647cff21"
   },
   "/Users/mfryer/Code/battleship-rl/training/__init__.py": {
     "mtime": 1778350510.1834447,
-    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
-    "semantic_hash": ""
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "/Users/mfryer/Code/battleship-rl/training/battleship_env.py": {
     "mtime": 1779377552.079276,
-    "ast_hash": "9ba48962a1ee4c9c3b1415a981f0cee0",
-    "semantic_hash": ""
+    "hash": "9ba48962a1ee4c9c3b1415a981f0cee0"
   },
   "/Users/mfryer/Code/battleship-rl/training/q_train.py": {
     "mtime": 1779388660.1761384,
-    "ast_hash": "b778822903911b9fd4156f13d6d9d79f",
-    "semantic_hash": ""
+    "hash": "b778822903911b9fd4156f13d6d9d79f"
   },
   "/Users/mfryer/Code/battleship-rl/training/q_replay_buffer.py": {
     "mtime": 1778862156.2777565,
-    "ast_hash": "612a4b8546b0cd1a47f4eb346c9cf091",
-    "semantic_hash": ""
+    "hash": "612a4b8546b0cd1a47f4eb346c9cf091"
   },
   "/Users/mfryer/Code/battleship-rl/training/training_logger.py": {
     "mtime": 1778350510.18575,
-    "ast_hash": "cb93ef0f994ab9c14e43cb18c5fb2956",
-    "semantic_hash": ""
+    "hash": "cb93ef0f994ab9c14e43cb18c5fb2956"
   },
   "/Users/mfryer/Code/battleship-rl/game/directions.py": {
     "mtime": 1776516222.712051,
-    "ast_hash": "f78c08fb77c7fa52f08e733a4d89b524",
-    "semantic_hash": ""
+    "hash": "f78c08fb77c7fa52f08e733a4d89b524"
   },
   "/Users/mfryer/Code/battleship-rl/game/game_engine.py": {
-    "mtime": 1779388948.020992,
-    "ast_hash": "6a2c4ffeb6316349e23af1ab08173934",
-    "semantic_hash": ""
+    "mtime": 1779392701.4228723,
+    "hash": "6a2c4ffeb6316349e23af1ab08173934"
   },
   "/Users/mfryer/Code/battleship-rl/game/game_logger.py": {
     "mtime": 1778350510.1110876,
-    "ast_hash": "f1fd8992d80782327f425e90d96b0a2c",
-    "semantic_hash": ""
+    "hash": "f1fd8992d80782327f425e90d96b0a2c"
   },
   "/Users/mfryer/Code/battleship-rl/game/placement_protocol.py": {
     "mtime": 1777794801.070661,
-    "ast_hash": "fce14f6d235c0f040dee6571fcb3e451",
-    "semantic_hash": ""
+    "hash": "fce14f6d235c0f040dee6571fcb3e451"
   },
   "/Users/mfryer/Code/battleship-rl/game/fleet_placement_methods.py": {
     "mtime": 1779388846.791724,
-    "ast_hash": "d198f43e98a8c1e9323ce1595046cfe8",
-    "semantic_hash": ""
+    "hash": "d198f43e98a8c1e9323ce1595046cfe8"
   },
   "/Users/mfryer/Code/battleship-rl/game/fastapi_ws_adapter.py": {
-    "mtime": 1779388673.8509219,
-    "ast_hash": "3339e2e42e8a94e45e28bdf5f3a275d8",
-    "semantic_hash": ""
+    "mtime": 1779392701.422419,
+    "hash": "3339e2e42e8a94e45e28bdf5f3a275d8"
   },
   "/Users/mfryer/Code/battleship-rl/game/coordinate_methods.py": {
     "mtime": 1778350510.109739,
-    "ast_hash": "bc0d8a2a436a340d55955e5fe97eac99",
-    "semantic_hash": ""
+    "hash": "bc0d8a2a436a340d55955e5fe97eac99"
   },
   "/Users/mfryer/Code/battleship-rl/game/game_board.py": {
     "mtime": 1778925263.2315474,
-    "ast_hash": "ff53e5b7f7b5e661a71638d5cd074267",
-    "semantic_hash": ""
+    "hash": "ff53e5b7f7b5e661a71638d5cd074267"
   },
   "/Users/mfryer/Code/battleship-rl/game/websocket.py": {
     "mtime": 1779388846.7934222,
-    "ast_hash": "698cc14e8324c0c079577e96508cd686",
-    "semantic_hash": ""
+    "hash": "698cc14e8324c0c079577e96508cd686"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/random_agent.py": {
     "mtime": 1778350510.1092806,
-    "ast_hash": "558a1760f32cb49a23da3a31eee345fd",
-    "semantic_hash": ""
+    "hash": "558a1760f32cb49a23da3a31eee345fd"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/bayesian_agent.py": {
     "mtime": 1778834697.3112824,
-    "ast_hash": "8338ce1c4c3f11459fdb0a4cdc3d460f",
-    "semantic_hash": ""
+    "hash": "8338ce1c4c3f11459fdb0a4cdc3d460f"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/base_agent.py": {
     "mtime": 1777898720.122407,
-    "ast_hash": "2cc0dfdc39dbce51b68038dbd385d4d5",
-    "semantic_hash": ""
+    "hash": "2cc0dfdc39dbce51b68038dbd385d4d5"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/hunt_agent.py": {
     "mtime": 1778350510.1080906,
-    "ast_hash": "b959330bedb1d899b7ebcd1305ea7115",
-    "semantic_hash": ""
+    "hash": "b959330bedb1d899b7ebcd1305ea7115"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/__init__.py": {
     "mtime": 1778862156.2601712,
-    "ast_hash": "214a488cfb2d31bf7199b940e806d1ab",
-    "semantic_hash": ""
+    "hash": "214a488cfb2d31bf7199b940e806d1ab"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/q_agent.py": {
     "mtime": 1778862156.2604442,
-    "ast_hash": "c18c37cba22ad8b43ae62d71a88a7893",
-    "semantic_hash": ""
+    "hash": "c18c37cba22ad8b43ae62d71a88a7893"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/q_net/q_network.py": {
     "mtime": 1778862156.2607086,
-    "ast_hash": "879c79fc691b466b6b395b27c8953db4",
-    "semantic_hash": ""
+    "hash": "879c79fc691b466b6b395b27c8953db4"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/q_net/__init__.py": {
     "mtime": 1778834697.3118534,
-    "ast_hash": "c34e2e85b887ffa0a36af19c1cf6ed91",
-    "semantic_hash": ""
+    "hash": "c34e2e85b887ffa0a36af19c1cf6ed91"
   },
   "/Users/mfryer/Code/battleship-rl/game/agents/q_net/state_encoder.py": {
     "mtime": 1778834697.3124394,
-    "ast_hash": "4a27fd1e84d7328105c06c7c71eb8c5d",
-    "semantic_hash": ""
+    "hash": "4a27fd1e84d7328105c06c7c71eb8c5d"
   },
   "/Users/mfryer/Code/battleship-rl/game/models/ship_type.py": {
     "mtime": 1778353101.3049412,
-    "ast_hash": "92579ad258e70578896d4e877c9dd83e",
-    "semantic_hash": ""
+    "hash": "92579ad258e70578896d4e877c9dd83e"
   },
   "/Users/mfryer/Code/battleship-rl/game/models/board.py": {
     "mtime": 1778350510.1116984,
-    "ast_hash": "c455e41c5cbf7ec4c0e039675abd9afe",
-    "semantic_hash": ""
+    "hash": "c455e41c5cbf7ec4c0e039675abd9afe"
   },
   "/Users/mfryer/Code/battleship-rl/game/models/__init__.py": {
     "mtime": 1778350510.1114326,
-    "ast_hash": "46aeeaee3361c1b0d5aae0da74dc59aa",
-    "semantic_hash": ""
+    "hash": "46aeeaee3361c1b0d5aae0da74dc59aa"
   },
   "/Users/mfryer/Code/battleship-rl/game/models/ship.py": {
     "mtime": 1778353101.3046641,
-    "ast_hash": "8d6e9e5f30954478276d98ec5a3a83fe",
-    "semantic_hash": ""
+    "hash": "8d6e9e5f30954478276d98ec5a3a83fe"
   },
   "/Users/mfryer/Code/battleship-rl/game/models/cell_state.py": {
     "mtime": 1776517787.576947,
-    "ast_hash": "4b1c5c2af1dce454aab1ae0afdce1bad",
-    "semantic_hash": ""
+    "hash": "4b1c5c2af1dce454aab1ae0afdce1bad"
   },
   "/Users/mfryer/Code/battleship-rl/training/README.md": {
     "mtime": 1778862156.2662811,
-    "ast_hash": "b2d1a9d8f570e2708286ebcc7ec4f920",
-    "semantic_hash": ""
+    "hash": "b2d1a9d8f570e2708286ebcc7ec4f920"
   }
 }
