@@ -98,6 +98,12 @@ def parse_args() -> argparse.Namespace:
         default="INFO",
         help="Logging verbosity (default: INFO)",
     )
+    p.add_argument(
+        "--override",
+        action="store_true",
+        help="When resuming from a checkpoint, ignore saved episode/step counts and epsilon",
+        default=False,
+    )
     return p.parse_args()
 
 
@@ -316,6 +322,13 @@ def train(args: argparse.Namespace) -> None:
         total_steps = 0
         best_turns = float("inf")
 
+    if args.override:
+        TrainingLogger.warn("Overriding checkpoint parameters")
+        start_episode = 1
+        epsilon = args.eps_start
+        total_steps = 0
+        best_turns = float("inf")
+
     if not args.resume and args.pretrain_games > 0:
         pretrain_supervised(
             online_net,
@@ -333,13 +346,11 @@ def train(args: argparse.Namespace) -> None:
     TrainingLogger.info("Starting training...")
 
     for episode in range(start_episode, args.episodes + 1):
-        print(
-            f"ep: {episode}/{args.episodes} - eps: {epsilon:.4f} - reward: {reward:.4f}",
-            end="\r",
-        )
         obs, _ = env.reset()
         encoder.reset()
         cell_feats, global_feats = encoder.encode(obs)
+        turns = 0
+        episode_reward = 0.0
 
         while not env.done:
             legal_mask = legal_mask_from_obs(obs)
@@ -364,6 +375,8 @@ def train(args: argparse.Namespace) -> None:
 
             next_obs, reward, done, _, info = env.step(action, cell_feats)
             encoder.update(info["coordinate"], info["result"], info["ship_sunk"])
+            episode_reward += reward
+            turns += 1
             if not done:
                 next_cell_feats, next_global_feats = encoder.encode(next_obs)
                 next_legal_mask = legal_mask_from_obs(next_obs)
@@ -456,6 +469,11 @@ def train(args: argparse.Namespace) -> None:
                 TrainingLogger.info(
                     f"checkpoint saved -> {args.save_path} (best={best_turns:.1f})"
                 )
+
+        print(
+            f"ep: {episode}/{args.episodes} - eps: {epsilon:.4f} - reward: {episode_reward:.4f} - turns: {str(turns):3s}",
+            end="\r",
+        )
 
 
 def main() -> None:
