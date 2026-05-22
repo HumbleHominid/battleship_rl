@@ -75,6 +75,16 @@ class GameWebSocketServer:
         self._observers.clear()
         self._player_ws = None
 
+    async def close_player(self) -> None:
+        """Close the player socket with a clean close frame. No-op if no player connected."""
+        if self._player_ws is None:
+            return
+        try:
+            await self._player_ws.close(1000, "game over")
+        except Exception:
+            pass
+        self._player_ws = None
+
     # ------------------------------------------------------------------
     # Connection handler
     # ------------------------------------------------------------------
