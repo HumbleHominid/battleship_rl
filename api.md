@@ -191,11 +191,12 @@ Server confirms:
   "result": "HIT",
   "ship_hit": "DESTROYER",
   "ship_sunk": null,
-  "game_over": false
+  "game_over": false,
+  "winner": null
 }
 ```
 
-`result` is `"HIT"` or `"MISS"`. `ship_sunk` is the ship name if sunk, else `null`.
+`result` is `"HIT"` or `"MISS"`. `ship_sunk` is the ship name if sunk, else `null`. When `game_over` is `true`, `winner` is `"player"` or `"agent"`.
 
 ---
 
@@ -251,6 +252,8 @@ Broadcast to all observers whenever a ship is sunk:
 
 ### Game over
 
+Sent to all connected clients (player and observers) after the final move:
+
 ```json
 {
   "type": "game_over",
@@ -263,7 +266,7 @@ Broadcast to all observers whenever a ship is sunk:
 }
 ```
 
-`winner` is `"player"` or `"agent"`.
+`winner` is `"player"` or `"agent"`. After this message the server sends a WebSocket close frame (code 1000) to the player. Clients should not expect further messages after `game_over`.
 
 ---
 
