@@ -447,7 +447,7 @@ def place_fleet_cognitive_human(board: PlacementTarget) -> None:
 # Relative weights control how often each algorithm is selected.
 # Edit the first element of each tuple to tune the distribution.
 PLACEMENT_METHODS: dict[str, tuple[int, PlacementMethod]] = {
-    "random": (4, place_fleet_random),
+    "random": (1, place_fleet_random),
     "gaussian": (1, place_fleet_gaussian),
     "spread": (1, place_fleet_spread),
     "edges": (1, place_fleet_edges),
@@ -456,5 +456,5 @@ PLACEMENT_METHODS: dict[str, tuple[int, PlacementMethod]] = {
     "quadrant": (1, place_fleet_quadrant),
     "dense_center": (1, place_fleet_dense_center),
     "diagonal": (1, place_fleet_diagonal),
-    "cognitive_human": (8, place_fleet_cognitive_human),
+    "cognitive_human": (1, place_fleet_cognitive_human),
 }
