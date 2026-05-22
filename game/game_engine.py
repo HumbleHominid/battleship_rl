@@ -218,6 +218,7 @@ class GameEngine:
             if self._check_win_condition():
                 if self.ws_server:
                     await self.ws_server.broadcast_state(self._build_game_over_dict())
+                    await self.ws_server.close_player()
                 break
 
             self._current_player = (
@@ -240,6 +241,7 @@ class GameEngine:
                 GameLogger.warn("Player sent invalid coordinate '%s': %s", coord, e)
                 return
             await self._fire_on_agent_board(row, col)
+            self._check_win_condition()
             if self.ws_server and self._last_move:
                 await self.ws_server.send_to_player(
                     {
@@ -249,6 +251,7 @@ class GameEngine:
                         "ship_hit": self._last_move["ship_hit"],
                         "ship_sunk": self._last_move["ship_sunk"],
                         "game_over": self._game_over,
+                        "winner": self._winner if self._game_over else None,
                     }
                 )
         elif self.player_type == "terminal":
