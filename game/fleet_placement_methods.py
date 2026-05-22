@@ -448,13 +448,13 @@ def place_fleet_cognitive_human(board: PlacementTarget) -> None:
 # Edit the first element of each tuple to tune the distribution.
 PLACEMENT_METHODS: dict[str, tuple[int, PlacementMethod]] = {
     "random": (1, place_fleet_random),
-    "gaussian": (1, place_fleet_gaussian),
-    "spread": (1, place_fleet_spread),
-    "edges": (1, place_fleet_edges),
-    "corners": (1, place_fleet_corners),
-    "clustered": (1, place_fleet_clustered),
-    "quadrant": (1, place_fleet_quadrant),
-    "dense_center": (1, place_fleet_dense_center),
-    "diagonal": (1, place_fleet_diagonal),
-    "cognitive_human": (1, place_fleet_cognitive_human),
+    "gaussian": (0, place_fleet_gaussian),
+    "spread": (0, place_fleet_spread),
+    "edges": (0, place_fleet_edges),
+    "corners": (0, place_fleet_corners),
+    "clustered": (0, place_fleet_clustered),
+    "quadrant": (0, place_fleet_quadrant),
+    "dense_center": (0, place_fleet_dense_center),
+    "diagonal": (0, place_fleet_diagonal),
+    "cognitive_human": (0, place_fleet_cognitive_human),
 }
