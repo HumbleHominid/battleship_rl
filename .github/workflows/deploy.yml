@@ -3,6 +3,16 @@ name: Deploy
 on:
   push:
     branches: [main]
+    paths:
+      - "backend/**"
+      - "!backend/training/**"
+      - "!backend/tests/**"
+      - "!backend/evaluate.py"
+      - "!backend/app_logger.py"
+      - "!backend/api.md"
+      - "!backend/environment.yaml"
+      - "!backend/pyproject.toml"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 env:
