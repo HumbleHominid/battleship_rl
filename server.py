@@ -1,5 +1,4 @@
 import asyncio
-import inspect
 import logging
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
@@ -12,10 +11,7 @@ from pydantic import BaseModel, Field
 
 from game.agents import AGENT_REGISTRY
 from game.fastapi_ws_adapter import FastAPIWebSocketAdapter
-from game.fleet_placement_methods import PLACEMENT_METHODS
 from game.game_engine import GameEngine
-from game.game_logger import GameLogger
-from game.models import Board, Ship, ShipType
 
 
 # ------------------------------------------------------------------
@@ -24,17 +20,10 @@ from game.models import Board, Ship, ShipType
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    Board.board_size = 10
-    Ship.valid_ships = [s for s in ShipType if s != ShipType.NONE]
-    GameLogger.setup(console_level=logging.WARNING)
+    logging.basicConfig(level=logging.WARNING)
     yield
     for record in list(_games.values()):
-        if not record.task.done():
-            record.task.cancel()
-            try:
-                await record.task
-            except (asyncio.CancelledError, Exception):
-                pass
+        await _cancel(record)
 
 
 app = FastAPI(title="Battleship RL Server", version="1.0.0", lifespan=lifespan)
@@ -77,10 +66,6 @@ _games: dict[str, GameRecord] = {}
 class CreateGameRequest(BaseModel):
     agent: str = Field(default="q-agent", description="Agent key: random, hunt, bayes, q-agent")
     player_placement: str = Field(default="random", pattern="^(random|manual)$")
-    player_placement_method: Optional[str] = Field(
-        default=None,
-        description="Fleet placement algorithm. One of: random, gaussian, spread, edges, corners, clustered, quadrant, dense_center, diagonal",
-    )
 
 
 class CreateGameResponse(BaseModel):
@@ -107,25 +92,13 @@ class GameStatusResponse(BaseModel):
 # Helpers
 # ------------------------------------------------------------------
 
-def _build_engine(
-    agent_name: str,
-    player_placement: str,
-    player_placement_method: Optional[str],
-    adapter: FastAPIWebSocketAdapter,
-) -> GameEngine:
-    agent_cls = AGENT_REGISTRY[agent_name]
-    agent_kwargs: dict = {}
-    if "checkpoint_path" in inspect.signature(agent_cls.__init__).parameters:
-        agent_kwargs["checkpoint_path"] = "checkpoints/q_agent.pt"
-    return GameEngine(
-        agent=agent_cls(**agent_kwargs),
-        player_type="websocket",
-        player_placement=player_placement,
-        player_placement_method=player_placement_method,
-        enable_ws=False,
-        headless=True,
-        ws_server=adapter,
-    )
+async def _cancel(record: GameRecord) -> None:
+    if not record.task.done():
+        record.task.cancel()
+        try:
+            await record.task
+        except (asyncio.CancelledError, Exception):
+            pass
 
 
 def _record_to_status(r: GameRecord) -> GameStatusResponse:
@@ -151,15 +124,13 @@ def _record_to_status(r: GameRecord) -> GameStatusResponse:
 async def create_game(req: CreateGameRequest, request: Request):
     if req.agent not in AGENT_REGISTRY:
         raise HTTPException(400, f"Unknown agent '{req.agent}'. Valid: {list(AGENT_REGISTRY)}")
-    if req.player_placement_method and req.player_placement_method not in PLACEMENT_METHODS:
-        raise HTTPException(
-            400,
-            f"Unknown placement method '{req.player_placement_method}'. Valid: {list(PLACEMENT_METHODS)}",
-        )
 
     adapter = FastAPIWebSocketAdapter()
-    engine = _build_engine(
-        req.agent, req.player_placement, req.player_placement_method, adapter
+    engine = GameEngine(
+        agent=AGENT_REGISTRY[req.agent](),
+        ws_server=adapter,
+        player_placement=req.player_placement,
+        headless=True,
     )
     task = asyncio.create_task(engine.run(), name=f"game-{adapter.game_id}")
 
@@ -201,12 +172,7 @@ async def delete_game(game_id: str):
     record = _games.pop(game_id, None)
     if not record:
         raise HTTPException(404, "Game not found")
-    if not record.task.done():
-        record.task.cancel()
-        try:
-            await record.task
-        except (asyncio.CancelledError, Exception):
-            pass
+    await _cancel(record)
 
 
 @app.websocket("/games/{game_id}/ws")

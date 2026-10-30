@@ -1,10 +1,12 @@
+import logging
 import random
 from typing import Optional
 
 from game.agents.base_agent import BaseAgent
 from game.coordinate_methods import format_coordinate, parse_coordinate
-from game.game_logger import GameLogger
-from game.models import Board, Ship, ShipType, get_ship_size
+from game.models import FLEET, Board, ShipType, get_ship_size
+
+log = logging.getLogger(__name__)
 
 
 class BayesianAgent(BaseAgent):
@@ -18,7 +20,10 @@ class BayesianAgent(BaseAgent):
     covering at least one hit cell are counted, focusing fire on the damaged ship.
     """
 
-    def __init__(self, deterministic_selection: bool = False) -> None:
+    def __init__(self) -> None:
+        self.reset()
+
+    def reset(self) -> None:
         self._valid_placements: dict[ShipType, list[frozenset[tuple[int, int]]]] = {}
         self._grid: list[list[int]] = [
             [0] * Board.board_size for _ in range(Board.board_size)
@@ -26,17 +31,7 @@ class BayesianAgent(BaseAgent):
         self._unresolved_hits: set[tuple[int, int]] = set()
         self._sunk_ship_types: set[ShipType] = set()
         self._initialized: bool = False
-        self._rng = random.Random()
-        self._deterministic_selection = deterministic_selection
-        GameLogger.info("Initialized BayesianAgent")
-
-    def reset(self) -> None:
-        self._valid_placements = {}
-        self._grid = [[0] * Board.board_size for _ in range(Board.board_size)]
-        self._unresolved_hits = set()
-        self._sunk_ship_types = set()
-        self._initialized = False
-        GameLogger.debug("ProbabilityAgent state reset")
+        log.debug("BayesianAgent state reset")
 
     def init(self) -> None:
         """Explicitly initialize placements and compute the starting grid."""
@@ -44,7 +39,7 @@ class BayesianAgent(BaseAgent):
         self._recompute_grid()
 
     def _initialize_placements(self) -> None:
-        for ship_type in Ship.get_fleet():
+        for ship_type in FLEET:
             size = get_ship_size(ship_type)
             placements: list[frozenset[tuple[int, int]]] = []
             for dr, dc in [(0, 1), (1, 0)]:
@@ -59,7 +54,7 @@ class BayesianAgent(BaseAgent):
             self._valid_placements[ship_type] = placements
         self._initialized = True
         total = sum(len(p) for p in self._valid_placements.values())
-        GameLogger.debug(
+        log.debug(
             "Initialized %d total placements across %d ships",
             total,
             len(self._valid_placements),
@@ -120,44 +115,30 @@ class BayesianAgent(BaseAgent):
 
     def select_move(self, obs: dict) -> str:
         if not self._initialized:
-            self._initialize_placements()
-            self._recompute_grid()
+            self.init()
+
+        self.resolve_sunk_hits(obs)
 
         board = obs["enemy_board"]
-        sunk_names = {st.name for st in self._sunk_ship_types}
-        unshot_cells: list[tuple[int, int]] = []
-        hits_changed = False
-
-        for r in range(Board.board_size):
-            for c in range(Board.board_size):
-                ship_name, state = board[r][c].split(":")
-                if state == "EMPTY":
-                    unshot_cells.append((r, c))
-                elif state == "HIT" and ship_name in sunk_names:
-                    if (r, c) in self._unresolved_hits:
-                        self._unresolved_hits.discard((r, c))
-                        hits_changed = True
-
-        if hits_changed:
-            self._recompute_grid()
+        unshot_cells = [
+            (r, c)
+            for r in range(Board.board_size)
+            for c in range(Board.board_size)
+            if board[r][c].endswith(":EMPTY")
+        ]
 
         if not unshot_cells:
             raise RuntimeError("No unshot cells remain")
 
         best_count = max(self._grid[r][c] for r, c in unshot_cells)
         if best_count == 0:
-            GameLogger.debug("All placements exhausted, falling back to random")
-            return format_coordinate(*self._rng.choice(unshot_cells))
+            log.debug("All placements exhausted, falling back to random")
+            return format_coordinate(*random.choice(unshot_cells))
 
-        candidates = sorted(
-            (r, c) for r, c in unshot_cells if self._grid[r][c] == best_count
+        chosen = random.choice(
+            [(r, c) for r, c in unshot_cells if self._grid[r][c] == best_count]
         )
-        chosen = (
-            candidates[0]
-            if self._deterministic_selection
-            else self._rng.choice(candidates)
-        )
-        GameLogger.debug(
+        log.debug(
             "Selected %s with probability count %d",
             format_coordinate(*chosen),
             best_count,

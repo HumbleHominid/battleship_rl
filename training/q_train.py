@@ -1,14 +1,15 @@
 """Vanilla DQN training for the Battleship Q-learning agent.
 
 Usage:
-    python training/q_learning/q_train.py
-    python training/q_learning/q_train.py --episodes 100000 --save-path checkpoints/q_agent.pt
+    python training/q_train.py
+    python training/q_train.py --episodes 100000 --save-path checkpoints/q_agent.pt
 """
 
 from __future__ import annotations
 
 import argparse
 import copy
+import logging
 import os
 import random
 
@@ -17,12 +18,14 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+from app_logger import setup_logging
 from game.agents.q_net import QNetwork
 from game.agents.q_net.state_encoder import BayesEncoder, legal_mask_from_obs
 from training.battleship_env import BattleshipEnv
 from training.q_replay_buffer import ReplayBuffer
 from training.reward_fns import REWARD_REGISTRY, make_reward_fn
-from training.training_logger import TrainingLogger
+
+log = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # Hyperparameters
@@ -154,7 +157,7 @@ def pretrain_supervised(
     trains the network for n_epochs so that Q-values track Bayesian probability
     before any RL updates begin.
     """
-    TrainingLogger.info("Pretraining: collecting %d games...", n_games)
+    log.info("Pretraining: collecting %d games...", n_games)
     env = BattleshipEnv()
     encoder = BayesEncoder()
 
@@ -169,7 +172,7 @@ def pretrain_supervised(
             obs, _, _, _, info = env.step(action)
             encoder.update(info["coordinate"], info["result"], info["ship_sunk"])
 
-    TrainingLogger.info("Pretraining: %d samples, %d epochs", len(demos), n_epochs)
+    log.info("Pretraining: %d samples, %d epochs", len(demos), n_epochs)
     optimizer = optim.Adam(net.parameters(), lr=lr)
     loss_fn = nn.MSELoss()
     all_mask = torch.ones(1, 100, dtype=torch.bool, device=device)
@@ -198,9 +201,9 @@ def pretrain_supervised(
             total_loss += loss.item()
             steps += 1
         loss = total_loss / steps
-        TrainingLogger.info("Pretrain epoch %d/%d  loss=%.5f", epoch, n_epochs, loss)
+        log.info("Pretrain epoch %d/%d  loss=%.5f", epoch, n_epochs, loss)
         if loss < min_loss:
-            TrainingLogger.info(
+            log.info(
                 "Pretrain loss %.5f < %.5f, stopping early", loss, min_loss
             )
             break
@@ -216,10 +219,10 @@ def fill_demo_buffer(
     from game.coordinate_methods import parse_coordinate
     from game.models import Board
 
-    TrainingLogger.info("Demo buffer: collecting %d Bayesian games...", n_games)
+    log.info("Demo buffer: collecting %d Bayesian games...", n_games)
     env = BattleshipEnv(reward_fn=reward_fn)
     encoder = BayesEncoder()
-    agent = BayesianAgent(deterministic_selection=False)
+    agent = BayesianAgent()
 
     for _ in range(n_games):
         obs, _ = env.reset()
@@ -259,7 +262,7 @@ def fill_demo_buffer(
             cell_feats = next_cell_feats
             global_feats = next_global_feats
 
-    TrainingLogger.info("Demo buffer: %d transitions loaded", len(buffer))
+    log.info("Demo buffer: %d transitions loaded", len(buffer))
 
 
 def _save(
@@ -313,7 +316,7 @@ def train(args: argparse.Namespace) -> None:
         total_steps = ckpt.get("total_steps", 0)
         epsilon = ckpt.get("epsilon", args.eps_start)
         best_turns = ckpt.get("best_turns", float("inf"))
-        TrainingLogger.info(
+        log.info(
             f"Resumed from {args.resume} at episode {start_episode - 1}"
         )
     else:
@@ -323,7 +326,7 @@ def train(args: argparse.Namespace) -> None:
         best_turns = float("inf")
 
     if args.override:
-        TrainingLogger.warn("Overriding checkpoint parameters")
+        log.warning("Overriding checkpoint parameters")
         start_episode = 1
         epsilon = args.eps_start
         total_steps = 0
@@ -343,7 +346,7 @@ def train(args: argparse.Namespace) -> None:
     if not args.resume and args.demo_games > 0:
         fill_demo_buffer(buffer, args.demo_games, reward_fn)
 
-    TrainingLogger.info("Starting training...")
+    log.info("Starting training...")
 
     for episode in range(start_episode, args.episodes + 1):
         obs, _ = env.reset()
@@ -440,7 +443,7 @@ def train(args: argparse.Namespace) -> None:
         # --- Periodic evaluation ---
         if episode % args.eval_interval == 0:
             mean_turns = evaluate(online_net, args.eval_games, device)
-            TrainingLogger.info(
+            log.info(
                 f"ep={episode}  eps={epsilon:.4f}  steps={total_steps}  "
                 f"mean_turns={mean_turns:.1f}"
             )
@@ -466,7 +469,7 @@ def train(args: argparse.Namespace) -> None:
                     epsilon,
                     best_turns,
                 )
-                TrainingLogger.info(
+                log.info(
                     f"checkpoint saved -> {args.save_path} (best={best_turns:.1f})"
                 )
 
@@ -478,7 +481,7 @@ def train(args: argparse.Namespace) -> None:
 
 def main() -> None:
     args = parse_args()
-    TrainingLogger.setup(run_name="q_train", console_level=args.log_level)
+    setup_logging("q_train", args.log_level)
     train(args)
 
 

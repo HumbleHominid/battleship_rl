@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-import logging
 from typing import Optional
 
 import numpy as np
 
 from game.coordinate_methods import format_coordinate
 from game.game_board import GameBoard
-from game.game_logger import GameLogger
 from game.models import Board, CellState
 from training.reward_fns import RewardFn, default_reward
 
@@ -37,7 +35,6 @@ class BattleshipEnv:
     """
 
     def __init__(self, reward_fn: RewardFn = default_reward) -> None:
-        GameLogger.setup(console_level=logging.WARNING)
         self._board = GameBoard()
         self._turn = 0
         self._done = False

@@ -1,5 +1,3 @@
-from game.game_logger import GameLogger
-
 from .cell_state import CellState
 from .ship import Ship
 from .ship_type import ShipType
@@ -15,9 +13,6 @@ class Board:
             for _ in range(Board.board_size)
         ]
         self.ships: list[Ship] = []
-        GameLogger.debug(
-            f"Initialized board with size {Board.board_size}x{Board.board_size}"
-        )
 
     def get_cell(self, row: int, col: int) -> tuple[ShipType, CellState]:
         return self.board[row][col]
@@ -26,6 +21,3 @@ class Board:
         self, row: int, col: int, ship_type: ShipType, state: CellState
     ) -> None:
         self.board[row][col] = (ship_type, state)
-
-    def reset(self) -> None:
-        self.__init__()

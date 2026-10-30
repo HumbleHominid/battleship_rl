@@ -1,12 +1,5 @@
 training/
-theory/
-data/
-img/
-analysis.ipynb
-presentation/
-
-game/logs/
-training/logs/
+logs/
 
 **/__pycache__/
 **/*.pyc

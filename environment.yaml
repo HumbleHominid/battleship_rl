@@ -6,20 +6,10 @@ channels:
 dependencies:
   - python=3.11
   - pip
-  - ipykernel
   - numpy
-  - polars
   - websockets
-  - matplotlib
-  - altair
   - pytorch
-  - torchvision
-  - torchaudio
-  - vegafusion
-  - vl-convert-python
-  - nbconvert
   - fastapi
   - uvicorn
-  - pip:
-    - tensorflow-macos
-    - tensorflow-metal
+  - pytest
+  - httpx

@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import logging
 from typing import Callable, Optional
 
 import numpy as np
 
-from training.training_logger import TrainingLogger
+log = logging.getLogger(__name__)
 
 # (action, pre_shot_cell_feats (100,1) | None, base_reward, result, ship_sunk, done) -> float
 RewardFn = Callable[[int, Optional[np.ndarray], float, str, Optional[str], bool], float]
@@ -41,7 +42,7 @@ def bayes_augment_reward(alpha: float) -> RewardFn:
             raise ValueError(
                 "bayes reward fn requires pre_shot_cell_feats — pass cell_feats to env.step()"
             )
-        TrainingLogger.debug(
+        log.debug(
             f"Bayes reward: base {base_reward:.2f} + alpha {alpha} * prob {cell_feats[action, 0]:.4f}"
         )
         return base_reward + alpha * float(cell_feats[action, 0])

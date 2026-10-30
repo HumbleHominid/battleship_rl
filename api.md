@@ -23,8 +23,7 @@ POST /games
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `agent` | string | `"q-agent"` | Agent to play against: `random`, `hunt`, `bayes`, `q-agent` |
-| `player_placement` | string | `"manual"` | `"random"` (server places fleet) or `"manual"` (client places fleet over WS) |
-| `player_placement_method` | string \| null | `null` | Fleet placement algorithm for the agent's fleet: `random`, `gaussian`, `spread`, `edges`, `corners`, `clustered`, `quadrant`, `dense_center`, `diagonal` |
+| `player_placement` | string | `"random"` | `"random"` (server places fleet) or `"manual"` (client places fleet over WS) |
 
 **Response** `201`
 
@@ -82,7 +81,7 @@ GET /games/{game_id}
 DELETE /games/{game_id}
 ```
 
-Cancels the game task and closes all WebSocket connections. Returns `204`.
+Cancels the game task and closes the WebSocket connection. Returns `204`.
 
 ---
 
@@ -98,19 +97,13 @@ After connecting, the client must send a hello message:
 {"type": "hello", "role": "player"}
 ```
 
-or
-
-```json
-{"type": "hello", "role": "observer"}
-```
-
 Server responds:
 
 ```json
 {"type": "welcome", "game_id": "3f2a...", "role": "player"}
 ```
 
-Only one `player` is accepted per game. Subsequent player connections are downgraded to `observer`.
+Only one player is accepted per game. Other connections are closed with code `4003`.
 
 ---
 
@@ -200,9 +193,9 @@ Server confirms:
 
 ---
 
-### Game state broadcasts (observers)
+### Game state
 
-After every move, all observers receive:
+After every move, by either side, the player receives:
 
 ```json
 {
@@ -242,7 +235,7 @@ After every move, all observers receive:
 
 ### Ship sunk event
 
-Broadcast to all observers whenever a ship is sunk:
+Sent whenever a ship is sunk:
 
 ```json
 {"type": "ship_sunk", "attacker": "player", "ship": "DESTROYER", "turn": 5}
@@ -252,7 +245,7 @@ Broadcast to all observers whenever a ship is sunk:
 
 ### Game over
 
-Sent to all connected clients (player and observers) after the final move:
+Sent after the final move:
 
 ```json
 {
@@ -266,7 +259,7 @@ Sent to all connected clients (player and observers) after the final move:
 }
 ```
 
-`winner` is `"player"` or `"agent"`. After this message the server sends a WebSocket close frame (code 1000) to the player. Clients should not expect further messages after `game_over`.
+`winner` is `"player"` or `"agent"`. The server then closes the WebSocket (code 1000).
 
 ---
 

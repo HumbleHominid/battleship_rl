@@ -9,7 +9,8 @@ battleship_rl.egg-info/
 # Mac
 .DS_Store
 
-data/game_records/
+# Generated
+checkpoints/*.latest
 
 # Terraform
 **/.terraform/

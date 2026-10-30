@@ -1,10 +1,12 @@
+import logging
 import random
 from typing import Optional
 
 from game.agents.base_agent import BaseAgent
 from game.coordinate_methods import format_coordinate, parse_coordinate
-from game.game_logger import GameLogger
 from game.models import Board, ShipType
+
+log = logging.getLogger(__name__)
 
 
 class HuntAgent(BaseAgent):
@@ -29,18 +31,10 @@ class HuntAgent(BaseAgent):
     """
 
     def __init__(self) -> None:
-        self._untried: set[tuple[int, int]] = set()
-        self._search_cells: list[tuple[int, int]] = []
-        self._queue: list[tuple[int, int]] = []
-        self._active_hits: list[tuple[int, int]] = []
-        self._sunk_ship_types: set[ShipType] = set()
-        self._axis: Optional[tuple[int, int]] = None
-        self._rng = random.Random()
-        self._reset_state()
-        GameLogger.info("Initialized HuntAgent")
+        self.reset()
 
-    def _reset_state(self) -> None:
-        self._untried = {
+    def reset(self) -> None:
+        self._untried: set[tuple[int, int]] = {
             (r, c) for r in range(Board.board_size) for c in range(Board.board_size)
         }
         checkerboard = [
@@ -49,16 +43,13 @@ class HuntAgent(BaseAgent):
             for c in range(Board.board_size)
             if (r + c) % 2 == 0
         ]
-        self._rng.shuffle(checkerboard)
-        self._search_cells = checkerboard
-        self._queue = []
-        self._active_hits = []
-        self._sunk_ship_types = set()
-        self._axis = None
-
-    def reset(self) -> None:
-        self._reset_state()
-        GameLogger.info("HuntAgent state reset")
+        random.shuffle(checkerboard)
+        self._search_cells: list[tuple[int, int]] = checkerboard
+        self._queue: list[tuple[int, int]] = []
+        self._active_hits: list[tuple[int, int]] = []
+        self._sunk_ship_types: set[ShipType] = set()
+        self._axis: Optional[tuple[int, int]] = None
+        log.info("HuntAgent state reset")
 
     def _enqueue_back(self, cell: tuple[int, int]) -> None:
         if cell in self._untried and cell not in self._queue:
@@ -150,7 +141,7 @@ class HuntAgent(BaseAgent):
         while self._queue:
             cell = self._queue.pop(0)
             if cell in self._untried:
-                GameLogger.debug("HuntAgent hunt → %s", format_coordinate(*cell))
+                log.debug("HuntAgent hunt → %s", format_coordinate(*cell))
                 return format_coordinate(*cell)
 
         # Queue exhausted: scan board for any unresolved hits we've lost track of
@@ -159,16 +150,14 @@ class HuntAgent(BaseAgent):
         while self._queue:
             cell = self._queue.pop(0)
             if cell in self._untried:
-                GameLogger.debug(
-                    "HuntAgent hunt (recovered) → %s", format_coordinate(*cell)
-                )
+                log.debug("HuntAgent hunt (recovered) → %s", format_coordinate(*cell))
                 return format_coordinate(*cell)
 
         # Search mode: next checkerboard cell
         while self._search_cells:
             cell = self._search_cells.pop()
             if cell in self._untried:
-                GameLogger.debug("HuntAgent search → %s", format_coordinate(*cell))
+                log.debug("HuntAgent search → %s", format_coordinate(*cell))
                 return format_coordinate(*cell)
 
         raise RuntimeError("No cells remain")

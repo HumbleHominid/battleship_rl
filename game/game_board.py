@@ -1,18 +1,24 @@
+import logging
 import random
 from typing import Optional
 
 from .coordinate_methods import ROW_LABELS, format_coordinate, parse_coordinate
-from .directions import DIRECTIONS
-from .fleet_placement_methods import PLACEMENT_METHODS
-from .game_logger import GameLogger
-from .models import Board, CellState, Ship, ShipType, get_ship_size
+from .models import FLEET, Board, CellState, Ship, ShipType, get_ship_size
+
+log = logging.getLogger(__name__)
+
+DIRECTIONS: dict[str, tuple[int, int]] = {
+    "right": (0, 1),
+    "left": (0, -1),
+    "down": (1, 0),
+    "up": (-1, 0),
+}
 
 
 class GameBoard:
     def __init__(self, log_boards: bool = False) -> None:
         self.board = Board()
         self.log_boards = log_boards
-        self.placement_method = "manual"
         self._turn = 0
 
     @property
@@ -83,31 +89,16 @@ class GameBoard:
         row, col = parse_coordinate(coord)
         return self.place_ship(ship_type, row, col, direction)
 
-    def get_placed_cells(self) -> list[tuple[int, int]]:
-        return [cell for ship in self.board.ships for cell in ship.cells]
-
-    def place_fleet(self, method: str | None = None) -> None:
-        """Place the full fleet using a weighted-random placement algorithm.
-
-        If *method* is given, that specific algorithm is used directly.
-        Algorithm and weights are configured via PLACEMENT_METHODS in
-        game/fleet_placement_methods.py.
-        """
-        if method is not None:
-            if method not in PLACEMENT_METHODS:
-                raise ValueError(
-                    f"Unknown placement method '{method}'. Valid: {list(PLACEMENT_METHODS)}"
-                )
-            self.placement_method = method
-            f = PLACEMENT_METHODS[method][1]
-        else:
-            weights = [w for w, _ in PLACEMENT_METHODS.values()]
-            placement_names = list(PLACEMENT_METHODS.keys())
-            heuristic = random.choices(placement_names, weights=weights, k=1)[0]
-            self.placement_method = heuristic
-            f = PLACEMENT_METHODS[heuristic][1]
-        GameLogger.debug(f"Placing fleet using '{self.placement_method}' method")
-        f(self)
+    def place_fleet(self) -> None:
+        """Place each ship uniformly at random among its valid placements."""
+        for ship_type in FLEET:
+            while True:
+                row = random.randrange(Board.board_size)
+                col = random.randrange(Board.board_size)
+                direction = random.choice(list(DIRECTIONS))
+                if self.can_place_ship(ship_type, row, col, direction)[0]:
+                    self.place_ship(ship_type, row, col, direction)
+                    break
 
     # ------------------------------------------------------------------
     # Hit detection
@@ -210,7 +201,7 @@ class GameBoard:
 
         def _print(msg: str) -> None:
             if self.log_boards:
-                GameLogger.info(msg)
+                log.info(msg)
             else:
                 print(msg)
 

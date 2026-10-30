@@ -9,8 +9,8 @@ Vanilla DQN with a `QNetwork` (Bayesian-encoded cell + global features). Epsilon
 ## Training
 
 ```bash
-python training/q_learning/q_train.py
-python training/q_learning/q_train.py --episodes 100000 --save-path checkpoints/q_agent.pt
+python training/q_train.py
+python training/q_train.py --episodes 100000 --save-path checkpoints/q_agent.pt
 ```
 
 | Flag | Default | Description |
@@ -48,5 +48,5 @@ python training/q_learning/q_train.py --episodes 100000 --save-path checkpoints/
 ## Running the trained agent
 
 ```bash
-python main.py --agent q-agent --checkpoint checkpoints/q_agent.pt --no-ws --headless --max-games 100
+python main.py --agent q-agent --checkpoint checkpoints/q_agent.pt --headless --max-games 100
 ```

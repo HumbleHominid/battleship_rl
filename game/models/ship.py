@@ -13,26 +13,17 @@ _SHIP_SIZES: dict[ShipType, int] = {
     ShipType.PATROL_BOAT: 2,
 }
 
+# Order matters: the Q-network's global features follow it.
+FLEET: list[ShipType] = list(_SHIP_SIZES)
+
 
 def get_ship_size(ship_type: ShipType) -> int:
     return _SHIP_SIZES[ship_type]
 
 
-def get_ship_name(ship_type: ShipType) -> str:
-    display = "Patrol Boat" if ship_type is ShipType.PATROL_BOAT else ship_type.name.capitalize()
-    return f"{display} ({get_ship_size(ship_type)})"
-
-
 @dataclass
 class Ship:
     ship_type: ShipType
-    valid_ships = list(_SHIP_SIZES.keys())
-
-    # NOTE: dicts are ordered in Python 3.7+, _SHIP_SIZES.keys() is consistent
-    @staticmethod
-    def get_fleet() -> list[ShipType]:
-        return Ship.valid_ships
-
     # Zero-indexed (row, col) pairs occupied by this ship.
     cells: list[tuple[int, int]]
     hits: int = field(default=0, init=False)
@@ -47,6 +38,3 @@ class Ship:
 
     def register_hit(self) -> None:
         self.hits += 1
-
-    def __repr__(self) -> str:
-        return f"Ship(type={self.ship_type}, cells={self.cells}, hits={self.hits})"

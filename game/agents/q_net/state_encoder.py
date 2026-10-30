@@ -5,7 +5,7 @@ from typing import Optional
 import numpy as np
 
 from game.agents.bayesian_agent import BayesianAgent
-from game.models import Board, Ship
+from game.models import FLEET, Board
 
 
 def legal_mask_from_obs(obs: dict) -> np.ndarray:
@@ -78,9 +78,8 @@ class BayesEncoder:
 
         cell_feats = np.stack([total_grid, hit, miss], axis=1)  # (100, 3)
 
-        fleet = Ship.get_fleet()
         global_feats = np.array(
-            [1.0 if ship_type.name in self._sunk_ships else 0.0 for ship_type in fleet],
+            [1.0 if ship_type.name in self._sunk_ships else 0.0 for ship_type in FLEET],
             dtype=np.float32,
         )
 
