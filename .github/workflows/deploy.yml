@@ -33,7 +33,7 @@ jobs:
         env:
           IMAGE: ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/battleship-rl/app:${{ github.sha }}
         run: |
-          docker build -t "$IMAGE" .
+          docker build -t "$IMAGE" backend
           docker push "$IMAGE"
 
       - name: Deploy to Cloud Run

@@ -265,13 +265,16 @@ Sent after the final move:
 
 ## Running locally
 
+Run from `backend/`:
+
 ```bash
 conda activate battleship-rl
-pip install fastapi uvicorn[standard]
-uvicorn server:app --reload --port 8080
+uvicorn server.app:app --reload --port 8080
 ```
 
 ## Docker
+
+Run from `backend/`:
 
 ```bash
 docker build -t battleship-rl:latest .

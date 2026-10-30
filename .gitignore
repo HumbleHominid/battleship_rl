@@ -10,7 +10,7 @@ battleship_rl.egg-info/
 .DS_Store
 
 # Generated
-checkpoints/*.latest
+backend/checkpoints/*.latest
 
 # Terraform
 **/.terraform/

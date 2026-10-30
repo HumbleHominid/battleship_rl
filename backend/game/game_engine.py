@@ -11,7 +11,7 @@ from .game_board import GameBoard
 from .models import FLEET, CellState, get_ship_size
 
 if TYPE_CHECKING:
-    from .fastapi_ws_adapter import FastAPIWebSocketAdapter
+    from server.ws_session import FastAPIWebSocketAdapter
 
 log = logging.getLogger(__name__)
 

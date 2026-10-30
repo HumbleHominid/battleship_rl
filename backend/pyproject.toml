@@ -12,4 +12,4 @@ py-modules = ["app_logger"]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["game*", "training*"]
+include = ["game*", "server*", "training*"]

@@ -1,4 +1,4 @@
-"""End-to-end checks: python -m pytest test_game.py"""
+"""End-to-end checks: python -m pytest tests"""
 
 import asyncio
 import json
@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 
 from game.agents import BayesianAgent, HuntAgent, QAgent, RandomAgent
 from game.game_engine import GameEngine
-from server import app
+from server.app import app
 
 
 def _play(agent, player_agent) -> GameEngine:

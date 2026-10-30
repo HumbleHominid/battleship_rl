@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from game.agents import AGENT_REGISTRY
-from game.fastapi_ws_adapter import FastAPIWebSocketAdapter
+from server.ws_session import FastAPIWebSocketAdapter
 from game.game_engine import GameEngine
 
 

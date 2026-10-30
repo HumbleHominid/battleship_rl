@@ -1,6 +1,6 @@
 # Training the Q-Learning Agent
 
-All commands should be run from the **project root**.
+All commands should be run from `backend/`.
 
 ## Algorithm
 
@@ -48,5 +48,5 @@ python training/q_train.py --episodes 100000 --save-path checkpoints/q_agent.pt
 ## Running the trained agent
 
 ```bash
-python main.py --agent q-agent --checkpoint checkpoints/q_agent.pt --headless --max-games 100
+python evaluate.py --agent q-agent --checkpoint checkpoints/q_agent.pt --headless --max-games 100
 ```
